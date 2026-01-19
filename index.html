@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2026-01-19 lun 14:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redes Neuronales Artificiales</title>
+<meta name="author" content="Eduardo Alcaraz" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/readtheorg.css"/>
+<script type="text/javascript" src="src/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="src/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="src/readtheorg_theme/js/readtheorg.js"></script>
+<style> #content{max-width:1800px;}</style>
+<style>pre.src {background-color: #303030; color: #e5e5e5;}</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Redes Neuronales Artificiales</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org49c5e71">Presentación del Curso</a>
+<ul>
+<li><a href="#orgcd7f69e">Objetivo general</a></li>
+</ul>
+</li>
+<li><a href="#orga6df31e">Instalación de requerimientos</a>
+<ul>
+<li><a href="#org88a9927">Verificación de Python</a></li>
+<li><a href="#orgedb2d22">Creación del entorno virtual</a></li>
+<li><a href="#orgbfe58d6">Activación del entorno virtual</a>
+<ul>
+<li><a href="#orgf872f2e">GNU/Linux y macOS</a></li>
+<li><a href="#org99ad630">Windows – Símbolo del sistema (CMD)</a></li>
+<li><a href="#orgaec9e84">Windows – PowerShell</a></li>
+<li><a href="#orgd7e02c7">Windows – Git Bash</a></li>
+</ul>
+</li>
+<li><a href="#org7eca5c3">Actualización del gestor de paquetes</a></li>
+<li><a href="#org87be2fc">Instalación de dependencias</a></li>
+<li><a href="#org0899c67">Verificación de la instalación</a></li>
+<li><a href="#org1ec16e3">Desactivación del entorno virtual</a></li>
+</ul>
+</li>
+<li><a href="#org9afbcb7">Manual de Entornos Virtuales en Python</a>
+<ul>
+<li><a href="#org6811108">Introducción</a></li>
+<li><a href="#orgd0b113f">Flujo de Trabajo Básico</a>
+<ul>
+<li><a href="#org86aab0d">1. Creación del entorno</a></li>
+<li><a href="#org9a5f94a">2. Activación</a></li>
+</ul>
+</li>
+<li><a href="#org3cfc909">Gestión de paquetes</a></li>
+<li><a href="#orgec2a119">El archivo de Requerimientos</a></li>
+<li><a href="#orgd567d07">Exportar dependencias</a></li>
+<li><a href="#org0d70fad">Instalar desde el archivo</a></li>
+<li><a href="#org22cb126">Tips de Limpieza</a></li>
+<li><a href="#orge8502d8">Entornos Virtuales Python (Edición Windows)</a></li>
+<li><a href="#org18d4e98">Requisitos Previos</a></li>
+<li><a href="#org06c2e8d">Flujo de Trabajo en Windows</a>
+<ul>
+<li><a href="#org19e24b8">1. Crear el Entorno Virtual</a></li>
+<li><a href="#org34b66b1">2. El Paso Crítico: La Activación</a></li>
+<li><a href="#orgb46850d">3. Confirmación</a></li>
+</ul>
+</li>
+<li><a href="#org76c79a7">Gestión de Librerías con PIP</a>
+<ul>
+<li><a href="#org4cc003a">Instalación de paquetes</a></li>
+<li><a href="#org66ef36d">Congelar dependencias (Compartir proyecto)</a></li>
+<li><a href="#org34d5cd9">Instalar desde un archivo recibido</a></li>
+</ul>
+</li>
+<li><a href="#org7db85da">Uso de Entornos en Emacs (Windows)</a>
+<ul>
+<li><a href="#org6d513c0">Instalación del paquete pyvenv</a></li>
+<li><a href="#orgd48a7df">Cómo activarlo dentro de Emacs</a></li>
+</ul>
+</li>
+<li><a href="#org8b5f4c6">Solución de Problemas Comunes en Windows</a></li>
+<li><a href="#orgb8ae402">Desactivación y Limpieza</a></li>
+</ul>
+</li>
+<li><a href="#org5c99106">Introducción a la Inteligencia Artificial (IA)</a>
+<ul>
+<li><a href="#orgec0d336">Definición formal</a></li>
+<li><a href="#org70771ab">IA débil vs IA fuerte</a></li>
+</ul>
+</li>
+<li><a href="#org0e0fb3e">Machine Learning (Aprendizaje Automático)</a>
+<ul>
+<li><a href="#orgdeffee0">Tipos de aprendizaje</a></li>
+</ul>
+</li>
+<li><a href="#org994b43d">Historia de las Redes Neuronales</a>
+<ul>
+<li><a href="#org78fabae">Contexto histórico</a></li>
+<li><a href="#orge3d2ecd">McCulloch y Pitts (1943)</a></li>
+<li><a href="#orgeaa2d85">Perceptrón y optimismo inicial</a></li>
+<li><a href="#org6d6ad35">Críticas y estancamiento</a></li>
+<li><a href="#orge24a0fb">Renacimiento moderno</a></li>
+</ul>
+</li>
+<li><a href="#org00e47d7">La Neurona Artificial</a>
+<ul>
+<li><a href="#org790871c">Motivación</a></li>
+<li><a href="#orgcf507f6">Componentes</a></li>
+<li><a href="#org284cb74">Modelo matemático</a></li>
+</ul>
+</li>
+<li><a href="#org9e7249b">El Perceptrón</a>
+<ul>
+<li><a href="#org68292f8">Definición</a></li>
+<li><a href="#org4c6aa90">Interpretación geométrica</a></li>
+<li><a href="#orgd43747c">Aprendizaje</a></li>
+<li><a href="#org28df91d">Limitaciones</a></li>
+</ul>
+</li>
+<li><a href="#orga95639d">¿Qué es un problema linealmente separable?</a>
+<ul>
+<li><a href="#orga16a402">Intuición básica</a></li>
+</ul>
+</li>
+<li><a href="#orgb58d6c6">Estructura de un Perceptrón Simple</a>
+<ul>
+<li><a href="#org99031c7">Entradas (Inputs)</a></li>
+<li><a href="#orgcec3c2d">Pesos Sinápticos (Weights)</a></li>
+<li><a href="#org08e0135">Suma Ponderada (Weighted Sum)</a></li>
+<li><a href="#org5b45c34">Sesgo (Bias)</a></li>
+<li><a href="#orgd49d22e">Función de Activación</a></li>
+<li><a href="#org6ae267b">Salida (Output)</a></li>
+</ul>
+</li>
+<li><a href="#org8530943">1. El Escenario: La Decisión de la Cena</a>
+<ul>
+<li><a href="#orgc6705ef">Nuestras Entradas (Inputs)</a></li>
+<li><a href="#orgc0f4dd1">El Peso (Weight): La Importancia</a></li>
+</ul>
+</li>
+<li><a href="#org5768f0f">2. ¿Cómo toma la decisión? (La Suma y el Sesgo)</a>
+<ul>
+<li><a href="#orga930528">El Sesgo (Bias)</a></li>
+</ul>
+</li>
+<li><a href="#org1386864">3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?</a>
+<ul>
+<li><a href="#org26b0b5f">El Error: La Brújula</a></li>
+<li><a href="#org9bada46">El Ajuste (La Regla Delta)</a></li>
+</ul>
+</li>
+<li><a href="#org9498b35">5. Conclusión</a></li>
+<li><a href="#org57d6ac7">Redes Multicapa (MLP)</a>
+<ul>
+<li><a href="#org6068f48">Capacidad de representación</a></li>
+<li><a href="#orged0c813">Estructura</a></li>
+</ul>
+</li>
+<li><a href="#org82ee67e">Entrada</a></li>
+<li><a href="#org3cf48b7">Capas ocultas</a></li>
+<li><a href="#orge9dfd09">Salida</a></li>
+<li><a href="#orgcda6495">Perceptrón ejemplo (Python)</a>
+<ul>
+<li><a href="#org81d2a70">Perceptrón para una compuerta "AND"</a></li>
+</ul>
+</li>
+<li><a href="#orge2a8c0f">Bibliografía  Deep Learning</a>
+<ul>
+<li><a href="#org82ce20e">Teórica y Académica&#xa0;&#xa0;&#xa0;<span class="tag"><span class="MATEMATICAS">MATEMATICAS</span>&#xa0;<span class="FUNDAMENTOS">FUNDAMENTOS</span></span></a>
+<ul>
+<li><a href="#org5536e92">Deep Learning</a></li>
+<li><a href="#orgc366a68">Neural Networks and Deep Learning: A Textbook</a></li>
+</ul>
+</li>
+<li><a href="#org6151110">Práctica y Programación&#xa0;&#xa0;&#xa0;<span class="tag"><span class="PYTHON">PYTHON</span>&#xa0;<span class="PYTORCH">PYTORCH</span>&#xa0;<span class="KERAS">KERAS</span></span></a>
+<ul>
+<li><a href="#orge118bd9">Deep Learning with Python (3rd Edition)</a></li>
+<li><a href="#orge5741ff">Hands-On Machine Learning with Scikit-Learn and PyTorch</a></li>
+</ul>
+</li>
+<li><a href="#orgfb96681">Aprendizaje "Desde Cero"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NUMPY">NUMPY</span>&#xa0;<span class="LOGICA">LOGICA</span></span></a>
+<ul>
+<li><a href="#org3a8c964">Grokking Deep Learning</a></li>
+<li><a href="#org08f2e56">Neural Networks from Scratch (NNFS)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgf6e9608">Tabla Comparativa para Elección Rápida</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org49c5e71" class="outline-2">
+<h2 id="org49c5e71">Presentación del Curso</h2>
+<div class="outline-text-2" id="text-org49c5e71">
+</div>
+<div id="outline-container-orgcd7f69e" class="outline-3">
+<h3 id="orgcd7f69e">Objetivo general</h3>
+<div class="outline-text-3" id="text-orgcd7f69e">
+<p>
+Este curso tiene como objetivo proporcionar una
+comprensión <b>profunda y progresiva</b> de las redes neuronales
+artificiales, desde sus fundamentos teóricos hasta las principales
+arquitecturas modernas utilizadas en la industria y la
+investigación.
+</p>
+
+
+<ul class="org-ul">
+<li>Fundamentos matemáticos y conceptuales</li>
+<li>Funcionamiento interno de una red neuronal</li>
+<li>Entrenamiento y optimización</li>
+<li>Arquitecturas principales</li>
+<li>Intuición práctica y casos de uso</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga6df31e" class="outline-2">
+<h2 id="orga6df31e">Instalación de requerimientos</h2>
+<div class="outline-text-2" id="text-orga6df31e">
+</div>
+<div id="outline-container-org88a9927" class="outline-3">
+<h3 id="org88a9927">Verificación de Python</h3>
+<div class="outline-text-3" id="text-org88a9927">
+<p>
+Antes de instalar las dependencias, verifique que el sistema cuente con Python
+versión 3.9 o superior.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">python --version
+</pre>
+</div>
+
+<p>
+En caso de que el comando anterior no esté disponible, intente:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">python3 --version
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgedb2d22" class="outline-3">
+<h3 id="orgedb2d22">Creación del entorno virtual</h3>
+<div class="outline-text-3" id="text-orgedb2d22">
+<p>
+Se recomienda crear un entorno virtual para aislar las dependencias del proyecto
+y evitar conflictos entre versiones de librerías.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">python -m venv mlp_env
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbfe58d6" class="outline-3">
+<h3 id="orgbfe58d6">Activación del entorno virtual</h3>
+<div class="outline-text-3" id="text-orgbfe58d6">
+<p>
+La activación del entorno virtual depende del sistema operativo y del intérprete
+de comandos utilizado.
+</p>
+</div>
+<div id="outline-container-orgf872f2e" class="outline-4">
+<h4 id="orgf872f2e">GNU/Linux y macOS</h4>
+<div class="outline-text-4" id="text-orgf872f2e">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #fe8019;">source</span> mlp_env/bin/activate
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org99ad630" class="outline-4">
+<h4 id="org99ad630">Windows – Símbolo del sistema (CMD)</h4>
+<div class="outline-text-4" id="text-org99ad630">
+<p>
+Si se utiliza el <b>Símbolo del sistema</b> (cmd.exe), ejecute:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bat">mlp_env\Scripts\activate.bat
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaec9e84" class="outline-4">
+<h4 id="orgaec9e84">Windows – PowerShell</h4>
+<div class="outline-text-4" id="text-orgaec9e84">
+<p>
+Si se utiliza <b>Windows PowerShell</b>, ejecute:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-powershell">mlp_env\Scripts\Activate.ps1
+</pre>
+</div>
+
+<p>
+En caso de que la ejecución de scripts esté deshabilitada, habilítela
+temporalmente con:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-powershell">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+</pre>
+</div>
+
+<p>
+Posteriormente, vuelva a ejecutar el comando de activación.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd7e02c7" class="outline-4">
+<h4 id="orgd7e02c7">Windows – Git Bash</h4>
+<div class="outline-text-4" id="text-orgd7e02c7">
+<p>
+Si se utiliza <b>Git Bash</b>, ejecute:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #fe8019;">source</span> mlp_env/Scripts/activate
+</pre>
+</div>
+
+<p>
+Una vez activado el entorno virtual, el nombre del entorno aparecerá entre
+paréntesis al inicio de la línea de comandos.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7eca5c3" class="outline-3">
+<h3 id="org7eca5c3">Actualización del gestor de paquetes</h3>
+<div class="outline-text-3" id="text-org7eca5c3">
+<p>
+Antes de instalar las librerías, se recomienda actualizar el gestor de paquetes
+<code>pip</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">pip install --upgrade pip
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org87be2fc" class="outline-3">
+<h3 id="org87be2fc">Instalación de dependencias</h3>
+<div class="outline-text-3" id="text-org87be2fc">
+<p>
+Ejecute el siguiente comando para instalar los requerimientos del módulo
+Perceptrón Multicapa <b>feedforward</b>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">pip install numpy matplotlib scikit-learn pygame
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0899c67" class="outline-3">
+<h3 id="org0899c67">Verificación de la instalación</h3>
+<div class="outline-text-3" id="text-org0899c67">
+<p>
+Para verificar que las dependencias se instalaron correctamente, ejecute Python
+en modo interactivo:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">python
+</pre>
+</div>
+
+<p>
+Posteriormente, importe las librerías:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">import</span> numpy
+<span style="color: #fb4934;">import</span> matplotlib
+<span style="color: #fb4934;">import</span> sklearn
+<span style="color: #fb4934;">import</span> pygame
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Instalaci&#243;n de requerimientos completada correctamente"</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ec16e3" class="outline-3">
+<h3 id="org1ec16e3">Desactivación del entorno virtual</h3>
+<div class="outline-text-3" id="text-org1ec16e3">
+<p>
+Una vez finalizado el trabajo, el entorno virtual puede desactivarse con el
+siguiente comando:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">deactivate
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9afbcb7" class="outline-2">
+<h2 id="org9afbcb7">Manual de Entornos Virtuales en Python</h2>
+<div class="outline-text-2" id="text-org9afbcb7">
+</div>
+<div id="outline-container-org6811108" class="outline-3">
+<h3 id="org6811108">Introducción</h3>
+<div class="outline-text-3" id="text-org6811108">
+<p>
+El uso de entornos virtuales es esencial para mantener las
+dependencias de tus proyectos aisladas. En este manual aprenderás a
+gestionarlos usando el módulo estándar <code>venv</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd0b113f" class="outline-3">
+<h3 id="orgd0b113f">Flujo de Trabajo Básico</h3>
+<div class="outline-text-3" id="text-orgd0b113f">
+</div>
+<div id="outline-container-org86aab0d" class="outline-4">
+<h4 id="org86aab0d">1. Creación del entorno</h4>
+<div class="outline-text-4" id="text-org86aab0d">
+<p>
+Para crear un entorno virtual, navega a la raíz de tu proyecto en la terminal (o dentro de un buffer de Emacs con <code>M-x shell</code>) y ejecuta:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">python -m venv .venv
+</pre>
+</div>
+
+<p>
+<b>Nota:</b> El nombre <code>.venv</code> es una convención que hace que el directorio sea oculto en sistemas Unix.
+</p>
+</div>
+</div>
+<div id="outline-container-org9a5f94a" class="outline-4">
+<h4 id="org9a5f94a">2. Activación</h4>
+<div class="outline-text-4" id="text-org9a5f94a">
+<p>
+La activación depende de tu sistema operativo:
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="org5545357"></a>En Windows (PowerShell)<br />
+<div class="outline-text-5" id="text-org5545357">
+<div class="org-src-container">
+<pre class="src src-powershell">.\.venv\Scripts\Activate.ps1
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org305d725"></a>En macOS / Linux<br />
+<div class="outline-text-5" id="text-org305d725">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #fe8019;">source</span> .venv/bin/activate
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3cfc909" class="outline-3">
+<h3 id="org3cfc909">Gestión de paquetes</h3>
+<div class="outline-text-3" id="text-org3cfc909">
+<p>
+Una vez activado (verás el prefijo <code>(.venv)</code> en tu prompt), puedes instalar librerías:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">pip install requests pandas
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgec2a119" class="outline-3">
+<h3 id="orgec2a119">El archivo de Requerimientos</h3>
+<div class="outline-text-3" id="text-orgec2a119">
+<p>
+Es fundamental para la reproducibilidad del proyecto.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd567d07" class="outline-3">
+<h3 id="orgd567d07">Exportar dependencias</h3>
+<div class="outline-text-3" id="text-orgd567d07">
+<div class="org-src-container">
+<pre class="src src-bash">pip freeze &gt; requirements.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0d70fad" class="outline-3">
+<h3 id="org0d70fad">Instalar desde el archivo</h3>
+<div class="outline-text-3" id="text-org0d70fad">
+<div class="org-src-container">
+<pre class="src src-bash">pip install -r requirements.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org22cb126" class="outline-3">
+<h3 id="org22cb126">Tips de Limpieza</h3>
+<div class="outline-text-3" id="text-org22cb126">
+<p>
+Para salir del entorno virtual:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">deactivate
+</pre>
+</div>
+
+<p>
+Para borrar el entorno, simplemente elimina la carpeta:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">rm -rf .venv  <span style="color: #928374;"># </span><span style="color: #928374;">En Linux/macOS
+</span>rmdir /s /q .venv  <span style="color: #928374;"># </span><span style="color: #928374;">En Windows</span>
+</pre>
+</div>
+
+<p>
+&#x2014;
+</p>
+<blockquote>
+<p>
+"Keep your global Python clean, keep your projects isolated."
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orge8502d8" class="outline-3">
+<h3 id="orge8502d8">Entornos Virtuales Python (Edición Windows)</h3>
+</div>
+
+<div id="outline-container-org18d4e98" class="outline-3">
+<h3 id="org18d4e98">Requisitos Previos</h3>
+<div class="outline-text-3" id="text-org18d4e98">
+<ol class="org-ol">
+<li>Tener instalado Python (descargado de <a href="https://www.python.org/">python.org</a> o la Microsoft Store).</li>
+<li>Durante la instalación, asegúrate de marcar la casilla: <b><b>"Add Python to PATH"</b></b>.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org06c2e8d" class="outline-3">
+<h3 id="org06c2e8d">Flujo de Trabajo en Windows</h3>
+<div class="outline-text-3" id="text-org06c2e8d">
+</div>
+<div id="outline-container-org19e24b8" class="outline-4">
+<h4 id="org19e24b8">1. Crear el Entorno Virtual</h4>
+<div class="outline-text-4" id="text-org19e24b8">
+<p>
+Abre tu terminal (PowerShell o CMD) en la carpeta de tu proyecto. El comando es el mismo para ambos:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-powershell">python -m venv venv
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org34b66b1" class="outline-4">
+<h4 id="org34b66b1">2. El Paso Crítico: La Activación</h4>
+<div class="outline-text-4" id="text-org34b66b1">
+<p>
+En Windows, la activación depende de qué terminal estés usando.
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="org93212e9"></a>Opción A: PowerShell (Recomendado)<br />
+<div class="outline-text-5" id="text-org93212e9">
+<p>
+Si es la primera vez que usas scripts en Windows, podrías recibir un error de seguridad. Primero, ejecuta esto como administrador (solo una vez):
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+</pre>
+</div>
+
+<p>
+Luego, para activar el entorno:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">.\venv\Scripts\Activate.ps1
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org5c6812a"></a>Opción B: Símbolo del Sistema (CMD)<br />
+<div class="outline-text-5" id="text-org5c6812a">
+<div class="org-src-container">
+<pre class="src src-cmd">.\venv\Scripts\activate.bat
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-orgb46850d" class="outline-4">
+<h4 id="orgb46850d">3. Confirmación</h4>
+<div class="outline-text-4" id="text-orgb46850d">
+<p>
+Sabrás que el entorno está activo porque el nombre <code>(venv)</code> aparecerá a la izquierda de la ruta en tu terminal:
+#+example
+(venv) C:\Proyectos\MiProyecto&gt;
+#+example
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org76c79a7" class="outline-3">
+<h3 id="org76c79a7">Gestión de Librerías con PIP</h3>
+<div class="outline-text-3" id="text-org76c79a7">
+</div>
+<div id="outline-container-org4cc003a" class="outline-4">
+<h4 id="org4cc003a">Instalación de paquetes</h4>
+<div class="outline-text-4" id="text-org4cc003a">
+<p>
+Una vez activo el entorno, instala lo que necesites:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">pip install pandas requests openpyxl
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org66ef36d" class="outline-4">
+<h4 id="org66ef36d">Congelar dependencias (Compartir proyecto)</h4>
+<div class="outline-text-4" id="text-org66ef36d">
+<p>
+Para que otros participantes tengan exactamente lo mismo que tú:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">pip freeze &gt; requirements.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org34d5cd9" class="outline-4">
+<h4 id="org34d5cd9">Instalar desde un archivo recibido</h4>
+<div class="outline-text-4" id="text-org34d5cd9">
+<p>
+Si un compañero te pasa su <code>requirements.txt</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">pip install -r requirements.txt
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org7db85da" class="outline-3">
+<h3 id="org7db85da">Uso de Entornos en Emacs (Windows)</h3>
+<div class="outline-text-3" id="text-org7db85da">
+<p>
+Para que Emacs en Windows gestione bien el entorno, añade esto a tu archivo de configuración (<code>init.el</code> o <code>.emacs</code>):
+</p>
+</div>
+<div id="outline-container-org6d513c0" class="outline-4">
+<h4 id="org6d513c0">Instalación del paquete pyvenv</h4>
+<div class="outline-text-4" id="text-org6d513c0">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #fe8019;">(</span><span style="color: #fb4934;">use-package</span> pyvenv
+  <span style="color: #fe8019;">:ensure</span> t
+  <span style="color: #fe8019;">:config</span>
+  <span style="color: #b16286;">(</span>pyvenv-mode 1<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd48a7df" class="outline-4">
+<h4 id="orgd48a7df">Cómo activarlo dentro de Emacs</h4>
+<div class="outline-text-4" id="text-orgd48a7df">
+<ol class="org-ol">
+<li>Presiona <code>M-x pyvenv-activate</code>.</li>
+<li>Emacs te pedirá la ruta. Navega hasta la carpeta <code>venv</code> de tu proyecto.</li>
+<li>Al seleccionarla, Emacs usará ese intérprete de Python para todos los scripts que ejecutes.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org8b5f4c6" class="outline-3">
+<h3 id="org8b5f4c6">Solución de Problemas Comunes en Windows</h3>
+<div class="outline-text-3" id="text-org8b5f4c6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Error / Problema</td>
+<td class="org-left">Solución</td>
+</tr>
+
+<tr>
+<td class="org-left">:---</td>
+<td class="org-left">:---</td>
+</tr>
+
+<tr>
+<td class="org-left">"python" no se reconoce</td>
+<td class="org-left">Reinstala Python y marca "Add to PATH" o usa el comando `py`.</td>
+</tr>
+
+<tr>
+<td class="org-left">Error de "Execution Policy"</td>
+<td class="org-left">Ejecuta `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`.</td>
+</tr>
+
+<tr>
+<td class="org-left">No aparece el (venv)</td>
+<td class="org-left">Asegúrate de usar el comando de activación correcto para tu terminal (.ps1 vs .bat).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgb8ae402" class="outline-3">
+<h3 id="orgb8ae402">Desactivación y Limpieza</h3>
+<div class="outline-text-3" id="text-orgb8ae402">
+<p>
+Para salir del entorno:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">deactivate
+</pre>
+</div>
+
+<p>
+Si quieres borrar el entorno por completo (para empezar de cero):
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">rmdir /s /q venv
+</pre>
+</div>
+
+<p>
+&#x2014;
+</p>
+<div class="IMPORTANT" id="orge0a2016">
+<p>
+<b>Recordatorio:</b> Nunca incluyas la carpeta <code>venv</code> en tus archivos compartidos o en tu repositorio de Git. Solo comparte el código y el archivo <code>requirements.txt</code>.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5c99106" class="outline-2">
+<h2 id="org5c99106">Introducción a la Inteligencia Artificial (IA)</h2>
+<div class="outline-text-2" id="text-org5c99106">
+</div>
+<div id="outline-container-orgec0d336" class="outline-3">
+<h3 id="orgec0d336">Definición formal</h3>
+<div class="outline-text-3" id="text-orgec0d336">
+<p>
+La <b>Inteligencia Artificial</b> es el área de la computación que estudia
+  cómo construir sistemas capaces de realizar tareas que, si fueran
+  realizadas por humanos, requerirían inteligencia.
+</p>
+
+<p>
+Esto incluye capacidades como:
+</p>
+
+<ul class="org-ul">
+<li>Aprender de la experiencia</li>
+<li>Razonar</li>
+<li>Reconocer patrones</li>
+<li>Tomar decisiones bajo incertidumbre</li>
+</ul>
+
+<p>
+La IA no implica necesariamente consciencia; se centra en <b>comportamiento inteligente observable</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-org70771ab" class="outline-3">
+<h3 id="org70771ab">IA débil vs IA fuerte</h3>
+<div class="outline-text-3" id="text-org70771ab">
+<ul class="org-ul">
+<li><b>IA débil</b>: sistemas especializados en una tarea concreta (la IA actual)</li>
+<li><b>IA fuerte</b>: inteligencia general comparable a la humana (teórica)</li>
+</ul>
+
+<p>
+Las redes neuronales pertenecen claramente a la IA débil.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e0fb3e" class="outline-2">
+<h2 id="org0e0fb3e">Machine Learning (Aprendizaje Automático)</h2>
+<div class="outline-text-2" id="text-org0e0fb3e">
+<p>
+<b>* Relación entre IA y ML
+El *Machine Learning (ML)</b> es una subdisciplina de la IA. Mientras la IA es el objetivo general, el ML es una de las herramientas principales para alcanzarlo.
+</p>
+
+<p>
+Idea clave:
+</p>
+<blockquote>
+<p>
+En lugar de programar reglas, el sistema aprende las reglas a partir de datos.
+</p>
+</blockquote>
+</div>
+<div id="outline-container-orgdeffee0" class="outline-3">
+<h3 id="orgdeffee0">Tipos de aprendizaje</h3>
+<div class="outline-text-3" id="text-orgdeffee0">
+<ul class="org-ul">
+<li><b>Supervisado</b>: datos con etiqueta (clasificación, regresión)</li>
+<li><b>No supervisado</b>: datos sin etiqueta (clustering, reducción de dimensión)</li>
+<li><b>Por refuerzo</b>: aprendizaje mediante recompensa y castigo</li>
+</ul>
+
+<p>
+Las redes neuronales pueden adaptarse a los tres esquemas.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org994b43d" class="outline-2">
+<h2 id="org994b43d">Historia de las Redes Neuronales</h2>
+<div class="outline-text-2" id="text-org994b43d">
+</div>
+<div id="outline-container-org78fabae" class="outline-3">
+<h3 id="org78fabae">Contexto histórico</h3>
+<div class="outline-text-3" id="text-org78fabae">
+<p>
+Desde mediados del siglo XX, científicos han intentado entender si la inteligencia podía ser replicada mediante modelos matemáticos.
+</p>
+</div>
+</div>
+<div id="outline-container-orge3d2ecd" class="outline-3">
+<h3 id="orge3d2ecd">McCulloch y Pitts (1943)</h3>
+<div class="outline-text-3" id="text-orge3d2ecd">
+<p>
+Propusieron la primera neurona artificial basada en lógica
+booleana. Demostraron que redes de estas neuronas podían computar
+cualquier función lógica.
+</p>
+
+<p>
+Este trabajo sentó las bases teóricas de las redes neuronales.
+</p>
+</div>
+</div>
+<div id="outline-container-orgeaa2d85" class="outline-3">
+<h3 id="orgeaa2d85">Perceptrón y optimismo inicial</h3>
+<div class="outline-text-3" id="text-orgeaa2d85">
+<p>
+En los años 50 y 60, el perceptrón generó grandes expectativas al ser uno de los primeros sistemas que <b>aprendía</b> automáticamente.
+</p>
+</div>
+</div>
+<div id="outline-container-org6d6ad35" class="outline-3">
+<h3 id="org6d6ad35">Críticas y estancamiento</h3>
+<div class="outline-text-3" id="text-org6d6ad35">
+<p>
+El libro <b>Perceptrons</b> (Minsky &amp; Papert, 1969) demostró limitaciones severas del perceptrón, provocando una fuerte caída en el interés por las redes neuronales.
+</p>
+</div>
+</div>
+<div id="outline-container-orge24a0fb" class="outline-3">
+<h3 id="orge24a0fb">Renacimiento moderno</h3>
+<div class="outline-text-3" id="text-orge24a0fb">
+<p>
+Con mayor poder computacional, grandes bases de datos y mejores algoritmos, las redes neuronales resurgen como <b>Deep Learning</b>.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org00e47d7" class="outline-2">
+<h2 id="org00e47d7">La Neurona Artificial</h2>
+<div class="outline-text-2" id="text-org00e47d7">
+</div>
+<div id="outline-container-org790871c" class="outline-3">
+<h3 id="org790871c">Motivación</h3>
+<div class="outline-text-3" id="text-org790871c">
+<p>
+Una red neuronal artificial es un modelo matemático inspirado en la
+organización y conectividad de las neuronas biológicas, que abstrae
+su funcionamiento esencial para construir sistemas capaces de
+aprender representaciones a partir de datos mediante el ajuste de
+parámetros.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcf507f6" class="outline-3">
+<h3 id="orgcf507f6">Componentes</h3>
+<div class="outline-text-3" id="text-orgcf507f6">
+<ul class="org-ul">
+<li>Entradas: variables numéricas</li>
+<li>Pesos: importancia relativa de cada entrada</li>
+<li>Bias: ajuste del umbral</li>
+<li>Activación: decisión final</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org284cb74" class="outline-3">
+<h3 id="org284cb74">Modelo matemático</h3>
+<div class="outline-text-3" id="text-org284cb74">
+<div class="org-src-container">
+<pre class="src src-text">z = w&#183;x + b
+a = f(z)
+</pre>
+</div>
+
+<p>
+Este modelo es la unidad básica de todas las redes neuronales modernas.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9e7249b" class="outline-2">
+<h2 id="org9e7249b">El Perceptrón</h2>
+<div class="outline-text-2" id="text-org9e7249b">
+</div>
+<div id="outline-container-org68292f8" class="outline-3">
+<h3 id="org68292f8">Definición</h3>
+<div class="outline-text-3" id="text-org68292f8">
+<p>
+El perceptrón es una neurona artificial entrenable utilizada para clasificación binaria.
+</p>
+</div>
+</div>
+<div id="outline-container-org4c6aa90" class="outline-3">
+<h3 id="org4c6aa90">Interpretación geométrica</h3>
+<div class="outline-text-3" id="text-org4c6aa90">
+<p>
+El perceptrón aprende una <b>frontera de decisión lineal</b> que separa los datos en dos clases.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd43747c" class="outline-3">
+<h3 id="orgd43747c">Aprendizaje</h3>
+<div class="outline-text-3" id="text-orgd43747c">
+<p>
+Cuando el perceptrón se equivoca, ajusta sus pesos para reducir el error.
+</p>
+</div>
+</div>
+<div id="outline-container-org28df91d" class="outline-3">
+<h3 id="org28df91d">Limitaciones</h3>
+<div class="outline-text-3" id="text-org28df91d">
+<p>
+No puede aprender relaciones no lineales, como XOR.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga95639d" class="outline-2">
+<h2 id="orga95639d">¿Qué es un problema linealmente separable?</h2>
+<div class="outline-text-2" id="text-orga95639d">
+</div>
+<div id="outline-container-orga16a402" class="outline-3">
+<h3 id="orga16a402">Intuición básica</h3>
+<div class="outline-text-3" id="text-orga16a402">
+<p>
+Un problema es linealmente separable si puedes separar las clases usando una línea recta (en 2D),
+un plano (en 3D), o en general un hiperplano.
+</p>
+
+<p>
+Si existe una sola frontera recta que divide perfectamente las clases, el problema es linealmente separable.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb58d6c6" class="outline-2">
+<h2 id="orgb58d6c6">Estructura de un Perceptrón Simple</h2>
+<div class="outline-text-2" id="text-orgb58d6c6">
+</div>
+<div id="outline-container-org99031c7" class="outline-3">
+<h3 id="org99031c7">Entradas (Inputs)</h3>
+<div class="outline-text-3" id="text-org99031c7">
+<ul class="org-ul">
+<li>Representadas como \(x_1, x_2, ..., x_n\).</li>
+<li>Son los datos brutos o características que recibe el modelo.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcec3c2d" class="outline-3">
+<h3 id="orgcec3c2d">Pesos Sinápticos (Weights)</h3>
+<div class="outline-text-3" id="text-orgcec3c2d">
+<ul class="org-ul">
+<li>Representados como \(w_1, w_2, ..., w_n\).</li>
+<li>Determinan la importancia o influencia de cada entrada en el resultado final.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org08e0135" class="outline-3">
+<h3 id="org08e0135">Suma Ponderada (Weighted Sum)</h3>
+<div class="outline-text-3" id="text-org08e0135">
+<ul class="org-ul">
+<li>Es la combinación lineal de las entradas y los pesos.</li>
+<li>La fórmula matemática es:
+\[z = \sum_{i=1}^{n} w_i x_i + b\]</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5b45c34" class="outline-3">
+<h3 id="org5b45c34">Sesgo (Bias)</h3>
+<div class="outline-text-3" id="text-org5b45c34">
+<ul class="org-ul">
+<li>Representado generalmente como \(b\) (o \(w_0\)).</li>
+<li>Permite desplazar la función de activación hacia la izquierda o derecha para ajustar mejor los datos.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd49d22e" class="outline-3">
+<h3 id="orgd49d22e">Función de Activación</h3>
+<div class="outline-text-3" id="text-orgd49d22e">
+<ul class="org-ul">
+<li>Decide si la neurona debe "dispararse" (activarse) o no.</li>
+<li>En el perceptrón original de Rosenblatt, se utiliza la <b>Función Escalón</b> (Heaviside):
+<ul class="org-ul">
+<li>\(f(z) = 1\) si \(z > 0\)</li>
+<li>\(f(z) = 0\) en caso contrario.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6ae267b" class="outline-3">
+<h3 id="org6ae267b">Salida (Output)</h3>
+<div class="outline-text-3" id="text-org6ae267b">
+<ul class="org-ul">
+<li>Es el resultado final del procesamiento (\(\hat{y}\)).</li>
+<li>En un perceptrón simple, suele ser un valor binario (0 o 1).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org8530943" class="outline-2">
+<h2 id="org8530943">1. El Escenario: La Decisión de la Cena</h2>
+<div class="outline-text-2" id="text-org8530943">
+<p>
+Para entender cómo aprende una IA, vamos a usar un ejemplo de la vida real. Queremos que nuestra neurona artificial aprenda cuándo estamos "Satisfechos" (1) o "Inconformes" (0).
+</p>
+</div>
+<div id="outline-container-orgc6705ef" class="outline-3">
+<h3 id="orgc6705ef">Nuestras Entradas (Inputs)</h3>
+<div class="outline-text-3" id="text-orgc6705ef">
+<ul class="org-ul">
+<li>\(x_0\): ¿Hay Tacos? (1 = Sí, 0 = No)</li>
+<li>\(x_1\): ¿Hay Refresco? (1 = Sí, 0 = No)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc0f4dd1" class="outline-3">
+<h3 id="orgc0f4dd1">El Peso (Weight): La Importancia</h3>
+<div class="outline-text-3" id="text-orgc0f4dd1">
+<p>
+No todo nos hace igual de felices. Los <b><b>Pesos</b></b> (\(w_0, w_1\)) representan qué tanto nos importa cada ingrediente. 
+</p>
+<ul class="org-ul">
+<li>Si el peso del taco es alto, el taco es fundamental para nuestra felicidad.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org5768f0f" class="outline-2">
+<h2 id="org5768f0f">2. ¿Cómo toma la decisión? (La Suma y el Sesgo)</h2>
+<div class="outline-text-2" id="text-org5768f0f">
+<p>
+La neurona hace un cálculo matemático simple:
+\[net = (x_0 \cdot w_0) + (x_1 \cdot w_1) - \text{bias}\]
+</p>
+</div>
+<div id="outline-container-orga930528" class="outline-3">
+<h3 id="orga930528">El Sesgo (Bias)</h3>
+<div class="outline-text-3" id="text-orga930528">
+<p>
+El <b><b>Bias</b></b> es nuestro "nivel de exigencia". Si el Bias es muy alto, necesitaremos mucha comida (pesos altos) para poder llegar a estar satisfechos.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1386864" class="outline-2">
+<h2 id="org1386864">3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?</h2>
+<div class="outline-text-2" id="text-org1386864">
+<p>
+Cuando la neurona se equivoca, necesita ajustar sus pesos. Este proceso se llama <b><b>Descenso del Gradiente</b></b>.
+</p>
+</div>
+<div id="outline-container-org26b0b5f" class="outline-3">
+<h3 id="org26b0b5f">El Error: La Brújula</h3>
+<div class="outline-text-3" id="text-org26b0b5f">
+<p>
+Si esperábamos estar felices (<code>target = 1</code>) pero la neurona dice que estamos tristes (<code>net = 0</code>), tenemos un <b><b>Error de 1</b></b>.
+\[Error = Target - Net\]
+</p>
+</div>
+</div>
+<div id="outline-container-org9bada46" class="outline-3">
+<h3 id="org9bada46">El Ajuste (La Regla Delta)</h3>
+<div class="outline-text-3" id="text-org9bada46">
+<p>
+Para corregir el error, cambiamos los pesos usando esta lógica:
+</p>
+<ol class="org-ol">
+<li>Miramos el <b><b>Error</b></b>.</li>
+<li>Miramos la <b><b>Entrada</b></b> (¿Quién tuvo la culpa? Si no había tacos, el taco no pudo causar el error).</li>
+<li>Aplicamos el <b><b>Learning Rate (K)</b></b>: Que es qué tan rápido queremos aprender.</li>
+</ol>
+
+<p>
+\[Nuevo\_Peso = Peso\_Actual + (K \cdot Error \cdot Entrada)\]
+</p>
+
+
+<p>
+Imagina que \(K = 0.1\) y el Peso inicial del taco es \(0.5\).
+</p>
+<ol class="org-ol">
+<li><b><b>Situación:</b></b> Hay tacos (\(x_0=1\)), pero la red dice "Triste" (\(net=0\)). Nosotros queríamos "Feliz" (\(target=1\)).</li>
+<li><b><b>Cálculo del Error:</b></b> \(1 - 0 = 1\).</li>
+<li><b><b>Ajuste del Peso:</b></b>
+<ul class="org-ul">
+<li>\(Delta = 0.1 \cdot 1 \cdot 1 = 0.1\)</li>
+<li>\(Nuevo\_Peso\_Taco = 0.5 + 0.1 = 0.6\)</li>
+</ul></li>
+</ol>
+
+<p>
+<b><b>Resultado:</b></b> La próxima vez que haya tacos, la neurona estará un poco más cerca de hacernos felices. ¡Eso es el aprendizaje!
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9498b35" class="outline-2">
+<h2 id="org9498b35">5. Conclusión</h2>
+<div class="outline-text-2" id="text-org9498b35">
+<ul class="org-ul">
+<li>El <b><b>Gradiente</b></b> nos dice en qué dirección mover los pesos para que el error sea cero.</li>
+<li>El <b><b>Learning Rate</b></b> controla qué tan grandes son los pasos que damos hacia esa solución.</li>
+<li>Si repetimos este proceso miles de veces (Épocas), la neurona encontrará los pesos perfectos para nuestra felicidad.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org57d6ac7" class="outline-2">
+<h2 id="org57d6ac7">Redes Multicapa (MLP)</h2>
+<div class="outline-text-2" id="text-org57d6ac7">
+<p>
+** Necesidad de capas ocultas
+Para resolver problemas no lineales, se introducen capas ocultas que permiten componer funciones simples en funciones complejas.
+</p>
+</div>
+<div id="outline-container-org6068f48" class="outline-3">
+<h3 id="org6068f48">Capacidad de representación</h3>
+<div class="outline-text-3" id="text-org6068f48">
+<p>
+Un MLP con suficientes neuronas puede aproximar cualquier función continua (teorema de aproximación universal).
+</p>
+</div>
+</div>
+<div id="outline-container-orged0c813" class="outline-3">
+<h3 id="orged0c813">Estructura</h3>
+</div>
+</div>
+<div id="outline-container-org82ee67e" class="outline-2">
+<h2 id="org82ee67e">Entrada</h2>
+</div>
+<div id="outline-container-org3cf48b7" class="outline-2">
+<h2 id="org3cf48b7">Capas ocultas</h2>
+</div>
+<div id="outline-container-orge9dfd09" class="outline-2">
+<h2 id="orge9dfd09">Salida</h2>
+</div>
+<div id="outline-container-orgcda6495" class="outline-2">
+<h2 id="orgcda6495">Perceptrón ejemplo (Python)</h2>
+<div class="outline-text-2" id="text-orgcda6495">
+<p>
+Un perceptrón es una neurona artificial que:
+</p>
+<ol class="org-ol">
+<li>Recibe entradas (\(x_1, x_2, \dots\)).</li>
+<li>Las multiplica por pesos (\(w_1, w_2, \dots\)).</li>
+<li>Suma un sesgo (\(b\)).</li>
+<li>Aplica una función de activación (ej. Escalón).</li>
+</ol>
+</div>
+<div id="outline-container-org81d2a70" class="outline-3">
+<h3 id="org81d2a70">Perceptrón para una compuerta "AND"</h3>
+<div class="outline-text-3" id="text-org81d2a70">
+<p>
+Este código simula una neurona que solo se activa si ambas entradas son 1.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">def</span> <span style="color: #b8bb26;">perceptron_and</span><span style="color: #fe8019;">(</span>x1, x2<span style="color: #fe8019;">)</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">1. Definimos los Pesos y el Sesgo (Bias)
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Estos valores normalmente se aprenden, aqu&#237; los asignamos manualmente
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">w1</span>, <span style="color: #83a598;">w2</span> = 0.5, 0.5
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">bias</span> = -0.7
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">2. Suma ponderada: (x1 * w1) + (x2 * w2) + bias
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">suma</span> = <span style="color: #fe8019;">(</span>x1 * w1<span style="color: #fe8019;">)</span> + <span style="color: #fe8019;">(</span>x2 * w2<span style="color: #fe8019;">)</span> + bias
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">3. Funci&#243;n de activaci&#243;n (Escal&#243;n de Heaviside)
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Si la suma es mayor a 0, la neurona se dispara (1)
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">if</span> suma &gt; 0:
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">return</span> 1
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">else</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">return</span> 0
+
+<span style="color: #928374;"># </span><span style="color: #928374;">Prueba de la tabla de verdad AND
+</span><span style="color: #83a598;">entradas</span> = <span style="color: #fe8019;">[</span><span style="color: #b16286;">(</span>0, 0<span style="color: #b16286;">)</span>, <span style="color: #b16286;">(</span>0, 1<span style="color: #b16286;">)</span>, <span style="color: #b16286;">(</span>1, 0<span style="color: #b16286;">)</span>, <span style="color: #b16286;">(</span>1, 1<span style="color: #b16286;">)</span><span style="color: #fe8019;">]</span>
+
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Entrada | Salida"</span><span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"--------|-------"</span><span style="color: #fe8019;">)</span>
+<span style="color: #fb4934;">for</span> e <span style="color: #fb4934;">in</span> entradas:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">resultado</span> = perceptron_and<span style="color: #fe8019;">(</span>e<span style="color: #b16286;">[</span>0<span style="color: #b16286;">]</span>, e<span style="color: #b16286;">[</span>1<span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">" </span>{e}<span style="color: #b8bb26;">  |   </span>{resultado}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge2a8c0f" class="outline-2">
+<h2 id="orge2a8c0f">Bibliografía  Deep Learning</h2>
+<div class="outline-text-2" id="text-orge2a8c0f">
+</div>
+<div id="outline-container-org82ce20e" class="outline-3">
+<h3 id="org82ce20e">Teórica y Académica&#xa0;&#xa0;&#xa0;<span class="tag"><span class="MATEMATICAS">MATEMATICAS</span>&#xa0;<span class="FUNDAMENTOS">FUNDAMENTOS</span></span></h3>
+<div class="outline-text-3" id="text-org82ce20e">
+<p>
+Libros diseñados para entender el "porqué" de los algoritmos.
+</p>
+</div>
+<div id="outline-container-org5536e92" class="outline-4">
+<h4 id="org5536e92">Deep Learning</h4>
+<div class="outline-text-4" id="text-org5536e92">
+<ul class="org-ul">
+<li><b>Autores:</b> Ian Goodfellow, Yoshua Bengio y Aaron Courville.</li>
+<li><b>Editorial:</b> MIT Press (2016).</li>
+<li><b>Nota:</b> Considerada la "Biblia" de la IA. Cubre álgebra lineal, probabilidad y arquitecturas complejas.</li>
+<li><b>Web:</b> <a href="https://www.deeplearningbook.org/">Acceso gratuito a la versión web (HTML)</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc366a68" class="outline-4">
+<h4 id="orgc366a68">Neural Networks and Deep Learning: A Textbook</h4>
+<div class="outline-text-4" id="text-orgc366a68">
+<ul class="org-ul">
+<li><b>Autor:</b> Charu C. Aggarwal.</li>
+<li><b>Editorial:</b> Springer (2018).</li>
+<li><b>Enfoque:</b> Muy estructurado para estudiantes de ingeniería y computación.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6151110" class="outline-3">
+<h3 id="org6151110">Práctica y Programación&#xa0;&#xa0;&#xa0;<span class="tag"><span class="PYTHON">PYTHON</span>&#xa0;<span class="PYTORCH">PYTORCH</span>&#xa0;<span class="KERAS">KERAS</span></span></h3>
+<div class="outline-text-3" id="text-org6151110">
+<p>
+Libros enfocados en la implementación inmediata usando librerías de Python.
+</p>
+</div>
+<div id="outline-container-orge118bd9" class="outline-4">
+<h4 id="orge118bd9">Deep Learning with Python (3rd Edition)</h4>
+<div class="outline-text-4" id="text-orge118bd9">
+<ul class="org-ul">
+<li><b>Autor:</b> François Chollet (Creador de Keras).</li>
+<li><b>Editorial:</b> Manning Publications (2025).</li>
+<li><b>Por qué leerlo:</b> Explicaciones excepcionales sobre la intuición detrás de las redes neuronales.</li>
+<li><b>Enlace:</b> <a href="https://www.manning.com/books/deep-learning-with-python-third-edition">Página del libro</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge5741ff" class="outline-4">
+<h4 id="orge5741ff">Hands-On Machine Learning with Scikit-Learn and PyTorch</h4>
+<div class="outline-text-4" id="text-orge5741ff">
+<ul class="org-ul">
+<li><b>Autor:</b> Aurélien Géron.</li>
+<li><b>Editorial:</b> O'Reilly Media (Edición 2025).</li>
+<li><b>Enfoque:</b> Es el manual más completo para pasar de la teoría a la práctica industrial. Cubre desde regresiones simples hasta Transformers.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb96681" class="outline-3">
+<h3 id="orgfb96681">Aprendizaje "Desde Cero"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NUMPY">NUMPY</span>&#xa0;<span class="LOGICA">LOGICA</span></span></h3>
+<div class="outline-text-3" id="text-orgfb96681">
+<p>
+Ideales para entender cómo funciona el "motor" de una red neuronal sin usar herramientas automáticas.
+</p>
+</div>
+<div id="outline-container-org3a8c964" class="outline-4">
+<h4 id="org3a8c964">Grokking Deep Learning</h4>
+<div class="outline-text-4" id="text-org3a8c964">
+<ul class="org-ul">
+<li><b>Autor:</b> Andrew Trask.</li>
+<li><b>Editorial:</b> Manning Publications.</li>
+<li><b>Descripción:</b> Aprenderás a programar redes neuronales usando solo <code>NumPy</code>. Ideal si quieres entender la "caja negra".</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org08f2e56" class="outline-4">
+<h4 id="org08f2e56">Neural Networks from Scratch (NNFS)</h4>
+<div class="outline-text-4" id="text-org08f2e56">
+<ul class="org-ul">
+<li><b>Autores:</b> Harrison Kinsley (Sentdex) y Daniel Kukieła.</li>
+<li><b>Descripción:</b> Basado en código puro de Python. Muy popular entre autodidactas.</li>
+<li><b>Web:</b> <a href="https://nnfs.io/">Sitio Oficial de NNFS</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf6e9608" class="outline-2">
+<h2 id="orgf6e9608">Tabla Comparativa para Elección Rápida</h2>
+<div class="outline-text-2" id="text-orgf6e9608">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Libro</th>
+<th scope="col" class="org-left">Nivel</th>
+<th scope="col" class="org-left">Enfoque Principal</th>
+<th scope="col" class="org-left">Tecnología</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Goodfellow</td>
+<td class="org-left">Avanzado</td>
+<td class="org-left">Teoría/Matemáticas</td>
+<td class="org-left">Genérico</td>
+</tr>
+
+<tr>
+<td class="org-left">Chollet</td>
+<td class="org-left">Intermedio</td>
+<td class="org-left">Intuición</td>
+<td class="org-left">Keras/TensorFlow</td>
+</tr>
+
+<tr>
+<td class="org-left">Géron</td>
+<td class="org-left">Todos</td>
+<td class="org-left">Práctica/Industria</td>
+<td class="org-left">PyTorch/Scikit-Learn</td>
+</tr>
+
+<tr>
+<td class="org-left">Trask</td>
+<td class="org-left">Principiante</td>
+<td class="org-left">Lógica Interna</td>
+<td class="org-left">NumPy</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Eduardo Alcaraz</p>
+<p class="date">Created: 2026-01-19 lun 14:53</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
