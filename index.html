@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-01-19 lun 14:53 -->
+<!-- 2026-01-20 mar 09:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Redes Neuronales Artificiales</title>
@@ -241,184 +241,359 @@
 <h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org49c5e71">Presentación del Curso</a>
+<li><a href="#org5215ec8">Presentación del Curso</a>
 <ul>
-<li><a href="#orgcd7f69e">Objetivo general</a></li>
+<li><a href="#org908e50f">Objetivo general</a></li>
 </ul>
 </li>
-<li><a href="#orga6df31e">Instalación de requerimientos</a>
+<li><a href="#org300fe57">Instalación de requerimientos</a>
 <ul>
-<li><a href="#org88a9927">Verificación de Python</a></li>
-<li><a href="#orgedb2d22">Creación del entorno virtual</a></li>
-<li><a href="#orgbfe58d6">Activación del entorno virtual</a>
+<li><a href="#org2fad950">Verificación de Python</a></li>
+<li><a href="#orgc7d1c6a">Creación del entorno virtual</a></li>
+<li><a href="#org8e544a0">Activación del entorno virtual</a>
 <ul>
-<li><a href="#orgf872f2e">GNU/Linux y macOS</a></li>
-<li><a href="#org99ad630">Windows – Símbolo del sistema (CMD)</a></li>
-<li><a href="#orgaec9e84">Windows – PowerShell</a></li>
-<li><a href="#orgd7e02c7">Windows – Git Bash</a></li>
+<li><a href="#orgdf640ab">GNU/Linux y macOS</a></li>
+<li><a href="#org02f57ea">Windows – Símbolo del sistema (CMD)</a></li>
+<li><a href="#orgd8a119b">Windows – PowerShell</a></li>
+<li><a href="#org0fc9df2">Windows – Git Bash</a></li>
 </ul>
 </li>
-<li><a href="#org7eca5c3">Actualización del gestor de paquetes</a></li>
-<li><a href="#org87be2fc">Instalación de dependencias</a></li>
-<li><a href="#org0899c67">Verificación de la instalación</a></li>
-<li><a href="#org1ec16e3">Desactivación del entorno virtual</a></li>
+<li><a href="#org34ac52f">Actualización del gestor de paquetes</a></li>
+<li><a href="#org9dc8cdd">Instalación de dependencias</a></li>
+<li><a href="#org04df2ae">Verificación de la instalación</a></li>
+<li><a href="#orgf52e061">Desactivación del entorno virtual</a></li>
 </ul>
 </li>
-<li><a href="#org9afbcb7">Manual de Entornos Virtuales en Python</a>
+<li><a href="#org0495020">Manual de Entornos Virtuales en Python</a>
 <ul>
-<li><a href="#org6811108">Introducción</a></li>
-<li><a href="#orgd0b113f">Flujo de Trabajo Básico</a>
+<li><a href="#org4d4bda7">Introducción</a></li>
+<li><a href="#org1c90f00">Flujo de Trabajo Básico</a>
 <ul>
-<li><a href="#org86aab0d">1. Creación del entorno</a></li>
-<li><a href="#org9a5f94a">2. Activación</a></li>
+<li><a href="#org6bf342a">1. Creación del entorno</a></li>
+<li><a href="#orgdfb19c4">2. Activación</a></li>
 </ul>
 </li>
-<li><a href="#org3cfc909">Gestión de paquetes</a></li>
-<li><a href="#orgec2a119">El archivo de Requerimientos</a></li>
-<li><a href="#orgd567d07">Exportar dependencias</a></li>
-<li><a href="#org0d70fad">Instalar desde el archivo</a></li>
-<li><a href="#org22cb126">Tips de Limpieza</a></li>
-<li><a href="#orge8502d8">Entornos Virtuales Python (Edición Windows)</a></li>
-<li><a href="#org18d4e98">Requisitos Previos</a></li>
-<li><a href="#org06c2e8d">Flujo de Trabajo en Windows</a>
+<li><a href="#org2b2f01c">Gestión de paquetes</a></li>
+<li><a href="#org35c0c43">El archivo de Requerimientos</a></li>
+<li><a href="#org251a56a">Exportar dependencias</a></li>
+<li><a href="#org814555b">Instalar desde el archivo</a></li>
+<li><a href="#orgb61e2c6">Tips de Limpieza</a></li>
+<li><a href="#org444f2b3">Entornos Virtuales Python (Edición Windows)</a></li>
+<li><a href="#org141305d">Requisitos Previos</a></li>
+<li><a href="#orgc7ce0f2">Flujo de Trabajo en Windows</a>
 <ul>
-<li><a href="#org19e24b8">1. Crear el Entorno Virtual</a></li>
-<li><a href="#org34b66b1">2. El Paso Crítico: La Activación</a></li>
-<li><a href="#orgb46850d">3. Confirmación</a></li>
+<li><a href="#orged7fddf">1. Crear el Entorno Virtual</a></li>
+<li><a href="#org7e9e561">2. El Paso Crítico: La Activación</a></li>
+<li><a href="#orgb74ff67">3. Confirmación</a></li>
 </ul>
 </li>
-<li><a href="#org76c79a7">Gestión de Librerías con PIP</a>
+<li><a href="#org5e9df78">Gestión de Librerías con PIP</a>
 <ul>
-<li><a href="#org4cc003a">Instalación de paquetes</a></li>
-<li><a href="#org66ef36d">Congelar dependencias (Compartir proyecto)</a></li>
-<li><a href="#org34d5cd9">Instalar desde un archivo recibido</a></li>
+<li><a href="#org8cfd633">Instalación de paquetes</a></li>
+<li><a href="#org3516ad5">Congelar dependencias (Compartir proyecto)</a></li>
+<li><a href="#org86261b8">Instalar desde un archivo recibido</a></li>
 </ul>
 </li>
-<li><a href="#org7db85da">Uso de Entornos en Emacs (Windows)</a>
+<li><a href="#orgdb96f22">Uso de Entornos en Emacs (Windows)</a>
 <ul>
-<li><a href="#org6d513c0">Instalación del paquete pyvenv</a></li>
-<li><a href="#orgd48a7df">Cómo activarlo dentro de Emacs</a></li>
+<li><a href="#org9e3a79b">Instalación del paquete pyvenv</a></li>
+<li><a href="#org4c3cda7">Cómo activarlo dentro de Emacs</a></li>
 </ul>
 </li>
-<li><a href="#org8b5f4c6">Solución de Problemas Comunes en Windows</a></li>
-<li><a href="#orgb8ae402">Desactivación y Limpieza</a></li>
+<li><a href="#org3aef7f3">Solución de Problemas Comunes en Windows</a></li>
+<li><a href="#orge984e7b">Desactivación y Limpieza</a></li>
 </ul>
 </li>
-<li><a href="#org5c99106">Introducción a la Inteligencia Artificial (IA)</a>
+<li><a href="#orga1efb12">Introducción a la Inteligencia Artificial (IA)</a>
 <ul>
-<li><a href="#orgec0d336">Definición formal</a></li>
-<li><a href="#org70771ab">IA débil vs IA fuerte</a></li>
+<li><a href="#org752da29">Definición formal</a></li>
+<li><a href="#orgf476121">IA débil vs IA fuerte</a></li>
 </ul>
 </li>
-<li><a href="#org0e0fb3e">Machine Learning (Aprendizaje Automático)</a>
+<li><a href="#org13d319a">Machine Learning (Aprendizaje Automático)</a>
 <ul>
-<li><a href="#orgdeffee0">Tipos de aprendizaje</a></li>
+<li><a href="#orgc358afd">Tipos de aprendizaje</a></li>
 </ul>
 </li>
-<li><a href="#org994b43d">Historia de las Redes Neuronales</a>
+<li><a href="#org42d5eec">Historia de las Redes Neuronales</a>
 <ul>
-<li><a href="#org78fabae">Contexto histórico</a></li>
-<li><a href="#orge3d2ecd">McCulloch y Pitts (1943)</a></li>
-<li><a href="#orgeaa2d85">Perceptrón y optimismo inicial</a></li>
-<li><a href="#org6d6ad35">Críticas y estancamiento</a></li>
-<li><a href="#orge24a0fb">Renacimiento moderno</a></li>
+<li><a href="#orgf1a48ac">Contexto histórico</a></li>
+<li><a href="#org4e49683">McCulloch y Pitts (1943)</a></li>
+<li><a href="#orgaa8c909">Perceptrón y optimismo inicial</a></li>
+<li><a href="#orgc566e54">Críticas y estancamiento</a></li>
+<li><a href="#orgaae0c8f">Renacimiento moderno</a></li>
 </ul>
 </li>
-<li><a href="#org00e47d7">La Neurona Artificial</a>
+<li><a href="#org88f4073">La Neurona Artificial</a>
 <ul>
-<li><a href="#org790871c">Motivación</a></li>
-<li><a href="#orgcf507f6">Componentes</a></li>
-<li><a href="#org284cb74">Modelo matemático</a></li>
+<li><a href="#orgc541128">Motivación</a></li>
+<li><a href="#orgdadd21f">Componentes</a></li>
+<li><a href="#org815c89a">Modelo matemático</a></li>
 </ul>
 </li>
-<li><a href="#org9e7249b">El Perceptrón</a>
+<li><a href="#org02ca7bc">El Perceptrón</a>
 <ul>
-<li><a href="#org68292f8">Definición</a></li>
-<li><a href="#org4c6aa90">Interpretación geométrica</a></li>
-<li><a href="#orgd43747c">Aprendizaje</a></li>
-<li><a href="#org28df91d">Limitaciones</a></li>
+<li><a href="#org9d2b76f">Definición</a></li>
+<li><a href="#orgd4ac84a">Interpretación geométrica</a></li>
+<li><a href="#org65fd948">Aprendizaje</a></li>
+<li><a href="#org3bfff73">Limitaciones</a></li>
 </ul>
 </li>
-<li><a href="#orga95639d">¿Qué es un problema linealmente separable?</a>
+<li><a href="#orga569d93">¿Qué es un problema linealmente separable?</a>
 <ul>
-<li><a href="#orga16a402">Intuición básica</a></li>
+<li><a href="#org5c97fb2">Intuición básica</a></li>
 </ul>
 </li>
-<li><a href="#orgb58d6c6">Estructura de un Perceptrón Simple</a>
+<li><a href="#orgc590bc1">Estructura de un Perceptrón Simple</a>
 <ul>
-<li><a href="#org99031c7">Entradas (Inputs)</a></li>
-<li><a href="#orgcec3c2d">Pesos Sinápticos (Weights)</a></li>
-<li><a href="#org08e0135">Suma Ponderada (Weighted Sum)</a></li>
-<li><a href="#org5b45c34">Sesgo (Bias)</a></li>
-<li><a href="#orgd49d22e">Función de Activación</a></li>
-<li><a href="#org6ae267b">Salida (Output)</a></li>
+<li><a href="#orge7eb74b">Entradas (Inputs)</a></li>
+<li><a href="#orgcd31096">Pesos Sinápticos (Weights)</a></li>
+<li><a href="#orgd564e0b">Suma Ponderada (Weighted Sum)</a></li>
+<li><a href="#org98a724f">Sesgo (Bias)</a></li>
+<li><a href="#org3b8aafc">Función de Activación</a></li>
+<li><a href="#org2eb900e">Salida (Output)</a></li>
 </ul>
 </li>
-<li><a href="#org8530943">1. El Escenario: La Decisión de la Cena</a>
+<li><a href="#org0241fe6">Ejemplo Tacos</a>
 <ul>
-<li><a href="#orgc6705ef">Nuestras Entradas (Inputs)</a></li>
-<li><a href="#orgc0f4dd1">El Peso (Weight): La Importancia</a></li>
+<li><a href="#orgb18e582">1. El Escenario: La Decisión de la Cena</a>
+<ul>
+<li><a href="#orgd8fc211">Nuestras Entradas (Inputs)</a></li>
+<li><a href="#orgf5c669f">El Peso (Weight): La Importancia</a></li>
 </ul>
 </li>
-<li><a href="#org5768f0f">2. ¿Cómo toma la decisión? (La Suma y el Sesgo)</a>
+<li><a href="#org9bbe2fe">2. ¿Cómo toma la decisión? (La Suma y el Sesgo)</a>
 <ul>
-<li><a href="#orga930528">El Sesgo (Bias)</a></li>
+<li><a href="#orge7c39ab">El Sesgo (Bias)</a></li>
 </ul>
 </li>
-<li><a href="#org1386864">3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?</a>
+<li><a href="#orgfb33cdb">3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?</a>
 <ul>
-<li><a href="#org26b0b5f">El Error: La Brújula</a></li>
-<li><a href="#org9bada46">El Ajuste (La Regla Delta)</a></li>
+<li><a href="#org8c08ab3">El Error: La Brújula</a></li>
+<li><a href="#orgcbeb9c8">El Ajuste (La Regla Delta)</a></li>
 </ul>
 </li>
-<li><a href="#org9498b35">5. Conclusión</a></li>
-<li><a href="#org57d6ac7">Redes Multicapa (MLP)</a>
+<li><a href="#orgafc48ea">Perceptrón ejemplo (Python)</a>
 <ul>
-<li><a href="#org6068f48">Capacidad de representación</a></li>
-<li><a href="#orged0c813">Estructura</a></li>
-</ul>
-</li>
-<li><a href="#org82ee67e">Entrada</a></li>
-<li><a href="#org3cf48b7">Capas ocultas</a></li>
-<li><a href="#orge9dfd09">Salida</a></li>
-<li><a href="#orgcda6495">Perceptrón ejemplo (Python)</a>
-<ul>
-<li><a href="#org81d2a70">Perceptrón para una compuerta "AND"</a></li>
-</ul>
-</li>
-<li><a href="#orge2a8c0f">Bibliografía  Deep Learning</a>
-<ul>
-<li><a href="#org82ce20e">Teórica y Académica&#xa0;&#xa0;&#xa0;<span class="tag"><span class="MATEMATICAS">MATEMATICAS</span>&#xa0;<span class="FUNDAMENTOS">FUNDAMENTOS</span></span></a>
-<ul>
-<li><a href="#org5536e92">Deep Learning</a></li>
-<li><a href="#orgc366a68">Neural Networks and Deep Learning: A Textbook</a></li>
-</ul>
-</li>
-<li><a href="#org6151110">Práctica y Programación&#xa0;&#xa0;&#xa0;<span class="tag"><span class="PYTHON">PYTHON</span>&#xa0;<span class="PYTORCH">PYTORCH</span>&#xa0;<span class="KERAS">KERAS</span></span></a>
-<ul>
-<li><a href="#orge118bd9">Deep Learning with Python (3rd Edition)</a></li>
-<li><a href="#orge5741ff">Hands-On Machine Learning with Scikit-Learn and PyTorch</a></li>
-</ul>
-</li>
-<li><a href="#orgfb96681">Aprendizaje "Desde Cero"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NUMPY">NUMPY</span>&#xa0;<span class="LOGICA">LOGICA</span></span></a>
-<ul>
-<li><a href="#org3a8c964">Grokking Deep Learning</a></li>
-<li><a href="#org08f2e56">Neural Networks from Scratch (NNFS)</a></li>
+<li><a href="#orgf18ea56">Perceptrón para una compuerta "AND"</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgf6e9608">Tabla Comparativa para Elección Rápida</a></li>
+<li><a href="#orgf613cb1">Codigo C python</a></li>
+<li><a href="#org060d8f4">Redes Neuronales Multicapa (Multilayer Perceptron)</a>
+<ul>
+<li><a href="#org9ef5901">Introducción</a></li>
+<li><a href="#orgb559640">Modelo matemático</a>
+<ul>
+<li><a href="#orgfd5e60a">Neurona individual</a></li>
+<li><a href="#orgbda171f">Forma matricial de una capa</a></li>
+</ul>
+</li>
+<li><a href="#org6ff0523">Funciones de activación</a>
+<ul>
+<li><a href="#org4135bc4">¿Para qué sirven las funciones de activación?</a></li>
+</ul>
+</li>
+<li><a href="#org0831682">Clasificación de las funciones de activación</a>
+<ul>
+<li><a href="#org0f4d024">Funciones de activación clásicas</a></li>
+<li><a href="#org7ee83e6">Funciones de activación modernas</a></li>
+<li><a href="#org95eb073">Funciones de activación en la capa de salida</a></li>
+<li><a href="#org6a87ea3">Impacto en el entrenamiento</a></li>
+</ul>
+</li>
+<li><a href="#org767c0c0">Propagación hacia adelante (Forward Propagation)</a></li>
+<li><a href="#orga4ec7a5">Funciones de pérdida</a>
+<ul>
+<li><a href="#orgaad2735">Error cuadrático medio (MSE)</a></li>
+<li><a href="#orgfaf936f">Entropía cruzada (Cross-Entropy)</a></li>
+</ul>
+</li>
+<li><a href="#org4e25891">Backpropagation</a></li>
+<li><a href="#org7679b69">Descenso de gradiente</a></li>
+</ul>
+</li>
+<li><a href="#orgf4a57cf">Ejemplo Clasificación del dataset Iris con MLP</a>
+<ul>
+<li><a href="#orgea7f77f">Reproducibilidad del experimento</a></li>
+<li><a href="#org91a6d5f">Estratificación de clases</a></li>
+<li><a href="#orgeb4dc17">Importancia en redes neuronales</a></li>
+<li><a href="#org112d3a9">Normalización de los datos</a></li>
+<li><a href="#org5d42f47">Definir el Perceptrón Multicapa (MLP)</a>
+<ul>
+<li><a href="#orgf41dd0a">Arquitectura de la red neuronal</a></li>
+<li><a href="#org367f316">Capa de entrada</a></li>
+<li><a href="#orged8401a">Capas ocultas</a></li>
+<li><a href="#org204a8bd">Función de activación</a></li>
+<li><a href="#org72aeba5">Capa de salida</a></li>
+<li><a href="#orgecfbd04">Entrenamiento del modelo</a></li>
+</ul>
+</li>
+<li><a href="#org988ee7f">Número de iteraciones</a></li>
+<li><a href="#orgbab2677">Reproducibilidad</a></li>
+<li><a href="#org2d28422">Entrenamiento del modelo</a>
+<ul>
+<li><a href="#org6ad586a">Propagación hacia adelante (forward pass)</a></li>
+<li><a href="#org5f892c3">Cálculo del error</a></li>
+<li><a href="#org388cc8b">Backpropagation</a></li>
+<li><a href="#orgd87b2a8">Descenso de gradiente con Adam</a></li>
+</ul>
+</li>
+<li><a href="#org1d985a9">Evaluación del modelo</a>
+<ul>
+<li><a href="#orgef8f65f">Métricas utilizadas</a></li>
+</ul>
+</li>
+<li><a href="#orgadaff57">Predicción con una nueva flor</a></li>
+<li><a href="#orge40bc50">Interpretación matemática del MLP</a></li>
+</ul>
+</li>
+<li><a href="#orgeeb11f0">Ejemplo Clasificación de Cáncer de Mama con MLP</a>
+<ul>
+<li><a href="#org1973470">Importar librerías</a></li>
+<li><a href="#org81187e0">Cargar el dataset Breast Cancer</a>
+<ul>
+<li><a href="#orgefdd34e">Importancia del dominio</a></li>
+</ul>
+</li>
+<li><a href="#org0d2106f">Partición del conjunto de datos</a>
+<ul>
+<li><a href="#org5437901">Significado de los parámetros</a></li>
+<li><a href="#org16802a7">Propósito de la partición</a></li>
+</ul>
+</li>
+<li><a href="#org342f94e">Normalización (Estandarización)</a>
+<ul>
+<li><a href="#org0d0baf1">Importante</a></li>
+</ul>
+</li>
+<li><a href="#orgceb966f">Definición del Perceptrón Multicapa (MLP)</a>
+<ul>
+<li><a href="#org9de47d7">Arquitectura del modelo</a></li>
+<li><a href="#org63da5cb">Función de activación ReLU</a></li>
+<li><a href="#org67633de">Optimizador Adam</a></li>
+<li><a href="#org77ca636">Número máximo de iteraciones</a></li>
+<li><a href="#org52ed1b9">Reproducibilidad</a></li>
+</ul>
+</li>
+<li><a href="#orga344199">Entrenamiento del modelo</a>
+<ul>
+<li><a href="#org367e54e">Proceso interno (visión conceptual)</a></li>
+</ul>
+</li>
+<li><a href="#org36ca5b6">Evaluación del modelo</a>
+<ul>
+<li><a href="#org10d4fbc">Métricas principales</a></li>
+</ul>
+</li>
+<li><a href="#orgbb58616">Interpretación matemática de la salida binaria</a></li>
+<li><a href="#org64fcbac">Predicción de una nueva muestra</a>
+<ul>
+<li><a href="#org9f342f1">Comentarios importantes</a></li>
+</ul>
+</li>
+<li><a href="#org565b06d">Resumen conceptual</a></li>
+</ul>
+</li>
+<li><a href="#org53e5973">Redes Neuronales LSTM (Long Short-Term Memory)</a>
+<ul>
+<li><a href="#org5122671">Estructura general de una RNN</a>
+<ul>
+<li><a href="#orgf978fd2">Problema: vanishing y exploding gradients</a></li>
+</ul>
+</li>
+<li><a href="#org2fb113d">Motivación de las LSTM</a></li>
+<li><a href="#org043e9f4">Arquitectura interna de una celda LSTM</a>
+<ul>
+<li><a href="#org00837c9">Ecuaciones de la LSTM</a></li>
+<li><a href="#org52850a5">Interpretación de las puertas</a></li>
+</ul>
+</li>
+<li><a href="#orge7d2c8c">Intuición conceptual</a></li>
+<li><a href="#org8c28c7f">Entrenamiento de una LSTM</a></li>
+<li><a href="#org8bbd524">Tipos de tareas típicas con LSTM</a></li>
+<li><a href="#org16b287c">Variantes y extensiones de LSTM</a></li>
+<li><a href="#orgaf59085">Implementación básica en Python (Keras)</a></li>
+<li><a href="#org789c5fc">Ventajas y limitaciones de LSTM</a>
+<ul>
+<li><a href="#org19b8e49">Ventajas</a></li>
+<li><a href="#org6222110">Limitaciones</a></li>
+</ul>
+</li>
+<li><a href="#org65b290f">Conclusión</a></li>
+</ul>
+</li>
+<li><a href="#org738aa1c">Ejemplo Clasificación del dataset Iris con una red LSTM</a>
+<ul>
+<li><a href="#orgc0200e3">Importar librerías</a></li>
+<li><a href="#orgaa1347d">Cargar el dataset Iris</a></li>
+<li><a href="#org740d861">Partición entrenamiento / prueba</a>
+<ul>
+<li><a href="#org0148741">Propósito de la partición</a></li>
+<li><a href="#org1a094eb">Parámetro test<sub>size</sub></a></li>
+<li><a href="#orgf48a363">Reproducibilidad del experimento</a></li>
+<li><a href="#org60e6e07">Estratificación de clases</a></li>
+</ul>
+</li>
+<li><a href="#orgdaa0f6a">Normalización de los datos</a></li>
+<li><a href="#orgd6c5f84">Preparar los datos para LSTM</a></li>
+<li><a href="#orgc9b992b">Definir la red LSTM</a>
+<ul>
+<li><a href="#org58d3ad7">Arquitectura de la red</a></li>
+</ul>
+</li>
+<li><a href="#orgf88a008">Compilación del modelo</a></li>
+<li><a href="#org61a735d">Entrenamiento del modelo LSTM</a>
+<ul>
+<li><a href="#org81b43b1">Propagación hacia adelante (forward pass)</a></li>
+<li><a href="#org5c748e9">Cálculo del error</a></li>
+<li><a href="#org0b3fe1e">Backpropagation Through Time (BPTT)</a></li>
+<li><a href="#org9a4cec2">Descenso de gradiente con Adam</a></li>
+</ul>
+</li>
+<li><a href="#org16b4510">Evaluación del modelo</a>
+<ul>
+<li><a href="#org05dbe54">Métricas utilizadas</a></li>
+</ul>
+</li>
+<li><a href="#orgfb3b399">Predicción con una nueva flor</a></li>
+<li><a href="#orgcb3d5c0">Interpretación matemática básica de la LSTM</a></li>
+</ul>
+</li>
+<li><a href="#orgc1d139a">Bibliografía  Deep Learning</a>
+<ul>
+<li><a href="#org34d8591">Teórica y Académica&#xa0;&#xa0;&#xa0;<span class="tag"><span class="MATEMATICAS">MATEMATICAS</span>&#xa0;<span class="FUNDAMENTOS">FUNDAMENTOS</span></span></a>
+<ul>
+<li><a href="#orga0fd66e">Deep Learning</a></li>
+<li><a href="#orgdddf44d">Neural Networks and Deep Learning: A Textbook</a></li>
+</ul>
+</li>
+<li><a href="#org9f22c46">Práctica y Programación&#xa0;&#xa0;&#xa0;<span class="tag"><span class="PYTHON">PYTHON</span>&#xa0;<span class="PYTORCH">PYTORCH</span>&#xa0;<span class="KERAS">KERAS</span></span></a>
+<ul>
+<li><a href="#org8fa7fe7">Deep Learning with Python (3rd Edition)</a></li>
+<li><a href="#org3518405">Hands-On Machine Learning with Scikit-Learn and PyTorch</a></li>
+</ul>
+</li>
+<li><a href="#orge0ca758">Aprendizaje "Desde Cero"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NUMPY">NUMPY</span>&#xa0;<span class="LOGICA">LOGICA</span></span></a>
+<ul>
+<li><a href="#org1974f16">Grokking Deep Learning</a></li>
+<li><a href="#org60b330b">Neural Networks from Scratch (NNFS)</a></li>
+</ul>
+</li>
+<li><a href="#org69dbb15">Tabla Comparativa para Elección Rápida</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org49c5e71" class="outline-2">
-<h2 id="org49c5e71">Presentación del Curso</h2>
-<div class="outline-text-2" id="text-org49c5e71">
+<div id="outline-container-org5215ec8" class="outline-2">
+<h2 id="org5215ec8">Presentación del Curso</h2>
+<div class="outline-text-2" id="text-org5215ec8">
 </div>
-<div id="outline-container-orgcd7f69e" class="outline-3">
-<h3 id="orgcd7f69e">Objetivo general</h3>
-<div class="outline-text-3" id="text-orgcd7f69e">
+<div id="outline-container-org908e50f" class="outline-3">
+<h3 id="org908e50f">Objetivo general</h3>
+<div class="outline-text-3" id="text-org908e50f">
 <p>
 Este curso tiene como objetivo proporcionar una
 comprensión <b>profunda y progresiva</b> de las redes neuronales
@@ -438,13 +613,13 @@ investigación.
 </div>
 </div>
 </div>
-<div id="outline-container-orga6df31e" class="outline-2">
-<h2 id="orga6df31e">Instalación de requerimientos</h2>
-<div class="outline-text-2" id="text-orga6df31e">
+<div id="outline-container-org300fe57" class="outline-2">
+<h2 id="org300fe57">Instalación de requerimientos</h2>
+<div class="outline-text-2" id="text-org300fe57">
 </div>
-<div id="outline-container-org88a9927" class="outline-3">
-<h3 id="org88a9927">Verificación de Python</h3>
-<div class="outline-text-3" id="text-org88a9927">
+<div id="outline-container-org2fad950" class="outline-3">
+<h3 id="org2fad950">Verificación de Python</h3>
+<div class="outline-text-3" id="text-org2fad950">
 <p>
 Antes de instalar las dependencias, verifique que el sistema cuente con Python
 versión 3.9 o superior.
@@ -465,9 +640,9 @@ En caso de que el comando anterior no esté disponible, intente:
 </div>
 </div>
 </div>
-<div id="outline-container-orgedb2d22" class="outline-3">
-<h3 id="orgedb2d22">Creación del entorno virtual</h3>
-<div class="outline-text-3" id="text-orgedb2d22">
+<div id="outline-container-orgc7d1c6a" class="outline-3">
+<h3 id="orgc7d1c6a">Creación del entorno virtual</h3>
+<div class="outline-text-3" id="text-orgc7d1c6a">
 <p>
 Se recomienda crear un entorno virtual para aislar las dependencias del proyecto
 y evitar conflictos entre versiones de librerías.
@@ -479,26 +654,26 @@ y evitar conflictos entre versiones de librerías.
 </div>
 </div>
 </div>
-<div id="outline-container-orgbfe58d6" class="outline-3">
-<h3 id="orgbfe58d6">Activación del entorno virtual</h3>
-<div class="outline-text-3" id="text-orgbfe58d6">
+<div id="outline-container-org8e544a0" class="outline-3">
+<h3 id="org8e544a0">Activación del entorno virtual</h3>
+<div class="outline-text-3" id="text-org8e544a0">
 <p>
 La activación del entorno virtual depende del sistema operativo y del intérprete
 de comandos utilizado.
 </p>
 </div>
-<div id="outline-container-orgf872f2e" class="outline-4">
-<h4 id="orgf872f2e">GNU/Linux y macOS</h4>
-<div class="outline-text-4" id="text-orgf872f2e">
+<div id="outline-container-orgdf640ab" class="outline-4">
+<h4 id="orgdf640ab">GNU/Linux y macOS</h4>
+<div class="outline-text-4" id="text-orgdf640ab">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #fe8019;">source</span> mlp_env/bin/activate
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org99ad630" class="outline-4">
-<h4 id="org99ad630">Windows – Símbolo del sistema (CMD)</h4>
-<div class="outline-text-4" id="text-org99ad630">
+<div id="outline-container-org02f57ea" class="outline-4">
+<h4 id="org02f57ea">Windows – Símbolo del sistema (CMD)</h4>
+<div class="outline-text-4" id="text-org02f57ea">
 <p>
 Si se utiliza el <b>Símbolo del sistema</b> (cmd.exe), ejecute:
 </p>
@@ -509,9 +684,9 @@ Si se utiliza el <b>Símbolo del sistema</b> (cmd.exe), ejecute:
 </div>
 </div>
 </div>
-<div id="outline-container-orgaec9e84" class="outline-4">
-<h4 id="orgaec9e84">Windows – PowerShell</h4>
-<div class="outline-text-4" id="text-orgaec9e84">
+<div id="outline-container-orgd8a119b" class="outline-4">
+<h4 id="orgd8a119b">Windows – PowerShell</h4>
+<div class="outline-text-4" id="text-orgd8a119b">
 <p>
 Si se utiliza <b>Windows PowerShell</b>, ejecute:
 </p>
@@ -536,9 +711,9 @@ Posteriormente, vuelva a ejecutar el comando de activación.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd7e02c7" class="outline-4">
-<h4 id="orgd7e02c7">Windows – Git Bash</h4>
-<div class="outline-text-4" id="text-orgd7e02c7">
+<div id="outline-container-org0fc9df2" class="outline-4">
+<h4 id="org0fc9df2">Windows – Git Bash</h4>
+<div class="outline-text-4" id="text-org0fc9df2">
 <p>
 Si se utiliza <b>Git Bash</b>, ejecute:
 </p>
@@ -555,9 +730,9 @@ paréntesis al inicio de la línea de comandos.
 </div>
 </div>
 </div>
-<div id="outline-container-org7eca5c3" class="outline-3">
-<h3 id="org7eca5c3">Actualización del gestor de paquetes</h3>
-<div class="outline-text-3" id="text-org7eca5c3">
+<div id="outline-container-org34ac52f" class="outline-3">
+<h3 id="org34ac52f">Actualización del gestor de paquetes</h3>
+<div class="outline-text-3" id="text-org34ac52f">
 <p>
 Antes de instalar las librerías, se recomienda actualizar el gestor de paquetes
 <code>pip</code>.
@@ -569,9 +744,9 @@ Antes de instalar las librerías, se recomienda actualizar el gestor de paquetes
 </div>
 </div>
 </div>
-<div id="outline-container-org87be2fc" class="outline-3">
-<h3 id="org87be2fc">Instalación de dependencias</h3>
-<div class="outline-text-3" id="text-org87be2fc">
+<div id="outline-container-org9dc8cdd" class="outline-3">
+<h3 id="org9dc8cdd">Instalación de dependencias</h3>
+<div class="outline-text-3" id="text-org9dc8cdd">
 <p>
 Ejecute el siguiente comando para instalar los requerimientos del módulo
 Perceptrón Multicapa <b>feedforward</b>.
@@ -583,9 +758,9 @@ Perceptrón Multicapa <b>feedforward</b>.
 </div>
 </div>
 </div>
-<div id="outline-container-org0899c67" class="outline-3">
-<h3 id="org0899c67">Verificación de la instalación</h3>
-<div class="outline-text-3" id="text-org0899c67">
+<div id="outline-container-org04df2ae" class="outline-3">
+<h3 id="org04df2ae">Verificación de la instalación</h3>
+<div class="outline-text-3" id="text-org04df2ae">
 <p>
 Para verificar que las dependencias se instalaron correctamente, ejecute Python
 en modo interactivo:
@@ -610,9 +785,9 @@ Posteriormente, importe las librerías:
 </div>
 </div>
 </div>
-<div id="outline-container-org1ec16e3" class="outline-3">
-<h3 id="org1ec16e3">Desactivación del entorno virtual</h3>
-<div class="outline-text-3" id="text-org1ec16e3">
+<div id="outline-container-orgf52e061" class="outline-3">
+<h3 id="orgf52e061">Desactivación del entorno virtual</h3>
+<div class="outline-text-3" id="text-orgf52e061">
 <p>
 Una vez finalizado el trabajo, el entorno virtual puede desactivarse con el
 siguiente comando:
@@ -625,13 +800,13 @@ siguiente comando:
 </div>
 </div>
 </div>
-<div id="outline-container-org9afbcb7" class="outline-2">
-<h2 id="org9afbcb7">Manual de Entornos Virtuales en Python</h2>
-<div class="outline-text-2" id="text-org9afbcb7">
+<div id="outline-container-org0495020" class="outline-2">
+<h2 id="org0495020">Manual de Entornos Virtuales en Python</h2>
+<div class="outline-text-2" id="text-org0495020">
 </div>
-<div id="outline-container-org6811108" class="outline-3">
-<h3 id="org6811108">Introducción</h3>
-<div class="outline-text-3" id="text-org6811108">
+<div id="outline-container-org4d4bda7" class="outline-3">
+<h3 id="org4d4bda7">Introducción</h3>
+<div class="outline-text-3" id="text-org4d4bda7">
 <p>
 El uso de entornos virtuales es esencial para mantener las
 dependencias de tus proyectos aisladas. En este manual aprenderás a
@@ -639,13 +814,13 @@ gestionarlos usando el módulo estándar <code>venv</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd0b113f" class="outline-3">
-<h3 id="orgd0b113f">Flujo de Trabajo Básico</h3>
-<div class="outline-text-3" id="text-orgd0b113f">
+<div id="outline-container-org1c90f00" class="outline-3">
+<h3 id="org1c90f00">Flujo de Trabajo Básico</h3>
+<div class="outline-text-3" id="text-org1c90f00">
 </div>
-<div id="outline-container-org86aab0d" class="outline-4">
-<h4 id="org86aab0d">1. Creación del entorno</h4>
-<div class="outline-text-4" id="text-org86aab0d">
+<div id="outline-container-org6bf342a" class="outline-4">
+<h4 id="org6bf342a">1. Creación del entorno</h4>
+<div class="outline-text-4" id="text-org6bf342a">
 <p>
 Para crear un entorno virtual, navega a la raíz de tu proyecto en la terminal (o dentro de un buffer de Emacs con <code>M-x shell</code>) y ejecuta:
 </p>
@@ -660,24 +835,24 @@ Para crear un entorno virtual, navega a la raíz de tu proyecto en la terminal (
 </p>
 </div>
 </div>
-<div id="outline-container-org9a5f94a" class="outline-4">
-<h4 id="org9a5f94a">2. Activación</h4>
-<div class="outline-text-4" id="text-org9a5f94a">
+<div id="outline-container-orgdfb19c4" class="outline-4">
+<h4 id="orgdfb19c4">2. Activación</h4>
+<div class="outline-text-4" id="text-orgdfb19c4">
 <p>
 La activación depende de tu sistema operativo:
 </p>
 </div>
 <ul class="org-ul">
-<li><a id="org5545357"></a>En Windows (PowerShell)<br />
-<div class="outline-text-5" id="text-org5545357">
+<li><a id="orgb2a9d31"></a>En Windows (PowerShell)<br />
+<div class="outline-text-5" id="text-orgb2a9d31">
 <div class="org-src-container">
 <pre class="src src-powershell">.\.venv\Scripts\Activate.ps1
 </pre>
 </div>
 </div>
 </li>
-<li><a id="org305d725"></a>En macOS / Linux<br />
-<div class="outline-text-5" id="text-org305d725">
+<li><a id="orga63bf77"></a>En macOS / Linux<br />
+<div class="outline-text-5" id="text-orga63bf77">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #fe8019;">source</span> .venv/bin/activate
 </pre>
@@ -687,9 +862,9 @@ La activación depende de tu sistema operativo:
 </ul>
 </div>
 </div>
-<div id="outline-container-org3cfc909" class="outline-3">
-<h3 id="org3cfc909">Gestión de paquetes</h3>
-<div class="outline-text-3" id="text-org3cfc909">
+<div id="outline-container-org2b2f01c" class="outline-3">
+<h3 id="org2b2f01c">Gestión de paquetes</h3>
+<div class="outline-text-3" id="text-org2b2f01c">
 <p>
 Una vez activado (verás el prefijo <code>(.venv)</code> en tu prompt), puedes instalar librerías:
 </p>
@@ -700,35 +875,35 @@ Una vez activado (verás el prefijo <code>(.venv)</code> en tu prompt), puedes i
 </div>
 </div>
 </div>
-<div id="outline-container-orgec2a119" class="outline-3">
-<h3 id="orgec2a119">El archivo de Requerimientos</h3>
-<div class="outline-text-3" id="text-orgec2a119">
+<div id="outline-container-org35c0c43" class="outline-3">
+<h3 id="org35c0c43">El archivo de Requerimientos</h3>
+<div class="outline-text-3" id="text-org35c0c43">
 <p>
 Es fundamental para la reproducibilidad del proyecto.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd567d07" class="outline-3">
-<h3 id="orgd567d07">Exportar dependencias</h3>
-<div class="outline-text-3" id="text-orgd567d07">
+<div id="outline-container-org251a56a" class="outline-3">
+<h3 id="org251a56a">Exportar dependencias</h3>
+<div class="outline-text-3" id="text-org251a56a">
 <div class="org-src-container">
 <pre class="src src-bash">pip freeze &gt; requirements.txt
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org0d70fad" class="outline-3">
-<h3 id="org0d70fad">Instalar desde el archivo</h3>
-<div class="outline-text-3" id="text-org0d70fad">
+<div id="outline-container-org814555b" class="outline-3">
+<h3 id="org814555b">Instalar desde el archivo</h3>
+<div class="outline-text-3" id="text-org814555b">
 <div class="org-src-container">
 <pre class="src src-bash">pip install -r requirements.txt
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org22cb126" class="outline-3">
-<h3 id="org22cb126">Tips de Limpieza</h3>
-<div class="outline-text-3" id="text-org22cb126">
+<div id="outline-container-orgb61e2c6" class="outline-3">
+<h3 id="orgb61e2c6">Tips de Limpieza</h3>
+<div class="outline-text-3" id="text-orgb61e2c6">
 <p>
 Para salir del entorno virtual:
 </p>
@@ -756,26 +931,26 @@ Para borrar el entorno, simplemente elimina la carpeta:
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orge8502d8" class="outline-3">
-<h3 id="orge8502d8">Entornos Virtuales Python (Edición Windows)</h3>
+<div id="outline-container-org444f2b3" class="outline-3">
+<h3 id="org444f2b3">Entornos Virtuales Python (Edición Windows)</h3>
 </div>
 
-<div id="outline-container-org18d4e98" class="outline-3">
-<h3 id="org18d4e98">Requisitos Previos</h3>
-<div class="outline-text-3" id="text-org18d4e98">
+<div id="outline-container-org141305d" class="outline-3">
+<h3 id="org141305d">Requisitos Previos</h3>
+<div class="outline-text-3" id="text-org141305d">
 <ol class="org-ol">
 <li>Tener instalado Python (descargado de <a href="https://www.python.org/">python.org</a> o la Microsoft Store).</li>
 <li>Durante la instalación, asegúrate de marcar la casilla: <b><b>"Add Python to PATH"</b></b>.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org06c2e8d" class="outline-3">
-<h3 id="org06c2e8d">Flujo de Trabajo en Windows</h3>
-<div class="outline-text-3" id="text-org06c2e8d">
+<div id="outline-container-orgc7ce0f2" class="outline-3">
+<h3 id="orgc7ce0f2">Flujo de Trabajo en Windows</h3>
+<div class="outline-text-3" id="text-orgc7ce0f2">
 </div>
-<div id="outline-container-org19e24b8" class="outline-4">
-<h4 id="org19e24b8">1. Crear el Entorno Virtual</h4>
-<div class="outline-text-4" id="text-org19e24b8">
+<div id="outline-container-orged7fddf" class="outline-4">
+<h4 id="orged7fddf">1. Crear el Entorno Virtual</h4>
+<div class="outline-text-4" id="text-orged7fddf">
 <p>
 Abre tu terminal (PowerShell o CMD) en la carpeta de tu proyecto. El comando es el mismo para ambos:
 </p>
@@ -786,16 +961,16 @@ Abre tu terminal (PowerShell o CMD) en la carpeta de tu proyecto. El comando es 
 </div>
 </div>
 </div>
-<div id="outline-container-org34b66b1" class="outline-4">
-<h4 id="org34b66b1">2. El Paso Crítico: La Activación</h4>
-<div class="outline-text-4" id="text-org34b66b1">
+<div id="outline-container-org7e9e561" class="outline-4">
+<h4 id="org7e9e561">2. El Paso Crítico: La Activación</h4>
+<div class="outline-text-4" id="text-org7e9e561">
 <p>
 En Windows, la activación depende de qué terminal estés usando.
 </p>
 </div>
 <ul class="org-ul">
-<li><a id="org93212e9"></a>Opción A: PowerShell (Recomendado)<br />
-<div class="outline-text-5" id="text-org93212e9">
+<li><a id="orgd122e95"></a>Opción A: PowerShell (Recomendado)<br />
+<div class="outline-text-5" id="text-orgd122e95">
 <p>
 Si es la primera vez que usas scripts en Windows, podrías recibir un error de seguridad. Primero, ejecuta esto como administrador (solo una vez):
 </p>
@@ -813,8 +988,8 @@ Luego, para activar el entorno:
 </div>
 </div>
 </li>
-<li><a id="org5c6812a"></a>Opción B: Símbolo del Sistema (CMD)<br />
-<div class="outline-text-5" id="text-org5c6812a">
+<li><a id="org89f1372"></a>Opción B: Símbolo del Sistema (CMD)<br />
+<div class="outline-text-5" id="text-org89f1372">
 <div class="org-src-container">
 <pre class="src src-cmd">.\venv\Scripts\activate.bat
 </pre>
@@ -823,9 +998,9 @@ Luego, para activar el entorno:
 </li>
 </ul>
 </div>
-<div id="outline-container-orgb46850d" class="outline-4">
-<h4 id="orgb46850d">3. Confirmación</h4>
-<div class="outline-text-4" id="text-orgb46850d">
+<div id="outline-container-orgb74ff67" class="outline-4">
+<h4 id="orgb74ff67">3. Confirmación</h4>
+<div class="outline-text-4" id="text-orgb74ff67">
 <p>
 Sabrás que el entorno está activo porque el nombre <code>(venv)</code> aparecerá a la izquierda de la ruta en tu terminal:
 #+example
@@ -835,13 +1010,13 @@ Sabrás que el entorno está activo porque el nombre <code>(venv)</code> aparece
 </div>
 </div>
 </div>
-<div id="outline-container-org76c79a7" class="outline-3">
-<h3 id="org76c79a7">Gestión de Librerías con PIP</h3>
-<div class="outline-text-3" id="text-org76c79a7">
+<div id="outline-container-org5e9df78" class="outline-3">
+<h3 id="org5e9df78">Gestión de Librerías con PIP</h3>
+<div class="outline-text-3" id="text-org5e9df78">
 </div>
-<div id="outline-container-org4cc003a" class="outline-4">
-<h4 id="org4cc003a">Instalación de paquetes</h4>
-<div class="outline-text-4" id="text-org4cc003a">
+<div id="outline-container-org8cfd633" class="outline-4">
+<h4 id="org8cfd633">Instalación de paquetes</h4>
+<div class="outline-text-4" id="text-org8cfd633">
 <p>
 Una vez activo el entorno, instala lo que necesites:
 </p>
@@ -851,9 +1026,9 @@ Una vez activo el entorno, instala lo que necesites:
 </div>
 </div>
 </div>
-<div id="outline-container-org66ef36d" class="outline-4">
-<h4 id="org66ef36d">Congelar dependencias (Compartir proyecto)</h4>
-<div class="outline-text-4" id="text-org66ef36d">
+<div id="outline-container-org3516ad5" class="outline-4">
+<h4 id="org3516ad5">Congelar dependencias (Compartir proyecto)</h4>
+<div class="outline-text-4" id="text-org3516ad5">
 <p>
 Para que otros participantes tengan exactamente lo mismo que tú:
 </p>
@@ -863,9 +1038,9 @@ Para que otros participantes tengan exactamente lo mismo que tú:
 </div>
 </div>
 </div>
-<div id="outline-container-org34d5cd9" class="outline-4">
-<h4 id="org34d5cd9">Instalar desde un archivo recibido</h4>
-<div class="outline-text-4" id="text-org34d5cd9">
+<div id="outline-container-org86261b8" class="outline-4">
+<h4 id="org86261b8">Instalar desde un archivo recibido</h4>
+<div class="outline-text-4" id="text-org86261b8">
 <p>
 Si un compañero te pasa su <code>requirements.txt</code>:
 </p>
@@ -876,16 +1051,16 @@ Si un compañero te pasa su <code>requirements.txt</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-org7db85da" class="outline-3">
-<h3 id="org7db85da">Uso de Entornos en Emacs (Windows)</h3>
-<div class="outline-text-3" id="text-org7db85da">
+<div id="outline-container-orgdb96f22" class="outline-3">
+<h3 id="orgdb96f22">Uso de Entornos en Emacs (Windows)</h3>
+<div class="outline-text-3" id="text-orgdb96f22">
 <p>
 Para que Emacs en Windows gestione bien el entorno, añade esto a tu archivo de configuración (<code>init.el</code> o <code>.emacs</code>):
 </p>
 </div>
-<div id="outline-container-org6d513c0" class="outline-4">
-<h4 id="org6d513c0">Instalación del paquete pyvenv</h4>
-<div class="outline-text-4" id="text-org6d513c0">
+<div id="outline-container-org9e3a79b" class="outline-4">
+<h4 id="org9e3a79b">Instalación del paquete pyvenv</h4>
+<div class="outline-text-4" id="text-org9e3a79b">
 <div class="org-src-container">
 <pre class="src src-elisp"><span style="color: #fe8019;">(</span><span style="color: #fb4934;">use-package</span> pyvenv
   <span style="color: #fe8019;">:ensure</span> t
@@ -895,9 +1070,9 @@ Para que Emacs en Windows gestione bien el entorno, añade esto a tu archivo de 
 </div>
 </div>
 </div>
-<div id="outline-container-orgd48a7df" class="outline-4">
-<h4 id="orgd48a7df">Cómo activarlo dentro de Emacs</h4>
-<div class="outline-text-4" id="text-orgd48a7df">
+<div id="outline-container-org4c3cda7" class="outline-4">
+<h4 id="org4c3cda7">Cómo activarlo dentro de Emacs</h4>
+<div class="outline-text-4" id="text-org4c3cda7">
 <ol class="org-ol">
 <li>Presiona <code>M-x pyvenv-activate</code>.</li>
 <li>Emacs te pedirá la ruta. Navega hasta la carpeta <code>venv</code> de tu proyecto.</li>
@@ -906,9 +1081,9 @@ Para que Emacs en Windows gestione bien el entorno, añade esto a tu archivo de 
 </div>
 </div>
 </div>
-<div id="outline-container-org8b5f4c6" class="outline-3">
-<h3 id="org8b5f4c6">Solución de Problemas Comunes en Windows</h3>
-<div class="outline-text-3" id="text-org8b5f4c6">
+<div id="outline-container-org3aef7f3" class="outline-3">
+<h3 id="org3aef7f3">Solución de Problemas Comunes en Windows</h3>
+<div class="outline-text-3" id="text-org3aef7f3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -946,9 +1121,9 @@ Para que Emacs en Windows gestione bien el entorno, añade esto a tu archivo de 
 </table>
 </div>
 </div>
-<div id="outline-container-orgb8ae402" class="outline-3">
-<h3 id="orgb8ae402">Desactivación y Limpieza</h3>
-<div class="outline-text-3" id="text-orgb8ae402">
+<div id="outline-container-orge984e7b" class="outline-3">
+<h3 id="orge984e7b">Desactivación y Limpieza</h3>
+<div class="outline-text-3" id="text-orge984e7b">
 <p>
 Para salir del entorno:
 </p>
@@ -968,7 +1143,7 @@ Si quieres borrar el entorno por completo (para empezar de cero):
 <p>
 &#x2014;
 </p>
-<div class="IMPORTANT" id="orge0a2016">
+<div class="IMPORTANT" id="org25f940a">
 <p>
 <b>Recordatorio:</b> Nunca incluyas la carpeta <code>venv</code> en tus archivos compartidos o en tu repositorio de Git. Solo comparte el código y el archivo <code>requirements.txt</code>.
 </p>
@@ -977,13 +1152,13 @@ Si quieres borrar el entorno por completo (para empezar de cero):
 </div>
 </div>
 </div>
-<div id="outline-container-org5c99106" class="outline-2">
-<h2 id="org5c99106">Introducción a la Inteligencia Artificial (IA)</h2>
-<div class="outline-text-2" id="text-org5c99106">
+<div id="outline-container-orga1efb12" class="outline-2">
+<h2 id="orga1efb12">Introducción a la Inteligencia Artificial (IA)</h2>
+<div class="outline-text-2" id="text-orga1efb12">
 </div>
-<div id="outline-container-orgec0d336" class="outline-3">
-<h3 id="orgec0d336">Definición formal</h3>
-<div class="outline-text-3" id="text-orgec0d336">
+<div id="outline-container-org752da29" class="outline-3">
+<h3 id="org752da29">Definición formal</h3>
+<div class="outline-text-3" id="text-org752da29">
 <p>
 La <b>Inteligencia Artificial</b> es el área de la computación que estudia
   cómo construir sistemas capaces de realizar tareas que, si fueran
@@ -1006,9 +1181,9 @@ La IA no implica necesariamente consciencia; se centra en <b>comportamiento inte
 </p>
 </div>
 </div>
-<div id="outline-container-org70771ab" class="outline-3">
-<h3 id="org70771ab">IA débil vs IA fuerte</h3>
-<div class="outline-text-3" id="text-org70771ab">
+<div id="outline-container-orgf476121" class="outline-3">
+<h3 id="orgf476121">IA débil vs IA fuerte</h3>
+<div class="outline-text-3" id="text-orgf476121">
 <ul class="org-ul">
 <li><b>IA débil</b>: sistemas especializados en una tarea concreta (la IA actual)</li>
 <li><b>IA fuerte</b>: inteligencia general comparable a la humana (teórica)</li>
@@ -1020,9 +1195,9 @@ Las redes neuronales pertenecen claramente a la IA débil.
 </div>
 </div>
 </div>
-<div id="outline-container-org0e0fb3e" class="outline-2">
-<h2 id="org0e0fb3e">Machine Learning (Aprendizaje Automático)</h2>
-<div class="outline-text-2" id="text-org0e0fb3e">
+<div id="outline-container-org13d319a" class="outline-2">
+<h2 id="org13d319a">Machine Learning (Aprendizaje Automático)</h2>
+<div class="outline-text-2" id="text-org13d319a">
 <p>
 <b>* Relación entre IA y ML
 El *Machine Learning (ML)</b> es una subdisciplina de la IA. Mientras la IA es el objetivo general, el ML es una de las herramientas principales para alcanzarlo.
@@ -1037,9 +1212,9 @@ En lugar de programar reglas, el sistema aprende las reglas a partir de datos.
 </p>
 </blockquote>
 </div>
-<div id="outline-container-orgdeffee0" class="outline-3">
-<h3 id="orgdeffee0">Tipos de aprendizaje</h3>
-<div class="outline-text-3" id="text-orgdeffee0">
+<div id="outline-container-orgc358afd" class="outline-3">
+<h3 id="orgc358afd">Tipos de aprendizaje</h3>
+<div class="outline-text-3" id="text-orgc358afd">
 <ul class="org-ul">
 <li><b>Supervisado</b>: datos con etiqueta (clasificación, regresión)</li>
 <li><b>No supervisado</b>: datos sin etiqueta (clustering, reducción de dimensión)</li>
@@ -1052,21 +1227,21 @@ Las redes neuronales pueden adaptarse a los tres esquemas.
 </div>
 </div>
 </div>
-<div id="outline-container-org994b43d" class="outline-2">
-<h2 id="org994b43d">Historia de las Redes Neuronales</h2>
-<div class="outline-text-2" id="text-org994b43d">
+<div id="outline-container-org42d5eec" class="outline-2">
+<h2 id="org42d5eec">Historia de las Redes Neuronales</h2>
+<div class="outline-text-2" id="text-org42d5eec">
 </div>
-<div id="outline-container-org78fabae" class="outline-3">
-<h3 id="org78fabae">Contexto histórico</h3>
-<div class="outline-text-3" id="text-org78fabae">
+<div id="outline-container-orgf1a48ac" class="outline-3">
+<h3 id="orgf1a48ac">Contexto histórico</h3>
+<div class="outline-text-3" id="text-orgf1a48ac">
 <p>
 Desde mediados del siglo XX, científicos han intentado entender si la inteligencia podía ser replicada mediante modelos matemáticos.
 </p>
 </div>
 </div>
-<div id="outline-container-orge3d2ecd" class="outline-3">
-<h3 id="orge3d2ecd">McCulloch y Pitts (1943)</h3>
-<div class="outline-text-3" id="text-orge3d2ecd">
+<div id="outline-container-org4e49683" class="outline-3">
+<h3 id="org4e49683">McCulloch y Pitts (1943)</h3>
+<div class="outline-text-3" id="text-org4e49683">
 <p>
 Propusieron la primera neurona artificial basada en lógica
 booleana. Demostraron que redes de estas neuronas podían computar
@@ -1078,38 +1253,38 @@ Este trabajo sentó las bases teóricas de las redes neuronales.
 </p>
 </div>
 </div>
-<div id="outline-container-orgeaa2d85" class="outline-3">
-<h3 id="orgeaa2d85">Perceptrón y optimismo inicial</h3>
-<div class="outline-text-3" id="text-orgeaa2d85">
+<div id="outline-container-orgaa8c909" class="outline-3">
+<h3 id="orgaa8c909">Perceptrón y optimismo inicial</h3>
+<div class="outline-text-3" id="text-orgaa8c909">
 <p>
 En los años 50 y 60, el perceptrón generó grandes expectativas al ser uno de los primeros sistemas que <b>aprendía</b> automáticamente.
 </p>
 </div>
 </div>
-<div id="outline-container-org6d6ad35" class="outline-3">
-<h3 id="org6d6ad35">Críticas y estancamiento</h3>
-<div class="outline-text-3" id="text-org6d6ad35">
+<div id="outline-container-orgc566e54" class="outline-3">
+<h3 id="orgc566e54">Críticas y estancamiento</h3>
+<div class="outline-text-3" id="text-orgc566e54">
 <p>
 El libro <b>Perceptrons</b> (Minsky &amp; Papert, 1969) demostró limitaciones severas del perceptrón, provocando una fuerte caída en el interés por las redes neuronales.
 </p>
 </div>
 </div>
-<div id="outline-container-orge24a0fb" class="outline-3">
-<h3 id="orge24a0fb">Renacimiento moderno</h3>
-<div class="outline-text-3" id="text-orge24a0fb">
+<div id="outline-container-orgaae0c8f" class="outline-3">
+<h3 id="orgaae0c8f">Renacimiento moderno</h3>
+<div class="outline-text-3" id="text-orgaae0c8f">
 <p>
 Con mayor poder computacional, grandes bases de datos y mejores algoritmos, las redes neuronales resurgen como <b>Deep Learning</b>.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org00e47d7" class="outline-2">
-<h2 id="org00e47d7">La Neurona Artificial</h2>
-<div class="outline-text-2" id="text-org00e47d7">
+<div id="outline-container-org88f4073" class="outline-2">
+<h2 id="org88f4073">La Neurona Artificial</h2>
+<div class="outline-text-2" id="text-org88f4073">
 </div>
-<div id="outline-container-org790871c" class="outline-3">
-<h3 id="org790871c">Motivación</h3>
-<div class="outline-text-3" id="text-org790871c">
+<div id="outline-container-orgc541128" class="outline-3">
+<h3 id="orgc541128">Motivación</h3>
+<div class="outline-text-3" id="text-orgc541128">
 <p>
 Una red neuronal artificial es un modelo matemático inspirado en la
 organización y conectividad de las neuronas biológicas, que abstrae
@@ -1119,9 +1294,9 @@ parámetros.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcf507f6" class="outline-3">
-<h3 id="orgcf507f6">Componentes</h3>
-<div class="outline-text-3" id="text-orgcf507f6">
+<div id="outline-container-orgdadd21f" class="outline-3">
+<h3 id="orgdadd21f">Componentes</h3>
+<div class="outline-text-3" id="text-orgdadd21f">
 <ul class="org-ul">
 <li>Entradas: variables numéricas</li>
 <li>Pesos: importancia relativa de cada entrada</li>
@@ -1130,9 +1305,9 @@ parámetros.
 </ul>
 </div>
 </div>
-<div id="outline-container-org284cb74" class="outline-3">
-<h3 id="org284cb74">Modelo matemático</h3>
-<div class="outline-text-3" id="text-org284cb74">
+<div id="outline-container-org815c89a" class="outline-3">
+<h3 id="org815c89a">Modelo matemático</h3>
+<div class="outline-text-3" id="text-org815c89a">
 <div class="org-src-container">
 <pre class="src src-text">z = w&#183;x + b
 a = f(z)
@@ -1145,86 +1320,83 @@ Este modelo es la unidad básica de todas las redes neuronales modernas.
 </div>
 </div>
 </div>
-<div id="outline-container-org9e7249b" class="outline-2">
-<h2 id="org9e7249b">El Perceptrón</h2>
-<div class="outline-text-2" id="text-org9e7249b">
+<div id="outline-container-org02ca7bc" class="outline-2">
+<h2 id="org02ca7bc">El Perceptrón</h2>
+<div class="outline-text-2" id="text-org02ca7bc">
 </div>
-<div id="outline-container-org68292f8" class="outline-3">
-<h3 id="org68292f8">Definición</h3>
-<div class="outline-text-3" id="text-org68292f8">
+<div id="outline-container-org9d2b76f" class="outline-3">
+<h3 id="org9d2b76f">Definición</h3>
+<div class="outline-text-3" id="text-org9d2b76f">
 <p>
 El perceptrón es una neurona artificial entrenable utilizada para clasificación binaria.
 </p>
 </div>
 </div>
-<div id="outline-container-org4c6aa90" class="outline-3">
-<h3 id="org4c6aa90">Interpretación geométrica</h3>
-<div class="outline-text-3" id="text-org4c6aa90">
+<div id="outline-container-orgd4ac84a" class="outline-3">
+<h3 id="orgd4ac84a">Interpretación geométrica</h3>
+<div class="outline-text-3" id="text-orgd4ac84a">
 <p>
 El perceptrón aprende una <b>frontera de decisión lineal</b> que separa los datos en dos clases.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd43747c" class="outline-3">
-<h3 id="orgd43747c">Aprendizaje</h3>
-<div class="outline-text-3" id="text-orgd43747c">
+<div id="outline-container-org65fd948" class="outline-3">
+<h3 id="org65fd948">Aprendizaje</h3>
+<div class="outline-text-3" id="text-org65fd948">
 <p>
 Cuando el perceptrón se equivoca, ajusta sus pesos para reducir el error.
 </p>
 </div>
 </div>
-<div id="outline-container-org28df91d" class="outline-3">
-<h3 id="org28df91d">Limitaciones</h3>
-<div class="outline-text-3" id="text-org28df91d">
+<div id="outline-container-org3bfff73" class="outline-3">
+<h3 id="org3bfff73">Limitaciones</h3>
+<div class="outline-text-3" id="text-org3bfff73">
 <p>
 No puede aprender relaciones no lineales, como XOR.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orga95639d" class="outline-2">
-<h2 id="orga95639d">¿Qué es un problema linealmente separable?</h2>
-<div class="outline-text-2" id="text-orga95639d">
+<div id="outline-container-orga569d93" class="outline-2">
+<h2 id="orga569d93">¿Qué es un problema linealmente separable?</h2>
+<div class="outline-text-2" id="text-orga569d93">
 </div>
-<div id="outline-container-orga16a402" class="outline-3">
-<h3 id="orga16a402">Intuición básica</h3>
-<div class="outline-text-3" id="text-orga16a402">
+<div id="outline-container-org5c97fb2" class="outline-3">
+<h3 id="org5c97fb2">Intuición básica</h3>
+<div class="outline-text-3" id="text-org5c97fb2">
 <p>
 Un problema es linealmente separable si puedes separar las clases usando una línea recta (en 2D),
 un plano (en 3D), o en general un hiperplano.
-</p>
-
-<p>
 Si existe una sola frontera recta que divide perfectamente las clases, el problema es linealmente separable.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb58d6c6" class="outline-2">
-<h2 id="orgb58d6c6">Estructura de un Perceptrón Simple</h2>
-<div class="outline-text-2" id="text-orgb58d6c6">
+<div id="outline-container-orgc590bc1" class="outline-2">
+<h2 id="orgc590bc1">Estructura de un Perceptrón Simple</h2>
+<div class="outline-text-2" id="text-orgc590bc1">
 </div>
-<div id="outline-container-org99031c7" class="outline-3">
-<h3 id="org99031c7">Entradas (Inputs)</h3>
-<div class="outline-text-3" id="text-org99031c7">
+<div id="outline-container-orge7eb74b" class="outline-3">
+<h3 id="orge7eb74b">Entradas (Inputs)</h3>
+<div class="outline-text-3" id="text-orge7eb74b">
 <ul class="org-ul">
 <li>Representadas como \(x_1, x_2, ..., x_n\).</li>
 <li>Son los datos brutos o características que recibe el modelo.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcec3c2d" class="outline-3">
-<h3 id="orgcec3c2d">Pesos Sinápticos (Weights)</h3>
-<div class="outline-text-3" id="text-orgcec3c2d">
+<div id="outline-container-orgcd31096" class="outline-3">
+<h3 id="orgcd31096">Pesos Sinápticos (Weights)</h3>
+<div class="outline-text-3" id="text-orgcd31096">
 <ul class="org-ul">
 <li>Representados como \(w_1, w_2, ..., w_n\).</li>
 <li>Determinan la importancia o influencia de cada entrada en el resultado final.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org08e0135" class="outline-3">
-<h3 id="org08e0135">Suma Ponderada (Weighted Sum)</h3>
-<div class="outline-text-3" id="text-org08e0135">
+<div id="outline-container-orgd564e0b" class="outline-3">
+<h3 id="orgd564e0b">Suma Ponderada (Weighted Sum)</h3>
+<div class="outline-text-3" id="text-orgd564e0b">
 <ul class="org-ul">
 <li>Es la combinación lineal de las entradas y los pesos.</li>
 <li>La fórmula matemática es:
@@ -1232,18 +1404,18 @@ Si existe una sola frontera recta que divide perfectamente las clases, el proble
 </ul>
 </div>
 </div>
-<div id="outline-container-org5b45c34" class="outline-3">
-<h3 id="org5b45c34">Sesgo (Bias)</h3>
-<div class="outline-text-3" id="text-org5b45c34">
+<div id="outline-container-org98a724f" class="outline-3">
+<h3 id="org98a724f">Sesgo (Bias)</h3>
+<div class="outline-text-3" id="text-org98a724f">
 <ul class="org-ul">
 <li>Representado generalmente como \(b\) (o \(w_0\)).</li>
 <li>Permite desplazar la función de activación hacia la izquierda o derecha para ajustar mejor los datos.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd49d22e" class="outline-3">
-<h3 id="orgd49d22e">Función de Activación</h3>
-<div class="outline-text-3" id="text-orgd49d22e">
+<div id="outline-container-org3b8aafc" class="outline-3">
+<h3 id="org3b8aafc">Función de Activación</h3>
+<div class="outline-text-3" id="text-org3b8aafc">
 <ul class="org-ul">
 <li>Decide si la neurona debe "dispararse" (activarse) o no.</li>
 <li>En el perceptrón original de Rosenblatt, se utiliza la <b>Función Escalón</b> (Heaviside):
@@ -1254,9 +1426,9 @@ Si existe una sola frontera recta que divide perfectamente las clases, el proble
 </ul>
 </div>
 </div>
-<div id="outline-container-org6ae267b" class="outline-3">
-<h3 id="org6ae267b">Salida (Output)</h3>
-<div class="outline-text-3" id="text-org6ae267b">
+<div id="outline-container-org2eb900e" class="outline-3">
+<h3 id="org2eb900e">Salida (Output)</h3>
+<div class="outline-text-3" id="text-org2eb900e">
 <ul class="org-ul">
 <li>Es el resultado final del procesamiento (\(\hat{y}\)).</li>
 <li>En un perceptrón simple, suele ser un valor binario (0 o 1).</li>
@@ -1264,25 +1436,29 @@ Si existe una sola frontera recta que divide perfectamente las clases, el proble
 </div>
 </div>
 </div>
-<div id="outline-container-org8530943" class="outline-2">
-<h2 id="org8530943">1. El Escenario: La Decisión de la Cena</h2>
-<div class="outline-text-2" id="text-org8530943">
+<div id="outline-container-org0241fe6" class="outline-2">
+<h2 id="org0241fe6">Ejemplo Tacos</h2>
+<div class="outline-text-2" id="text-org0241fe6">
+</div>
+<div id="outline-container-orgb18e582" class="outline-3">
+<h3 id="orgb18e582">1. El Escenario: La Decisión de la Cena</h3>
+<div class="outline-text-3" id="text-orgb18e582">
 <p>
 Para entender cómo aprende una IA, vamos a usar un ejemplo de la vida real. Queremos que nuestra neurona artificial aprenda cuándo estamos "Satisfechos" (1) o "Inconformes" (0).
 </p>
 </div>
-<div id="outline-container-orgc6705ef" class="outline-3">
-<h3 id="orgc6705ef">Nuestras Entradas (Inputs)</h3>
-<div class="outline-text-3" id="text-orgc6705ef">
+<div id="outline-container-orgd8fc211" class="outline-4">
+<h4 id="orgd8fc211">Nuestras Entradas (Inputs)</h4>
+<div class="outline-text-4" id="text-orgd8fc211">
 <ul class="org-ul">
 <li>\(x_0\): ¿Hay Tacos? (1 = Sí, 0 = No)</li>
 <li>\(x_1\): ¿Hay Refresco? (1 = Sí, 0 = No)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc0f4dd1" class="outline-3">
-<h3 id="orgc0f4dd1">El Peso (Weight): La Importancia</h3>
-<div class="outline-text-3" id="text-orgc0f4dd1">
+<div id="outline-container-orgf5c669f" class="outline-4">
+<h4 id="orgf5c669f">El Peso (Weight): La Importancia</h4>
+<div class="outline-text-4" id="text-orgf5c669f">
 <p>
 No todo nos hace igual de felices. Los <b><b>Pesos</b></b> (\(w_0, w_1\)) representan qué tanto nos importa cada ingrediente. 
 </p>
@@ -1292,42 +1468,42 @@ No todo nos hace igual de felices. Los <b><b>Pesos</b></b> (\(w_0, w_1\)) repres
 </div>
 </div>
 </div>
-<div id="outline-container-org5768f0f" class="outline-2">
-<h2 id="org5768f0f">2. ¿Cómo toma la decisión? (La Suma y el Sesgo)</h2>
-<div class="outline-text-2" id="text-org5768f0f">
+<div id="outline-container-org9bbe2fe" class="outline-3">
+<h3 id="org9bbe2fe">2. ¿Cómo toma la decisión? (La Suma y el Sesgo)</h3>
+<div class="outline-text-3" id="text-org9bbe2fe">
 <p>
 La neurona hace un cálculo matemático simple:
 \[net = (x_0 \cdot w_0) + (x_1 \cdot w_1) - \text{bias}\]
 </p>
 </div>
-<div id="outline-container-orga930528" class="outline-3">
-<h3 id="orga930528">El Sesgo (Bias)</h3>
-<div class="outline-text-3" id="text-orga930528">
+<div id="outline-container-orge7c39ab" class="outline-4">
+<h4 id="orge7c39ab">El Sesgo (Bias)</h4>
+<div class="outline-text-4" id="text-orge7c39ab">
 <p>
 El <b><b>Bias</b></b> es nuestro "nivel de exigencia". Si el Bias es muy alto, necesitaremos mucha comida (pesos altos) para poder llegar a estar satisfechos.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1386864" class="outline-2">
-<h2 id="org1386864">3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?</h2>
-<div class="outline-text-2" id="text-org1386864">
+<div id="outline-container-orgfb33cdb" class="outline-3">
+<h3 id="orgfb33cdb">3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?</h3>
+<div class="outline-text-3" id="text-orgfb33cdb">
 <p>
 Cuando la neurona se equivoca, necesita ajustar sus pesos. Este proceso se llama <b><b>Descenso del Gradiente</b></b>.
 </p>
 </div>
-<div id="outline-container-org26b0b5f" class="outline-3">
-<h3 id="org26b0b5f">El Error: La Brújula</h3>
-<div class="outline-text-3" id="text-org26b0b5f">
+<div id="outline-container-org8c08ab3" class="outline-4">
+<h4 id="org8c08ab3">El Error: La Brújula</h4>
+<div class="outline-text-4" id="text-org8c08ab3">
 <p>
 Si esperábamos estar felices (<code>target = 1</code>) pero la neurona dice que estamos tristes (<code>net = 0</code>), tenemos un <b><b>Error de 1</b></b>.
 \[Error = Target - Net\]
 </p>
 </div>
 </div>
-<div id="outline-container-org9bada46" class="outline-3">
-<h3 id="org9bada46">El Ajuste (La Regla Delta)</h3>
-<div class="outline-text-3" id="text-org9bada46">
+<div id="outline-container-orgcbeb9c8" class="outline-4">
+<h4 id="orgcbeb9c8">El Ajuste (La Regla Delta)</h4>
+<div class="outline-text-4" id="text-orgcbeb9c8">
 <p>
 Para corregir el error, cambiamos los pesos usando esta lógica:
 </p>
@@ -1358,12 +1534,11 @@ Imagina que \(K = 0.1\) y el Peso inicial del taco es \(0.5\).
 <p>
 <b><b>Resultado:</b></b> La próxima vez que haya tacos, la neurona estará un poco más cerca de hacernos felices. ¡Eso es el aprendizaje!
 </p>
-</div>
-</div>
-</div>
-<div id="outline-container-org9498b35" class="outline-2">
-<h2 id="org9498b35">5. Conclusión</h2>
-<div class="outline-text-2" id="text-org9498b35">
+
+<p>
+Puntos importantes
+</p>
+
 <ul class="org-ul">
 <li>El <b><b>Gradiente</b></b> nos dice en qué dirección mover los pesos para que el error sea cero.</li>
 <li>El <b><b>Learning Rate</b></b> controla qué tan grandes son los pasos que damos hacia esa solución.</li>
@@ -1371,41 +1546,10 @@ Imagina que \(K = 0.1\) y el Peso inicial del taco es \(0.5\).
 </ul>
 </div>
 </div>
-<div id="outline-container-org57d6ac7" class="outline-2">
-<h2 id="org57d6ac7">Redes Multicapa (MLP)</h2>
-<div class="outline-text-2" id="text-org57d6ac7">
-<p>
-** Necesidad de capas ocultas
-Para resolver problemas no lineales, se introducen capas ocultas que permiten componer funciones simples en funciones complejas.
-</p>
 </div>
-<div id="outline-container-org6068f48" class="outline-3">
-<h3 id="org6068f48">Capacidad de representación</h3>
-<div class="outline-text-3" id="text-org6068f48">
-<p>
-Un MLP con suficientes neuronas puede aproximar cualquier función continua (teorema de aproximación universal).
-</p>
-</div>
-</div>
-<div id="outline-container-orged0c813" class="outline-3">
-<h3 id="orged0c813">Estructura</h3>
-</div>
-</div>
-<div id="outline-container-org82ee67e" class="outline-2">
-<h2 id="org82ee67e">Entrada</h2>
-</div>
-<div id="outline-container-org3cf48b7" class="outline-2">
-<h2 id="org3cf48b7">Capas ocultas</h2>
-</div>
-<div id="outline-container-orge9dfd09" class="outline-2">
-<h2 id="orge9dfd09">Salida</h2>
-</div>
-<div id="outline-container-orgcda6495" class="outline-2">
-<h2 id="orgcda6495">Perceptrón ejemplo (Python)</h2>
-<div class="outline-text-2" id="text-orgcda6495">
-<p>
-Un perceptrón es una neurona artificial que:
-</p>
+<div id="outline-container-orgafc48ea" class="outline-3">
+<h3 id="orgafc48ea">Perceptrón ejemplo (Python)</h3>
+<div class="outline-text-3" id="text-orgafc48ea">
 <ol class="org-ol">
 <li>Recibe entradas (\(x_1, x_2, \dots\)).</li>
 <li>Las multiplica por pesos (\(w_1, w_2, \dots\)).</li>
@@ -1413,9 +1557,9 @@ Un perceptrón es una neurona artificial que:
 <li>Aplica una función de activación (ej. Escalón).</li>
 </ol>
 </div>
-<div id="outline-container-org81d2a70" class="outline-3">
-<h3 id="org81d2a70">Perceptrón para una compuerta "AND"</h3>
-<div class="outline-text-3" id="text-org81d2a70">
+<div id="outline-container-orgf18ea56" class="outline-4">
+<h4 id="orgf18ea56">Perceptrón para una compuerta "AND"</h4>
+<div class="outline-text-4" id="text-orgf18ea56">
 <p>
 Este código simula una neurona que solo se activa si ambas entradas son 1.
 </p>
@@ -1450,20 +1594,3387 @@ Este código simula una neurona que solo se activa si ambas entradas son 1.
 </div>
 </div>
 </div>
-<div id="outline-container-orge2a8c0f" class="outline-2">
-<h2 id="orge2a8c0f">Bibliografía  Deep Learning</h2>
-<div class="outline-text-2" id="text-orge2a8c0f">
 </div>
-<div id="outline-container-org82ce20e" class="outline-3">
-<h3 id="org82ce20e">Teórica y Académica&#xa0;&#xa0;&#xa0;<span class="tag"><span class="MATEMATICAS">MATEMATICAS</span>&#xa0;<span class="FUNDAMENTOS">FUNDAMENTOS</span></span></h3>
-<div class="outline-text-3" id="text-org82ce20e">
+<div id="outline-container-orgf613cb1" class="outline-2">
+<h2 id="orgf613cb1">Codigo C python</h2>
+<div class="outline-text-2" id="text-orgf613cb1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">import</span> math
+<span style="color: #fb4934;">import</span> random
+
+<span style="color: #83a598;">EPOCAS</span> = 300000
+<span style="color: #83a598;">K</span> = 0.03  <span style="color: #928374;"># </span><span style="color: #928374;">tasa de aprendizaje
+</span>
+<span style="color: #928374;"># </span><span style="color: #928374;">Pesos y bias globales (como en el c&#243;digo C)
+</span><span style="color: #83a598;">Pesos</span> = <span style="color: #fe8019;">[</span>0.0, 0.0<span style="color: #fe8019;">]</span>
+<span style="color: #83a598;">bias</span> = 0.5
+<span style="color: #83a598;">Error</span> = 0.0
+
+
+<span style="color: #fb4934;">def</span> <span style="color: #b8bb26;">sigmoide</span><span style="color: #fe8019;">(</span>s: <span style="color: #fe8019;">float</span><span style="color: #fe8019;">)</span> -&gt; <span style="color: #fe8019;">float</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Versi&#243;n correcta de la sigmoide log&#237;stica:
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">1 / (1 + e^{-s})
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">return</span> 1.0 / <span style="color: #fe8019;">(</span>1.0 + math.exp<span style="color: #b16286;">(</span>-s<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+
+
+<span style="color: #fb4934;">def</span> <span style="color: #b8bb26;">pesos_initNt</span><span style="color: #fe8019;">()</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #dfd2b8;">"""Inicializa los pesos de forma aleatoria en [0,1)."""</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">global</span> Pesos
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">Pesos</span> = <span style="color: #fe8019;">[</span>random.random<span style="color: #b16286;">()</span> <span style="color: #fb4934;">for</span> _ <span style="color: #fb4934;">in</span> <span style="color: #fe8019;">range</span><span style="color: #b16286;">(</span>2<span style="color: #b16286;">)</span><span style="color: #fe8019;">]</span>
+
+
+<span style="color: #fb4934;">def</span> <span style="color: #b8bb26;">EntNt</span><span style="color: #fe8019;">(</span>x0: <span style="color: #fe8019;">float</span>, x1: <span style="color: #fe8019;">float</span>, target: <span style="color: #fe8019;">float</span><span style="color: #fe8019;">)</span> -&gt; <span style="color: #fe8019;">float</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #dfd2b8;">"""
+</span><span style="color: #dfd2b8; background-color: #3c3836;"> </span><span style="color: #dfd2b8;">   Funci&#243;n de entrenamiento del perceptr&#243;n (una iteraci&#243;n para un patr&#243;n).
+</span><span style="color: #dfd2b8; background-color: #3c3836;"> </span><span style="color: #dfd2b8;">   Modifica Pesos y bias de forma global.
+</span><span style="color: #dfd2b8; background-color: #3c3836;"> </span><span style="color: #dfd2b8;">   """</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">global</span> Pesos, bias, Error
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">net = w0*x0 + w1*x1 - bias
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">net</span> = Pesos<span style="color: #fe8019;">[</span>0<span style="color: #fe8019;">]</span> * x0 + Pesos<span style="color: #fe8019;">[</span>1<span style="color: #fe8019;">]</span> * x1 - bias
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">net</span> = sigmoide<span style="color: #fe8019;">(</span>net<span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">Error</span> = target - net
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Actualizaci&#243;n de bias (se asume entrada de bias = 1)
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">bias</span> -= K * Error
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Variaci&#243;n de los pesos sin&#225;pticos
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">delta0</span> = K * Error * x0
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">delta1</span> = K * Error * x1
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Ajuste de pesos
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">Pesos</span><span style="color: #fe8019;">[</span>0<span style="color: #fe8019;">]</span> += delta0
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">Pesos</span><span style="color: #fe8019;">[</span>1<span style="color: #fe8019;">]</span> += delta1
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">return</span> net
+
+
+<span style="color: #fb4934;">def</span> <span style="color: #b8bb26;">InitNt</span><span style="color: #fe8019;">(</span>x0: <span style="color: #fe8019;">float</span>, x1: <span style="color: #fe8019;">float</span><span style="color: #fe8019;">)</span> -&gt; <span style="color: #fe8019;">float</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #dfd2b8;">"""
+</span><span style="color: #dfd2b8; background-color: #3c3836;"> </span><span style="color: #dfd2b8;">   Funci&#243;n que usa pesos fijos (de ejemplo) para calcular la salida.
+</span><span style="color: #dfd2b8; background-color: #3c3836;"> </span><span style="color: #dfd2b8;">   Equivalente a la parte comentada en C.
+</span><span style="color: #dfd2b8; background-color: #3c3836;"> </span><span style="color: #dfd2b8;">   """</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">net = 70.934807*x0 + 93.935219*x1 - 187.886169;
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">net</span> = 70.934807 * x0 + 93.935219 * x1 - 187.886169
+<span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">net</span> = sigmoide<span style="color: #fe8019;">(</span>net<span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">return</span> net
+
+
+<span style="color: #fb4934;">def</span> <span style="color: #b8bb26;">main</span><span style="color: #fe8019;">()</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">global</span> Pesos, bias, Error
+
+<span style="background-color: #3c3836;"> </span>   pesos_initNt<span style="color: #fe8019;">()</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #fb4934;">for</span> i <span style="color: #fb4934;">in</span> <span style="color: #fe8019;">range</span><span style="color: #fe8019;">(</span>EPOCAS<span style="color: #fe8019;">)</span>:
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"------------------------"</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"Salida Entrenamiento Epoca </span>{i}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">apr</span> = EntNt<span style="color: #fe8019;">(</span>1, 1, 0<span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"1,1 = </span>{apr:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">apr</span> = EntNt<span style="color: #fe8019;">(</span>1, 0, 1<span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"1,0 = </span>{apr:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">apr</span> = EntNt<span style="color: #fe8019;">(</span>0, 1, 1<span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"0,1 = </span>{apr:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #83a598;">apr</span> = EntNt<span style="color: #fe8019;">(</span>0, 0, 0<span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"0,0 = </span>{apr:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">Pesos de cada epoca"</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"Peso 0 = </span>{Pesos[0]:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"Peso 1 = </span>{Pesos[1]:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"Bias   = </span>{bias:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>f<span style="color: #b8bb26;">"Error  = </span>{Error:.6f}<span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"------------------------"</span><span style="color: #fe8019;">)</span>
+
+<span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">Si quieres probar con los pesos fijos del comentario de C:
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">print("Resultados con InitNt:")
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">print("1,1 =", InitNt(1, 1))
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">print("1,0 =", InitNt(1, 0))
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">print("0,1 =", InitNt(0, 1))
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #928374;"># </span><span style="color: #928374;">print("0,0 =", InitNt(0, 0))
+</span>
+
+<span style="color: #fb4934;">if</span> <span style="color: #fe8019;">__name__</span> == <span style="color: #b8bb26;">"__main__"</span>:
+<span style="background-color: #3c3836;"> </span>   main<span style="color: #fe8019;">()</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org060d8f4" class="outline-2">
+<h2 id="org060d8f4">Redes Neuronales Multicapa (Multilayer Perceptron)</h2>
+<div class="outline-text-2" id="text-org060d8f4">
+</div>
+<div id="outline-container-org9ef5901" class="outline-3">
+<h3 id="org9ef5901">Introducción</h3>
+<div class="outline-text-3" id="text-org9ef5901">
+<p>
+Una <b>red neuronal multicapa</b> o <b>Perceptrón Multicapa (MLP)</b> es un modelo
+de aprendizaje supervisado que extiende al perceptrón simple mediante
+la inclusión de <b>una o más capas ocultas</b>. Estas capas permiten modelar
+<b>relaciones no lineales complejas</b> entre las variables de entrada y la salida.
+</p>
+
+<p>
+Los MLP constituyen la base conceptual del <b>Deep Learning</b> moderno:
+</p>
+
+<ul class="org-ul">
+<li>El perceptrón simple solo puede resolver problemas <b>linealmente separables</b>.</li>
+<li>Muchos problemas reales (visión, texto, señales) son <b>no lineales</b>.</li>
+<li>Agregar capas ocultas + funciones de activación no lineales permite
+aproximar funciones mucho más complejas (teorema del aproximador universal).</li>
+</ul>
+
+<p>
+Ejemplos clásicos (con 2 entradas):
+</p>
+
+<ul class="org-ul">
+<li>AND  → ✓ separable linealmente</li>
+<li>OR   → ✓ separable linealmente</li>
+<li>XOR  → ✗ <b>no</b> es separable linealmente</li>
+</ul>
+
+<p>
+El problema XOR demuestra la necesidad de introducir:
+</p>
+
+<ul class="org-ul">
+<li><b>Capas ocultas</b> (capacidad de representar interacciones no triviales),</li>
+<li><b>Funciones de activación no lineales</b>.</li>
+</ul>
+
+<p>
+Un MLP típico está compuesto por:
+</p>
+
+<ol class="org-ol">
+<li><b>Capa de entrada</b>  
+Recibe el vector de características \(\mathbf{x}\).</li>
+
+<li><b>Capas ocultas</b>  
+Realizan transformaciones lineales + no lineales sobre las
+representaciones intermedias.</li>
+
+<li><b>Capa de salida</b>  
+Produce la predicción final (clase, probabilidad, valor continuo, etc.).</li>
+</ol>
+
+<p>
+Estructura conceptual:
+</p>
+
+<pre class="example" id="orgf9f42ac">
+x → Capa Oculta 1 → Capa Oculta 2 → … → Capa de salida → ŷ
+</pre>
+
+<p>
+Cada “flecha” representa una transformación lineal (multiplicación por
+matriz de pesos + suma de bias) seguida de una función de activación.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb559640" class="outline-3">
+<h3 id="orgb559640">Modelo matemático</h3>
+<div class="outline-text-3" id="text-orgb559640">
+</div>
+<div id="outline-container-orgfd5e60a" class="outline-4">
+<h4 id="orgfd5e60a">Neurona individual</h4>
+<div class="outline-text-4" id="text-orgfd5e60a">
+<p>
+Cada neurona recibe un vector de entrada \(\mathbf{x} \in \mathbb{R}^n\) y calcula:
+</p>
+
+<p>
+\[
+z = \sum_{i=1}^{n} w_i x_i + b
+\]
+</p>
+
+<p>
+\[
+a = f(z)
+\]
+</p>
+
+<p>
+Donde:
+</p>
+
+<ul class="org-ul">
+<li>\(w_i\): pesos sinápticos de la neurona,</li>
+<li>\(b\): término de sesgo (bias),</li>
+<li>\(f(\cdot)\): función de activación,</li>
+<li>\(z\): combinación lineal de las entradas,</li>
+<li>\(a\): salida (activación) de la neurona.</li>
+</ul>
+
+<p>
+En forma vectorial para una neurona:
+</p>
+
+<p>
+\[
+z = \mathbf{w}^\top \mathbf{x} + b
+\]
+</p>
+
+<p>
+\[
+a = f(z)
+\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgbda171f" class="outline-4">
+<h4 id="orgbda171f">Forma matricial de una capa</h4>
+<div class="outline-text-4" id="text-orgbda171f">
+<p>
+En una capa con múltiples neuronas, se usa notación matricial:
+</p>
+
+<ul class="org-ul">
+<li>\(\mathbf{a}^{(l-1)}\): vector de activaciones de la capa anterior,</li>
+<li>\(\mathbf{W}^{(l)}\): matriz de pesos de la capa \(l\),</li>
+<li>\(\mathbf{b}^{(l)}\): vector de bias de la capa \(l\),</li>
+<li>\(\mathbf{z}^{(l)}\): preactivaciones de la capa \(l\),</li>
+<li>\(\mathbf{a}^{(l)}\): activaciones de la capa \(l\).</li>
+</ul>
+
+<p>
+Cálculo:
+</p>
+
+<p>
+\[
+\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}
+\]
+</p>
+
+<p>
+\[
+\mathbf{a}^{(l)} = f(\mathbf{z}^{(l)})
+\]
+</p>
+
+<p>
+donde \(f\) se aplica componente a componente.
+</p>
+
+<p>
+Repitiendo este proceso desde la capa de entrada hasta la salida,
+obtenemos la predicción del MLP.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org6ff0523" class="outline-3">
+<h3 id="org6ff0523">Funciones de activación</h3>
+<div class="outline-text-3" id="text-org6ff0523">
+<p>
+Las funciones de activación son componentes fundamentales en las redes
+neuronales multicapa. Su función principal es introducir <b>no linealidad</b>
+en el modelo.
+</p>
+
+<p>
+Sin funciones de activación no lineales:
+</p>
+
+<ul class="org-ul">
+<li>cada capa sería solo una transformación lineal,</li>
+<li>y la composición de múltiples transformaciones lineales es <b>otra</b>
+transformación lineal,</li>
+<li>por lo tanto, una “red profunda” sin no linealidad se comporta como
+un <b>modelo lineal simple</b>, independientemente del número de capas.</li>
+</ul>
+</div>
+<div id="outline-container-org4135bc4" class="outline-4">
+<h4 id="org4135bc4">¿Para qué sirven las funciones de activación?</h4>
+<div class="outline-text-4" id="text-org4135bc4">
+<p>
+Las funciones de activación permiten:
+</p>
+
+<ul class="org-ul">
+<li>Introducir <b>no linealidad</b> en la red.</li>
+<li>Modelar relaciones complejas entre variables de entrada y salida.</li>
+<li>Aprender fronteras de decisión no lineales en problemas de clasificación.</li>
+<li>Aproximar cualquier función continua bajo ciertas condiciones
+(teorema del aproximador universal).</li>
+</ul>
+
+<p>
+Recordemos que una neurona realiza:
+</p>
+
+<p>
+\[
+z = \sum_{i=1}^{n} w_i x_i + b
+\]
+</p>
+
+<p>
+\[
+a = f(z)
+\]
+</p>
+
+<p>
+Donde \(f\) es la función de activación.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0831682" class="outline-3">
+<h3 id="org0831682">Clasificación de las funciones de activación</h3>
+<div class="outline-text-3" id="text-org0831682">
+<p>
+Las funciones de activación pueden clasificarse según:
+</p>
+
+<ul class="org-ul">
+<li>su forma (escalón, sigmoide, lineal por partes, etc.),</li>
+<li>su rango de salida,</li>
+<li>su uso (capas ocultas vs capa de salida),</li>
+<li>su comportamiento para valores grandes de \(|z|\).</li>
+</ul>
+</div>
+<div id="outline-container-org0f4d024" class="outline-4">
+<h4 id="org0f4d024">Funciones de activación clásicas</h4>
+<div class="outline-text-4" id="text-org0f4d024">
+</div>
+<ul class="org-ul">
+<li><a id="orgcddbf93"></a>Función escalón (Step Function)<br />
+<div class="outline-text-5" id="text-orgcddbf93">
+<p>
+\[
+f(z) =
+</p>
+\begin{cases}
+1 & \text{si } z \ge 0 \\
+0 & \text{si } z < 0
+\end{cases}
+<p>
+\]
+</p>
+
+<p>
+Características:
+</p>
+
+<ul class="org-ul">
+<li>Usada en el perceptrón simple original.</li>
+<li>No es continua ni derivable (no adecuada para descenso de gradiente).</li>
+<li>Genera salidas binarias (0/1).</li>
+</ul>
+
+<p>
+Uso:
+</p>
+
+<ul class="org-ul">
+<li>Modelos teóricos e históricos.</li>
+<li>Introducción al concepto de neurona como “disparar / no disparar”.</li>
+<li>No se utiliza en redes multicapa modernas para entrenamiento con
+backpropagation.</li>
+</ul>
+</div>
+</li>
+<li><a id="org67cb9eb"></a>Sigmoide logística<br />
+<div class="outline-text-5" id="text-org67cb9eb">
+<p>
+\[
+f(z) = \frac{1}{1 + e^{-z}}
+\]
+</p>
+
+<p>
+Características:
+</p>
+
+<ul class="org-ul">
+<li>Salida en el intervalo \((0, 1)\).</li>
+<li>Puede interpretarse como una probabilidad.</li>
+<li>Es suave y derivable en todo \(\mathbb{R}\).</li>
+</ul>
+
+<p>
+Ventajas:
+</p>
+
+<ul class="org-ul">
+<li>Interpretación probabilística directa.</li>
+<li>Históricamente muy usada en redes neuronales tempranas.</li>
+</ul>
+
+<p>
+Desventajas:
+</p>
+
+<ul class="org-ul">
+<li>Para \(|z|\) grandes, la función se <b>satura</b> cerca de 0 o 1:
+<ul class="org-ul">
+<li>la derivada es muy pequeña,</li>
+<li>aparece el problema de <b>vanishing gradient</b>,</li>
+<li>el entrenamiento de redes profundas se vuelve lento o ineficaz.</li>
+</ul></li>
+</ul>
+
+<p>
+Uso típico actual:
+</p>
+
+<ul class="org-ul">
+<li>Capa de salida en algunos modelos de clasificación binaria (aunque
+en deep learning moderno también se usan otras combinaciones).</li>
+</ul>
+</div>
+</li>
+<li><a id="org8107365"></a>Tangente hiperbólica (tanh)<br />
+<div class="outline-text-5" id="text-org8107365">
+<p>
+\[
+f(z) = \tanh(z)
+\]
+</p>
+
+<p>
+Características:
+</p>
+
+<ul class="org-ul">
+<li>Salida en el intervalo \((-1, 1)\).</li>
+<li>Es simétrica alrededor de 0 (centrada en cero).</li>
+</ul>
+
+<p>
+Ventajas:
+</p>
+
+<ul class="org-ul">
+<li>En comparación con la sigmoide logística, su salida centrada en cero:
+<ul class="org-ul">
+<li>puede favorecer una convergencia algo más rápida,</li>
+<li>reduce ciertos sesgos en las activaciones.</li>
+</ul></li>
+</ul>
+
+<p>
+Desventajas:
+</p>
+
+<ul class="org-ul">
+<li>También se satura para \(|z|\) grandes.</li>
+<li>Sigue presentando <b>vanishing gradient</b> en redes muy profundas.</li>
+</ul>
+
+<p>
+Uso clásico:
+</p>
+
+<ul class="org-ul">
+<li>Capas ocultas en redes no demasiado profundas, antes de la adopción
+masiva de ReLU.</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org7ee83e6" class="outline-4">
+<h4 id="org7ee83e6">Funciones de activación modernas</h4>
+<div class="outline-text-4" id="text-org7ee83e6">
+</div>
+<ul class="org-ul">
+<li><a id="org2d34dd9"></a>ReLU (Rectified Linear Unit)<br />
+<div class="outline-text-5" id="text-org2d34dd9">
+<p>
+\[
+f(z) = \max(0, z)
+\]
+</p>
+
+<p>
+Características:
+</p>
+
+<ul class="org-ul">
+<li>Función lineal por partes:
+<ul class="org-ul">
+<li>para \(z < 0\): salida 0,</li>
+<li>para \(z \ge 0\): salida \(z\).</li>
+</ul></li>
+<li>Muy sencilla y eficiente de calcular.</li>
+</ul>
+
+<p>
+Ventajas:
+</p>
+
+<ul class="org-ul">
+<li>No se satura para valores positivos grandes (derivada constante 1).</li>
+<li>Reduce considerablemente el problema del <b>vanishing gradient</b>.</li>
+<li>Ha permitido entrenar redes profundas con muchas capas.</li>
+</ul>
+
+<p>
+Desventajas:
+</p>
+
+<ul class="org-ul">
+<li><b>Dead neurons</b>: si una neurona recibe valores de \(z\) siempre
+negativos, su salida es siempre 0 y el gradiente puede quedar en 0
+→ deja de aprender.</li>
+</ul>
+
+<p>
+Uso típico:
+</p>
+
+<ul class="org-ul">
+<li>Función estándar en <b>capas ocultas</b> de MLP y CNN modernos.</li>
+</ul>
+</div>
+</li>
+<li><a id="org4d16a9f"></a>Leaky ReLU<br />
+<div class="outline-text-5" id="text-org4d16a9f">
+<p>
+\[
+f(z) =
+</p>
+\begin{cases}
+z & \text{si } z \ge 0 \\
+\alpha z & \text{si } z < 0
+\end{cases}
+<p>
+\]
+</p>
+
+<p>
+donde \(\alpha\) es un pequeño número positivo (por ejemplo, 0.01).
+</p>
+
+<p>
+Características:
+</p>
+
+<ul class="org-ul">
+<li>Variante de ReLU que, en lugar de “apagar” totalmente la neurona para
+\(z < 0\), permite un pequeño gradiente negativo.</li>
+</ul>
+
+<p>
+Ventajas:
+</p>
+
+<ul class="org-ul">
+<li>Reduce el problema de neuronas muertas (<b>dead ReLU</b>).</li>
+<li>Mantiene muchas ventajas de ReLU.</li>
+</ul>
+
+<p>
+Uso típico:
+</p>
+
+<ul class="org-ul">
+<li>Alternativa a ReLU cuando se observa que muchas neuronas quedan
+inactivas de manera permanente.</li>
+</ul>
+</div>
+</li>
+<li><a id="orgff06f7d"></a>ELU (Exponential Linear Unit)<br />
+<div class="outline-text-5" id="text-orgff06f7d">
+<p>
+\[
+f(z) =
+</p>
+\begin{cases}
+z & \text{si } z \ge 0 \\
+\alpha (e^{z} - 1) & \text{si } z < 0
+\end{cases}
+<p>
+\]
+</p>
+
+<p>
+Características:
+</p>
+
+<ul class="org-ul">
+<li>Para \(z \ge 0\): igual que ReLU.</li>
+<li>Para \(z < 0\): decae de forma exponencial, con salida negativa acotada.</li>
+</ul>
+
+<p>
+Ventajas:
+</p>
+
+<ul class="org-ul">
+<li>Puede acelerar la convergencia en ciertos casos.</li>
+<li>Las salidas negativas ayudan a centrar la activación alrededor de 0,
+lo que puede mejorar la propagación del gradiente.</li>
+</ul>
+
+<p>
+Uso típico:
+</p>
+
+<ul class="org-ul">
+<li>Capas ocultas, en algunos modelos donde se ha observado mejor
+rendimiento que con ReLU estándar.</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org95eb073" class="outline-4">
+<h4 id="org95eb073">Funciones de activación en la capa de salida</h4>
+<div class="outline-text-4" id="text-org95eb073">
+<p>
+La función de activación de la <b>capa de salida</b> depende del tipo de
+problema:
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="orgeca743d"></a>Clasificación binaria<br />
+<div class="outline-text-5" id="text-orgeca743d">
+<p>
+Se usa típicamente una función <b>sigmoide</b> para obtener una probabilidad
+en \((0,1)\):
+</p>
+
+<p>
+\[
+\hat{y} = \sigma(z) \in (0,1)
+\]
+</p>
+
+<p>
+donde \(\hat{y}\) se interpreta como la probabilidad de clase “1”.
+</p>
+</div>
+</li>
+<li><a id="org3946c7e"></a>Clasificación multiclase (mutuamente excluyentes)<br />
+<div class="outline-text-5" id="text-org3946c7e">
+<p>
+Se usa la función <b>softmax</b>:
+</p>
+
+<p>
+\[
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\]
+</p>
+
+<ul class="org-ul">
+<li>Convierte un vector de puntajes \(\mathbf{z}\) en un vector de
+probabilidades que:
+<ul class="org-ul">
+<li>son positivas,</li>
+<li>y suman 1.</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="orgaf3a6d3"></a>Regresión<br />
+<div class="outline-text-5" id="text-orgaf3a6d3">
+<ul class="org-ul">
+<li>Se usa generalmente una función de activación <b>lineal</b> en la salida:
+\[
+    f(z) = z
+  \]</li>
+<li>La red puede entonces producir valores reales sin restricción de
+rango (o con restricciones adicionales impuestas por el preprocesado).</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-org6a87ea3" class="outline-4">
+<h4 id="org6a87ea3">Impacto en el entrenamiento</h4>
+<div class="outline-text-4" id="text-org6a87ea3">
+<p>
+La elección de la función de activación afecta:
+</p>
+
+<ul class="org-ul">
+<li>La <b>velocidad de convergencia</b>.</li>
+<li>La <b>estabilidad</b> del entrenamiento.</li>
+<li>El <b>flujo del gradiente</b> a través de las capas.</li>
+<li>La capacidad de representar ciertas distribuciones de salida.</li>
+</ul>
+
+<p>
+Una elección inadecuada:
+</p>
+
+<ul class="org-ul">
+<li>puede causar vanishing/exploding gradient,</li>
+<li>puede impedir que la red aprenda adecuadamente,</li>
+<li>o requerir tiempos de entrenamiento excesivos.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org767c0c0" class="outline-3">
+<h3 id="org767c0c0">Propagación hacia adelante (Forward Propagation)</h3>
+<div class="outline-text-3" id="text-org767c0c0">
+<p>
+La <b>propagación hacia adelante</b> es el proceso mediante el cual la red
+calcula su salida a partir de una entrada dada.
+</p>
+
+<p>
+Pasos generales:
+</p>
+
+<ol class="org-ol">
+<li>Se recibe el vector de entrada \(\mathbf{x}\).</li>
+<li>Se calcula sucesivamente:
+<ul class="org-ul">
+<li>\(\mathbf{z}^{(1)}\), \(\mathbf{a}^{(1)}\) (primera capa oculta),</li>
+<li>\(\mathbf{z}^{(2)}\), \(\mathbf{a}^{(2)}\), etc.</li>
+</ul></li>
+<li>Se obtiene la activación de la capa de salida \(\mathbf{a}^{(L)}\),
+que corresponde a la predicción \(\hat{\mathbf{y}}\).</li>
+</ol>
+
+<p>
+Podemos verlo como una composición de funciones:
+</p>
+
+<p>
+\[
+\mathbf{a}^{(L)} = f^{(L)}\left( \mathbf{W}^{(L)} \, f^{(L-1)}\left( \dots f^{(1)}\left(\mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)}\right) \dots \right) + \mathbf{b}^{(L)} \right)
+\]
+</p>
+
+<p>
+o, de forma más compacta:
+</p>
+
+<p>
+\[
+\hat{\mathbf{y}} = F(\mathbf{x}; \theta)
+\]
+</p>
+
+<p>
+donde \(\theta\) denota el conjunto de todos los pesos y bias de la red.
+</p>
+</div>
+</div>
+<div id="outline-container-orga4ec7a5" class="outline-3">
+<h3 id="orga4ec7a5">Funciones de pérdida</h3>
+<div class="outline-text-3" id="text-orga4ec7a5">
+<p>
+Las funciones de pérdida (o <b>funciones de coste</b>) miden el error entre:
+</p>
+
+<ul class="org-ul">
+<li>la predicción del modelo \(\hat{y}\) (o \(\hat{\mathbf{y}}\)),</li>
+<li>y el valor real \(y\) (o \(\mathbf{y}\)).</li>
+</ul>
+
+<p>
+El objetivo del entrenamiento es encontrar parámetros \(\theta\) que
+<b>minimicen</b> la pérdida promedio sobre el conjunto de entrenamiento.
+</p>
+</div>
+<div id="outline-container-orgaad2735" class="outline-4">
+<h4 id="orgaad2735">Error cuadrático medio (MSE)</h4>
+<div class="outline-text-4" id="text-orgaad2735">
+<p>
+Común en problemas de regresión:
+</p>
+
+<p>
+\[
+\mathcal{L}_{\text{MSE}} = \frac{1}{n} \sum_{k=1}^{n} (y_k - \hat{y}_k)^2
+\]
+</p>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(n\) es el número de muestras,</li>
+<li>\(y_k\) es el valor real de la muestra \(k\),</li>
+<li>\(\hat{y}_k\) es la predicción del modelo.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfaf936f" class="outline-4">
+<h4 id="orgfaf936f">Entropía cruzada (Cross-Entropy)</h4>
+<div class="outline-text-4" id="text-orgfaf936f">
+<p>
+Muy utilizada en clasificación.
+</p>
+
+<ul class="org-ul">
+<li>Para clasificación binaria:</li>
+</ul>
+
+<p>
+\[
+\mathcal{L}_{\text{binaria}} = - \frac{1}{n} \sum_{k=1}^{n} \left[ y_k \log(\hat{y}_k) + (1 - y_k)\log(1 - \hat{y}_k) \right]
+\]
+</p>
+
+<ul class="org-ul">
+<li>Para clasificación multiclase (one-hot \(\mathbf{y}\) y softmax \(\hat{\mathbf{y}}\)):</li>
+</ul>
+
+<p>
+\[
+\mathcal{L}_{\text{multiclase}} = - \frac{1}{n} \sum_{k=1}^{n} \sum_{c=1}^{C} y_{k,c} \log(\hat{y}_{k,c})
+\]
+</p>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(C\) es el número de clases,</li>
+<li>\(y_{k,c}\) es 1 si la muestra \(k\) pertenece a la clase \(c\), y 0 en caso contrario,</li>
+<li>\(\hat{y}_{k,c}\) es la probabilidad predicha para la clase \(c\).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org4e25891" class="outline-3">
+<h3 id="org4e25891">Backpropagation</h3>
+<div class="outline-text-3" id="text-org4e25891">
+<p>
+<b>Backpropagation</b> es el algoritmo fundamental para entrenar MLP. Se
+basa en la aplicación sistemática de la <b>regla de la cadena</b> del cálculo
+diferencial para propagar el error desde la capa de salida hacia las
+capas anteriores.
+</p>
+
+<p>
+Para un peso genérico \(w\), la derivada de la pérdida se expresa como:
+</p>
+
+<p>
+\[
+\frac{\partial \mathcal{L}}{\partial w} =
+\frac{\partial \mathcal{L}}{\partial a}
+\cdot \frac{\partial a}{\partial z}
+\cdot \frac{\partial z}{\partial w}
+\]
+</p>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(\frac{\partial \mathcal{L}}{\partial a}\): cuánto cambia la pérdida
+si cambia la activación \(a\),</li>
+<li>\(\frac{\partial a}{\partial z}\): deriva de la función de activación,</li>
+<li>\(\frac{\partial z}{\partial w}\): relación lineal entre \(z\) y el
+peso \(w\).</li>
+</ul>
+
+<p>
+El algoritmo:
+</p>
+
+<ol class="org-ol">
+<li>Calcula un <b>forward pass</b> (de entrada a salida).</li>
+<li>Calcula la pérdida \(\mathcal{L}\).</li>
+<li>Propaga gradientes hacia atrás usando la regla de la cadena.</li>
+<li>Obtiene \(\frac{\partial \mathcal{L}}{\partial w}\) y
+\(\frac{\partial \mathcal{L}}{\partial b}\) para todos los pesos y
+bias de la red.</li>
+<li>Usa estos gradientes para actualizar los parámetros.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org7679b69" class="outline-3">
+<h3 id="org7679b69">Descenso de gradiente</h3>
+<div class="outline-text-3" id="text-org7679b69">
+<p>
+El <b>descenso de gradiente</b> (gradient descent) es la regla de
+actualización básica para minimizar la función de pérdida.
+</p>
+
+<p>
+Para un peso \(w\):
+</p>
+
+<p>
+\[
+w := w - \eta \, \frac{\partial \mathcal{L}}{\partial w}
+\]
+</p>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(\eta\) es la <b>tasa de aprendizaje</b> (learning rate),</li>
+<li>\(\frac{\partial \mathcal{L}}{\partial w}\) es el gradiente de la
+pérdida respecto a \(w\).</li>
+</ul>
+
+<p>
+Interpretación:
+</p>
+
+<ul class="org-ul">
+<li>Nos movemos en la dirección <b>opuesta</b> al gradiente (descenso),</li>
+<li>La magnitud del paso está controlada por \(\eta\).</li>
+</ul>
+
+<p>
+En la práctica:
+</p>
+
+<ul class="org-ul">
+<li>Se usan variantes como:
+<ul class="org-ul">
+<li><b>Stochastic Gradient Descent (SGD)</b>,</li>
+<li>SGD con <b>momentum</b>,</li>
+<li><b>Adam</b>, <b>RMSProp</b>, etc.</li>
+</ul></li>
+<li>Estas variantes mejoran:
+<ul class="org-ul">
+<li>la velocidad de convergencia,</li>
+<li>la estabilidad numérica,</li>
+<li>la capacidad de escapar de mínimos locales poco profundos.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf4a57cf" class="outline-2">
+<h2 id="orgf4a57cf">Ejemplo Clasificación del dataset Iris con MLP</h2>
+<div class="outline-text-2" id="text-orgf4a57cf">
+<p>
+Este apartado muestra un ejemplo completo en Python usando el dataset
+clásico Iris y una red neuronal feedforward (Perceptrón Multicapa)
+usando la librería scikit-learn.
+</p>
+
+<p>
+El objetivo es clasificar flores Iris en tres clases:
+</p>
+
+<ul class="org-ul">
+<li>Setosa</li>
+<li>Versicolor</li>
+<li>Virginica</li>
+</ul>
+
+
+<p>
+Importar librerías
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">import</span> numpy <span style="color: #fb4934;">as</span> np
+<span style="color: #fb4934;">from</span> sklearn.datasets
+<span style="color: #fb4934;">import</span> load_iris <span style="color: #fb4934;">from</span> sklearn.model_selection
+<span style="color: #fb4934;">import</span> train_test_split <span style="color: #fb4934;">from</span> sklearn.preprocessing
+<span style="color: #fb4934;">import</span> StandardScaler <span style="color: #fb4934;">from</span> sklearn.neural_network
+<span style="color: #fb4934;">import</span> MLPClassifier <span style="color: #fb4934;">from</span> sklearn.metrics
+<span style="color: #fb4934;">import</span> accuracy_score, classification_report
+</pre>
+</div>
+
+<p>
+Cargar el dataset Iris
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">iris</span> = load_iris<span style="color: #fe8019;">()</span>
+<span style="color: #83a598;">X</span> = iris.data <span style="color: #928374;"># </span><span style="color: #928374;">Caracter&#237;sticas (150 x 4) y = iris.target # Clases (150,)
+</span><span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>X.shape<span style="color: #fe8019;">)</span> <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>y.shape<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Las 4 características son:
+</p>
+
+<ul class="org-ul">
+<li>Largo del sépalo</li>
+<li>Ancho del sépalo</li>
+<li>Largo del pétalo</li>
+<li>Ancho del pétalo</li>
+</ul>
+
+<p>
+Las clases están codificadas como:
+</p>
+
+<ul class="org-ul">
+<li>0 → Setosa</li>
+<li>1 → Versicolor</li>
+<li>2 → Virginica</li>
+</ul>
+
+<p>
+El siguiente fragmento de código realiza la partición del conjunto de
+datos original en dos subconjuntos disjuntos: uno destinado al
+entrenamiento del modelo y otro a su evaluación.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">X_train</span>, <span style="color: #83a598;">X_test</span>, <span style="color: #83a598;">y_train</span>, <span style="color: #83a598;">y_test</span> = train_test_split<span style="color: #fe8019;">(</span> X, y, test_size=0.2, random_state=42, stratify=y <span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Propósito de la partición:
+</p>
+
+<p>
+En aprendizaje automático supervisado, es fundamental evaluar la
+capacidad de generalización de un modelo. Para ello, los datos
+disponibles se dividen en:
+</p>
+
+<ul class="org-ul">
+<li><b>Conjunto de entrenamiento</b>: utilizado para ajustar los parámetros del modelo (pesos y sesgos).</li>
+<li><b>Conjunto de prueba</b>: utilizado exclusivamente para medir el desempeño del modelo sobre datos no vistos durante el entrenamiento.</li>
+</ul>
+
+<p>
+Esta separación permite detectar fenómenos como overfitting y
+underfitting, y proporciona una estimación más realista del
+rendimiento esperado en producción.
+</p>
+
+<p>
+<b>El parámetro</b>:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">test_size</span>=0.2
+</pre>
+</div>
+<p>
+indica que el 20 % del conjunto total de datos se reserva para el
+conjunto de prueba, mientras que el 80 % restante se utiliza para
+entrenamiento. Esta proporción es común en la práctica y representa un
+compromiso razonable entre:
+</p>
+
+<ul class="org-ul">
+<li>disponer de suficientes datos para entrenar el modelo, y</li>
+<li>contar con una muestra representativa para evaluar su generalización.</li>
+</ul>
+</div>
+<div id="outline-container-orgea7f77f" class="outline-3">
+<h3 id="orgea7f77f">Reproducibilidad del experimento</h3>
+<div class="outline-text-3" id="text-orgea7f77f">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">random_state</span>=42
+</pre>
+</div>
+
+<p>
+fija la semilla del generador de números aleatorios utilizado durante
+la partición.  Esto garantiza que la división de los datos sea
+reproducible, es decir, que múltiples ejecuciones del mismo código
+produzcan exactamente la misma separación entre entrenamiento y
+prueba.
+</p>
+
+<p>
+La reproducibilidad es un requisito esencial en entornos científicos y
+académicos, ya que permite validar y comparar resultados de manera
+consistente.
+</p>
+</div>
+</div>
+<div id="outline-container-org91a6d5f" class="outline-3">
+<h3 id="org91a6d5f">Estratificación de clases</h3>
+<div class="outline-text-3" id="text-org91a6d5f">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">stratify</span>=y
+</pre>
+</div>
+
+<p>
+indica que la división debe realizarse de forma estratificada,
+conservando la proporción original de cada clase en ambos
+subconjuntos.
+</p>
+
+<p>
+Esto es especialmente importante en problemas de clasificación, ya que
+una división aleatoria sin estratificación podría provocar:
+</p>
+
+<ul class="org-ul">
+<li>conjuntos de entrenamiento o prueba con clases desbalanceadas,</li>
+<li>métricas de desempeño engañosas,</li>
+<li>modelos que no aprendan adecuadamente clases minoritarias.</li>
+</ul>
+
+<p>
+Mediante la estratificación, se asegura que tanto el conjunto de
+entrenamiento como el de prueba sean representativos de la
+distribución real de las clases.
+</p>
+</div>
+</div>
+<div id="outline-container-orgeb4dc17" class="outline-3">
+<h3 id="orgeb4dc17">Importancia en redes neuronales</h3>
+<div class="outline-text-3" id="text-orgeb4dc17">
+<p>
+En el contexto de redes neuronales (incluyendo MLP):
+</p>
+
+<ul class="org-ul">
+<li>el entrenamiento ajusta los pesos minimizando una función de pérdida
+sobre X<sub>train</sub>,</li>
+
+<li>la evaluación sobre X<sub>test</sub> permite medir la capacidad del modelo
+para generalizar,</li>
+
+<li>una mala partición puede conducir a conclusiones erróneas sobre el
+desempeño del modelo.</li>
+</ul>
+
+<p>
+Por esta razón, la división adecuada del conjunto de datos constituye
+un paso crítico previo al entrenamiento y no debe considerarse un
+detalle menor de implementación.
+</p>
+</div>
+</div>
+<div id="outline-container-org112d3a9" class="outline-3">
+<h3 id="org112d3a9">Normalización de los datos</h3>
+<div class="outline-text-3" id="text-org112d3a9">
+<p>
+La normalización de los datos de entrada es un paso crítico en el
+entrenamiento de redes neuronales, ya que influye directamente en la
+estabilidad numérica, la velocidad de convergencia y la eficacia del
+aprendizaje.
+</p>
+
+<p>
+En una red neuronal, los pesos se ajustan mediante métodos de
+optimización basados en gradientes. Si las variables de entrada
+presentan escalas muy diferentes, el proceso de entrenamiento puede
+volverse ineficiente o inestable.
+</p>
+
+<p>
+En muchos conjuntos de datos, las características pueden tener rangos muy distintos. Por ejemplo:
+</p>
+
+<ul class="org-ul">
+<li>una variable puede tomar valores entre 0 y 1,</li>
+<li>otra entre 0 y 10⁶,</li>
+<li>otra puede incluir valores negativos.</li>
+</ul>
+
+<p>
+Cuando estos datos se introducen directamente en una red neuronal:
+</p>
+
+<ul class="org-ul">
+<li>los gradientes asociados a variables de gran escala dominan la actualización de los pesos,</li>
+<li>las funciones de activación pueden saturarse,</li>
+<li>el descenso por gradiente se vuelve lento o errático.</li>
+</ul>
+
+<p>
+La normalización busca homogeneizar la escala de las entradas,
+permitiendo que todas las características contribuyan de manera
+equilibrada al aprendizaje.
+</p>
+
+
+<p>
+Una de las técnicas más utilizadas es la estandarización, implementada
+en scikit-learn mediante la clase StandardScaler.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">scaler</span> = StandardScaler<span style="color: #fe8019;">()</span>
+<span style="color: #83a598;">X_train</span> = scaler.fit_transform<span style="color: #fe8019;">(</span>X_train<span style="color: #fe8019;">)</span> <span style="color: #83a598;">X_test</span> = scaler.transform<span style="color: #fe8019;">(</span>X_test<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Este procedimiento transforma cada característica \(x\) según la siguiente expresión:
+</p>
+
+<p>
+\[
+x' = \frac{x - \mu}{\sigma}
+\]
+</p>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\( \mu \) es la media de la característica,</li>
+<li>\( \sigma \) es la desviación estándar de la característica.</li>
+</ul>
+
+<p>
+Como resultado de esta transformación, cada variable queda con:
+</p>
+
+<ul class="org-ul">
+<li>media aproximadamente igual a 0,</li>
+<li>desviación estándar igual a 1.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5d42f47" class="outline-3">
+<h3 id="org5d42f47">Definir el Perceptrón Multicapa (MLP)</h3>
+<div class="outline-text-3" id="text-org5d42f47">
+<p>
+El siguiente fragmento de código define un <b>Perceptrón Multicapa</b> (Multilayer Perceptron, MLP)
+para un problema de clasificación multiclase, utilizando la implementación provista por
+la biblioteca <b>scikit-learn</b>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">mlp</span> = MLPClassifier<span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   hidden_layer_sizes=<span style="color: #b16286;">(</span>10, 10<span style="color: #b16286;">)</span>,
+<span style="background-color: #3c3836;"> </span>   activation=<span style="color: #b8bb26;">'relu'</span>,
+<span style="background-color: #3c3836;"> </span>   solver=<span style="color: #b8bb26;">'adam'</span>,
+<span style="background-color: #3c3836;"> </span>   learning_rate_init=0.001,
+<span style="background-color: #3c3836;"> </span>   max_iter=2000,
+<span style="background-color: #3c3836;"> </span>   random_state=42
+<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Este modelo corresponde a una red neuronal <b>feedforward completamente conectada</b>,
+entrenada mediante <b>backpropagation</b> y optimizada usando métodos de descenso por gradiente.
+</p>
+</div>
+<div id="outline-container-orgf41dd0a" class="outline-4">
+<h4 id="orgf41dd0a">Arquitectura de la red neuronal</h4>
+<div class="outline-text-4" id="text-orgf41dd0a">
+<p>
+La arquitectura del MLP queda determinada por el número de características de entrada,
+las capas ocultas definidas explícitamente y el número de neuronas en la capa de salida.
+</p>
+</div>
+</div>
+<div id="outline-container-org367f316" class="outline-4">
+<h4 id="org367f316">Capa de entrada</h4>
+<div class="outline-text-4" id="text-org367f316">
+<ul class="org-ul">
+<li>La capa de entrada está compuesta por <b>4 neuronas</b>.</li>
+<li>Cada neurona representa una característica del vector de entrada.</li>
+<li>Esta capa no aplica transformaciones, únicamente propaga los valores hacia la primera capa oculta.</li>
+</ul>
+
+<p>
+Formalmente, el vector de entrada se expresa como:
+</p>
+
+<p>
+\[
+\mathbf{x} = (x_1, x_2, x_3, x_4)
+\]
+</p>
+</div>
+</div>
+<div id="outline-container-orged8401a" class="outline-4">
+<h4 id="orged8401a">Capas ocultas</h4>
+<div class="outline-text-4" id="text-orged8401a">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">hidden_layer_sizes</span>=<span style="color: #fe8019;">(</span>10, 10<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+define <b>dos capas ocultas</b>, cada una con <b>10 neuronas</b>.
+</p>
+
+<p>
+Características principales:
+</p>
+
+<ul class="org-ul">
+<li>Son capas <b>densas (fully connected)</b>.</li>
+<li>Cada neurona recibe como entrada la salida de <b>todas</b> las neuronas de la capa anterior.</li>
+<li>Permiten aprender representaciones no lineales del espacio de características.</li>
+</ul>
+
+<p>
+Cada capa oculta implementa la transformación:
+</p>
+
+<p>
+\[
+\mathbf{h}^{(l)} = f\left( \mathbf{W}^{(l)} \mathbf{h}^{(l-1)} + \mathbf{b}^{(l)} \right)
+\]
+</p>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\( \mathbf{W}^{(l)} \) es la matriz de pesos,</li>
+<li>\( \mathbf{b}^{(l)} \) es el vector de sesgos,</li>
+<li>\( f(\cdot) \) es la función de activación.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org204a8bd" class="outline-4">
+<h4 id="org204a8bd">Función de activación</h4>
+<div class="outline-text-4" id="text-org204a8bd">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">activation</span>=<span style="color: #b8bb26;">'relu'</span>
+</pre>
+</div>
+
+<p>
+indica el uso de la función <b>ReLU (Rectified Linear Unit)</b>, definida como:
+</p>
+
+<p>
+\[
+\text{ReLU}(z) = \max(0, z)
+\]
+</p>
+
+<p>
+Esta función se utiliza porque:
+</p>
+
+<ul class="org-ul">
+<li>introduce no linealidad,</li>
+<li>reduce el problema del <b>vanishing gradient</b>,</li>
+<li>mejora la estabilidad del entrenamiento,</li>
+<li>es computacionalmente eficiente.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org72aeba5" class="outline-4">
+<h4 id="org72aeba5">Capa de salida</h4>
+<div class="outline-text-4" id="text-org72aeba5">
+<ul class="org-ul">
+<li>La capa de salida está compuesta por <b>3 neuronas</b>.</li>
+<li>Cada neurona corresponde a una de las clases del problema.</li>
+<li>Internamente, el modelo utiliza una función <b>softmax</b> para obtener probabilidades.</li>
+</ul>
+
+<p>
+La clase predicha se obtiene mediante la operación <b>argmax</b> sobre las salidas.
+</p>
+</div>
+</div>
+<div id="outline-container-orgecfbd04" class="outline-4">
+<h4 id="orgecfbd04">Entrenamiento del modelo</h4>
+<div class="outline-text-4" id="text-orgecfbd04">
+<p>
+El entrenamiento se realiza mediante el optimizador <b>Adam</b>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">solver</span>=<span style="color: #b8bb26;">'adam'</span>
+</pre>
+</div>
+
+<p>
+Adam combina:
+</p>
+<ul class="org-ul">
+<li>momentum</li>
+<li>tasas de aprendizaje adaptativas</li>
+</ul>
+
+<p>
+lo que permite una convergencia más rápida y estable en redes con múltiples capas.
+</p>
+
+<p>
+La tasa de aprendizaje inicial se define como:
+</p>
+
+<p>
+\[
+\eta = 0.001
+\]
+</p>
+
+<p>
+controlando el tamaño de los pasos durante la actualización de los pesos.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org988ee7f" class="outline-3">
+<h3 id="org988ee7f">Número de iteraciones</h3>
+<div class="outline-text-3" id="text-org988ee7f">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">max_iter</span>=2000
+</pre>
+</div>
+
+<p>
+establece el número máximo de épocas de entrenamiento.
+Una época corresponde a un pase completo sobre el conjunto de entrenamiento.
+</p>
+
+<p>
+Un número elevado de épocas favorece la convergencia, aunque incrementa el riesgo de <b>overfitting</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbab2677" class="outline-3">
+<h3 id="orgbab2677">Reproducibilidad</h3>
+<div class="outline-text-3" id="text-orgbab2677">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">random_state</span>=42
+</pre>
+</div>
+
+<p>
+fija la semilla del generador de números aleatorios, garantizando resultados reproducibles
+en la inicialización de los pesos y el proceso de entrenamiento.
+</p>
+</div>
+</div>
+<div id="outline-container-org2d28422" class="outline-3">
+<h3 id="org2d28422">Entrenamiento del modelo</h3>
+<div class="outline-text-3" id="text-org2d28422">
+<p>
+El entrenamiento deñ Perceptrón Multicapa (MLP) consiste en ajustar
+los pesos y sesgos de la red para minimizar el error de predicción
+sobre los datos de entrenamiento.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">mlp.fit<span style="color: #fe8019;">(</span>X_train, y_train<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Durante este proceso ocurren los siguientes pasos fundamentales:
+</p>
+</div>
+<div id="outline-container-org6ad586a" class="outline-4">
+<h4 id="org6ad586a">Propagación hacia adelante (forward pass)</h4>
+<div class="outline-text-4" id="text-org6ad586a">
+<p>
+Cada muestra de entrada x atraviesa la red capa por capa.
+</p>
+
+<p>
+En cada neurona se calcula una combinación lineal y se aplica una función de activación.
+</p>
+
+<p>
+Se obtiene una salida y que representa la predicción del modelo.
+</p>
+</div>
+</div>
+<div id="outline-container-org5f892c3" class="outline-4">
+<h4 id="org5f892c3">Cálculo del error</h4>
+<div class="outline-text-4" id="text-org5f892c3">
+<p>
+La salida predicha se compara con la etiqueta real 𝑦.
+Se utiliza una función de pérdida (por ejemplo, log-loss para clasificación multiclase).
+</p>
+</div>
+</div>
+<div id="outline-container-org388cc8b" class="outline-4">
+<h4 id="org388cc8b">Backpropagation</h4>
+<div class="outline-text-4" id="text-org388cc8b">
+<p>
+El error se propaga desde la capa de salida hacia las capas
+anteriores. Se calculan los gradientes del error respecto a cada peso
+y sesgo. Se aplica la regla de la cadena del cálculo diferencial.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd87b2a8" class="outline-4">
+<h4 id="orgd87b2a8">Descenso de gradiente con Adam</h4>
+<div class="outline-text-4" id="text-orgd87b2a8">
+<ul class="org-ul">
+<li>Adam combina Momentum y RMSProp.</li>
+<li>Ajusta automáticamente la tasa de aprendizaje para cada parámetro.</li>
+<li>Proporciona convergencia rápida y estable.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1d985a9" class="outline-3">
+<h3 id="org1d985a9">Evaluación del modelo</h3>
+<div class="outline-text-3" id="text-org1d985a9">
+<p>
+Una vez entrenado el modelo, se evalúa su desempeño usando datos no vistos durante el entrenamiento.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">y_pred</span> = mlp.predict<span style="color: #fe8019;">(</span>X_test<span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Accuracy:"</span>, accuracy_score<span style="color: #b16286;">(</span>y_test, y_pred<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span> <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">Reporte de clasificaci&#243;n:</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span> <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>classification_report<span style="color: #b16286;">(</span>y_test, y_pred, target_names=iris.target_names<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-orgef8f65f" class="outline-4">
+<h4 id="orgef8f65f">Métricas utilizadas</h4>
+<div class="outline-text-4" id="text-orgef8f65f">
+<ul class="org-ul">
+<li>Accuracy: proporción total de predicciones correctas.</li>
+<li>Precision: qué tan confiables son las predicciones positivas.</li>
+<li>Recall: capacidad del modelo para encontrar todos los ejemplos de una clase.</li>
+<li>F1-score: balance entre precisión y recall.</li>
+</ul>
+
+<p>
+En el dataset Iris, el accuracy suele estar en el rango del 95% al
+100%, debido a su baja dimensionalidad y buena separación entre
+clases.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgadaff57" class="outline-3">
+<h3 id="orgadaff57">Predicción con una nueva flor</h3>
+<div class="outline-text-3" id="text-orgadaff57">
+<p>
+El modelo entrenado puede utilizarse para predecir nuevas muestras.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #928374;">#</span><span style="color: #928374;">[largo_sepalo, ancho_sepalo, largo_petalo, ancho_petalo]
+</span>
+<span style="color: #83a598;">flor_nueva</span> = np.array<span style="color: #fe8019;">(</span><span style="color: #b16286;">[</span><span style="color: #b8bb26;">[</span>5.1, 3.5, 1.4, 0.2<span style="color: #b8bb26;">]</span><span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+<span style="color: #928374;">#</span><span style="color: #928374;">Normalizaci&#243;n con el mismo scaler del entrenamiento
+</span><span style="color: #83a598;">flor_nueva</span> = scaler.transform<span style="color: #fe8019;">(</span>flor_nueva<span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">prediccion</span> = mlp.predict<span style="color: #fe8019;">(</span>flor_nueva<span style="color: #fe8019;">)</span> <span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Clase predicha:"</span>, iris.target_names<span style="color: #b16286;">[</span>prediccion<span style="color: #b8bb26;">[</span>0<span style="color: #b8bb26;">]</span><span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Es fundamental aplicar la misma normalización usada en el entrenamiento para mantener coherencia en las escalas.
+</p>
+</div>
+</div>
+<div id="outline-container-orge40bc50" class="outline-3">
+<h3 id="orge40bc50">Interpretación matemática del MLP</h3>
+<div class="outline-text-3" id="text-orge40bc50">
+<p>
+Cada neurona de la red realiza el siguiente cálculo:
+</p>
+
+<pre class="example" id="org39cbb30">
+z = w · x + b a = f(z)
+</pre>
+
+<p>
+Donde: 𝑤 es el vector de pesos 𝑥 es el vector de entradas 𝑏 es el sesgo (bias) 𝑓
+es la función de activación (ReLU en las capas ocultas). La capa de salida utiliza la función Softmax:
+</p>
+
+<div class="latex" id="orgee47b5b">
+<p>
+\text{softmax}(z<sub>i</sub>) = \frac{e<sup>z<sub>i</sub></sup>}{&sum;<sub>j</sub> e<sup>z<sub>j</sub></sup>}
+</p>
+
+</div>
+
+<p>
+Esto permite interpretar las salidas como probabilidades para cada clase.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeeb11f0" class="outline-2">
+<h2 id="orgeeb11f0">Ejemplo Clasificación de Cáncer de Mama con MLP</h2>
+<div class="outline-text-2" id="text-orgeeb11f0">
+<p>
+Este apartado muestra un ejemplo completo en Python usando el dataset
+<b>Breast Cancer Wisconsin (Diagnostic)</b> y un <b>Perceptrón Multicapa (MLP)</b>
+usando la librería scikit-learn.
+</p>
+
+<p>
+El objetivo es clasificar tumores en dos categorías:
+</p>
+
+<ul class="org-ul">
+<li>0 → Maligno</li>
+<li>1 → Benigno</li>
+</ul>
+
+<p>
+Este problema es un caso típico de <b><b>clasificación binaria</b></b> en el
+ámbito médico, donde es crucial:
+</p>
+
+<ul class="org-ul">
+<li>minimizar falsos negativos (tumor maligno clasificado como benigno),</li>
+<li>mantener una buena precisión general del modelo.</li>
+</ul>
+</div>
+<div id="outline-container-org1973470" class="outline-3">
+<h3 id="org1973470">Importar librerías</h3>
+<div class="outline-text-3" id="text-org1973470">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">import</span> numpy <span style="color: #fb4934;">as</span> np
+<span style="color: #fb4934;">from</span> sklearn.datasets <span style="color: #fb4934;">import</span> load_breast_cancer
+<span style="color: #fb4934;">from</span> sklearn.model_selection <span style="color: #fb4934;">import</span> train_test_split
+<span style="color: #fb4934;">from</span> sklearn.preprocessing <span style="color: #fb4934;">import</span> StandardScaler
+<span style="color: #fb4934;">from</span> sklearn.neural_network <span style="color: #fb4934;">import</span> MLPClassifier
+<span style="color: #fb4934;">from</span> sklearn.metrics <span style="color: #fb4934;">import</span> accuracy_score, classification_report
+</pre>
+</div>
+
+<p>
+En este bloque:
+</p>
+
+<ul class="org-ul">
+<li><code>load_breast_cancer</code>: carga el dataset de cáncer de mama.</li>
+<li><code>train_test_split</code>: divide en entrenamiento y prueba.</li>
+<li><code>StandardScaler</code>: aplica estandarización a las características.</li>
+<li><code>MLPClassifier</code>: implementa un Perceptrón Multicapa (MLP).</li>
+<li><code>accuracy_score</code> y <code>classification_report</code>: permiten evaluar el modelo.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org81187e0" class="outline-3">
+<h3 id="org81187e0">Cargar el dataset Breast Cancer</h3>
+<div class="outline-text-3" id="text-org81187e0">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">data</span> = load_breast_cancer<span style="color: #fe8019;">()</span>
+<span style="color: #83a598;">X</span> = data.data      <span style="color: #928374;"># </span><span style="color: #928374;">Caracter&#237;sticas (569 x 30)
+</span><span style="color: #83a598;">y</span> = data.target    <span style="color: #928374;"># </span><span style="color: #928374;">Etiquetas (569,)
+</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Dimensiones de X:"</span>, X.shape<span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Clases num&#233;ricas:"</span>, np.unique<span style="color: #b16286;">(</span>y<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Nombres de clases:"</span>, data.target_names<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Este dataset contiene:
+</p>
+
+<ul class="org-ul">
+<li>569 muestras (pacientes).</li>
+<li>30 características numéricas que describen propiedades de los tumores
+(radio, textura, perímetro, área, suavidad, compacidad, etc.).</li>
+<li>2 clases:
+<ul class="org-ul">
+<li>0 → malignant (maligno)</li>
+<li>1 → benign (benigno)</li>
+</ul></li>
+</ul>
+
+<p>
+Cada muestra corresponde a una imagen de tejido mamario analizada
+digitalmente. Las 30 características se derivan de medidas estadísticas
+de la forma, textura y estructura del tumor.
+</p>
+</div>
+<div id="outline-container-orgefdd34e" class="outline-4">
+<h4 id="orgefdd34e">Importancia del dominio</h4>
+<div class="outline-text-4" id="text-orgefdd34e">
+<p>
+En aplicaciones médicas, la interpretación de las predicciones es muy
+sensible:
+</p>
+
+<ul class="org-ul">
+<li>un <b>falso negativo</b> (maligno etiquetado como benigno) puede retrasar
+un diagnóstico crítico;</li>
+<li>un <b>falso positivo</b> (benigno etiquetado como maligno) puede generar
+ansiedad y procedimientos innecesarios.</li>
+</ul>
+
+<p>
+Por ello, además de la <b>accuracy</b>, suelen analizarse:
+</p>
+
+<ul class="org-ul">
+<li>sensibilidad (<b>recall</b>) para la clase “maligno”,</li>
+<li>especificidad,</li>
+<li>matriz de confusión, etc.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org0d2106f" class="outline-3">
+<h3 id="org0d2106f">Partición del conjunto de datos</h3>
+<div class="outline-text-3" id="text-org0d2106f">
+<p>
+Dividimos el dataset en entrenamiento y prueba:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">X_train</span>, <span style="color: #83a598;">X_test</span>, <span style="color: #83a598;">y_train</span>, <span style="color: #83a598;">y_test</span> = train_test_split<span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   X,
+<span style="background-color: #3c3836;"> </span>   y,
+<span style="background-color: #3c3836;"> </span>   test_size=0.3,
+<span style="background-color: #3c3836;"> </span>   random_state=42,
+<span style="background-color: #3c3836;"> </span>   stratify=y
+<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org5437901" class="outline-4">
+<h4 id="org5437901">Significado de los parámetros</h4>
+<div class="outline-text-4" id="text-org5437901">
+<ul class="org-ul">
+<li><code>test_size=0.3</code>:
+<ul class="org-ul">
+<li>30 % de los datos se reservan para el <b>conjunto de prueba</b>.</li>
+<li>70 % se usan para entrenar el modelo.</li>
+<li>En este caso:
+<ul class="org-ul">
+<li>Entrenamiento: ≈ 398 muestras.</li>
+<li>Prueba: ≈ 171 muestras.</li>
+</ul></li>
+</ul></li>
+
+<li><code>random_state=42</code>:
+<ul class="org-ul">
+<li>Fija la semilla del generador de números aleatorios.</li>
+<li>Permite que la partición sea reproducible: el mismo código genera
+siempre la misma división.</li>
+</ul></li>
+
+<li><code>stratify=y</code>:
+<ul class="org-ul">
+<li>Asegura que la proporción de clases (maligno/benigno) sea similar
+tanto en entrenamiento como en prueba.</li>
+<li>Esto es crucial en problemas médicos, donde el balance de clases
+puede influir fuertemente en las métricas.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org16802a7" class="outline-4">
+<h4 id="org16802a7">Propósito de la partición</h4>
+<div class="outline-text-4" id="text-org16802a7">
+<p>
+En aprendizaje automático supervisado:
+</p>
+
+<ul class="org-ul">
+<li>El <b>conjunto de entrenamiento</b> se usa para ajustar los parámetros
+(pesos y sesgos) del modelo.</li>
+<li>El <b>conjunto de prueba</b> se usa <b>solo</b> para evaluar la capacidad de
+generalización sobre datos no vistos.</li>
+</ul>
+
+<p>
+Esta separación es esencial para:
+</p>
+
+<ul class="org-ul">
+<li>detectar <b>overfitting</b> (el modelo memoriza el entrenamiento pero
+generaliza mal),</li>
+<li>obtener una estimación realista del rendimiento.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org342f94e" class="outline-3">
+<h3 id="org342f94e">Normalización (Estandarización)</h3>
+<div class="outline-text-3" id="text-org342f94e">
+<p>
+Las características tienen escalas muy diferentes (áreas grandes,
+texturas pequeñas, etc.). Esto puede causar:
+</p>
+
+<ul class="org-ul">
+<li>problemas numéricos,</li>
+<li>gradientes desbalanceados,</li>
+<li>convergencia lenta o inestable.</li>
+</ul>
+
+<p>
+Por ello, aplicamos estandarización:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">scaler</span> = StandardScaler<span style="color: #fe8019;">()</span>
+<span style="color: #83a598;">X_train</span> = scaler.fit_transform<span style="color: #fe8019;">(</span>X_train<span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">X_test</span> = scaler.transform<span style="color: #fe8019;">(</span>X_test<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Este procedimiento transforma cada característica \(x\) según:
+</p>
+
+<div class="latex" id="orgcd5d095">
+<p>
+x' = \frac{x - \mu}{\sigma}
+</p>
+
+</div>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(\mu\) es la media de la característica calculada sobre el conjunto
+de entrenamiento,</li>
+<li>\(\sigma\) es la desviación estándar de dicha característica.</li>
+</ul>
+
+<p>
+Después de la transformación:
+</p>
+
+<ul class="org-ul">
+<li>cada variable tiene media aproximadamente 0,</li>
+<li>y desviación estándar aproximadamente 1.</li>
+</ul>
+</div>
+<div id="outline-container-org0d0baf1" class="outline-4">
+<h4 id="org0d0baf1">Importante</h4>
+<div class="outline-text-4" id="text-org0d0baf1">
+<ul class="org-ul">
+<li>Solo se llama a <code>fit_transform</code> en <code>X_train</code>:
+<ul class="org-ul">
+<li><code>fit</code> calcula \(\mu\) y \(\sigma\) usando <b>solo entrenamiento</b>.</li>
+<li><code>transform</code> aplica la transformación.</li>
+</ul></li>
+<li>Para <code>X_test</code> se usa únicamente <code>transform</code>:
+<ul class="org-ul">
+<li>se reescalan los datos de prueba con los mismos parámetros
+(\(\mu\) y \(\sigma\)) obtenidos del entrenamiento.</li>
+</ul></li>
+<li>Esto evita <b>filtrar información del conjunto de prueba</b> hacia el
+proceso de entrenamiento (data leakage).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgceb966f" class="outline-3">
+<h3 id="orgceb966f">Definición del Perceptrón Multicapa (MLP)</h3>
+<div class="outline-text-3" id="text-orgceb966f">
+<p>
+Definimos un MLP para clasificación binaria:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">mlp</span> = MLPClassifier<span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   hidden_layer_sizes=<span style="color: #b16286;">(</span>30, 15<span style="color: #b16286;">)</span>,
+<span style="background-color: #3c3836;"> </span>   activation=<span style="color: #b8bb26;">'relu'</span>,
+<span style="background-color: #3c3836;"> </span>   solver=<span style="color: #b8bb26;">'adam'</span>,
+<span style="background-color: #3c3836;"> </span>   max_iter=1000,
+<span style="background-color: #3c3836;"> </span>   random_state=42
+<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org9de47d7" class="outline-4">
+<h4 id="org9de47d7">Arquitectura del modelo</h4>
+<div class="outline-text-4" id="text-org9de47d7">
+<p>
+El MLP es una red neuronal <b>feedforward</b> completamente conectada.
+</p>
+
+<ul class="org-ul">
+<li><b>Capa de entrada</b>:
+<ul class="org-ul">
+<li>Tiene tantas neuronas como características de entrada: 30.</li>
+<li>Cada componente del vector \(\mathbf{x} \in \mathbb{R}^{30}\)
+representa una característica del tumor.</li>
+</ul></li>
+
+<li><p>
+<b>Capas ocultas</b>:
+</p>
+<ul class="org-ul">
+<li>Primer capa oculta: 30 neuronas.</li>
+<li>Segunda capa oculta: 15 neuronas.</li>
+<li><p>
+Se especifican con el parámetro:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">hidden_layer_sizes</span> = <span style="color: #fe8019;">(</span>30, 15<span style="color: #fe8019;">)</span>
+</pre>
+</div></li>
+</ul>
+
+<p>
+Cada neurona en una capa oculta:
+</p>
+<ul class="org-ul">
+<li>recibe como entrada la salida de todas las neuronas de la capa
+anterior (capas densas),</li>
+<li>aplica una transformación lineal seguida de una función de
+activación no lineal.</li>
+</ul></li>
+
+<li><b>Capa de salida</b>:
+<ul class="org-ul">
+<li>Para clasificación binaria, internamente el MLP de scikit-learn
+puede usar:
+<ul class="org-ul">
+<li>1 neurona con activación logística (sigmoide),</li>
+<li>o una representación equivalente a 2 clases.</li>
+</ul></li>
+<li>La salida se interpreta como una probabilidad de pertenecer a la
+clase “1” (benigno).</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org63da5cb" class="outline-4">
+<h4 id="org63da5cb">Función de activación ReLU</h4>
+<div class="outline-text-4" id="text-org63da5cb">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">activation</span> = <span style="color: #b8bb26;">'relu'</span>
+</pre>
+</div>
+
+<p>
+indica el uso de la función <b>ReLU (Rectified Linear Unit)</b> en las capas
+ocultas:
+</p>
+
+<div class="latex" id="orgc1d3a25">
+<p>
+\text{ReLU}(z) = max(0, z)
+</p>
+
+</div>
+
+<p>
+Ventajas de ReLU:
+</p>
+
+<ul class="org-ul">
+<li>Introduce no linealidad (permite aproximar funciones no lineales).</li>
+<li>Reduce el problema del <b>vanishing gradient</b> en comparación con
+funciones como sigmoide o tanh.</li>
+<li>Es simple y eficiente de calcular.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org67633de" class="outline-4">
+<h4 id="org67633de">Optimizador Adam</h4>
+<div class="outline-text-4" id="text-org67633de">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">solver</span> = <span style="color: #b8bb26;">'adam'</span>
+</pre>
+</div>
+
+<p>
+selecciona el optimizador <b>Adam</b> (Adaptive Moment Estimation), que:
+</p>
+
+<ul class="org-ul">
+<li>combina ideas de Momentum y RMSProp,</li>
+<li>mantiene promedios móviles de:
+<ul class="org-ul">
+<li>los gradientes,</li>
+<li>los gradientes al cuadrado,</li>
+</ul></li>
+<li>adapta la tasa de aprendizaje para cada parámetro.</li>
+</ul>
+
+<p>
+Esto suele producir:
+</p>
+
+<ul class="org-ul">
+<li>convergencia rápida,</li>
+<li>estabilidad numérica,</li>
+<li>buen desempeño sin necesidad de mucha sintonía manual.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org77ca636" class="outline-4">
+<h4 id="org77ca636">Número máximo de iteraciones</h4>
+<div class="outline-text-4" id="text-org77ca636">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">max_iter</span> = 1000
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Indica el número máximo de épocas (o iteraciones sobre los datos)
+para entrenar la red.</li>
+<li>Un valor alto permite que el modelo converja, aunque si es excesivo
+puede aumentar el riesgo de <b>overfitting</b> (la red se ajusta demasiado
+al entrenamiento).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org52ed1b9" class="outline-4">
+<h4 id="org52ed1b9">Reproducibilidad</h4>
+<div class="outline-text-4" id="text-org52ed1b9">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">random_state</span> = 42
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Fija la semilla para la inicialización de pesos y el muestreo interno.</li>
+<li>Permite reproducir exactamente los mismos resultados entre ejecuciones.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga344199" class="outline-3">
+<h3 id="orga344199">Entrenamiento del modelo</h3>
+<div class="outline-text-3" id="text-orga344199">
+<p>
+Entrenamos el MLP ajustando pesos y sesgos para minimizar el error de
+clasificación en el conjunto de entrenamiento:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">mlp.fit<span style="color: #fe8019;">(</span>X_train, y_train<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org367e54e" class="outline-4">
+<h4 id="org367e54e">Proceso interno (visión conceptual)</h4>
+<div class="outline-text-4" id="text-org367e54e">
+<ol class="org-ol">
+<li><b>Propagación hacia adelante</b>:
+<ul class="org-ul">
+<li>Cada muestra \(\mathbf{x}\) pasa por las capas:
+\[
+       \mathbf{h}^{(1)} = f_1(W^{(1)} \mathbf{x} + \mathbf{b}^{(1)})
+     \]
+\[
+       \mathbf{h}^{(2)} = f_2(W^{(2)} \mathbf{h}^{(1)} + \mathbf{b}^{(2)})
+     \]
+\[
+       \hat{y} = \sigma(W^{(3)} \mathbf{h}^{(2)} + \mathbf{b}^{(3)})
+     \]</li>
+<li>\(\hat{y}\) es la probabilidad estimada de que el tumor sea benigno
+(clase 1).</li>
+</ul></li>
+
+<li><b>Cálculo del error</b>:
+<ul class="org-ul">
+<li>La salida \(\hat{y}\) se compara con la etiqueta real \(y \in \{0, 1\}\).</li>
+<li>En problemas binarios, se usa típicamente la <b>entropía cruzada
+binaria</b> (o log-loss):
+\[
+       L(y, \hat{y}) = -\left[y \log(\hat{y}) + (1 - y)\log(1 - \hat{y})\right]
+     \]</li>
+</ul></li>
+
+<li><b>Backpropagation</b>:
+<ul class="org-ul">
+<li>Se calculan las derivadas parciales de la pérdida con respecto a
+todos los pesos y sesgos mediante la regla de la cadena.</li>
+<li>Se propaga el error desde la capa de salida hacia las capas
+ocultas.</li>
+</ul></li>
+
+<li><b>Actualización de pesos</b>:
+<ul class="org-ul">
+<li>El optimizador Adam actualiza cada parámetro en la dirección que
+reduce la pérdida:
+\[
+       \theta \leftarrow \theta - \eta \cdot \hat{g}
+     \]
+donde \(\hat{g}\) es una versión adaptada del gradiente, y
+\(\eta\) la tasa de aprendizaje efectiva.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org36ca5b6" class="outline-3">
+<h3 id="org36ca5b6">Evaluación del modelo</h3>
+<div class="outline-text-3" id="text-org36ca5b6">
+<p>
+Una vez entrenado, evaluamos el modelo sobre el conjunto de prueba:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #928374;"># </span><span style="color: #928374;">Predicci&#243;n
+</span><span style="color: #83a598;">y_pred</span> = mlp.predict<span style="color: #fe8019;">(</span>X_test<span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">M&#233;tricas
+</span><span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Accuracy:"</span>, accuracy_score<span style="color: #b16286;">(</span>y_test, y_pred<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">Reporte de clasificaci&#243;n:</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>classification_report<span style="color: #b16286;">(</span>y_test, y_pred, target_names=data.target_names<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org10d4fbc" class="outline-4">
+<h4 id="org10d4fbc">Métricas principales</h4>
+<div class="outline-text-4" id="text-org10d4fbc">
+<ul class="org-ul">
+<li><b>Accuracy</b>:
+<ul class="org-ul">
+<li>Proporción de predicciones correctas:
+\[
+      \text{Accuracy} = \frac{\text{número de aciertos}}{\text{número total de muestras}}
+    \]</li>
+</ul></li>
+<li><b>Precision</b>:
+<ul class="org-ul">
+<li>De todos los ejemplos predichos como positivos, qué fracción son
+realmente positivos.</li>
+<li>Importante para evitar falsos positivos.</li>
+</ul></li>
+
+<li><b>Recall (Sensibilidad)</b>:
+<ul class="org-ul">
+<li>De todos los ejemplos realmente positivos, qué fracción se detecta
+correctamente.</li>
+<li>En diagnóstico médico, el recall para la clase “maligno” es crítico
+(minimizar falsos negativos).</li>
+</ul></li>
+
+<li><b>F1-score</b>:
+<ul class="org-ul">
+<li>Media armónica de precision y recall:
+\[
+      F1 = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
+    \]</li>
+<li>Útil cuando hay cierto desbalance entre clases.</li>
+</ul></li>
+</ul>
+
+<p>
+El dataset Breast Cancer suele producir <b>accuracy</b> muy altas (por
+encima de 95 %) con modelos bien entrenados, debido a que las
+características están relativamente bien separadas.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbb58616" class="outline-3">
+<h3 id="orgbb58616">Interpretación matemática de la salida binaria</h3>
+<div class="outline-text-3" id="text-orgbb58616">
+<p>
+En este modelo binario, la capa de salida puede verse como una neurona
+con activación <b>sigmoide (logística)</b>:
+</p>
+
+<div class="latex" id="org3e5170c">
+<p>
+&sigma;(z) = \frac{1}{1 + e<sup>-z</sup>}
+</p>
+
+</div>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(z = \mathbf{w} \cdot \mathbf{h} + b\),</li>
+<li>\(\mathbf{h}\) es el vector de activaciones de la última capa oculta.</li>
+</ul>
+
+<p>
+La salida \(\sigma(z)\) se interpreta como:
+</p>
+
+<ul class="org-ul">
+<li>\(\sigma(z) \approx 1\): alta probabilidad de clase 1 (benigno),</li>
+<li>\(\sigma(z) \approx 0\): alta probabilidad de clase 0 (maligno).</li>
+</ul>
+
+<p>
+En scikit-learn, la predicción de clase se realiza típicamente como:
+</p>
+
+<ul class="org-ul">
+<li>Si \(\sigma(z) \geq 0.5\) → clase 1 (benigno).</li>
+<li>Si \(\sigma(z) < 0.5\) → clase 0 (maligno).</li>
+</ul>
+
+<p>
+Este umbral puede modificarse en contextos médicos, por ejemplo:
+</p>
+
+<ul class="org-ul">
+<li>usar un umbral menor que 0.5 para aumentar la sensibilidad a tumores
+malignos (aceptando más falsos positivos).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org64fcbac" class="outline-3">
+<h3 id="org64fcbac">Predicción de una nueva muestra</h3>
+<div class="outline-text-3" id="text-org64fcbac">
+<p>
+Podemos usar el modelo entrenado para predecir el diagnóstico de un
+nuevo paciente.
+</p>
+
+<p>
+En este ejemplo, tomamos la primera muestra del set de prueba (ya
+normalizada) y realizamos la predicción:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #928374;"># </span><span style="color: #928374;">Ejemplo con la primera fila del set de prueba
+</span><span style="color: #83a598;">nuevo_paciente</span> = X_test<span style="color: #fe8019;">[</span>0:1<span style="color: #fe8019;">]</span>     <span style="color: #928374;"># </span><span style="color: #928374;">forma (1, 30)
+</span><span style="color: #83a598;">pred</span> = mlp.predict<span style="color: #fe8019;">(</span>nuevo_paciente<span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Resultado del diagn&#243;stico:"</span>, data.target_names<span style="color: #b16286;">[</span>pred<span style="color: #b8bb26;">[</span>0<span style="color: #b8bb26;">]</span><span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org9f342f1" class="outline-4">
+<h4 id="org9f342f1">Comentarios importantes</h4>
+<div class="outline-text-4" id="text-org9f342f1">
+<ul class="org-ul">
+<li>Es fundamental que la nueva muestra haya sido procesada con el mismo:
+
+<ol class="org-ol">
+<li>Conjunto de características (mismas columnas y orden).</li>
+<li>Mismo procedimiento de normalización (mismo <code>scaler</code>, con las
+medias y desviaciones aprendidas en el entrenamiento).</li>
+</ol></li>
+
+<li>En la práctica, se suele:
+
+<ul class="org-ul">
+<li>guardar el modelo entrenado (por ejemplo con <code>joblib</code>),</li>
+<li>guardar también el objeto <code>StandardScaler</code>,</li>
+<li>aplicar ambos de manera coherente a los nuevos datos.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org565b06d" class="outline-3">
+<h3 id="org565b06d">Resumen conceptual</h3>
+<div class="outline-text-3" id="text-org565b06d">
+<p>
+Este ejemplo ilustra varios conceptos clave en el uso de redes
+neuronales (MLP) para clasificación binaria en un contexto médico:
+</p>
+
+<ul class="org-ul">
+<li>Importancia de:
+<ul class="org-ul">
+<li>Partición entrenamiento/prueba estratificada.</li>
+<li>Normalización de características.</li>
+<li>Arquitectura de red (capas y neuronas).</li>
+<li>Función de activación (ReLU).</li>
+<li>Optimizador (Adam) y número de iteraciones.</li>
+</ul></li>
+
+<li>Interpretación de la salida:
+<ul class="org-ul">
+<li>Probabilidad generada por una función sigmoide.</li>
+<li>Decisión de clase basada en un umbral.</li>
+</ul></li>
+
+<li>Evaluación:
+<ul class="org-ul">
+<li>No basta con accuracy: hay que considerar precision, recall y F1,
+especialmente para la clase de interés (por ejemplo, “maligno”).</li>
+</ul></li>
+</ul>
+
+<p>
+Este mismo flujo (carga, partición, normalización, definición de modelo,
+entrenamiento, evaluación, predicción) puede adaptarse a otros modelos
+(árboles, SVM, LSTM, etc.) y a otros datasets de clasificación binaria
+o multiclase.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org53e5973" class="outline-2">
+<h2 id="org53e5973">Redes Neuronales LSTM (Long Short-Term Memory)</h2>
+<div class="outline-text-2" id="text-org53e5973">
+<p>
+Las redes neuronales LSTM (<b>Long Short-Term Memory</b>) son un tipo especial
+de <b><b>Red Neuronal Recurrente (RNN)</b></b> diseñada para trabajar con datos
+<b><b>secuenciales</b></b> y, en particular, para <b><b>recordar dependencias a largo
+plazo</b></b>.
+</p>
+
+<p>
+Se utilizan cuando el <b>orden</b> de los datos importa:
+</p>
+
+<ul class="org-ul">
+<li>Texto (oraciones, párrafos, documentos).</li>
+<li>Series temporales (precios, temperatura, señales).</li>
+<li>Audio y voz.</li>
+<li>Secuencias de eventos (logs, clics, acciones de usuario, etc.).</li>
+</ul>
+
+<p>
+Su principal aporte es resolver (o al menos mitigar fuertemente) el
+problema del <b><b>desvanecimiento del gradiente (vanishing gradient)</b></b> que
+afecta a las RNN simples cuando manejan secuencias largas.
+</p>
+</div>
+<div id="outline-container-org5122671" class="outline-3">
+<h3 id="org5122671">Estructura general de una RNN</h3>
+<div class="outline-text-3" id="text-org5122671">
+<p>
+En una RNN “simple”, en cada paso temporal \(t\):
+</p>
+
+<ul class="org-ul">
+<li>Se recibe una entrada \(x_t\).</li>
+<li>Se tiene un estado oculto anterior \(h_{t-1}\).</li>
+<li>Se actualiza el estado oculto actual \(h_t\) con:</li>
+</ul>
+
+<div class="latex" id="orgda13cee">
+<p>
+h<sub>t</sub> = &phi;(W<sub>xh</sub> x<sub>t</sub> + W<sub>hh</sub> h<sub>t-1</sub> + b<sub>h</sub>)
+</p>
+
+</div>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(W_{xh}\) y \(W_{hh}\) son matrices de pesos,</li>
+<li>\(b_h\) es el sesgo,</li>
+<li>\(\phi\) es una función de activación (típicamente <code>tanh</code> o <code>ReLU</code>).</li>
+</ul>
+
+<p>
+El estado final (o todos los estados) se usan para hacer predicciones.
+</p>
+</div>
+<div id="outline-container-orgf978fd2" class="outline-4">
+<h4 id="orgf978fd2">Problema: vanishing y exploding gradients</h4>
+<div class="outline-text-4" id="text-orgf978fd2">
+<p>
+Durante el entrenamiento, se aplica <b>Backpropagation Through Time (BPTT)</b>,
+es decir, se retropropagan los gradientes a través de todos los pasos
+temporales.
+</p>
+
+<p>
+En secuencias largas:
+</p>
+
+<ul class="org-ul">
+<li>Los gradientes pueden volverse <b><b>muy pequeños</b></b> → la red “olvida” las
+dependencias lejanas (problema de <b>vanishing gradient</b>).</li>
+<li>O volverse <b><b>muy grandes</b></b> → inestabilidad numérica (problema de
+<b>exploding gradient</b>).</li>
+</ul>
+
+<p>
+Consecuencia: las RNN simples tienen dificultades para <b><b>aprender
+relaciones de largo plazo</b></b>, por ejemplo, la dependencia entre una
+palabra al principio de una oración y otra al final.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2fb113d" class="outline-3">
+<h3 id="org2fb113d">Motivación de las LSTM</h3>
+<div class="outline-text-3" id="text-org2fb113d">
+<p>
+Las LSTM fueron propuestas para permitir que la red:
+</p>
+
+<ul class="org-ul">
+<li><b><b>Mantenga información relevante durante muchos pasos temporales</b></b>.</li>
+<li><b><b>Controle qué recordar y qué olvidar</b></b>.</li>
+<li>Facilite el flujo de gradiente a través del tiempo, reduciendo el
+problema del desvanecimiento.</li>
+</ul>
+
+<p>
+La idea principal es introducir una <b><b>celda de memoria</b></b> y un sistema de
+<b><b>puertas (gates)</b></b> que regulan el flujo de información.
+</p>
+</div>
+</div>
+<div id="outline-container-org043e9f4" class="outline-3">
+<h3 id="org043e9f4">Arquitectura interna de una celda LSTM</h3>
+<div class="outline-text-3" id="text-org043e9f4">
+<p>
+En lugar de solo tener el estado oculto \(h_t\), la LSTM mantiene:
+</p>
+
+<ul class="org-ul">
+<li>un <b><b>estado de memoria</b></b> \(c_t\) (a veces llamado <b>cell state</b>),</li>
+<li>un <b><b>estado oculto</b></b> \(h_t\) (la “salida” en ese paso).</li>
+</ul>
+
+<p>
+En cada paso temporal \(t\), la LSTM procesa:
+</p>
+
+<ul class="org-ul">
+<li>la entrada actual \(x_t\),</li>
+<li>el estado oculto anterior \(h_{t-1}\),</li>
+<li>el estado de memoria anterior \(c_{t-1}\).</li>
+</ul>
+
+<p>
+Y calcula:
+</p>
+
+<ul class="org-ul">
+<li>una <b>puerta de olvido</b> \(f_t\),</li>
+<li>una <b>puerta de entrada</b> \(i_t\),</li>
+<li>una <b>candidata de memoria</b> \(\tilde{c}_t\),</li>
+<li>una <b>puerta de salida</b> \(o_t\),</li>
+<li>el nuevo estado de memoria \(c_t\),</li>
+<li>el nuevo estado oculto \(h_t\).</li>
+</ul>
+</div>
+<div id="outline-container-org00837c9" class="outline-4">
+<h4 id="org00837c9">Ecuaciones de la LSTM</h4>
+<div class="outline-text-4" id="text-org00837c9">
+<p>
+Típicamente, las ecuaciones de una LSTM (versión “estándar”) son:
+</p>
+
+<div class="latex" id="orgf136f21">
+\begin{aligned}
+f_t &= \sigma(W_f [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i [h_{t-1}, x_t] + b_i) \\
+\tilde{c}_t &= \tanh(W_c [h_{t-1}, x_t] + b_c) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+o_t &= \sigma(W_o [h_{t-1}, x_t] + b_o) \\
+h_t &= o_t \odot \tanh(c_t)
+\end{aligned}
+
+</div>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(\sigma\) es la función sigmoide,</li>
+<li>\(\tanh\) es la tangente hiperbólica,</li>
+<li>\(\odot\) es el producto elemento a elemento,</li>
+<li>\([h_{t-1}, x_t]\) indica la concatenación de vectores.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org52850a5" class="outline-4">
+<h4 id="org52850a5">Interpretación de las puertas</h4>
+<div class="outline-text-4" id="text-org52850a5">
+<ul class="org-ul">
+<li>\(f_t\) (<b>forget gate</b> o puerta de olvido):  
+<ul class="org-ul">
+<li>Toma valores en \([0,1]\) (por la sigmoide).</li>
+<li>Decide cuánto de la memoria anterior \(c_{t-1}\) se conserva.</li>
+<li>Si \(f_t \approx 1\) → se mantiene casi toda la memoria anterior.</li>
+<li>Si \(f_t \approx 0\) → se olvida casi todo.</li>
+</ul></li>
+
+<li>\(i_t\) (<b>input gate</b> o puerta de entrada):  
+<ul class="org-ul">
+<li>Controla cuánta de la nueva información candidata \(\tilde{c}_t\) se
+incorpora a la memoria.</li>
+<li>Valores cercanos a 1 permiten “escribir” nueva información; valores
+cercanos a 0 bloquean escritura.</li>
+</ul></li>
+
+<li>\(\tilde{c}_t\) (candidata de memoria):  
+<ul class="org-ul">
+<li>Es el nuevo contenido potencial para la memoria.</li>
+<li>Se combina con \(i_t\) para actualizar \(c_t\).</li>
+</ul></li>
+
+<li>\(c_t\) (<b>cell state</b>):  
+<ul class="org-ul">
+<li>Es la memoria principal de la LSTM.</li>
+<li>Se actualiza como:
+\[
+      c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t
+    \]</li>
+<li>Puede transportar información durante muchos pasos, ya que el
+gradiente puede fluir a lo largo de \(c_t\) con menos atenuación.</li>
+</ul></li>
+
+<li>\(o_t\) (<b>output gate</b> o puerta de salida):  
+<ul class="org-ul">
+<li>Controla qué parte de la memoria \(c_t\) se expone como salida \(h_t\).</li>
+</ul></li>
+
+<li>\(h_t\) (estado oculto / salida):  
+<ul class="org-ul">
+<li>Es la “representación” que se usa para producir salidas en cada
+paso, o para alimentar capas posteriores.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge7d2c8c" class="outline-3">
+<h3 id="orge7d2c8c">Intuición conceptual</h3>
+<div class="outline-text-3" id="text-orge7d2c8c">
+<p>
+Una forma intuitiva de entender una LSTM es verla como una <b><b>celda de
+memoria con una “llave de escritura”, una “llave de borrado” y una
+“llave de lectura”</b></b>:
+</p>
+
+<ul class="org-ul">
+<li><b>Olvido</b>: la red decide qué partes de la memoria vieja ya no son
+relevantes y las borra parcialmente (puerta \(f_t\)).</li>
+<li><b>Escritura</b>: la red decide qué nueva información vale la pena guardar
+(puerta \(i_t\) y candidata \(\tilde{c}_t\)).</li>
+<li><b>Lectura</b>: la red decide qué parte de la memoria compartir como salida
+(puerta \(o_t\)).</li>
+</ul>
+
+<p>
+Esto permite que la red conserve información importante durante muchos
+pasos temporales, por ejemplo:
+</p>
+
+<ul class="org-ul">
+<li>el tema general de una oración,</li>
+<li>la tendencia de una serie temporal,</li>
+<li>el contexto de una conversación, etc.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8c28c7f" class="outline-3">
+<h3 id="org8c28c7f">Entrenamiento de una LSTM</h3>
+<div class="outline-text-3" id="text-org8c28c7f">
+<p>
+El entrenamiento de una LSTM sigue el mismo esquema general que otras
+redes neuronales:
+</p>
+
+<ol class="org-ol">
+<li><b><b>Forward pass</b></b>:
+<ul class="org-ul">
+<li>La secuencia completa \((x_1, x_2, \dots, x_T)\) se ingresa paso a
+paso.</li>
+<li>En cada paso se actualizan \(c_t\) y \(h_t\).</li>
+<li>Se produce una salida (por ejemplo, en cada paso o solo al final).</li>
+</ul></li>
+
+<li><b><b>Cálculo de la pérdida</b></b>:
+<ul class="org-ul">
+<li>Se compara la salida de la red con la etiqueta real.</li>
+<li>Se usa una función de pérdida acorde al problema:
+<ul class="org-ul">
+<li>Clasificación: entropía cruzada (multiclase o binaria).</li>
+<li>Regresión: error cuadrático medio (MSE), etc.</li>
+</ul></li>
+</ul></li>
+
+<li><b><b>Backpropagation Through Time (BPTT)</b></b>:
+<ul class="org-ul">
+<li>Se retropropaga el gradiente desde el último paso hacia los
+primeros.</li>
+<li>Se actualizan los pesos de todas las puertas y conexiones.</li>
+</ul></li>
+
+<li><b><b>Actualización de parámetros</b></b>:
+<ul class="org-ul">
+<li>Se utilizan optimizadores como SGD, Adam, RMSprop.</li>
+<li>En la práctica, Adam y RMSprop son muy populares en LSTM.</li>
+</ul></li>
+</ol>
+
+<p>
+Gracias a la estructura de memoria, los gradientes a través de \(c_t\)
+tienden a <b><b>no desaparecer tan rápido</b></b> como en una RNN simple.
+</p>
+</div>
+</div>
+<div id="outline-container-org8bbd524" class="outline-3">
+<h3 id="org8bbd524">Tipos de tareas típicas con LSTM</h3>
+<div class="outline-text-3" id="text-org8bbd524">
+<p>
+Las LSTM se aplican a muchas tareas de secuencia:
+</p>
+
+<ul class="org-ul">
+<li><b>Modelado de lenguaje</b>:
+<ul class="org-ul">
+<li>Predecir la siguiente palabra de una oración.</li>
+<li>Asignar probabilidad a una secuencia de palabras.</li>
+</ul></li>
+
+<li><b>Traducción automática</b>:
+<ul class="org-ul">
+<li>Modelos encoder–decoder (LSTM para codificar una oración, otra LSTM
+para decodificar en otro idioma).</li>
+</ul></li>
+
+<li><b>Etiquetado secuencial</b>:
+<ul class="org-ul">
+<li>Etiquetado de partes del habla (POS tagging).</li>
+<li>Reconocimiento de entidades nombradas (NER).</li>
+</ul></li>
+
+<li><b>Series temporales</b>:
+<ul class="org-ul">
+<li>Predicción de valores futuros (ej. precios de acciones).</li>
+<li>Detección de anomalías en señales.</li>
+</ul></li>
+
+<li><b>Procesamiento de audio / voz</b>:
+<ul class="org-ul">
+<li>Reconocimiento de voz.</li>
+<li>Síntesis de voz (en combinación con otras arquitecturas).</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org16b287c" class="outline-3">
+<h3 id="org16b287c">Variantes y extensiones de LSTM</h3>
+<div class="outline-text-3" id="text-org16b287c">
+<p>
+A partir de la LSTM estándar, han surgido múltiples variantes:
+</p>
+
+<ul class="org-ul">
+<li><b>LSTM bidireccional (Bidirectional LSTM)</b>:
+<ul class="org-ul">
+<li>Procesa la secuencia en dos direcciones:
+<ul class="org-ul">
+<li>de izquierda a derecha (forward),</li>
+<li>de derecha a izquierda (backward).</li>
+</ul></li>
+<li>Se concatena la información de ambos sentidos.</li>
+<li>Útil cuando se tiene acceso a la secuencia completa (texto, frases).</li>
+</ul></li>
+
+<li><b>Pilado de LSTMs (Stacked LSTM)</b>:
+<ul class="org-ul">
+<li>Varias capas LSTM apiladas una sobre otra.</li>
+<li>Las salidas de una capa sirven de entradas a la siguiente.</li>
+<li>Permite aprender representaciones más complejas.</li>
+</ul></li>
+
+<li><b>LSTM con atención (Attention)</b>:
+<ul class="org-ul">
+<li>Combinación de LSTM con mecanismos de atención.</li>
+<li>El modelo decide a qué partes de la secuencia “prestar más atención”
+al hacer una predicción.</li>
+</ul></li>
+
+<li><b>GRU (Gated Recurrent Unit)</b>:
+<ul class="org-ul">
+<li>Variante simplificada de LSTM (menos puertas, menos parámetros).</li>
+<li>Suele tener rendimiento comparable en muchos problemas.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaf59085" class="outline-3">
+<h3 id="orgaf59085">Implementación básica en Python (Keras)</h3>
+<div class="outline-text-3" id="text-orgaf59085">
+<p>
+A modo de ejemplo muy simple (no ligado a un dataset específico):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">import</span> numpy <span style="color: #fb4934;">as</span> np
+<span style="color: #fb4934;">import</span> tensorflow <span style="color: #fb4934;">as</span> tf
+<span style="color: #fb4934;">from</span> tensorflow.keras.models <span style="color: #fb4934;">import</span> Sequential
+<span style="color: #fb4934;">from</span> tensorflow.keras.layers <span style="color: #fb4934;">import</span> LSTM, Dense
+
+<span style="color: #928374;"># </span><span style="color: #928374;">Supongamos una secuencia de longitud 10 con 5 features por timestep
+</span><span style="color: #83a598;">timesteps</span> = 10
+<span style="color: #83a598;">features</span> = 5
+<span style="color: #83a598;">num_samples</span> = 100
+<span style="color: #83a598;">num_classes</span> = 3
+
+<span style="color: #928374;"># </span><span style="color: #928374;">Datos aleatorios de ejemplo (solo para ilustrar la forma)
+</span><span style="color: #83a598;">X</span> = np.random.randn<span style="color: #fe8019;">(</span>num_samples, timesteps, features<span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">y</span> = np.random.randint<span style="color: #fe8019;">(</span>0, num_classes, size=<span style="color: #b16286;">(</span>num_samples,<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">One-hot encoding
+</span><span style="color: #83a598;">y_onehot</span> = tf.keras.utils.to_categorical<span style="color: #fe8019;">(</span>y, num_classes=num_classes<span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">Definir modelo LSTM
+</span><span style="color: #83a598;">model</span> = Sequential<span style="color: #fe8019;">(</span><span style="color: #b16286;">[</span>
+<span style="background-color: #3c3836;"> </span>   LSTM<span style="color: #b8bb26;">(</span>32, input_shape=<span style="color: #83a598;">(</span>timesteps, features<span style="color: #83a598;">)</span><span style="color: #b8bb26;">)</span>,
+<span style="background-color: #3c3836;"> </span>   Dense<span style="color: #b8bb26;">(</span>num_classes, activation=<span style="color: #b8bb26;">'softmax'</span><span style="color: #b8bb26;">)</span>
+<span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+
+model.<span style="color: #fe8019;">compile</span><span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   loss=<span style="color: #b8bb26;">'categorical_crossentropy'</span>,
+<span style="background-color: #3c3836;"> </span>   optimizer=<span style="color: #b8bb26;">'adam'</span>,
+<span style="background-color: #3c3836;"> </span>   metrics=<span style="color: #b16286;">[</span><span style="color: #b8bb26;">'accuracy'</span><span style="color: #b16286;">]</span>
+<span style="color: #fe8019;">)</span>
+
+model.summary<span style="color: #fe8019;">()</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">Entrenamiento de ejemplo
+</span>model.fit<span style="color: #fe8019;">(</span>X, y_onehot, epochs=10, batch_size=16<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+En este ejemplo:
+</p>
+
+<ul class="org-ul">
+<li>La entrada tiene forma <code>(num_samples, timesteps, features)</code>.</li>
+<li>La LSTM devuelve un vector (el último estado oculto).</li>
+<li>La capa <code>Dense</code> con softmax produce una distribución de probabilidad
+sobre las clases.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org789c5fc" class="outline-3">
+<h3 id="org789c5fc">Ventajas y limitaciones de LSTM</h3>
+<div class="outline-text-3" id="text-org789c5fc">
+</div>
+<div id="outline-container-org19b8e49" class="outline-4">
+<h4 id="org19b8e49">Ventajas</h4>
+<div class="outline-text-4" id="text-org19b8e49">
+<ul class="org-ul">
+<li>Manejan mejor dependencias de largo plazo que las RNN simples.</li>
+<li>Funcionan bien en problemas donde el orden y el contexto importan.</li>
+<li>Son muy flexibles y pueden combinarse con otras arquitecturas
+(convolucionales, atención, etc.).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6222110" class="outline-4">
+<h4 id="org6222110">Limitaciones</h4>
+<div class="outline-text-4" id="text-org6222110">
+<ul class="org-ul">
+<li>Entrenamiento relativamente costoso (más parámetros que RNN simple).</li>
+<li>Difíciles de paralelizar completamente debido a su naturaleza
+secuencial.</li>
+<li>En tareas muy complejas y con grandes volúmenes de datos, han sido en
+muchos casos superadas por arquitecturas basadas en <b>transformers</b>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org65b290f" class="outline-3">
+<h3 id="org65b290f">Conclusión</h3>
+<div class="outline-text-3" id="text-org65b290f">
+<p>
+Las LSTM representan un paso fundamental en la historia de las redes
+neuronales para secuencias:
+</p>
+
+<ul class="org-ul">
+<li>resolvieron en gran medida el problema del desvanecimiento del
+gradiente en RNN,</li>
+<li>permitieron avances significativos en NLP, series temporales y voz,</li>
+<li>siguen siendo una herramienta muy útil y educativa para entender cómo
+las redes pueden “recordar” información a lo largo del tiempo.</li>
+</ul>
+
+<p>
+Aun cuando hoy en día los <b>transformers</b> dominen muchas aplicaciones de
+NLP, las LSTM siguen siendo:
+</p>
+
+<ul class="org-ul">
+<li>una excelente base conceptual,</li>
+<li>útiles en problemas con secuencias pequeñas o recursos limitados,</li>
+<li>y una parte importante de la “caja de herramientas” de cualquier
+persona que trabaja con aprendizaje profundo y datos secuenciales.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org738aa1c" class="outline-2">
+<h2 id="org738aa1c">Ejemplo Clasificación del dataset Iris con una red LSTM</h2>
+<div class="outline-text-2" id="text-org738aa1c">
+<p>
+Este apartado muestra un ejemplo completo en Python usando el dataset
+clásico Iris y una red neuronal recurrente del tipo <b>LSTM</b> (Long Short-Term Memory)
+usando la librería <b>Keras</b> (TensorFlow).
+</p>
+
+<p>
+El objetivo es clasificar flores Iris en tres clases:
+</p>
+
+<ul class="org-ul">
+<li>Setosa</li>
+<li>Versicolor</li>
+<li>Virginica</li>
+</ul>
+
+<p>
+A diferencia del MLP (Perceptrón Multicapa), la LSTM está diseñada
+para procesar datos <b>secuenciales</b>. En este ejemplo, forzamos la
+estructura secuencial tratando las 4 características de Iris como una
+secuencia de 4 pasos temporales.
+</p>
+</div>
+<div id="outline-container-orgc0200e3" class="outline-3">
+<h3 id="orgc0200e3">Importar librerías</h3>
+<div class="outline-text-3" id="text-orgc0200e3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #fb4934;">import</span> numpy <span style="color: #fb4934;">as</span> np
+
+<span style="color: #fb4934;">from</span> sklearn.datasets <span style="color: #fb4934;">import</span> load_iris
+<span style="color: #fb4934;">from</span> sklearn.model_selection <span style="color: #fb4934;">import</span> train_test_split
+<span style="color: #fb4934;">from</span> sklearn.preprocessing <span style="color: #fb4934;">import</span> StandardScaler
+<span style="color: #fb4934;">from</span> sklearn.metrics <span style="color: #fb4934;">import</span> accuracy_score, classification_report
+
+<span style="color: #fb4934;">import</span> tensorflow <span style="color: #fb4934;">as</span> tf
+<span style="color: #fb4934;">from</span> tensorflow.keras.models <span style="color: #fb4934;">import</span> Sequential
+<span style="color: #fb4934;">from</span> tensorflow.keras.layers <span style="color: #fb4934;">import</span> LSTM, Dense
+<span style="color: #fb4934;">from</span> tensorflow.keras.utils <span style="color: #fb4934;">import</span> to_categorical
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa1347d" class="outline-3">
+<h3 id="orgaa1347d">Cargar el dataset Iris</h3>
+<div class="outline-text-3" id="text-orgaa1347d">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">iris</span> = load_iris<span style="color: #fe8019;">()</span>
+<span style="color: #83a598;">X</span> = iris.data      <span style="color: #928374;"># </span><span style="color: #928374;">Caracter&#237;sticas (150 x 4)
+</span><span style="color: #83a598;">y</span> = iris.target    <span style="color: #928374;"># </span><span style="color: #928374;">Clases (150,)
+</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>X.shape<span style="color: #fe8019;">)</span>     <span style="color: #928374;"># </span><span style="color: #928374;">(150, 4)
+</span><span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>y.shape<span style="color: #fe8019;">)</span>     <span style="color: #928374;"># </span><span style="color: #928374;">(150,)</span>
+</pre>
+</div>
+
+<p>
+Las 4 características son:
+</p>
+
+<ul class="org-ul">
+<li>Largo del sépalo</li>
+<li>Ancho del sépalo</li>
+<li>Largo del pétalo</li>
+<li>Ancho del pétalo</li>
+</ul>
+
+<p>
+Las clases están codificadas como:
+</p>
+
+<ul class="org-ul">
+<li>0 → Setosa</li>
+<li>1 → Versicolor</li>
+<li>2 → Virginica</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org740d861" class="outline-3">
+<h3 id="org740d861">Partición entrenamiento / prueba</h3>
+<div class="outline-text-3" id="text-org740d861">
+<p>
+El siguiente fragmento de código realiza la partición del conjunto de
+datos original en dos subconjuntos disjuntos: uno destinado al
+entrenamiento del modelo y otro a su evaluación.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">X_train</span>, <span style="color: #83a598;">X_test</span>, <span style="color: #83a598;">y_train</span>, <span style="color: #83a598;">y_test</span> = train_test_split<span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   X,
+<span style="background-color: #3c3836;"> </span>   y,
+<span style="background-color: #3c3836;"> </span>   test_size=0.2,
+<span style="background-color: #3c3836;"> </span>   random_state=42,
+<span style="background-color: #3c3836;"> </span>   stratify=y
+<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org0148741" class="outline-4">
+<h4 id="org0148741">Propósito de la partición</h4>
+<div class="outline-text-4" id="text-org0148741">
+<p>
+En aprendizaje automático supervisado, es fundamental evaluar la
+capacidad de generalización de un modelo. Para ello, los datos
+disponibles se dividen en:
+</p>
+
+<ul class="org-ul">
+<li><b>Conjunto de entrenamiento</b>: utilizado para ajustar los parámetros del modelo (pesos y sesgos).</li>
+<li><b>Conjunto de prueba</b>: utilizado exclusivamente para medir el desempeño del modelo sobre datos no vistos durante el entrenamiento.</li>
+</ul>
+
+<p>
+Esta separación permite detectar fenómenos como overfitting y
+underfitting, y proporciona una estimación más realista del
+rendimiento esperado en producción.
+</p>
+</div>
+</div>
+<div id="outline-container-org1a094eb" class="outline-4">
+<h4 id="org1a094eb">Parámetro test<sub>size</sub></h4>
+<div class="outline-text-4" id="text-org1a094eb">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">test_size</span> = 0.2
+</pre>
+</div>
+
+<p>
+indica que el 20 % del conjunto total de datos se reserva para el
+conjunto de prueba, mientras que el 80 % restante se utiliza para
+entrenamiento.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf48a363" class="outline-4">
+<h4 id="orgf48a363">Reproducibilidad del experimento</h4>
+<div class="outline-text-4" id="text-orgf48a363">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">random_state</span> = 42
+</pre>
+</div>
+
+<p>
+fija la semilla del generador de números aleatorios utilizado durante
+la partición. Esto garantiza que la división de los datos sea
+reproducible.
+</p>
+</div>
+</div>
+<div id="outline-container-org60e6e07" class="outline-4">
+<h4 id="org60e6e07">Estratificación de clases</h4>
+<div class="outline-text-4" id="text-org60e6e07">
+<p>
+El parámetro:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">stratify</span> = y
+</pre>
+</div>
+
+<p>
+indica que la división debe realizarse de forma estratificada,
+conservando la proporción original de cada clase en ambos
+subconjuntos.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdaa0f6a" class="outline-3">
+<h3 id="orgdaa0f6a">Normalización de los datos</h3>
+<div class="outline-text-3" id="text-orgdaa0f6a">
+<p>
+La normalización de los datos de entrada es un paso crítico en el
+entrenamiento de redes neuronales (incluyendo LSTM), ya que influye
+directamente en la estabilidad numérica, la velocidad de convergencia
+y la eficacia del aprendizaje.
+</p>
+
+<p>
+Usaremos estandarización con <code>StandardScaler</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">scaler</span> = StandardScaler<span style="color: #fe8019;">()</span>
+<span style="color: #83a598;">X_train</span> = scaler.fit_transform<span style="color: #fe8019;">(</span>X_train<span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">X_test</span> = scaler.transform<span style="color: #fe8019;">(</span>X_test<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Cada característica \(x\) se transforma según:
+</p>
+
+<div class="latex" id="org471aa28">
+<p>
+x' = \frac{x - \mu}{\sigma}
+</p>
+
+</div>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\( \mu \) es la media de la característica,</li>
+<li>\( \sigma \) es la desviación estándar.</li>
+</ul>
+
+<p>
+El resultado es:
+</p>
+
+<ul class="org-ul">
+<li>media aproximadamente 0,</li>
+<li>desviación estándar aproximadamente 1.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd6c5f84" class="outline-3">
+<h3 id="orgd6c5f84">Preparar los datos para LSTM</h3>
+<div class="outline-text-3" id="text-orgd6c5f84">
+<p>
+Las LSTM en Keras esperan entradas con forma:
+</p>
+
+<ul class="org-ul">
+<li>\((n\_muestras, n\_timesteps, n\_features)\)</li>
+</ul>
+
+<p>
+En Iris, tenemos 4 características. Una forma simple de usar LSTM es:
+</p>
+
+<ul class="org-ul">
+<li>considerar una secuencia de longitud 4 (<code>timesteps=4</code>),</li>
+<li>con 1 característica por paso (<code>features=1</code>).</li>
+</ul>
+
+<p>
+Esto implica reestructurar cada muestra de forma (4,) a (4, 1):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #928374;"># </span><span style="color: #928374;">Reshape para LSTM: (n_muestras, timesteps=4, features=1)
+</span><span style="color: #83a598;">X_train_lstm</span> = X_train.reshape<span style="color: #fe8019;">(</span><span style="color: #b16286;">(</span>X_train.shape<span style="color: #b8bb26;">[</span>0<span style="color: #b8bb26;">]</span>, 4, 1<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">X_test_lstm</span> = X_test.reshape<span style="color: #fe8019;">(</span><span style="color: #b16286;">(</span>X_test.shape<span style="color: #b8bb26;">[</span>0<span style="color: #b8bb26;">]</span>, 4, 1<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>X_train_lstm.shape<span style="color: #fe8019;">)</span>  <span style="color: #928374;"># </span><span style="color: #928374;">(120, 4, 1)
+</span><span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>X_test_lstm.shape<span style="color: #fe8019;">)</span>   <span style="color: #928374;"># </span><span style="color: #928374;">(30, 4, 1)</span>
+</pre>
+</div>
+
+<p>
+Además, para clasificación multiclase con Keras, se suele usar
+one-hot encoding de las etiquetas:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">num_classes</span> = <span style="color: #fe8019;">len</span><span style="color: #fe8019;">(</span>np.unique<span style="color: #b16286;">(</span>y<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">y_train_cat</span> = to_categorical<span style="color: #fe8019;">(</span>y_train, num_classes=num_classes<span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">y_test_cat</span> = to_categorical<span style="color: #fe8019;">(</span>y_test, num_classes=num_classes<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc9b992b" class="outline-3">
+<h3 id="orgc9b992b">Definir la red LSTM</h3>
+<div class="outline-text-3" id="text-orgc9b992b">
+<p>
+Definimos un modelo secuencial con una capa LSTM y una capa densa de
+salida con softmax:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">model</span> = Sequential<span style="color: #fe8019;">(</span><span style="color: #b16286;">[</span>
+<span style="background-color: #3c3836;"> </span>   LSTM<span style="color: #b8bb26;">(</span>
+<span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   units=16,           <span style="color: #928374;"># </span><span style="color: #928374;">n&#250;mero de unidades LSTM
+</span><span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   activation=<span style="color: #b8bb26;">'tanh'</span>,  <span style="color: #928374;"># </span><span style="color: #928374;">activaci&#243;n interna
+</span><span style="background-color: #3c3836;"> </span>   <span style="background-color: #3c3836;"> </span>   input_shape=<span style="color: #83a598;">(</span>4, 1<span style="color: #83a598;">)</span>  <span style="color: #928374;"># </span><span style="color: #928374;">(timesteps=4, features=1)
+</span><span style="background-color: #3c3836;"> </span>   <span style="color: #b8bb26;">)</span>,
+<span style="background-color: #3c3836;"> </span>   Dense<span style="color: #b8bb26;">(</span>num_classes, activation=<span style="color: #b8bb26;">'softmax'</span><span style="color: #b8bb26;">)</span>
+<span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org58d3ad7" class="outline-4">
+<h4 id="org58d3ad7">Arquitectura de la red</h4>
+<div class="outline-text-4" id="text-org58d3ad7">
+<ul class="org-ul">
+<li><b>Capa de entrada</b>:
+<ul class="org-ul">
+<li>Forma: (4, 1)</li>
+<li>4 pasos "temporales" (cada uno con 1 valor), derivados de las 4 características.</li>
+</ul></li>
+
+<li><b>Capa LSTM</b>:
+<ul class="org-ul">
+<li><code>units=16</code>: 16 unidades de memoria.</li>
+<li>Procesa la secuencia \((x_1, x_2, x_3, x_4)\) y genera una representación que captura
+dependencias entre pasos.</li>
+</ul></li>
+
+<li><b>Capa de salida (Dense + softmax)</b>:
+<ul class="org-ul">
+<li>3 neuronas (una por clase).</li>
+<li>Activación softmax para obtener probabilidades.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf88a008" class="outline-3">
+<h3 id="orgf88a008">Compilación del modelo</h3>
+<div class="outline-text-3" id="text-orgf88a008">
+<p>
+Escogemos una función de pérdida apropiada para clasificación
+multiclase y un optimizador:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">model.<span style="color: #fe8019;">compile</span><span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   loss=<span style="color: #b8bb26;">'categorical_crossentropy'</span>,
+<span style="background-color: #3c3836;"> </span>   optimizer=tf.keras.optimizers.Adam<span style="color: #b16286;">(</span>learning_rate=0.001<span style="color: #b16286;">)</span>,
+<span style="background-color: #3c3836;"> </span>   metrics=<span style="color: #b16286;">[</span><span style="color: #b8bb26;">'accuracy'</span><span style="color: #b16286;">]</span>
+<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><code>categorical_crossentropy</code>: log-loss multiclase.</li>
+<li><b>Adam</b>: optimizador basado en descenso de gradiente con momento y tasas
+de aprendizaje adaptativas.</li>
+<li>Tasa de aprendizaje inicial \(\eta = 0.001\).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org61a735d" class="outline-3">
+<h3 id="org61a735d">Entrenamiento del modelo LSTM</h3>
+<div class="outline-text-3" id="text-org61a735d">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #83a598;">history</span> = model.fit<span style="color: #fe8019;">(</span>
+<span style="background-color: #3c3836;"> </span>   X_train_lstm,
+<span style="background-color: #3c3836;"> </span>   y_train_cat,
+<span style="background-color: #3c3836;"> </span>   epochs=200,         <span style="color: #928374;"># </span><span style="color: #928374;">n&#250;mero de &#233;pocas
+</span><span style="background-color: #3c3836;"> </span>   batch_size=16,
+<span style="background-color: #3c3836;"> </span>   validation_split=0.1,
+<span style="background-color: #3c3836;"> </span>   verbose=1
+<span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Durante el entrenamiento:
+</p>
+</div>
+<div id="outline-container-org81b43b1" class="outline-4">
+<h4 id="org81b43b1">Propagación hacia adelante (forward pass)</h4>
+<div class="outline-text-4" id="text-org81b43b1">
+<ul class="org-ul">
+<li>Cada muestra de entrada se considera como una secuencia de 4 pasos.</li>
+<li>En cada paso, la LSTM actualiza su:
+<ul class="org-ul">
+<li>estado oculto \(h_t\),</li>
+<li>estado de memoria \(c_t\).</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5c748e9" class="outline-4">
+<h4 id="org5c748e9">Cálculo del error</h4>
+<div class="outline-text-4" id="text-org5c748e9">
+<ul class="org-ul">
+<li>La salida softmax se compara con la etiqueta real codificada en one-hot.</li>
+<li>Se calcula la pérdida mediante entropía cruzada categórica.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0b3fe1e" class="outline-4">
+<h4 id="org0b3fe1e">Backpropagation Through Time (BPTT)</h4>
+<div class="outline-text-4" id="text-org0b3fe1e">
+<ul class="org-ul">
+<li>El error se propaga hacia atrás a lo largo del tiempo (sobre los 4 pasos).</li>
+<li>Se calculan los gradientes de los pesos de la LSTM y de la capa de salida.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9a4cec2" class="outline-4">
+<h4 id="org9a4cec2">Descenso de gradiente con Adam</h4>
+<div class="outline-text-4" id="text-org9a4cec2">
+<ul class="org-ul">
+<li>Adam combina Momentum y RMSProp.</li>
+<li>Ajusta automáticamente la tasa de aprendizaje para cada parámetro.</li>
+<li>Proporciona convergencia rápida y estable.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org16b4510" class="outline-3">
+<h3 id="org16b4510">Evaluación del modelo</h3>
+<div class="outline-text-3" id="text-org16b4510">
+<p>
+Una vez entrenado el modelo, se evalúa su desempeño usando datos no
+vistos (conjunto de prueba).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #928374;"># </span><span style="color: #928374;">Probabilidades por clase
+</span><span style="color: #83a598;">y_pred_proba</span> = model.predict<span style="color: #fe8019;">(</span>X_test_lstm<span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">Clase predicha = &#237;ndice de la probabilidad m&#225;xima
+</span><span style="color: #83a598;">y_pred</span> = np.argmax<span style="color: #fe8019;">(</span>y_pred_proba, axis=1<span style="color: #fe8019;">)</span>
+
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Accuracy:"</span>, accuracy_score<span style="color: #b16286;">(</span>y_test, y_pred<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">Reporte de clasificaci&#243;n:</span><span style="color: #d3869b;">\n</span><span style="color: #b8bb26;">"</span><span style="color: #fe8019;">)</span>
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span>classification_report<span style="color: #b16286;">(</span>y_test, y_pred, target_names=iris.target_names<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org05dbe54" class="outline-4">
+<h4 id="org05dbe54">Métricas utilizadas</h4>
+<div class="outline-text-4" id="text-org05dbe54">
+<ul class="org-ul">
+<li><b>Accuracy</b>: proporción total de predicciones correctas.</li>
+<li><b>Precision</b>: qué tan confiables son las predicciones positivas.</li>
+<li><b>Recall</b>: capacidad del modelo para encontrar todos los ejemplos de una clase.</li>
+<li><b>F1-score</b>: balance entre precisión y recall.</li>
+</ul>
+
+<p>
+En el dataset Iris, el accuracy también suele estar en el rango del
+95 % al 100 %.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb3b399" class="outline-3">
+<h3 id="orgfb3b399">Predicción con una nueva flor</h3>
+<div class="outline-text-3" id="text-orgfb3b399">
+<p>
+El modelo entrenado puede utilizarse para predecir nuevas muestras.
+Es importante repetir el mismo preprocesamiento: normalización y
+reshape para LSTM.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #928374;"># </span><span style="color: #928374;">[largo_sepalo, ancho_sepalo, largo_petalo, ancho_petalo]
+</span><span style="color: #83a598;">flor_nueva</span> = np.array<span style="color: #fe8019;">(</span><span style="color: #b16286;">[</span><span style="color: #b8bb26;">[</span>5.1, 3.5, 1.4, 0.2<span style="color: #b8bb26;">]</span><span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">1) Normalizaci&#243;n con el mismo scaler del entrenamiento
+</span><span style="color: #83a598;">flor_nueva_scaled</span> = scaler.transform<span style="color: #fe8019;">(</span>flor_nueva<span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">2) Reshape para LSTM: (1, timesteps=4, features=1)
+</span><span style="color: #83a598;">flor_nueva_lstm</span> = flor_nueva_scaled.reshape<span style="color: #fe8019;">(</span><span style="color: #b16286;">(</span>1, 4, 1<span style="color: #b16286;">)</span><span style="color: #fe8019;">)</span>
+
+<span style="color: #928374;"># </span><span style="color: #928374;">3) Predicci&#243;n
+</span><span style="color: #83a598;">proba</span> = model.predict<span style="color: #fe8019;">(</span>flor_nueva_lstm<span style="color: #fe8019;">)</span>
+<span style="color: #83a598;">prediccion</span> = np.argmax<span style="color: #fe8019;">(</span>proba, axis=1<span style="color: #fe8019;">)</span>
+
+<span style="color: #fe8019;">print</span><span style="color: #fe8019;">(</span><span style="color: #b8bb26;">"Clase predicha:"</span>, iris.target_names<span style="color: #b16286;">[</span>prediccion<span style="color: #b8bb26;">[</span>0<span style="color: #b8bb26;">]</span><span style="color: #b16286;">]</span><span style="color: #fe8019;">)</span>
+</pre>
+</div>
+
+<p>
+Es fundamental aplicar la misma normalización y la misma estructura de
+entrada (forma (1, 4, 1)) que se usaron en el entrenamiento.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcb3d5c0" class="outline-3">
+<h3 id="orgcb3d5c0">Interpretación matemática básica de la LSTM</h3>
+<div class="outline-text-3" id="text-orgcb3d5c0">
+<p>
+En una LSTM, en cada paso temporal \(t\) se procesan:
+</p>
+
+<ul class="org-ul">
+<li>la entrada \(x_t\),</li>
+<li>el estado oculto anterior \(h_{t-1}\),</li>
+<li>el estado de memoria anterior \(c_{t-1}\).</li>
+</ul>
+
+<p>
+La LSTM utiliza <b>puertas</b> que controlan el flujo de información:
+</p>
+
+<div class="latex" id="orge171a0e">
+\begin{aligned}
+f_t &= \sigma(W_f [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i [h_{t-1}, x_t] + b_i) \\
+\tilde{c}_t &= \tanh(W_c [h_{t-1}, x_t] + b_c) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+o_t &= \sigma(W_o [h_{t-1}, x_t] + b_o) \\
+h_t &= o_t \odot \tanh(c_t)
+\end{aligned}
+
+</div>
+
+<p>
+donde:
+</p>
+
+<ul class="org-ul">
+<li>\(\sigma\) es la función sigmoide,</li>
+<li>\(\odot\) denota el producto elemento a elemento.</li>
+</ul>
+
+<p>
+Al final de la secuencia (tras los 4 pasos), el último estado oculto
+\(h_T\) se pasa a la capa densa con función softmax:
+</p>
+
+<div class="latex" id="orgd08005f">
+<p>
+\text{softmax}(z<sub>i</sub>) = \frac{e<sup>z<sub>i</sub></sup>}{&sum;<sub>j</sub> e<sup>z<sub>j</sub></sup>}
+</p>
+
+</div>
+
+<p>
+lo que permite interpretar las salidas como probabilidades para cada
+clase (Setosa, Versicolor, Virginica).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc1d139a" class="outline-2">
+<h2 id="orgc1d139a">Bibliografía  Deep Learning</h2>
+<div class="outline-text-2" id="text-orgc1d139a">
+</div>
+<div id="outline-container-org34d8591" class="outline-3">
+<h3 id="org34d8591">Teórica y Académica&#xa0;&#xa0;&#xa0;<span class="tag"><span class="MATEMATICAS">MATEMATICAS</span>&#xa0;<span class="FUNDAMENTOS">FUNDAMENTOS</span></span></h3>
+<div class="outline-text-3" id="text-org34d8591">
 <p>
 Libros diseñados para entender el "porqué" de los algoritmos.
 </p>
 </div>
-<div id="outline-container-org5536e92" class="outline-4">
-<h4 id="org5536e92">Deep Learning</h4>
-<div class="outline-text-4" id="text-org5536e92">
+<div id="outline-container-orga0fd66e" class="outline-4">
+<h4 id="orga0fd66e">Deep Learning</h4>
+<div class="outline-text-4" id="text-orga0fd66e">
 <ul class="org-ul">
 <li><b>Autores:</b> Ian Goodfellow, Yoshua Bengio y Aaron Courville.</li>
 <li><b>Editorial:</b> MIT Press (2016).</li>
@@ -1472,9 +4983,9 @@ Libros diseñados para entender el "porqué" de los algoritmos.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc366a68" class="outline-4">
-<h4 id="orgc366a68">Neural Networks and Deep Learning: A Textbook</h4>
-<div class="outline-text-4" id="text-orgc366a68">
+<div id="outline-container-orgdddf44d" class="outline-4">
+<h4 id="orgdddf44d">Neural Networks and Deep Learning: A Textbook</h4>
+<div class="outline-text-4" id="text-orgdddf44d">
 <ul class="org-ul">
 <li><b>Autor:</b> Charu C. Aggarwal.</li>
 <li><b>Editorial:</b> Springer (2018).</li>
@@ -1483,16 +4994,16 @@ Libros diseñados para entender el "porqué" de los algoritmos.
 </div>
 </div>
 </div>
-<div id="outline-container-org6151110" class="outline-3">
-<h3 id="org6151110">Práctica y Programación&#xa0;&#xa0;&#xa0;<span class="tag"><span class="PYTHON">PYTHON</span>&#xa0;<span class="PYTORCH">PYTORCH</span>&#xa0;<span class="KERAS">KERAS</span></span></h3>
-<div class="outline-text-3" id="text-org6151110">
+<div id="outline-container-org9f22c46" class="outline-3">
+<h3 id="org9f22c46">Práctica y Programación&#xa0;&#xa0;&#xa0;<span class="tag"><span class="PYTHON">PYTHON</span>&#xa0;<span class="PYTORCH">PYTORCH</span>&#xa0;<span class="KERAS">KERAS</span></span></h3>
+<div class="outline-text-3" id="text-org9f22c46">
 <p>
 Libros enfocados en la implementación inmediata usando librerías de Python.
 </p>
 </div>
-<div id="outline-container-orge118bd9" class="outline-4">
-<h4 id="orge118bd9">Deep Learning with Python (3rd Edition)</h4>
-<div class="outline-text-4" id="text-orge118bd9">
+<div id="outline-container-org8fa7fe7" class="outline-4">
+<h4 id="org8fa7fe7">Deep Learning with Python (3rd Edition)</h4>
+<div class="outline-text-4" id="text-org8fa7fe7">
 <ul class="org-ul">
 <li><b>Autor:</b> François Chollet (Creador de Keras).</li>
 <li><b>Editorial:</b> Manning Publications (2025).</li>
@@ -1501,9 +5012,9 @@ Libros enfocados en la implementación inmediata usando librerías de Python.
 </ul>
 </div>
 </div>
-<div id="outline-container-orge5741ff" class="outline-4">
-<h4 id="orge5741ff">Hands-On Machine Learning with Scikit-Learn and PyTorch</h4>
-<div class="outline-text-4" id="text-orge5741ff">
+<div id="outline-container-org3518405" class="outline-4">
+<h4 id="org3518405">Hands-On Machine Learning with Scikit-Learn and PyTorch</h4>
+<div class="outline-text-4" id="text-org3518405">
 <ul class="org-ul">
 <li><b>Autor:</b> Aurélien Géron.</li>
 <li><b>Editorial:</b> O'Reilly Media (Edición 2025).</li>
@@ -1512,16 +5023,16 @@ Libros enfocados en la implementación inmediata usando librerías de Python.
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb96681" class="outline-3">
-<h3 id="orgfb96681">Aprendizaje "Desde Cero"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NUMPY">NUMPY</span>&#xa0;<span class="LOGICA">LOGICA</span></span></h3>
-<div class="outline-text-3" id="text-orgfb96681">
+<div id="outline-container-orge0ca758" class="outline-3">
+<h3 id="orge0ca758">Aprendizaje "Desde Cero"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="NUMPY">NUMPY</span>&#xa0;<span class="LOGICA">LOGICA</span></span></h3>
+<div class="outline-text-3" id="text-orge0ca758">
 <p>
 Ideales para entender cómo funciona el "motor" de una red neuronal sin usar herramientas automáticas.
 </p>
 </div>
-<div id="outline-container-org3a8c964" class="outline-4">
-<h4 id="org3a8c964">Grokking Deep Learning</h4>
-<div class="outline-text-4" id="text-org3a8c964">
+<div id="outline-container-org1974f16" class="outline-4">
+<h4 id="org1974f16">Grokking Deep Learning</h4>
+<div class="outline-text-4" id="text-org1974f16">
 <ul class="org-ul">
 <li><b>Autor:</b> Andrew Trask.</li>
 <li><b>Editorial:</b> Manning Publications.</li>
@@ -1529,9 +5040,9 @@ Ideales para entender cómo funciona el "motor" de una red neuronal sin usar her
 </ul>
 </div>
 </div>
-<div id="outline-container-org08f2e56" class="outline-4">
-<h4 id="org08f2e56">Neural Networks from Scratch (NNFS)</h4>
-<div class="outline-text-4" id="text-org08f2e56">
+<div id="outline-container-org60b330b" class="outline-4">
+<h4 id="org60b330b">Neural Networks from Scratch (NNFS)</h4>
+<div class="outline-text-4" id="text-org60b330b">
 <ul class="org-ul">
 <li><b>Autores:</b> Harrison Kinsley (Sentdex) y Daniel Kukieła.</li>
 <li><b>Descripción:</b> Basado en código puro de Python. Muy popular entre autodidactas.</li>
@@ -1540,10 +5051,9 @@ Ideales para entender cómo funciona el "motor" de una red neuronal sin usar her
 </div>
 </div>
 </div>
-</div>
-<div id="outline-container-orgf6e9608" class="outline-2">
-<h2 id="orgf6e9608">Tabla Comparativa para Elección Rápida</h2>
-<div class="outline-text-2" id="text-orgf6e9608">
+<div id="outline-container-org69dbb15" class="outline-3">
+<h3 id="org69dbb15">Tabla Comparativa para Elección Rápida</h3>
+<div class="outline-text-3" id="text-org69dbb15">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1597,9 +5107,10 @@ Ideales para entender cómo funciona el "motor" de una red neuronal sin usar her
 </div>
 </div>
 </div>
+</div>
 <div id="postamble" class="status">
 <p class="author">Autor: Eduardo Alcaraz</p>
-<p class="date">Created: 2026-01-19 lun 14:53</p>
+<p class="date">Created: 2026-01-20 mar 09:03</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

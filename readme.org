@@ -5,6 +5,7 @@
 #+SETUPFILE: /home/likcos/Dropbox/org/cursos/redesneuronales/theme-readtheorg-local.setup
 #+EXPORT_FILE_NAME: index.html
 #+OPTIONS: num:nil
+#+OPTIONS: tex:mathjax
 #+HTML_HEAD: <style> #content{max-width:1800px;}</style>
 #+HTML_HEAD: <style>pre.src {background-color: #303030; color: #e5e5e5;}</style>
 
@@ -136,7 +137,8 @@ siguiente comando:
 #+BEGIN_SRC bash
 deactivate
 #+END_SRC
-*  Manual de Entornos Virtuales en Python
+
+* Manual de Entornos Virtuales en Python
 
 ** Introducción
 El uso de entornos virtuales es esencial para mantener las
@@ -416,6 +418,7 @@ Este modelo es la unidad básica de todas las redes neuronales modernas.
 El perceptrón aprende una *frontera de decisión lineal* que separa los datos en dos clases.
 
 ** Aprendizaje
+
 Cuando el perceptrón se equivoca, ajusta sus pesos para reducir el error.
 
 ** Limitaciones
@@ -428,7 +431,6 @@ No puede aprender relaciones no lineales, como XOR.
 
 Un problema es linealmente separable si puedes separar las clases usando una línea recta (en 2D),
 un plano (en 3D), o en general un hiperplano.
-
 Si existe una sola frontera recta que divide perfectamente las clases, el problema es linealmente separable.
 
 
@@ -449,7 +451,7 @@ Si existe una sola frontera recta que divide perfectamente las clases, el proble
 - La fórmula matemática es:
   $$z = \sum_{i=1}^{n} w_i x_i + b$$
 
-
+  
 ** Sesgo (Bias)
 - Representado generalmente como $b$ (o $w_0$).
 - Permite desplazar la función de activación hacia la izquierda o derecha para ajustar mejor los datos.
@@ -465,35 +467,34 @@ Si existe una sola frontera recta que divide perfectamente las clases, el proble
 - En un perceptrón simple, suele ser un valor binario (0 o 1).
 
 
+* Ejemplo Tacos
 
-* 1. El Escenario: La Decisión de la Cena
+** 1. El Escenario: La Decisión de la Cena
 Para entender cómo aprende una IA, vamos a usar un ejemplo de la vida real. Queremos que nuestra neurona artificial aprenda cuándo estamos "Satisfechos" (1) o "Inconformes" (0).
 
-** Nuestras Entradas (Inputs)
+*** Nuestras Entradas (Inputs)
 - $x_0$: ¿Hay Tacos? (1 = Sí, 0 = No)
 - $x_1$: ¿Hay Refresco? (1 = Sí, 0 = No)
 
-** El Peso (Weight): La Importancia
+*** El Peso (Weight): La Importancia
 No todo nos hace igual de felices. Los **Pesos** ($w_0, w_1$) representan qué tanto nos importa cada ingrediente. 
 - Si el peso del taco es alto, el taco es fundamental para nuestra felicidad.
 
-* 2. ¿Cómo toma la decisión? (La Suma y el Sesgo)
+** 2. ¿Cómo toma la decisión? (La Suma y el Sesgo)
 La neurona hace un cálculo matemático simple:
 $$net = (x_0 \cdot w_0) + (x_1 \cdot w_1) - \text{bias}$$
 
-
-
-** El Sesgo (Bias)
+*** El Sesgo (Bias)
 El **Bias** es nuestro "nivel de exigencia". Si el Bias es muy alto, necesitaremos mucha comida (pesos altos) para poder llegar a estar satisfechos.
 
-* 3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?
+** 3. El Descenso del Gradiente: ¿Cómo "Aprende" la Neurona?
 Cuando la neurona se equivoca, necesita ajustar sus pesos. Este proceso se llama **Descenso del Gradiente**.
 
-** El Error: La Brújula
+*** El Error: La Brújula
 Si esperábamos estar felices (~target = 1~) pero la neurona dice que estamos tristes (~net = 0~), tenemos un **Error de 1**.
 $$Error = Target - Net$$
 
-** El Ajuste (La Regla Delta)
+*** El Ajuste (La Regla Delta)
 Para corregir el error, cambiamos los pesos usando esta lógica:
 1. Miramos el **Error**.
 2. Miramos la **Entrada** (¿Quién tuvo la culpa? Si no había tacos, el taco no pudo causar el error).
@@ -511,39 +512,24 @@ Imagina que $K = 0.1$ y el Peso inicial del taco es $0.5$.
 
 **Resultado:** La próxima vez que haya tacos, la neurona estará un poco más cerca de hacernos felices. ¡Eso es el aprendizaje!
 
-* 5. Conclusión
+Puntos importantes
+
 - El **Gradiente** nos dice en qué dirección mover los pesos para que el error sea cero.
 - El **Learning Rate** controla qué tan grandes son los pasos que damos hacia esa solución.
 - Si repetimos este proceso miles de veces (Épocas), la neurona encontrará los pesos perfectos para nuestra felicidad.
 
 
+** Perceptrón ejemplo (Python)
 
-
-
-* Redes Multicapa (MLP)
-  ** Necesidad de capas ocultas
-  Para resolver problemas no lineales, se introducen capas ocultas que permiten componer funciones simples en funciones complejas.
-
-** Capacidad de representación
-Un MLP con suficientes neuronas puede aproximar cualquier función continua (teorema de aproximación universal).
-
-** Estructura
-
-* Entrada
-* Capas ocultas
-* Salida
-* Perceptrón ejemplo (Python)
-
-Un perceptrón es una neurona artificial que:
 1. Recibe entradas ($x_1, x_2, \dots$).
 2. Las multiplica por pesos ($w_1, w_2, \dots$).
 3. Suma un sesgo ($b$).
 4. Aplica una función de activación (ej. Escalón).
 
-** Perceptrón para una compuerta "AND"
+*** Perceptrón para una compuerta "AND"
 Este código simula una neurona que solo se activa si ambas entradas son 1.
 
-#+begin_src python
+#+begin_src python :results output
 def perceptron_and(x1, x2):
     # 1. Definimos los Pesos y el Sesgo (Bias)
     # Estos valores normalmente se aprenden, aquí los asignamos manualmente
@@ -577,6 +563,2191 @@ for e in entradas:
 :  (0, 1)  |   0
 :  (1, 0)  |   0
 :  (1, 1)  |   1
+
+
+
+
+* Codigo C python
+
+#+BEGIN_SRC python
+import math
+import random
+
+EPOCAS = 300000
+K = 0.03  # tasa de aprendizaje
+
+# Pesos y bias globales (como en el código C)
+Pesos = [0.0, 0.0]
+bias = 0.5
+Error = 0.0
+
+
+def sigmoide(s: float) -> float:
+    # Versión correcta de la sigmoide logística:
+    # 1 / (1 + e^{-s})
+    return 1.0 / (1.0 + math.exp(-s))
+
+
+def pesos_initNt():
+    """Inicializa los pesos de forma aleatoria en [0,1)."""
+    global Pesos
+    Pesos = [random.random() for _ in range(2)]
+
+
+def EntNt(x0: float, x1: float, target: float) -> float:
+    """
+    Función de entrenamiento del perceptrón (una iteración para un patrón).
+    Modifica Pesos y bias de forma global.
+    """
+    global Pesos, bias, Error
+
+    # net = w0*x0 + w1*x1 - bias
+    net = Pesos[0] * x0 + Pesos[1] * x1 - bias
+    net = sigmoide(net)
+
+    Error = target - net
+
+    # Actualización de bias (se asume entrada de bias = 1)
+    bias -= K * Error
+
+    # Variación de los pesos sinápticos
+    delta0 = K * Error * x0
+    delta1 = K * Error * x1
+
+    # Ajuste de pesos
+    Pesos[0] += delta0
+    Pesos[1] += delta1
+
+    return net
+
+
+def InitNt(x0: float, x1: float) -> float:
+    """
+    Función que usa pesos fijos (de ejemplo) para calcular la salida.
+    Equivalente a la parte comentada en C.
+    """
+    # net = 70.934807*x0 + 93.935219*x1 - 187.886169;
+    net = 70.934807 * x0 + 93.935219 * x1 - 187.886169
+    net = sigmoide(net)
+    return net
+
+
+def main():
+    global Pesos, bias, Error
+
+    pesos_initNt()
+
+    for i in range(EPOCAS):
+        print("------------------------")
+        print(f"Salida Entrenamiento Epoca {i}")
+
+        apr = EntNt(1, 1, 0)
+        print(f"1,1 = {apr:.6f}")
+
+        apr = EntNt(1, 0, 1)
+        print(f"1,0 = {apr:.6f}")
+
+        apr = EntNt(0, 1, 1)
+        print(f"0,1 = {apr:.6f}")
+
+        apr = EntNt(0, 0, 0)
+        print(f"0,0 = {apr:.6f}")
+
+        print("\nPesos de cada epoca")
+        print(f"Peso 0 = {Pesos[0]:.6f}")
+        print(f"Peso 1 = {Pesos[1]:.6f}")
+        print(f"Bias   = {bias:.6f}")
+        print(f"Error  = {Error:.6f}")
+        print("------------------------")
+
+    # Si quieres probar con los pesos fijos del comentario de C:
+    # print("Resultados con InitNt:")
+    # print("1,1 =", InitNt(1, 1))
+    # print("1,0 =", InitNt(1, 0))
+    # print("0,1 =", InitNt(0, 1))
+    # print("0,0 =", InitNt(0, 0))
+
+
+if __name__ == "__main__":
+    main()
+#+END_SRC
+
+
+* Redes Neuronales Multicapa (Multilayer Perceptron)
+
+** Introducción
+
+Una *red neuronal multicapa* o *Perceptrón Multicapa (MLP)* es un modelo
+de aprendizaje supervisado que extiende al perceptrón simple mediante
+la inclusión de *una o más capas ocultas*. Estas capas permiten modelar
+*relaciones no lineales complejas* entre las variables de entrada y la salida.
+
+Los MLP constituyen la base conceptual del *Deep Learning* moderno:
+
+- El perceptrón simple solo puede resolver problemas *linealmente separables*.
+- Muchos problemas reales (visión, texto, señales) son *no lineales*.
+- Agregar capas ocultas + funciones de activación no lineales permite
+  aproximar funciones mucho más complejas (teorema del aproximador universal).
+
+Ejemplos clásicos (con 2 entradas):
+
+- AND  → ✓ separable linealmente
+- OR   → ✓ separable linealmente
+- XOR  → ✗ *no* es separable linealmente
+
+El problema XOR demuestra la necesidad de introducir:
+
+- *Capas ocultas* (capacidad de representar interacciones no triviales),
+- *Funciones de activación no lineales*.
+
+Un MLP típico está compuesto por:
+
+1. *Capa de entrada*  
+   Recibe el vector de características \(\mathbf{x}\).
+
+2. *Capas ocultas*  
+   Realizan transformaciones lineales + no lineales sobre las
+   representaciones intermedias.
+
+3. *Capa de salida*  
+   Produce la predicción final (clase, probabilidad, valor continuo, etc.).
+
+Estructura conceptual:
+
+#+begin_example
+x → Capa Oculta 1 → Capa Oculta 2 → … → Capa de salida → ŷ
+#+end_example
+
+Cada “flecha” representa una transformación lineal (multiplicación por
+matriz de pesos + suma de bias) seguida de una función de activación.
+
+** Modelo matemático
+
+*** Neurona individual
+
+Cada neurona recibe un vector de entrada \(\mathbf{x} \in \mathbb{R}^n\) y calcula:
+
+\[
+z = \sum_{i=1}^{n} w_i x_i + b
+\]
+
+\[
+a = f(z)
+\]
+
+Donde:
+
+- \(w_i\): pesos sinápticos de la neurona,
+- \(b\): término de sesgo (bias),
+- \(f(\cdot)\): función de activación,
+- \(z\): combinación lineal de las entradas,
+- \(a\): salida (activación) de la neurona.
+
+En forma vectorial para una neurona:
+
+\[
+z = \mathbf{w}^\top \mathbf{x} + b
+\]
+
+\[
+a = f(z)
+\]
+
+*** Forma matricial de una capa
+
+En una capa con múltiples neuronas, se usa notación matricial:
+
+- \(\mathbf{a}^{(l-1)}\): vector de activaciones de la capa anterior,
+- \(\mathbf{W}^{(l)}\): matriz de pesos de la capa \(l\),
+- \(\mathbf{b}^{(l)}\): vector de bias de la capa \(l\),
+- \(\mathbf{z}^{(l)}\): preactivaciones de la capa \(l\),
+- \(\mathbf{a}^{(l)}\): activaciones de la capa \(l\).
+
+Cálculo:
+
+\[
+\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}
+\]
+
+\[
+\mathbf{a}^{(l)} = f(\mathbf{z}^{(l)})
+\]
+
+donde \(f\) se aplica componente a componente.
+
+Repitiendo este proceso desde la capa de entrada hasta la salida,
+obtenemos la predicción del MLP.
+
+** Funciones de activación
+
+Las funciones de activación son componentes fundamentales en las redes
+neuronales multicapa. Su función principal es introducir *no linealidad*
+en el modelo.
+
+Sin funciones de activación no lineales:
+
+- cada capa sería solo una transformación lineal,
+- y la composición de múltiples transformaciones lineales es *otra*
+  transformación lineal,
+- por lo tanto, una “red profunda” sin no linealidad se comporta como
+  un *modelo lineal simple*, independientemente del número de capas.
+
+*** ¿Para qué sirven las funciones de activación?
+
+Las funciones de activación permiten:
+
+- Introducir *no linealidad* en la red.
+- Modelar relaciones complejas entre variables de entrada y salida.
+- Aprender fronteras de decisión no lineales en problemas de clasificación.
+- Aproximar cualquier función continua bajo ciertas condiciones
+  (teorema del aproximador universal).
+
+Recordemos que una neurona realiza:
+
+\[
+z = \sum_{i=1}^{n} w_i x_i + b
+\]
+
+\[
+a = f(z)
+\]
+
+Donde \(f\) es la función de activación.
+
+** Clasificación de las funciones de activación
+
+Las funciones de activación pueden clasificarse según:
+
+- su forma (escalón, sigmoide, lineal por partes, etc.),
+- su rango de salida,
+- su uso (capas ocultas vs capa de salida),
+- su comportamiento para valores grandes de \(|z|\).
+
+*** Funciones de activación clásicas
+
+**** Función escalón (Step Function)
+
+\[
+f(z) =
+\begin{cases}
+1 & \text{si } z \ge 0 \\
+0 & \text{si } z < 0
+\end{cases}
+\]
+
+Características:
+
+- Usada en el perceptrón simple original.
+- No es continua ni derivable (no adecuada para descenso de gradiente).
+- Genera salidas binarias (0/1).
+
+Uso:
+
+- Modelos teóricos e históricos.
+- Introducción al concepto de neurona como “disparar / no disparar”.
+- No se utiliza en redes multicapa modernas para entrenamiento con
+  backpropagation.
+
+**** Sigmoide logística
+
+\[
+f(z) = \frac{1}{1 + e^{-z}}
+\]
+
+Características:
+
+- Salida en el intervalo \((0, 1)\).
+- Puede interpretarse como una probabilidad.
+- Es suave y derivable en todo \(\mathbb{R}\).
+
+Ventajas:
+
+- Interpretación probabilística directa.
+- Históricamente muy usada en redes neuronales tempranas.
+
+Desventajas:
+
+- Para \(|z|\) grandes, la función se *satura* cerca de 0 o 1:
+  - la derivada es muy pequeña,
+  - aparece el problema de *vanishing gradient*,
+  - el entrenamiento de redes profundas se vuelve lento o ineficaz.
+
+Uso típico actual:
+
+- Capa de salida en algunos modelos de clasificación binaria (aunque
+  en deep learning moderno también se usan otras combinaciones).
+
+**** Tangente hiperbólica (tanh)
+
+\[
+f(z) = \tanh(z)
+\]
+
+Características:
+
+- Salida en el intervalo \((-1, 1)\).
+- Es simétrica alrededor de 0 (centrada en cero).
+
+Ventajas:
+
+- En comparación con la sigmoide logística, su salida centrada en cero:
+  - puede favorecer una convergencia algo más rápida,
+  - reduce ciertos sesgos en las activaciones.
+
+Desventajas:
+
+- También se satura para \(|z|\) grandes.
+- Sigue presentando *vanishing gradient* en redes muy profundas.
+
+Uso clásico:
+
+- Capas ocultas en redes no demasiado profundas, antes de la adopción
+  masiva de ReLU.
+
+*** Funciones de activación modernas
+
+**** ReLU (Rectified Linear Unit)
+
+\[
+f(z) = \max(0, z)
+\]
+
+Características:
+
+- Función lineal por partes:
+  - para \(z < 0\): salida 0,
+  - para \(z \ge 0\): salida \(z\).
+- Muy sencilla y eficiente de calcular.
+
+Ventajas:
+
+- No se satura para valores positivos grandes (derivada constante 1).
+- Reduce considerablemente el problema del *vanishing gradient*.
+- Ha permitido entrenar redes profundas con muchas capas.
+
+Desventajas:
+
+- *Dead neurons*: si una neurona recibe valores de \(z\) siempre
+  negativos, su salida es siempre 0 y el gradiente puede quedar en 0
+  → deja de aprender.
+
+Uso típico:
+
+- Función estándar en *capas ocultas* de MLP y CNN modernos.
+
+**** Leaky ReLU
+
+\[
+f(z) =
+\begin{cases}
+z & \text{si } z \ge 0 \\
+\alpha z & \text{si } z < 0
+\end{cases}
+\]
+
+donde \(\alpha\) es un pequeño número positivo (por ejemplo, 0.01).
+
+Características:
+
+- Variante de ReLU que, en lugar de “apagar” totalmente la neurona para
+  \(z < 0\), permite un pequeño gradiente negativo.
+
+Ventajas:
+
+- Reduce el problema de neuronas muertas (*dead ReLU*).
+- Mantiene muchas ventajas de ReLU.
+
+Uso típico:
+
+- Alternativa a ReLU cuando se observa que muchas neuronas quedan
+  inactivas de manera permanente.
+
+**** ELU (Exponential Linear Unit)
+
+\[
+f(z) =
+\begin{cases}
+z & \text{si } z \ge 0 \\
+\alpha (e^{z} - 1) & \text{si } z < 0
+\end{cases}
+\]
+
+Características:
+
+- Para \(z \ge 0\): igual que ReLU.
+- Para \(z < 0\): decae de forma exponencial, con salida negativa acotada.
+
+Ventajas:
+
+- Puede acelerar la convergencia en ciertos casos.
+- Las salidas negativas ayudan a centrar la activación alrededor de 0,
+  lo que puede mejorar la propagación del gradiente.
+
+Uso típico:
+
+- Capas ocultas, en algunos modelos donde se ha observado mejor
+  rendimiento que con ReLU estándar.
+
+*** Funciones de activación en la capa de salida
+
+La función de activación de la *capa de salida* depende del tipo de
+problema:
+
+**** Clasificación binaria
+
+Se usa típicamente una función *sigmoide* para obtener una probabilidad
+en \((0,1)\):
+
+\[
+\hat{y} = \sigma(z) \in (0,1)
+\]
+
+donde \(\hat{y}\) se interpreta como la probabilidad de clase “1”.
+
+**** Clasificación multiclase (mutuamente excluyentes)
+
+Se usa la función *softmax*:
+
+\[
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\]
+
+- Convierte un vector de puntajes \(\mathbf{z}\) en un vector de
+  probabilidades que:
+  - son positivas,
+  - y suman 1.
+
+**** Regresión
+
+- Se usa generalmente una función de activación *lineal* en la salida:
+  \[
+    f(z) = z
+  \]
+- La red puede entonces producir valores reales sin restricción de
+  rango (o con restricciones adicionales impuestas por el preprocesado).
+
+*** Impacto en el entrenamiento
+
+La elección de la función de activación afecta:
+
+- La *velocidad de convergencia*.
+- La *estabilidad* del entrenamiento.
+- El *flujo del gradiente* a través de las capas.
+- La capacidad de representar ciertas distribuciones de salida.
+
+Una elección inadecuada:
+
+- puede causar vanishing/exploding gradient,
+- puede impedir que la red aprenda adecuadamente,
+- o requerir tiempos de entrenamiento excesivos.
+
+** Propagación hacia adelante (Forward Propagation)
+
+La *propagación hacia adelante* es el proceso mediante el cual la red
+calcula su salida a partir de una entrada dada.
+
+Pasos generales:
+
+1. Se recibe el vector de entrada \(\mathbf{x}\).
+2. Se calcula sucesivamente:
+   - \(\mathbf{z}^{(1)}\), \(\mathbf{a}^{(1)}\) (primera capa oculta),
+   - \(\mathbf{z}^{(2)}\), \(\mathbf{a}^{(2)}\), etc.
+3. Se obtiene la activación de la capa de salida \(\mathbf{a}^{(L)}\),
+   que corresponde a la predicción \(\hat{\mathbf{y}}\).
+
+Podemos verlo como una composición de funciones:
+
+\[
+\mathbf{a}^{(L)} = f^{(L)}\left( \mathbf{W}^{(L)} \, f^{(L-1)}\left( \dots f^{(1)}\left(\mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)}\right) \dots \right) + \mathbf{b}^{(L)} \right)
+\]
+
+o, de forma más compacta:
+
+\[
+\hat{\mathbf{y}} = F(\mathbf{x}; \theta)
+\]
+
+donde \(\theta\) denota el conjunto de todos los pesos y bias de la red.
+
+** Funciones de pérdida
+
+Las funciones de pérdida (o *funciones de coste*) miden el error entre:
+
+- la predicción del modelo \(\hat{y}\) (o \(\hat{\mathbf{y}}\)),
+- y el valor real \(y\) (o \(\mathbf{y}\)).
+
+El objetivo del entrenamiento es encontrar parámetros \(\theta\) que
+*minimicen* la pérdida promedio sobre el conjunto de entrenamiento.
+
+*** Error cuadrático medio (MSE)
+
+Común en problemas de regresión:
+
+\[
+\mathcal{L}_{\text{MSE}} = \frac{1}{n} \sum_{k=1}^{n} (y_k - \hat{y}_k)^2
+\]
+
+donde:
+
+- \(n\) es el número de muestras,
+- \(y_k\) es el valor real de la muestra \(k\),
+- \(\hat{y}_k\) es la predicción del modelo.
+
+*** Entropía cruzada (Cross-Entropy)
+
+Muy utilizada en clasificación.
+
+- Para clasificación binaria:
+
+\[
+\mathcal{L}_{\text{binaria}} = - \frac{1}{n} \sum_{k=1}^{n} \left[ y_k \log(\hat{y}_k) + (1 - y_k)\log(1 - \hat{y}_k) \right]
+\]
+
+- Para clasificación multiclase (one-hot \(\mathbf{y}\) y softmax \(\hat{\mathbf{y}}\)):
+
+\[
+\mathcal{L}_{\text{multiclase}} = - \frac{1}{n} \sum_{k=1}^{n} \sum_{c=1}^{C} y_{k,c} \log(\hat{y}_{k,c})
+\]
+
+donde:
+
+- \(C\) es el número de clases,
+- \(y_{k,c}\) es 1 si la muestra \(k\) pertenece a la clase \(c\), y 0 en caso contrario,
+- \(\hat{y}_{k,c}\) es la probabilidad predicha para la clase \(c\).
+
+** Backpropagation
+
+*Backpropagation* es el algoritmo fundamental para entrenar MLP. Se
+basa en la aplicación sistemática de la *regla de la cadena* del cálculo
+diferencial para propagar el error desde la capa de salida hacia las
+capas anteriores.
+
+Para un peso genérico \(w\), la derivada de la pérdida se expresa como:
+
+\[
+\frac{\partial \mathcal{L}}{\partial w} =
+\frac{\partial \mathcal{L}}{\partial a}
+\cdot \frac{\partial a}{\partial z}
+\cdot \frac{\partial z}{\partial w}
+\]
+
+donde:
+
+- \(\frac{\partial \mathcal{L}}{\partial a}\): cuánto cambia la pérdida
+  si cambia la activación \(a\),
+- \(\frac{\partial a}{\partial z}\): deriva de la función de activación,
+- \(\frac{\partial z}{\partial w}\): relación lineal entre \(z\) y el
+  peso \(w\).
+
+El algoritmo:
+
+1. Calcula un *forward pass* (de entrada a salida).
+2. Calcula la pérdida \(\mathcal{L}\).
+3. Propaga gradientes hacia atrás usando la regla de la cadena.
+4. Obtiene \(\frac{\partial \mathcal{L}}{\partial w}\) y
+   \(\frac{\partial \mathcal{L}}{\partial b}\) para todos los pesos y
+   bias de la red.
+5. Usa estos gradientes para actualizar los parámetros.
+
+** Descenso de gradiente
+
+El *descenso de gradiente* (gradient descent) es la regla de
+actualización básica para minimizar la función de pérdida.
+
+Para un peso \(w\):
+
+\[
+w := w - \eta \, \frac{\partial \mathcal{L}}{\partial w}
+\]
+
+donde:
+
+- \(\eta\) es la *tasa de aprendizaje* (learning rate),
+- \(\frac{\partial \mathcal{L}}{\partial w}\) es el gradiente de la
+  pérdida respecto a \(w\).
+
+Interpretación:
+
+- Nos movemos en la dirección *opuesta* al gradiente (descenso),
+- La magnitud del paso está controlada por \(\eta\).
+
+En la práctica:
+
+- Se usan variantes como:
+  - *Stochastic Gradient Descent (SGD)*,
+  - SGD con *momentum*,
+  - *Adam*, *RMSProp*, etc.
+- Estas variantes mejoran:
+  - la velocidad de convergencia,
+  - la estabilidad numérica,
+  - la capacidad de escapar de mínimos locales poco profundos.
+
+
+* Ejemplo Clasificación del dataset Iris con MLP
+
+Este apartado muestra un ejemplo completo en Python usando el dataset
+clásico Iris y una red neuronal feedforward (Perceptrón Multicapa)
+usando la librería scikit-learn.
+
+El objetivo es clasificar flores Iris en tres clases:
+
+- Setosa
+- Versicolor
+- Virginica
+
+
+Importar librerías
+
+#+begin_src python
+import numpy as np
+from sklearn.datasets
+import load_iris from sklearn.model_selection
+import train_test_split from sklearn.preprocessing
+import StandardScaler from sklearn.neural_network
+import MLPClassifier from sklearn.metrics
+import accuracy_score, classification_report
+#+end_src
+
+Cargar el dataset Iris
+
+#+begin_src python
+iris = load_iris()
+X = iris.data # Características (150 x 4) y = iris.target # Clases (150,)
+print(X.shape) print(y.shape)
+#+end_src
+
+Las 4 características son:
+
+- Largo del sépalo
+- Ancho del sépalo
+- Largo del pétalo
+- Ancho del pétalo
+
+Las clases están codificadas como:
+
+- 0 → Setosa
+- 1 → Versicolor
+- 2 → Virginica
+
+El siguiente fragmento de código realiza la partición del conjunto de
+datos original en dos subconjuntos disjuntos: uno destinado al
+entrenamiento del modelo y otro a su evaluación.
+
+#+begin_src python
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=42, stratify=y )
+#+end_src
+
+Propósito de la partición:
+
+En aprendizaje automático supervisado, es fundamental evaluar la
+capacidad de generalización de un modelo. Para ello, los datos
+disponibles se dividen en:
+
+- *Conjunto de entrenamiento*: utilizado para ajustar los parámetros del modelo (pesos y sesgos).
+- *Conjunto de prueba*: utilizado exclusivamente para medir el desempeño del modelo sobre datos no vistos durante el entrenamiento.
+
+Esta separación permite detectar fenómenos como overfitting y
+underfitting, y proporciona una estimación más realista del
+rendimiento esperado en producción.
+
+*El parámetro*:
+#+BEGIN_SRC python
+test_size=0.2
+#+END_SRC
+indica que el 20 % del conjunto total de datos se reserva para el
+conjunto de prueba, mientras que el 80 % restante se utiliza para
+entrenamiento. Esta proporción es común en la práctica y representa un
+compromiso razonable entre:
+
+- disponer de suficientes datos para entrenar el modelo, y
+- contar con una muestra representativa para evaluar su generalización.
+
+** Reproducibilidad del experimento
+
+El parámetro:
+
+#+BEGIN_SRC python
+random_state=42
+#+END_SRC
+
+fija la semilla del generador de números aleatorios utilizado durante
+la partición.  Esto garantiza que la división de los datos sea
+reproducible, es decir, que múltiples ejecuciones del mismo código
+produzcan exactamente la misma separación entre entrenamiento y
+prueba.
+
+La reproducibilidad es un requisito esencial en entornos científicos y
+académicos, ya que permite validar y comparar resultados de manera
+consistente.
+
+** Estratificación de clases
+
+El parámetro:
+
+#+BEGIN_SRC python
+stratify=y
+#+END_SRC
+
+indica que la división debe realizarse de forma estratificada,
+conservando la proporción original de cada clase en ambos
+subconjuntos.
+
+Esto es especialmente importante en problemas de clasificación, ya que
+una división aleatoria sin estratificación podría provocar:
+
+- conjuntos de entrenamiento o prueba con clases desbalanceadas,
+- métricas de desempeño engañosas,
+- modelos que no aprendan adecuadamente clases minoritarias.
+
+Mediante la estratificación, se asegura que tanto el conjunto de
+entrenamiento como el de prueba sean representativos de la
+distribución real de las clases.
+
+** Importancia en redes neuronales
+
+En el contexto de redes neuronales (incluyendo MLP):
+
+- el entrenamiento ajusta los pesos minimizando una función de pérdida
+  sobre X_train,
+
+- la evaluación sobre X_test permite medir la capacidad del modelo
+  para generalizar,
+
+- una mala partición puede conducir a conclusiones erróneas sobre el
+  desempeño del modelo.
+
+Por esta razón, la división adecuada del conjunto de datos constituye
+un paso crítico previo al entrenamiento y no debe considerarse un
+detalle menor de implementación.
+
+
+** Normalización de los datos
+
+La normalización de los datos de entrada es un paso crítico en el
+entrenamiento de redes neuronales, ya que influye directamente en la
+estabilidad numérica, la velocidad de convergencia y la eficacia del
+aprendizaje.
+
+En una red neuronal, los pesos se ajustan mediante métodos de
+optimización basados en gradientes. Si las variables de entrada
+presentan escalas muy diferentes, el proceso de entrenamiento puede
+volverse ineficiente o inestable.
+
+En muchos conjuntos de datos, las características pueden tener rangos muy distintos. Por ejemplo:
+
+- una variable puede tomar valores entre 0 y 1,
+- otra entre 0 y 10⁶,
+- otra puede incluir valores negativos.
+
+Cuando estos datos se introducen directamente en una red neuronal:
+
+- los gradientes asociados a variables de gran escala dominan la actualización de los pesos,
+- las funciones de activación pueden saturarse,
+- el descenso por gradiente se vuelve lento o errático.
+
+La normalización busca homogeneizar la escala de las entradas,
+permitiendo que todas las características contribuyan de manera
+equilibrada al aprendizaje.
+
+
+Una de las técnicas más utilizadas es la estandarización, implementada
+en scikit-learn mediante la clase StandardScaler.
+
+#+begin_src python
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train) X_test = scaler.transform(X_test)
+#+end_src
+
+Este procedimiento transforma cada característica \(x\) según la siguiente expresión:
+
+\[
+x' = \frac{x - \mu}{\sigma}
+\]
+
+donde:
+
+- \( \mu \) es la media de la característica,
+- \( \sigma \) es la desviación estándar de la característica.
+
+Como resultado de esta transformación, cada variable queda con:
+
+- media aproximadamente igual a 0,
+- desviación estándar igual a 1.
+
+** Definir el Perceptrón Multicapa (MLP)
+
+
+El siguiente fragmento de código define un *Perceptrón Multicapa* (Multilayer Perceptron, MLP)
+para un problema de clasificación multiclase, utilizando la implementación provista por
+la biblioteca *scikit-learn*.
+
+#+begin_src python
+mlp = MLPClassifier(
+    hidden_layer_sizes=(10, 10),
+    activation='relu',
+    solver='adam',
+    learning_rate_init=0.001,
+    max_iter=2000,
+    random_state=42
+)
+#+end_src
+
+Este modelo corresponde a una red neuronal *feedforward completamente conectada*,
+entrenada mediante *backpropagation* y optimizada usando métodos de descenso por gradiente.
+
+*** Arquitectura de la red neuronal
+
+La arquitectura del MLP queda determinada por el número de características de entrada,
+las capas ocultas definidas explícitamente y el número de neuronas en la capa de salida.
+
+*** Capa de entrada
+
+- La capa de entrada está compuesta por *4 neuronas*.
+- Cada neurona representa una característica del vector de entrada.
+- Esta capa no aplica transformaciones, únicamente propaga los valores hacia la primera capa oculta.
+
+Formalmente, el vector de entrada se expresa como:
+
+\[
+\mathbf{x} = (x_1, x_2, x_3, x_4)
+\]
+
+*** Capas ocultas
+
+El parámetro:
+
+#+begin_src python
+hidden_layer_sizes=(10, 10)
+#+end_src
+
+define *dos capas ocultas*, cada una con *10 neuronas*.
+
+Características principales:
+
+- Son capas *densas (fully connected)*.
+- Cada neurona recibe como entrada la salida de *todas* las neuronas de la capa anterior.
+- Permiten aprender representaciones no lineales del espacio de características.
+
+Cada capa oculta implementa la transformación:
+
+\[
+\mathbf{h}^{(l)} = f\left( \mathbf{W}^{(l)} \mathbf{h}^{(l-1)} + \mathbf{b}^{(l)} \right)
+\]
+
+donde:
+
+- \( \mathbf{W}^{(l)} \) es la matriz de pesos,
+- \( \mathbf{b}^{(l)} \) es el vector de sesgos,
+- \( f(\cdot) \) es la función de activación.
+
+*** Función de activación
+
+El parámetro:
+
+#+begin_src python
+activation='relu'
+#+end_src
+
+indica el uso de la función *ReLU (Rectified Linear Unit)*, definida como:
+
+\[
+\text{ReLU}(z) = \max(0, z)
+\]
+
+Esta función se utiliza porque:
+
+- introduce no linealidad,
+- reduce el problema del *vanishing gradient*,
+- mejora la estabilidad del entrenamiento,
+- es computacionalmente eficiente.
+
+*** Capa de salida
+
+- La capa de salida está compuesta por *3 neuronas*.
+- Cada neurona corresponde a una de las clases del problema.
+- Internamente, el modelo utiliza una función *softmax* para obtener probabilidades.
+
+La clase predicha se obtiene mediante la operación *argmax* sobre las salidas.
+
+*** Entrenamiento del modelo
+
+El entrenamiento se realiza mediante el optimizador *Adam*:
+
+#+begin_src python
+solver='adam'
+#+end_src
+
+Adam combina:
+- momentum
+- tasas de aprendizaje adaptativas
+
+lo que permite una convergencia más rápida y estable en redes con múltiples capas.
+
+La tasa de aprendizaje inicial se define como:
+
+\[
+\eta = 0.001
+\]
+
+controlando el tamaño de los pasos durante la actualización de los pesos.
+
+** Número de iteraciones
+
+El parámetro:
+
+#+begin_src python
+max_iter=2000
+#+end_src
+
+establece el número máximo de épocas de entrenamiento.
+Una época corresponde a un pase completo sobre el conjunto de entrenamiento.
+
+Un número elevado de épocas favorece la convergencia, aunque incrementa el riesgo de *overfitting*.
+
+** Reproducibilidad
+
+El parámetro:
+
+#+begin_src python
+random_state=42
+#+end_src
+
+fija la semilla del generador de números aleatorios, garantizando resultados reproducibles
+en la inicialización de los pesos y el proceso de entrenamiento.
+
+
+
+** Entrenamiento del modelo
+
+El entrenamiento deñ Perceptrón Multicapa (MLP) consiste en ajustar
+los pesos y sesgos de la red para minimizar el error de predicción
+sobre los datos de entrenamiento.
+
+#+begin_src python
+mlp.fit(X_train, y_train)
+#+end_src
+
+Durante este proceso ocurren los siguientes pasos fundamentales:
+
+*** Propagación hacia adelante (forward pass)
+
+Cada muestra de entrada x atraviesa la red capa por capa.
+
+En cada neurona se calcula una combinación lineal y se aplica una función de activación.
+
+Se obtiene una salida y que representa la predicción del modelo.
+
+*** Cálculo del error
+
+La salida predicha se compara con la etiqueta real 𝑦.
+Se utiliza una función de pérdida (por ejemplo, log-loss para clasificación multiclase).
+
+*** Backpropagation
+
+El error se propaga desde la capa de salida hacia las capas
+anteriores. Se calculan los gradientes del error respecto a cada peso
+y sesgo. Se aplica la regla de la cadena del cálculo diferencial.
+
+*** Descenso de gradiente con Adam
+
+- Adam combina Momentum y RMSProp.
+- Ajusta automáticamente la tasa de aprendizaje para cada parámetro.
+- Proporciona convergencia rápida y estable.
+
+** Evaluación del modelo
+
+Una vez entrenado el modelo, se evalúa su desempeño usando datos no vistos durante el entrenamiento.
+
+#+begin_src python
+y_pred = mlp.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred)) print("\nReporte de clasificación:\n") print(classification_report(y_test, y_pred, target_names=iris.target_names))
+#+end_src
+
+*** Métricas utilizadas
+
+- Accuracy: proporción total de predicciones correctas.
+- Precision: qué tan confiables son las predicciones positivas.
+- Recall: capacidad del modelo para encontrar todos los ejemplos de una clase.
+- F1-score: balance entre precisión y recall.
+
+En el dataset Iris, el accuracy suele estar en el rango del 95% al
+100%, debido a su baja dimensionalidad y buena separación entre
+clases.
+
+** Predicción con una nueva flor
+
+El modelo entrenado puede utilizarse para predecir nuevas muestras.
+
+#+begin_src python
+
+#[largo_sepalo, ancho_sepalo, largo_petalo, ancho_petalo]
+
+flor_nueva = np.array([[5.1, 3.5, 1.4, 0.2]])
+#Normalización con el mismo scaler del entrenamiento
+flor_nueva = scaler.transform(flor_nueva)
+prediccion = mlp.predict(flor_nueva) print("Clase predicha:", iris.target_names[prediccion[0]])
+#+end_src
+
+Es fundamental aplicar la misma normalización usada en el entrenamiento para mantener coherencia en las escalas.
+
+** Interpretación matemática del MLP
+
+Cada neurona de la red realiza el siguiente cálculo:
+
+#+begin_example
+z = w · x + b a = f(z)
+#+end_example
+
+Donde: 𝑤 es el vector de pesos 𝑥 es el vector de entradas 𝑏 es el sesgo (bias) 𝑓
+es la función de activación (ReLU en las capas ocultas). La capa de salida utiliza la función Softmax:
+
+#+begin_latex
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+#+end_latex
+
+Esto permite interpretar las salidas como probabilidades para cada clase.
+
+* Ejemplo Clasificación de Cáncer de Mama con MLP 
+
+Este apartado muestra un ejemplo completo en Python usando el dataset
+*Breast Cancer Wisconsin (Diagnostic)* y un *Perceptrón Multicapa (MLP)*
+usando la librería scikit-learn.
+
+El objetivo es clasificar tumores en dos categorías:
+
+- 0 → Maligno
+- 1 → Benigno
+
+Este problema es un caso típico de **clasificación binaria** en el
+ámbito médico, donde es crucial:
+
+- minimizar falsos negativos (tumor maligno clasificado como benigno),
+- mantener una buena precisión general del modelo.
+
+** Importar librerías
+
+#+begin_src python
+import numpy as np
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import accuracy_score, classification_report
+#+end_src
+
+En este bloque:
+
+- =load_breast_cancer=: carga el dataset de cáncer de mama.
+- =train_test_split=: divide en entrenamiento y prueba.
+- =StandardScaler=: aplica estandarización a las características.
+- =MLPClassifier=: implementa un Perceptrón Multicapa (MLP).
+- =accuracy_score= y =classification_report=: permiten evaluar el modelo.
+
+** Cargar el dataset Breast Cancer
+
+#+begin_src python
+data = load_breast_cancer()
+X = data.data      # Características (569 x 30)
+y = data.target    # Etiquetas (569,)
+
+print("Dimensiones de X:", X.shape)
+print("Clases numéricas:", np.unique(y))
+print("Nombres de clases:", data.target_names)
+#+end_src
+
+Este dataset contiene:
+
+- 569 muestras (pacientes).
+- 30 características numéricas que describen propiedades de los tumores
+  (radio, textura, perímetro, área, suavidad, compacidad, etc.).
+- 2 clases:
+  - 0 → malignant (maligno)
+  - 1 → benign (benigno)
+
+Cada muestra corresponde a una imagen de tejido mamario analizada
+digitalmente. Las 30 características se derivan de medidas estadísticas
+de la forma, textura y estructura del tumor.
+
+*** Importancia del dominio
+
+En aplicaciones médicas, la interpretación de las predicciones es muy
+sensible:
+
+- un *falso negativo* (maligno etiquetado como benigno) puede retrasar
+  un diagnóstico crítico;
+- un *falso positivo* (benigno etiquetado como maligno) puede generar
+  ansiedad y procedimientos innecesarios.
+
+Por ello, además de la *accuracy*, suelen analizarse:
+
+- sensibilidad (*recall*) para la clase “maligno”,
+- especificidad,
+- matriz de confusión, etc.
+
+** Partición del conjunto de datos
+
+Dividimos el dataset en entrenamiento y prueba:
+
+#+begin_src python
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.3,
+    random_state=42,
+    stratify=y
+)
+#+end_src
+
+*** Significado de los parámetros
+
+- =test_size=0.3=:
+  - 30 % de los datos se reservan para el *conjunto de prueba*.
+  - 70 % se usan para entrenar el modelo.
+  - En este caso:
+    - Entrenamiento: ≈ 398 muestras.
+    - Prueba: ≈ 171 muestras.
+
+- =random_state=42=:
+  - Fija la semilla del generador de números aleatorios.
+  - Permite que la partición sea reproducible: el mismo código genera
+    siempre la misma división.
+
+- =stratify=y=:
+  - Asegura que la proporción de clases (maligno/benigno) sea similar
+    tanto en entrenamiento como en prueba.
+  - Esto es crucial en problemas médicos, donde el balance de clases
+    puede influir fuertemente en las métricas.
+
+*** Propósito de la partición
+
+En aprendizaje automático supervisado:
+
+- El *conjunto de entrenamiento* se usa para ajustar los parámetros
+  (pesos y sesgos) del modelo.
+- El *conjunto de prueba* se usa *solo* para evaluar la capacidad de
+  generalización sobre datos no vistos.
+
+Esta separación es esencial para:
+
+- detectar *overfitting* (el modelo memoriza el entrenamiento pero
+  generaliza mal),
+- obtener una estimación realista del rendimiento.
+
+** Normalización (Estandarización)
+
+Las características tienen escalas muy diferentes (áreas grandes,
+texturas pequeñas, etc.). Esto puede causar:
+
+- problemas numéricos,
+- gradientes desbalanceados,
+- convergencia lenta o inestable.
+
+Por ello, aplicamos estandarización:
+
+#+begin_src python
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+#+end_src
+
+Este procedimiento transforma cada característica \(x\) según:
+
+#+begin_latex
+x' = \frac{x - \mu}{\sigma}
+#+end_latex
+
+donde:
+
+- \(\mu\) es la media de la característica calculada sobre el conjunto
+  de entrenamiento,
+- \(\sigma\) es la desviación estándar de dicha característica.
+
+Después de la transformación:
+
+- cada variable tiene media aproximadamente 0,
+- y desviación estándar aproximadamente 1.
+
+*** Importante
+
+- Solo se llama a =fit_transform= en =X_train=:
+  - =fit= calcula \(\mu\) y \(\sigma\) usando *solo entrenamiento*.
+  - =transform= aplica la transformación.
+- Para =X_test= se usa únicamente =transform=:
+  - se reescalan los datos de prueba con los mismos parámetros
+    (\(\mu\) y \(\sigma\)) obtenidos del entrenamiento.
+- Esto evita *filtrar información del conjunto de prueba* hacia el
+  proceso de entrenamiento (data leakage).
+
+** Definición del Perceptrón Multicapa (MLP)
+
+Definimos un MLP para clasificación binaria:
+
+#+begin_src python
+mlp = MLPClassifier(
+    hidden_layer_sizes=(30, 15),
+    activation='relu',
+    solver='adam',
+    max_iter=1000,
+    random_state=42
+)
+#+end_src
+
+*** Arquitectura del modelo
+
+El MLP es una red neuronal *feedforward* completamente conectada.
+
+- *Capa de entrada*:
+  - Tiene tantas neuronas como características de entrada: 30.
+  - Cada componente del vector \(\mathbf{x} \in \mathbb{R}^{30}\)
+    representa una característica del tumor.
+
+- *Capas ocultas*:
+  - Primer capa oculta: 30 neuronas.
+  - Segunda capa oculta: 15 neuronas.
+  - Se especifican con el parámetro:
+    #+begin_src python
+hidden_layer_sizes = (30, 15)
+    #+end_src
+
+  Cada neurona en una capa oculta:
+  - recibe como entrada la salida de todas las neuronas de la capa
+    anterior (capas densas),
+  - aplica una transformación lineal seguida de una función de
+    activación no lineal.
+
+- *Capa de salida*:
+  - Para clasificación binaria, internamente el MLP de scikit-learn
+    puede usar:
+    - 1 neurona con activación logística (sigmoide),
+    - o una representación equivalente a 2 clases.
+  - La salida se interpreta como una probabilidad de pertenecer a la
+    clase “1” (benigno).
+
+*** Función de activación ReLU
+
+El parámetro:
+
+#+begin_src python
+activation = 'relu'
+#+end_src
+
+indica el uso de la función *ReLU (Rectified Linear Unit)* en las capas
+ocultas:
+
+#+begin_latex
+\text{ReLU}(z) = \max(0, z)
+#+end_latex
+
+Ventajas de ReLU:
+
+- Introduce no linealidad (permite aproximar funciones no lineales).
+- Reduce el problema del *vanishing gradient* en comparación con
+  funciones como sigmoide o tanh.
+- Es simple y eficiente de calcular.
+
+*** Optimizador Adam
+
+El parámetro:
+
+#+begin_src python
+solver = 'adam'
+#+end_src
+
+selecciona el optimizador *Adam* (Adaptive Moment Estimation), que:
+
+- combina ideas de Momentum y RMSProp,
+- mantiene promedios móviles de:
+  - los gradientes,
+  - los gradientes al cuadrado,
+- adapta la tasa de aprendizaje para cada parámetro.
+
+Esto suele producir:
+
+- convergencia rápida,
+- estabilidad numérica,
+- buen desempeño sin necesidad de mucha sintonía manual.
+
+*** Número máximo de iteraciones
+
+#+begin_src python
+max_iter = 1000
+#+end_src
+
+- Indica el número máximo de épocas (o iteraciones sobre los datos)
+  para entrenar la red.
+- Un valor alto permite que el modelo converja, aunque si es excesivo
+  puede aumentar el riesgo de *overfitting* (la red se ajusta demasiado
+  al entrenamiento).
+
+*** Reproducibilidad
+
+#+begin_src python
+random_state = 42
+#+end_src
+
+- Fija la semilla para la inicialización de pesos y el muestreo interno.
+- Permite reproducir exactamente los mismos resultados entre ejecuciones.
+
+** Entrenamiento del modelo
+
+Entrenamos el MLP ajustando pesos y sesgos para minimizar el error de
+clasificación en el conjunto de entrenamiento:
+
+#+begin_src python
+mlp.fit(X_train, y_train)
+#+end_src
+
+*** Proceso interno (visión conceptual)
+
+1. *Propagación hacia adelante*:
+   - Cada muestra \(\mathbf{x}\) pasa por las capas:
+     \[
+       \mathbf{h}^{(1)} = f_1(W^{(1)} \mathbf{x} + \mathbf{b}^{(1)})
+     \]
+     \[
+       \mathbf{h}^{(2)} = f_2(W^{(2)} \mathbf{h}^{(1)} + \mathbf{b}^{(2)})
+     \]
+     \[
+       \hat{y} = \sigma(W^{(3)} \mathbf{h}^{(2)} + \mathbf{b}^{(3)})
+     \]
+   - \(\hat{y}\) es la probabilidad estimada de que el tumor sea benigno
+     (clase 1).
+
+2. *Cálculo del error*:
+   - La salida \(\hat{y}\) se compara con la etiqueta real \(y \in \{0, 1\}\).
+   - En problemas binarios, se usa típicamente la *entropía cruzada
+     binaria* (o log-loss):
+     \[
+       L(y, \hat{y}) = -\left[y \log(\hat{y}) + (1 - y)\log(1 - \hat{y})\right]
+     \]
+
+3. *Backpropagation*:
+   - Se calculan las derivadas parciales de la pérdida con respecto a
+     todos los pesos y sesgos mediante la regla de la cadena.
+   - Se propaga el error desde la capa de salida hacia las capas
+     ocultas.
+
+4. *Actualización de pesos*:
+   - El optimizador Adam actualiza cada parámetro en la dirección que
+     reduce la pérdida:
+     \[
+       \theta \leftarrow \theta - \eta \cdot \hat{g}
+     \]
+     donde \(\hat{g}\) es una versión adaptada del gradiente, y
+     \(\eta\) la tasa de aprendizaje efectiva.
+
+** Evaluación del modelo
+
+Una vez entrenado, evaluamos el modelo sobre el conjunto de prueba:
+
+#+begin_src python
+# Predicción
+y_pred = mlp.predict(X_test)
+
+# Métricas
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nReporte de clasificación:\n")
+print(classification_report(y_test, y_pred, target_names=data.target_names))
+#+end_src
+
+*** Métricas principales
+
+- *Accuracy*:
+  - Proporción de predicciones correctas:
+    \[
+      \text{Accuracy} = \frac{\text{número de aciertos}}{\text{número total de muestras}}
+    \]
+- *Precision*:
+  - De todos los ejemplos predichos como positivos, qué fracción son
+    realmente positivos.
+  - Importante para evitar falsos positivos.
+
+- *Recall (Sensibilidad)*:
+  - De todos los ejemplos realmente positivos, qué fracción se detecta
+    correctamente.
+  - En diagnóstico médico, el recall para la clase “maligno” es crítico
+    (minimizar falsos negativos).
+
+- *F1-score*:
+  - Media armónica de precision y recall:
+    \[
+      F1 = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}
+    \]
+  - Útil cuando hay cierto desbalance entre clases.
+
+El dataset Breast Cancer suele producir *accuracy* muy altas (por
+encima de 95 %) con modelos bien entrenados, debido a que las
+características están relativamente bien separadas.
+
+** Interpretación matemática de la salida binaria
+
+En este modelo binario, la capa de salida puede verse como una neurona
+con activación *sigmoide (logística)*:
+
+#+begin_latex
+\sigma(z) = \frac{1}{1 + e^{-z}}
+#+end_latex
+
+donde:
+
+- \(z = \mathbf{w} \cdot \mathbf{h} + b\),
+- \(\mathbf{h}\) es el vector de activaciones de la última capa oculta.
+
+La salida \(\sigma(z)\) se interpreta como:
+
+- \(\sigma(z) \approx 1\): alta probabilidad de clase 1 (benigno),
+- \(\sigma(z) \approx 0\): alta probabilidad de clase 0 (maligno).
+
+En scikit-learn, la predicción de clase se realiza típicamente como:
+
+- Si \(\sigma(z) \geq 0.5\) → clase 1 (benigno).
+- Si \(\sigma(z) < 0.5\) → clase 0 (maligno).
+
+Este umbral puede modificarse en contextos médicos, por ejemplo:
+
+- usar un umbral menor que 0.5 para aumentar la sensibilidad a tumores
+  malignos (aceptando más falsos positivos).
+
+** Predicción de una nueva muestra
+
+Podemos usar el modelo entrenado para predecir el diagnóstico de un
+nuevo paciente.
+
+En este ejemplo, tomamos la primera muestra del set de prueba (ya
+normalizada) y realizamos la predicción:
+
+#+begin_src python
+# Ejemplo con la primera fila del set de prueba
+nuevo_paciente = X_test[0:1]     # forma (1, 30)
+pred = mlp.predict(nuevo_paciente)
+print("Resultado del diagnóstico:", data.target_names[pred[0]])
+#+end_src
+
+*** Comentarios importantes
+
+- Es fundamental que la nueva muestra haya sido procesada con el mismo:
+
+  1. Conjunto de características (mismas columnas y orden).
+  2. Mismo procedimiento de normalización (mismo =scaler=, con las
+     medias y desviaciones aprendidas en el entrenamiento).
+
+- En la práctica, se suele:
+
+  - guardar el modelo entrenado (por ejemplo con =joblib=),
+  - guardar también el objeto =StandardScaler=,
+  - aplicar ambos de manera coherente a los nuevos datos.
+
+** Resumen conceptual
+
+Este ejemplo ilustra varios conceptos clave en el uso de redes
+neuronales (MLP) para clasificación binaria en un contexto médico:
+
+- Importancia de:
+  - Partición entrenamiento/prueba estratificada.
+  - Normalización de características.
+  - Arquitectura de red (capas y neuronas).
+  - Función de activación (ReLU).
+  - Optimizador (Adam) y número de iteraciones.
+
+- Interpretación de la salida:
+  - Probabilidad generada por una función sigmoide.
+  - Decisión de clase basada en un umbral.
+
+- Evaluación:
+  - No basta con accuracy: hay que considerar precision, recall y F1,
+    especialmente para la clase de interés (por ejemplo, “maligno”).
+
+Este mismo flujo (carga, partición, normalización, definición de modelo,
+entrenamiento, evaluación, predicción) puede adaptarse a otros modelos
+(árboles, SVM, LSTM, etc.) y a otros datasets de clasificación binaria
+o multiclase.
+
+
+* Redes Neuronales LSTM (Long Short-Term Memory)
+
+Las redes neuronales LSTM (*Long Short-Term Memory*) son un tipo especial
+de **Red Neuronal Recurrente (RNN)** diseñada para trabajar con datos
+**secuenciales** y, en particular, para **recordar dependencias a largo
+plazo**.
+
+Se utilizan cuando el *orden* de los datos importa:
+
+- Texto (oraciones, párrafos, documentos).
+- Series temporales (precios, temperatura, señales).
+- Audio y voz.
+- Secuencias de eventos (logs, clics, acciones de usuario, etc.).
+
+Su principal aporte es resolver (o al menos mitigar fuertemente) el
+problema del **desvanecimiento del gradiente (vanishing gradient)** que
+afecta a las RNN simples cuando manejan secuencias largas.
+
+** Estructura general de una RNN
+
+En una RNN “simple”, en cada paso temporal \(t\):
+
+- Se recibe una entrada \(x_t\).
+- Se tiene un estado oculto anterior \(h_{t-1}\).
+- Se actualiza el estado oculto actual \(h_t\) con:
+
+#+begin_latex
+h_t = \phi(W_{xh} x_t + W_{hh} h_{t-1} + b_h)
+#+end_latex
+
+donde:
+
+- \(W_{xh}\) y \(W_{hh}\) son matrices de pesos,
+- \(b_h\) es el sesgo,
+- \(\phi\) es una función de activación (típicamente =tanh= o =ReLU=).
+
+El estado final (o todos los estados) se usan para hacer predicciones.
+
+*** Problema: vanishing y exploding gradients
+
+Durante el entrenamiento, se aplica *Backpropagation Through Time (BPTT)*,
+es decir, se retropropagan los gradientes a través de todos los pasos
+temporales.
+
+En secuencias largas:
+
+- Los gradientes pueden volverse **muy pequeños** → la red “olvida” las
+  dependencias lejanas (problema de *vanishing gradient*).
+- O volverse **muy grandes** → inestabilidad numérica (problema de
+  *exploding gradient*).
+
+Consecuencia: las RNN simples tienen dificultades para **aprender
+relaciones de largo plazo**, por ejemplo, la dependencia entre una
+palabra al principio de una oración y otra al final.
+
+** Motivación de las LSTM
+
+Las LSTM fueron propuestas para permitir que la red:
+
+- **Mantenga información relevante durante muchos pasos temporales**.
+- **Controle qué recordar y qué olvidar**.
+- Facilite el flujo de gradiente a través del tiempo, reduciendo el
+  problema del desvanecimiento.
+
+La idea principal es introducir una **celda de memoria** y un sistema de
+**puertas (gates)** que regulan el flujo de información.
+
+** Arquitectura interna de una celda LSTM
+
+En lugar de solo tener el estado oculto \(h_t\), la LSTM mantiene:
+
+- un **estado de memoria** \(c_t\) (a veces llamado *cell state*),
+- un **estado oculto** \(h_t\) (la “salida” en ese paso).
+
+En cada paso temporal \(t\), la LSTM procesa:
+
+- la entrada actual \(x_t\),
+- el estado oculto anterior \(h_{t-1}\),
+- el estado de memoria anterior \(c_{t-1}\).
+
+Y calcula:
+
+- una *puerta de olvido* \(f_t\),
+- una *puerta de entrada* \(i_t\),
+- una *candidata de memoria* \(\tilde{c}_t\),
+- una *puerta de salida* \(o_t\),
+- el nuevo estado de memoria \(c_t\),
+- el nuevo estado oculto \(h_t\).
+
+*** Ecuaciones de la LSTM
+
+Típicamente, las ecuaciones de una LSTM (versión “estándar”) son:
+
+#+begin_latex
+\begin{aligned}
+f_t &= \sigma(W_f [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i [h_{t-1}, x_t] + b_i) \\
+\tilde{c}_t &= \tanh(W_c [h_{t-1}, x_t] + b_c) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+o_t &= \sigma(W_o [h_{t-1}, x_t] + b_o) \\
+h_t &= o_t \odot \tanh(c_t)
+\end{aligned}
+#+end_latex
+
+donde:
+
+- \(\sigma\) es la función sigmoide,
+- \(\tanh\) es la tangente hiperbólica,
+- \(\odot\) es el producto elemento a elemento,
+- \([h_{t-1}, x_t]\) indica la concatenación de vectores.
+
+*** Interpretación de las puertas
+
+- \(f_t\) (*forget gate* o puerta de olvido):  
+  - Toma valores en \([0,1]\) (por la sigmoide).
+  - Decide cuánto de la memoria anterior \(c_{t-1}\) se conserva.
+  - Si \(f_t \approx 1\) → se mantiene casi toda la memoria anterior.
+  - Si \(f_t \approx 0\) → se olvida casi todo.
+
+- \(i_t\) (*input gate* o puerta de entrada):  
+  - Controla cuánta de la nueva información candidata \(\tilde{c}_t\) se
+    incorpora a la memoria.
+  - Valores cercanos a 1 permiten “escribir” nueva información; valores
+    cercanos a 0 bloquean escritura.
+
+- \(\tilde{c}_t\) (candidata de memoria):  
+  - Es el nuevo contenido potencial para la memoria.
+  - Se combina con \(i_t\) para actualizar \(c_t\).
+
+- \(c_t\) (*cell state*):  
+  - Es la memoria principal de la LSTM.
+  - Se actualiza como:
+    \[
+      c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t
+    \]
+  - Puede transportar información durante muchos pasos, ya que el
+    gradiente puede fluir a lo largo de \(c_t\) con menos atenuación.
+
+- \(o_t\) (*output gate* o puerta de salida):  
+  - Controla qué parte de la memoria \(c_t\) se expone como salida \(h_t\).
+
+- \(h_t\) (estado oculto / salida):  
+  - Es la “representación” que se usa para producir salidas en cada
+    paso, o para alimentar capas posteriores.
+
+** Intuición conceptual
+
+Una forma intuitiva de entender una LSTM es verla como una **celda de
+memoria con una “llave de escritura”, una “llave de borrado” y una
+“llave de lectura”**:
+
+- *Olvido*: la red decide qué partes de la memoria vieja ya no son
+  relevantes y las borra parcialmente (puerta \(f_t\)).
+- *Escritura*: la red decide qué nueva información vale la pena guardar
+  (puerta \(i_t\) y candidata \(\tilde{c}_t\)).
+- *Lectura*: la red decide qué parte de la memoria compartir como salida
+  (puerta \(o_t\)).
+
+Esto permite que la red conserve información importante durante muchos
+pasos temporales, por ejemplo:
+
+- el tema general de una oración,
+- la tendencia de una serie temporal,
+- el contexto de una conversación, etc.
+
+** Entrenamiento de una LSTM
+
+El entrenamiento de una LSTM sigue el mismo esquema general que otras
+redes neuronales:
+
+1. **Forward pass**:
+   - La secuencia completa \((x_1, x_2, \dots, x_T)\) se ingresa paso a
+     paso.
+   - En cada paso se actualizan \(c_t\) y \(h_t\).
+   - Se produce una salida (por ejemplo, en cada paso o solo al final).
+
+2. **Cálculo de la pérdida**:
+   - Se compara la salida de la red con la etiqueta real.
+   - Se usa una función de pérdida acorde al problema:
+     - Clasificación: entropía cruzada (multiclase o binaria).
+     - Regresión: error cuadrático medio (MSE), etc.
+
+3. **Backpropagation Through Time (BPTT)**:
+   - Se retropropaga el gradiente desde el último paso hacia los
+     primeros.
+   - Se actualizan los pesos de todas las puertas y conexiones.
+
+4. **Actualización de parámetros**:
+   - Se utilizan optimizadores como SGD, Adam, RMSprop.
+   - En la práctica, Adam y RMSprop son muy populares en LSTM.
+
+Gracias a la estructura de memoria, los gradientes a través de \(c_t\)
+tienden a **no desaparecer tan rápido** como en una RNN simple.
+
+** Tipos de tareas típicas con LSTM
+
+Las LSTM se aplican a muchas tareas de secuencia:
+
+- *Modelado de lenguaje*:
+  - Predecir la siguiente palabra de una oración.
+  - Asignar probabilidad a una secuencia de palabras.
+
+- *Traducción automática*:
+  - Modelos encoder–decoder (LSTM para codificar una oración, otra LSTM
+    para decodificar en otro idioma).
+
+- *Etiquetado secuencial*:
+  - Etiquetado de partes del habla (POS tagging).
+  - Reconocimiento de entidades nombradas (NER).
+
+- *Series temporales*:
+  - Predicción de valores futuros (ej. precios de acciones).
+  - Detección de anomalías en señales.
+
+- *Procesamiento de audio / voz*:
+  - Reconocimiento de voz.
+  - Síntesis de voz (en combinación con otras arquitecturas).
+
+** Variantes y extensiones de LSTM
+
+A partir de la LSTM estándar, han surgido múltiples variantes:
+
+- *LSTM bidireccional (Bidirectional LSTM)*:
+  - Procesa la secuencia en dos direcciones:
+    - de izquierda a derecha (forward),
+    - de derecha a izquierda (backward).
+  - Se concatena la información de ambos sentidos.
+  - Útil cuando se tiene acceso a la secuencia completa (texto, frases).
+
+- *Pilado de LSTMs (Stacked LSTM)*:
+  - Varias capas LSTM apiladas una sobre otra.
+  - Las salidas de una capa sirven de entradas a la siguiente.
+  - Permite aprender representaciones más complejas.
+
+- *LSTM con atención (Attention)*:
+  - Combinación de LSTM con mecanismos de atención.
+  - El modelo decide a qué partes de la secuencia “prestar más atención”
+    al hacer una predicción.
+
+- *GRU (Gated Recurrent Unit)*:
+  - Variante simplificada de LSTM (menos puertas, menos parámetros).
+  - Suele tener rendimiento comparable en muchos problemas.
+
+** Implementación básica en Python (Keras)
+
+A modo de ejemplo muy simple (no ligado a un dataset específico):
+
+#+begin_src python
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+# Supongamos una secuencia de longitud 10 con 5 features por timestep
+timesteps = 10
+features = 5
+num_samples = 100
+num_classes = 3
+
+# Datos aleatorios de ejemplo (solo para ilustrar la forma)
+X = np.random.randn(num_samples, timesteps, features)
+y = np.random.randint(0, num_classes, size=(num_samples,))
+
+# One-hot encoding
+y_onehot = tf.keras.utils.to_categorical(y, num_classes=num_classes)
+
+# Definir modelo LSTM
+model = Sequential([
+    LSTM(32, input_shape=(timesteps, features)),
+    Dense(num_classes, activation='softmax')
+])
+
+model.compile(
+    loss='categorical_crossentropy',
+    optimizer='adam',
+    metrics=['accuracy']
+)
+
+model.summary()
+
+# Entrenamiento de ejemplo
+model.fit(X, y_onehot, epochs=10, batch_size=16)
+#+end_src
+
+En este ejemplo:
+
+- La entrada tiene forma =(num_samples, timesteps, features)=.
+- La LSTM devuelve un vector (el último estado oculto).
+- La capa =Dense= con softmax produce una distribución de probabilidad
+  sobre las clases.
+
+** Ventajas y limitaciones de LSTM
+
+*** Ventajas
+
+- Manejan mejor dependencias de largo plazo que las RNN simples.
+- Funcionan bien en problemas donde el orden y el contexto importan.
+- Son muy flexibles y pueden combinarse con otras arquitecturas
+  (convolucionales, atención, etc.).
+
+*** Limitaciones
+
+- Entrenamiento relativamente costoso (más parámetros que RNN simple).
+- Difíciles de paralelizar completamente debido a su naturaleza
+  secuencial.
+- En tareas muy complejas y con grandes volúmenes de datos, han sido en
+  muchos casos superadas por arquitecturas basadas en *transformers*.
+
+** Conclusión
+
+Las LSTM representan un paso fundamental en la historia de las redes
+neuronales para secuencias:
+
+- resolvieron en gran medida el problema del desvanecimiento del
+  gradiente en RNN,
+- permitieron avances significativos en NLP, series temporales y voz,
+- siguen siendo una herramienta muy útil y educativa para entender cómo
+  las redes pueden “recordar” información a lo largo del tiempo.
+
+Aun cuando hoy en día los *transformers* dominen muchas aplicaciones de
+NLP, las LSTM siguen siendo:
+
+- una excelente base conceptual,
+- útiles en problemas con secuencias pequeñas o recursos limitados,
+- y una parte importante de la “caja de herramientas” de cualquier
+  persona que trabaja con aprendizaje profundo y datos secuenciales.
+
+
+* Ejemplo Clasificación del dataset Iris con una red LSTM
+
+Este apartado muestra un ejemplo completo en Python usando el dataset
+clásico Iris y una red neuronal recurrente del tipo *LSTM* (Long Short-Term Memory)
+usando la librería *Keras* (TensorFlow).
+
+El objetivo es clasificar flores Iris en tres clases:
+
+- Setosa
+- Versicolor
+- Virginica
+
+A diferencia del MLP (Perceptrón Multicapa), la LSTM está diseñada
+para procesar datos *secuenciales*. En este ejemplo, forzamos la
+estructura secuencial tratando las 4 características de Iris como una
+secuencia de 4 pasos temporales.
+
+** Importar librerías
+
+#+begin_src python
+import numpy as np
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+from tensorflow.keras.utils import to_categorical
+#+end_src
+
+** Cargar el dataset Iris
+
+#+begin_src python
+iris = load_iris()
+X = iris.data      # Características (150 x 4)
+y = iris.target    # Clases (150,)
+
+print(X.shape)     # (150, 4)
+print(y.shape)     # (150,)
+#+end_src
+
+Las 4 características son:
+
+- Largo del sépalo
+- Ancho del sépalo
+- Largo del pétalo
+- Ancho del pétalo
+
+Las clases están codificadas como:
+
+- 0 → Setosa
+- 1 → Versicolor
+- 2 → Virginica
+
+** Partición entrenamiento / prueba
+
+El siguiente fragmento de código realiza la partición del conjunto de
+datos original en dos subconjuntos disjuntos: uno destinado al
+entrenamiento del modelo y otro a su evaluación.
+
+#+begin_src python
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+#+end_src
+
+*** Propósito de la partición
+
+En aprendizaje automático supervisado, es fundamental evaluar la
+capacidad de generalización de un modelo. Para ello, los datos
+disponibles se dividen en:
+
+- *Conjunto de entrenamiento*: utilizado para ajustar los parámetros del modelo (pesos y sesgos).
+- *Conjunto de prueba*: utilizado exclusivamente para medir el desempeño del modelo sobre datos no vistos durante el entrenamiento.
+
+Esta separación permite detectar fenómenos como overfitting y
+underfitting, y proporciona una estimación más realista del
+rendimiento esperado en producción.
+
+*** Parámetro test_size
+
+#+begin_src python
+test_size = 0.2
+#+end_src
+
+indica que el 20 % del conjunto total de datos se reserva para el
+conjunto de prueba, mientras que el 80 % restante se utiliza para
+entrenamiento.
+
+*** Reproducibilidad del experimento
+
+El parámetro:
+
+#+begin_src python
+random_state = 42
+#+end_src
+
+fija la semilla del generador de números aleatorios utilizado durante
+la partición. Esto garantiza que la división de los datos sea
+reproducible.
+
+*** Estratificación de clases
+
+El parámetro:
+
+#+begin_src python
+stratify = y
+#+end_src
+
+indica que la división debe realizarse de forma estratificada,
+conservando la proporción original de cada clase en ambos
+subconjuntos.
+
+** Normalización de los datos
+
+La normalización de los datos de entrada es un paso crítico en el
+entrenamiento de redes neuronales (incluyendo LSTM), ya que influye
+directamente en la estabilidad numérica, la velocidad de convergencia
+y la eficacia del aprendizaje.
+
+Usaremos estandarización con =StandardScaler=:
+
+#+begin_src python
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+#+end_src
+
+Cada característica \(x\) se transforma según:
+
+#+begin_latex
+x' = \frac{x - \mu}{\sigma}
+#+end_latex
+
+donde:
+
+- \( \mu \) es la media de la característica,
+- \( \sigma \) es la desviación estándar.
+
+El resultado es:
+
+- media aproximadamente 0,
+- desviación estándar aproximadamente 1.
+
+** Preparar los datos para LSTM
+
+Las LSTM en Keras esperan entradas con forma:
+
+- \((n\_muestras, n\_timesteps, n\_features)\)
+
+En Iris, tenemos 4 características. Una forma simple de usar LSTM es:
+
+- considerar una secuencia de longitud 4 (=timesteps=4=),
+- con 1 característica por paso (=features=1=).
+
+Esto implica reestructurar cada muestra de forma (4,) a (4, 1):
+
+#+begin_src python
+# Reshape para LSTM: (n_muestras, timesteps=4, features=1)
+X_train_lstm = X_train.reshape((X_train.shape[0], 4, 1))
+X_test_lstm = X_test.reshape((X_test.shape[0], 4, 1))
+
+print(X_train_lstm.shape)  # (120, 4, 1)
+print(X_test_lstm.shape)   # (30, 4, 1)
+#+end_src
+
+Además, para clasificación multiclase con Keras, se suele usar
+one-hot encoding de las etiquetas:
+
+#+begin_src python
+num_classes = len(np.unique(y))
+y_train_cat = to_categorical(y_train, num_classes=num_classes)
+y_test_cat = to_categorical(y_test, num_classes=num_classes)
+#+end_src
+
+** Definir la red LSTM
+
+Definimos un modelo secuencial con una capa LSTM y una capa densa de
+salida con softmax:
+
+#+begin_src python
+model = Sequential([
+    LSTM(
+        units=16,           # número de unidades LSTM
+        activation='tanh',  # activación interna
+        input_shape=(4, 1)  # (timesteps=4, features=1)
+    ),
+    Dense(num_classes, activation='softmax')
+])
+#+end_src
+
+*** Arquitectura de la red
+
+- *Capa de entrada*:
+  - Forma: (4, 1)
+  - 4 pasos "temporales" (cada uno con 1 valor), derivados de las 4 características.
+
+- *Capa LSTM*:
+  - =units=16=: 16 unidades de memoria.
+  - Procesa la secuencia \((x_1, x_2, x_3, x_4)\) y genera una representación que captura
+    dependencias entre pasos.
+
+- *Capa de salida (Dense + softmax)*:
+  - 3 neuronas (una por clase).
+  - Activación softmax para obtener probabilidades.
+
+** Compilación del modelo
+
+Escogemos una función de pérdida apropiada para clasificación
+multiclase y un optimizador:
+
+#+begin_src python
+model.compile(
+    loss='categorical_crossentropy',
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    metrics=['accuracy']
+)
+#+end_src
+
+- =categorical_crossentropy=: log-loss multiclase.
+- *Adam*: optimizador basado en descenso de gradiente con momento y tasas
+  de aprendizaje adaptativas.
+- Tasa de aprendizaje inicial \(\eta = 0.001\).
+
+** Entrenamiento del modelo LSTM
+
+#+begin_src python
+history = model.fit(
+    X_train_lstm,
+    y_train_cat,
+    epochs=200,         # número de épocas
+    batch_size=16,
+    validation_split=0.1,
+    verbose=1
+)
+#+end_src
+
+Durante el entrenamiento:
+
+*** Propagación hacia adelante (forward pass)
+
+- Cada muestra de entrada se considera como una secuencia de 4 pasos.
+- En cada paso, la LSTM actualiza su:
+  - estado oculto \(h_t\),
+  - estado de memoria \(c_t\).
+
+*** Cálculo del error
+
+- La salida softmax se compara con la etiqueta real codificada en one-hot.
+- Se calcula la pérdida mediante entropía cruzada categórica.
+
+*** Backpropagation Through Time (BPTT)
+
+- El error se propaga hacia atrás a lo largo del tiempo (sobre los 4 pasos).
+- Se calculan los gradientes de los pesos de la LSTM y de la capa de salida.
+
+*** Descenso de gradiente con Adam
+
+- Adam combina Momentum y RMSProp.
+- Ajusta automáticamente la tasa de aprendizaje para cada parámetro.
+- Proporciona convergencia rápida y estable.
+
+** Evaluación del modelo
+
+Una vez entrenado el modelo, se evalúa su desempeño usando datos no
+vistos (conjunto de prueba).
+
+#+begin_src python
+# Probabilidades por clase
+y_pred_proba = model.predict(X_test_lstm)
+
+# Clase predicha = índice de la probabilidad máxima
+y_pred = np.argmax(y_pred_proba, axis=1)
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nReporte de clasificación:\n")
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+#+end_src
+
+*** Métricas utilizadas
+
+- *Accuracy*: proporción total de predicciones correctas.
+- *Precision*: qué tan confiables son las predicciones positivas.
+- *Recall*: capacidad del modelo para encontrar todos los ejemplos de una clase.
+- *F1-score*: balance entre precisión y recall.
+
+En el dataset Iris, el accuracy también suele estar en el rango del
+95 % al 100 %.
+
+** Predicción con una nueva flor
+
+El modelo entrenado puede utilizarse para predecir nuevas muestras.
+Es importante repetir el mismo preprocesamiento: normalización y
+reshape para LSTM.
+
+#+begin_src python
+# [largo_sepalo, ancho_sepalo, largo_petalo, ancho_petalo]
+flor_nueva = np.array([[5.1, 3.5, 1.4, 0.2]])
+
+# 1) Normalización con el mismo scaler del entrenamiento
+flor_nueva_scaled = scaler.transform(flor_nueva)
+
+# 2) Reshape para LSTM: (1, timesteps=4, features=1)
+flor_nueva_lstm = flor_nueva_scaled.reshape((1, 4, 1))
+
+# 3) Predicción
+proba = model.predict(flor_nueva_lstm)
+prediccion = np.argmax(proba, axis=1)
+
+print("Clase predicha:", iris.target_names[prediccion[0]])
+#+end_src
+
+Es fundamental aplicar la misma normalización y la misma estructura de
+entrada (forma (1, 4, 1)) que se usaron en el entrenamiento.
+
+** Interpretación matemática básica de la LSTM
+
+En una LSTM, en cada paso temporal \(t\) se procesan:
+
+- la entrada \(x_t\),
+- el estado oculto anterior \(h_{t-1}\),
+- el estado de memoria anterior \(c_{t-1}\).
+
+La LSTM utiliza *puertas* que controlan el flujo de información:
+
+#+begin_latex
+\begin{aligned}
+f_t &= \sigma(W_f [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i [h_{t-1}, x_t] + b_i) \\
+\tilde{c}_t &= \tanh(W_c [h_{t-1}, x_t] + b_c) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+o_t &= \sigma(W_o [h_{t-1}, x_t] + b_o) \\
+h_t &= o_t \odot \tanh(c_t)
+\end{aligned}
+#+end_latex
+
+donde:
+
+- \(\sigma\) es la función sigmoide,
+- \(\odot\) denota el producto elemento a elemento.
+
+Al final de la secuencia (tras los 4 pasos), el último estado oculto
+\(h_T\) se pasa a la capa densa con función softmax:
+
+#+begin_latex
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
+#+end_latex
+
+lo que permite interpretar las salidas como probabilidades para cada
+clase (Setosa, Versicolor, Virginica).
 
 
 * Bibliografía  Deep Learning
@@ -622,7 +2793,7 @@ Ideales para entender cómo funciona el "motor" de una red neuronal sin usar her
 - *Descripción:* Basado en código puro de Python. Muy popular entre autodidactas.
 - *Web:* [[https://nnfs.io/][Sitio Oficial de NNFS]]
 
-* Tabla Comparativa para Elección Rápida
+** Tabla Comparativa para Elección Rápida
 
 | Libro      | Nivel        | Enfoque Principal  | Tecnología           |
 |------------+--------------+--------------------+----------------------|
