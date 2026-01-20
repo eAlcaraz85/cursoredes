@@ -318,6 +318,12 @@ rmdir /s /q venv
 
 
 
+** Agregar a jupyter notebook
+
+#+BEGIN_SRC shell
+pip install ipykernel
+python -m ipykernel install --user --name=redes --display-name="redes"
+#+END_SRC
 
 * Introducción a la Inteligencia Artificial (IA)
 ** Definición formal
