@@ -1217,7 +1217,9 @@ Cargar el dataset Iris
 
 #+begin_src python
 iris = load_iris()
-X = iris.data # Características (150 x 4) y = iris.target # Clases (150,)
+X = iris.data #
+#Características (150 x 4)
+y = iris.target # Clases (150,)
 print(X.shape) print(y.shape)
 #+end_src
 
@@ -1249,7 +1251,8 @@ capacidad de generalización de un modelo. Para ello, los datos
 disponibles se dividen en:
 
 - *Conjunto de entrenamiento*: utilizado para ajustar los parámetros del modelo (pesos y sesgos).
-- *Conjunto de prueba*: utilizado exclusivamente para medir el desempeño del modelo sobre datos no vistos durante el entrenamiento.
+- *Conjunto de prueba*: utilizado exclusivamente para medir el desempeño
+  del modelo sobre datos no vistos durante el entrenamiento.
 
 Esta separación permite detectar fenómenos como overfitting y
 underfitting, y proporciona una estimación más realista del
@@ -2068,6 +2071,1077 @@ entrenamiento, evaluación, predicción) puede adaptarse a otros modelos
 o multiclase.
 
 
+* Juego de Bala y Salto con MLP
+
+** Introducción
+*** ¿Qué es este juego?
+
+Este es un juego que combina mecánicas de juego simples con
+aprendizaje automático (Machine Learning). El objetivo es entrenar una
+red neuronal (MLP - Multi-Layer Perceptron) para que aprenda a jugar
+imitando tu estilo de juego.
+
+*** Concepto principal
+
+- Tú juegas en modo MANUAL y el juego registra tus decisiones.
+- El modelo MLP aprende de tus patrones de juego.
+- En modo AUTO, el MLP juega por ti usando lo que aprendió.
+
+*** Objetivo del juego
+
+Esquivar las balas que vienen desde la derecha saltando en el momento adecuado. El MLP aprende cuándo saltar basándose en:
+- La velocidad de la bala
+- La distancia entre el jugador y la bala
+
+** Requisitos e Instalación
+*** Dependencias necesarias
+
+El juego requiere las siguientes librerías de Python:
+
+#+BEGIN_SRC python
+pygame >= 2.6.0
+scikit-learn >= 1.0.0
+matplotlib >= 3.5.0
+numpy >= 1.21.0
+#+END_SRC
+
+*** Instalación
+
+#+BEGIN_SRC bash
+pip install pygame scikit-learn matplotlib numpy
+#+END_SRC
+
+*** Estructura de archivos
+
+El proyecto contiene:
+
+- =juego_pygame_mlp.py= :: Juego principal con MLP
+- =juego_pygame_mlp_plot.py= :: Script para visualizar datos del CSV
+- =datos_mlp.csv= :: Datos exportados (se genera al usar la opción C)
+- =assets/= :: Carpeta con sprites y fondos del juego
+
+** Cómo Jugar
+*** Iniciar el juego
+
+#+BEGIN_SRC bash
+python juego_pygame_mlp.py
+#+END_SRC
+
+*** Menú principal
+
+Al iniciar verás un menú con las siguientes opciones:
+
+| Tecla | Acción |
+|-------+--------|
+| M | Modo Manual (reinicia dataset y borra modelo) |
+| A | Modo Auto (usa MLP; sin modelo NO salta) |
+| T | Entrenar MLP |
+| C | Exportar datos a CSV |
+| F | Fullscreen (toggle) |
+| Q | Salir |
+
+*** Controles durante el juego
+
+| Tecla | Acción |
+|-------+--------|
+| ESPACIO | Saltar (solo en modo manual) |
+| ESC / P | Volver al menú |
+| F | Alternar pantalla completa |
+| Q | Salir del juego |
+
+** Modo Manual: Recolectando Datos
+*** ¿Qué hace el modo manual?
+
+En modo manual, tú controlas al personaje y el juego registra automáticamente:
+- La velocidad de cada bala
+- La distancia entre el jugador y la bala
+- Si decidiste saltar (1) o no saltar (0) en cada frame
+
+*** Cómo jugar en modo manual
+
+1. Presiona =M= en el menú para entrar en modo manual
+2. El juego se reinicia y borra cualquier modelo anterior
+3. Juega normalmente usando ESPACIO para saltar
+4. El juego registra tus decisiones en cada frame donde hay una bala activa
+
+*** Consejos para recolectar buenos datos
+
+- Juega de forma natural, como lo harías normalmente
+- Mezcla situaciones: a veces salta temprano, a veces tarde, a veces no saltes
+- Juega varias partidas para tener más datos
+- Intenta tener al menos 80+ muestras antes de entrenar (verás el contador en el menú)
+
+*** Registro de datos
+
+El juego registra datos en cada frame donde:
+- La bala está disparada
+- El jugador está en el suelo (para decisiones de salto)
+- O está en el aire (marcado como salto=1 durante todo el tiempo en el aire)
+
+** Entrenamiento del Modelo MLP
+*** ¿Qué es un MLP?
+
+MLP (Multi-Layer Perceptron) es un tipo de red neuronal artificial que:
+- Tiene capas ocultas entre la entrada y la salida
+- Puede aprender patrones no lineales
+- En este juego: aprende a predecir cuándo saltar basándose en velocidad y distancia
+
+*** Arquitectura del modelo
+
+El MLP usado en este juego tiene:
+- Entrada: 2 características (velocidad_bala, distancia)
+- Capas ocultas: (24, 12) neuronas
+- Salida: 1 neurona (probabilidad de salto: 0 o 1)
+- Activación: ReLU
+- Optimizador: Adam
+
+*** Cómo entrenar
+
+1. Recolecta datos en modo manual (al menos 80 muestras)
+2. Presiona =T= en el menú para entrenar
+3. El modelo se entrena automáticamente:
+   - Divide los datos en entrenamiento (80%) y prueba (20%)
+   - Normaliza las características con StandardScaler
+   - Entrena el MLP con hasta 3000 iteraciones
+4. Verás un mensaje con la precisión (accuracy) del modelo
+
+*** Casos especiales
+
+- Si tienes menos de 80 muestras: el entrenamiento fallará con un mensaje
+- Si solo tienes una clase (solo 0s o solo 1s): se crea un "modelo trivial" que siempre devuelve esa clase
+- Para un modelo útil: necesitas datos con ambas clases (0 y 1)
+
+*** Interpretando los resultados
+
+- Accuracy ≈ 0.5-0.6: El modelo no está aprendiendo bien, necesitas más datos variados
+- Accuracy ≈ 0.7-0.8: El modelo está aprendiendo, pero puede mejorar
+- Accuracy ≈ 0.8-0.9: Buen modelo, está capturando tus patrones
+- Accuracy > 0.9: Excelente, el modelo imita muy bien tu estilo
+
+** Modo Auto: El MLP Juega Solo
+*** ¿Qué hace el modo auto?
+
+En modo auto, el MLP toma las decisiones de salto basándose en lo que aprendió de ti.
+
+*** Cómo activar modo auto
+
+1. Primero debes entrenar un modelo (presiona =T=)
+2. Luego presiona =A= en el menú
+3. El juego se reinicia y el MLP controla los saltos
+
+*** Visualización en tiempo real
+
+Mientras juegas en modo auto, verás en la esquina superior izquierda:
+- =proba_salto≈0.XX= :: La probabilidad que el modelo calcula de que debería saltar
+
+*** Limitaciones del modo auto
+
+- Si no hay modelo entrenado, el modo auto no saltará nunca
+- El modelo solo puede hacer lo que aprendió de tus datos
+- Si tus datos son inconsistentes, el modelo también lo será
+
+** Exportación y Visualización de Datos
+*** Exportar a CSV
+
+1. En el menú, presiona =C=
+2. Se crea/sobrescribe el archivo =datos_mlp.csv=
+3. El CSV contiene tres columnas:
+   - =velocidad_bala= :: Velocidad de la bala (negativa, en píxeles/frame)
+   - =distancia= :: Distancia entre jugador y bala (en píxeles)
+   - =salto= :: 1 si saltaste, 0 si no saltaste
+
+*** Visualizar los datos
+
+Para ver gráficas de tus datos:
+
+#+BEGIN_SRC bash
+python juego_pygame_mlp_plot.py
+#+END_SRC
+
+Esto abre dos ventanas:
+- Gráfica 2D: Distancia vs Velocidad (colores: rojo=salto, azul=no salto)
+- Gráfica 3D: Distancia, Velocidad y Clase (0 abajo, 1 arriba)
+
+*** Interpretando las gráficas
+
+- Si ves dos nubes bien separadas: tus datos son consistentes, el modelo debería aprender bien
+- Si las nubes están mezcladas: tus decisiones son más variadas, el modelo puede tener más dificultad
+- Si solo ves una nube: solo tienes una clase, necesitas más variedad en tus datos
+
+** Arquitectura del Código
+*** Estructura principal
+
+El código está organizado en una clase =Juego= con los siguientes módulos:
+
+- =__init__= :: Inicialización de pygame, ventana, estado del juego
+- =_apply_resolution= :: Manejo de escalado y resolución
+- =_cargar_assets= :: Carga de sprites e imágenes
+- =_reset_estado_juego= :: Reinicia posiciones y estado
+- =disparar_bala= / =reset_bala= :: Lógica de las balas
+- =iniciar_salto= / =manejar_salto= :: Física del salto
+- =registrar_decision_manual= :: Guarda datos mientras juegas
+- =entrenar_modelo= :: Entrena el MLP con los datos recolectados
+- =decision_auto_saltar= :: El MLP decide si saltar o no
+- =mostrar_menu= :: Menú principal
+- =loop= :: Bucle principal del juego
+
+*** Clase Sample
+
+#+BEGIN_SRC python
+@dataclass
+class Sample:
+    velocidad_bala: float
+    distancia: float
+    salto: int  # 1 si saltó EN ESE FRAME, 0 si no
+#+END_SRC
+
+Cada muestra representa una decisión en un frame específico.
+
+*** Flujo de datos
+
+1. Modo Manual:
+   - Juegas → =registrar_decision_manual()= → =datos_modelo.append(Sample(...))=
+   
+2. Entrenamiento:
+   - =datos_modelo= → =entrenar_modelo()= → MLP entrenado guardado en =self.modelo=
+   
+3. Modo Auto:
+   - Cada frame → =decision_auto_saltar()= → MLP predice → Salta o no salta
+
+** Parámetros Configurables
+*** Parámetros del juego
+
+| Variable | Valor | Descripción |
+|----------+-------+-------------|
+| =BASE_W, BASE_H= | 1080, 720 | Tamaño base de la ventana |
+| =velocidad_bala= | -12 a -6 | Rango de velocidad de las balas |
+| =salto_vel_inicial= | 15.0 | Velocidad inicial del salto |
+| =gravedad= | 1.0 | Fuerza de gravedad |
+| =fondo_speed= | 3 | Velocidad de desplazamiento del fondo |
+
+*** Parámetros del MLP
+
+| Variable | Valor | Descripción |
+|----------+-------+-------------|
+| =hidden_layer_sizes= | (24, 12) | Neuronas en cada capa oculta |
+| =activation= | "relu" | Función de activación |
+| =solver= | "adam" | Algoritmo de optimización |
+| =max_iter= | 3000 | Máximo de iteraciones de entrenamiento |
+| =test_size= | 0.2 | 20% de los datos para prueba |
+
+*** Parámetros de registro
+
+| Variable | Valor | Descripción |
+|----------+-------+-------------|
+| =decision_window= | 500 | Ventana de decisión (ya no se usa, registra todo) |
+| =min_samples= | 80 | Mínimo de muestras para entrenar |
+
+** Mejores Prácticas
+*** Recolectando datos de calidad
+
+- Juega varias partidas (no solo una)
+- Varía tu estilo: a veces conservador, a veces agresivo
+- Asegúrate de tener ejemplos de ambas clases (saltos y no-saltos)
+- Recolecta al menos 200-300 muestras para un modelo robusto
+
+*** Entrenando el modelo
+
+- Siempre revisa el accuracy: si es muy bajo (<0.6), recolecta más datos
+- Si el accuracy es perfecto (1.0), puede ser sobreajuste: prueba con más datos de prueba
+- Exporta el CSV y visualiza los datos para ver si hay patrones claros
+
+*** Jugando en modo auto
+
+- Observa la probabilidad en tiempo real (=proba_salto≈XX=)
+- Si el modelo nunca salta o siempre salta, revisa tus datos
+- Compara el comportamiento del modelo con cómo tú jugarías
+
+** Solución de Problemas
+*** El modelo no aprende (accuracy < 0.5)
+
+- Posibles causas:
+  - Datos insuficientes (< 80 muestras)
+  - Solo una clase en los datos (solo 0s o solo 1s)
+  - Datos muy inconsistentes o aleatorios
+- Solución:
+  - Recolecta más datos variados
+  - Asegúrate de tener ejemplos de ambas clases
+  - Juega de forma más consistente
+
+*** El modo auto no salta nunca
+
+- Verifica que el modelo esté entrenado (=Modelo: sí= en el menú)
+- Si el modelo es trivial de clase 0, siempre dirá "no saltar"
+- Solución: recolecta datos donde sí saltas y reentrena
+
+*** El modo auto salta demasiado
+
+- El modelo aprendió que siempre debes saltar
+- Solución: recolecta más datos donde NO saltas y reentrena
+
+*** Las gráficas no se muestran
+
+- Verifica que tengas =matplotlib= instalado
+- Verifica que el CSV tenga datos válidos
+- Ejecuta =juego_pygame_mlp_plot.py= desde la terminal
+
+*** El juego se ve lento o con lag
+
+- Reduce los FPS en =reloj.tick(45)= a un valor menor (ej: 30)
+- Cierra otras aplicaciones que consuman recursos
+- Verifica que tu sistema tenga aceleración gráfica habilitada
+
+** Conceptos Técnicos Avanzados
+*** ¿Por qué MLP y no otro algoritmo?
+
+- MLP puede aprender patrones no lineales (la relación velocidad-distancia-salto no es lineal)
+- Es relativamente simple y rápido de entrenar
+- Funciona bien con pocas características (solo 2 en este caso)
+
+*** Normalización (StandardScaler)
+
+Las características se normalizan porque:
+- La velocidad de la bala y la distancia tienen escalas muy diferentes
+- El MLP funciona mejor con datos normalizados
+- Ayuda a que el entrenamiento converja más rápido
+
+*** División train/test
+
+- 80% entrenamiento, 20% prueba
+- Estratificado (=stratify=y=) para mantener proporción de clases
+- El accuracy en test es más confiable que en entrenamiento
+
+*** Overfitting y Underfitting
+
+- Overfitting: El modelo memoriza los datos de entrenamiento pero falla en nuevos datos
+- Underfitting: El modelo no aprende lo suficiente
+- En este juego: si accuracy test << accuracy train → overfitting
+
+
+**  Código de Ejemplo
+*** Cargar y visualizar datos manualmente
+
+#+BEGIN_SRC python
+import csv
+import matplotlib.pyplot as plt
+
+# Cargar CSV
+xs, ys, cs = [], [], []
+with open("datos_mlp.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        xs.append(float(row["distancia"]))
+        ys.append(float(row["velocidad_bala"]))
+        cs.append(int(row["salto"]))
+
+# Separar por clases
+xs_0 = [x for x, c in zip(xs, cs) if c == 0]
+ys_0 = [y for y, c in zip(ys, cs) if c == 0]
+xs_1 = [x for x, c in zip(xs, cs) if c == 1]
+ys_1 = [y for y, c in zip(ys, cs) if c == 1]
+
+# Graficar
+plt.scatter(xs_0, ys_0, c="blue", label="No salto")
+plt.scatter(xs_1, ys_1, c="red", label="Salto")
+plt.xlabel("Distancia")
+plt.ylabel("Velocidad")
+plt.legend()
+plt.show()
+#+END_SRC
+
+*** Entrenar modelo desde CSV
+
+#+BEGIN_SRC python
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
+import csv
+
+# Cargar datos
+X, y = [], []
+with open("datos_mlp.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        X.append([float(row["velocidad_bala"]), float(row["distancia"])])
+        y.append(int(row["salto"]))
+
+# Normalizar
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Entrenar
+modelo = MLPClassifier(hidden_layer_sizes=(24, 12), max_iter=3000)
+modelo.fit(X_scaled, y)
+
+# Predecir
+nueva_velocidad = -8.5
+nueva_distancia = 250.0
+X_nuevo = scaler.transform([[nueva_velocidad, nueva_distancia]])
+probabilidad = modelo.predict_proba(X_nuevo)[0][1]
+print(f"Probabilidad de salto: {probabilidad:.2f}")
+#+END_SRC
+
+
+
+
+* Métricas de Evaluación para Machine Learning
+
+** Introducción
+*** ¿Qué son las métricas de evaluación?
+
+Las métricas de evaluación son medidas numéricas que nos permiten cuantificar qué tan bien está funcionando un modelo de Machine Learning. Nos ayudan a:
+- Comparar diferentes modelos
+- Entender las fortalezas y debilidades del modelo
+- Decidir si un modelo es útil para nuestro problema
+- Detectar problemas como sobreajuste o sesgo
+
+*** ¿Por qué son importantes?
+
+Un modelo puede tener un accuracy alto pero aún así tener problemas graves. Por ejemplo:
+- Un modelo que siempre predice "no salto" tendría 90% accuracy si el 90% de los casos son "no salto"
+- Pero sería inútil porque nunca saltaría cuando debería
+
+Las métricas nos ayudan a detectar estos problemas.
+
+** Matriz de Confusión: La Base de Todo
+*** ¿Qué es una matriz de confusión?
+
+La matriz de confusión es una tabla que muestra cómo se clasificaron las predicciones del modelo comparadas con los valores reales.
+
+*** Estructura de la matriz (2 clases)
+
+Para un problema de clasificación binaria (como nuestro juego: salto=1, no salto=0):
+
+#+BEGIN_EXAMPLE
+                    Predicción
+                 No Salto  Salto
+Real  No Salto     TN      FP
+      Salto        FN      TP
+#+END_EXAMPLE
+
+Donde:
+- =TP= (True Positive): Predijo salto y era salto ✓
+- =TN= (True Negative): Predijo no salto y era no salto ✓
+- =FP= (False Positive): Predijo salto pero era no salto ✗
+- =FN= (False Negative): Predijo no salto pero era salto ✗
+
+*** Interpretación en el contexto del juego
+
+| Caso | Significado en el juego |
+|------+--------------------------|
+| TP | El modelo saltó y era correcto hacerlo |
+| TN | El modelo no saltó y era correcto no saltar |
+| FP | El modelo saltó innecesariamente (gasto de salto) |
+| FN | El modelo NO saltó cuando debería haber saltado (¡colisión!) |
+
+*** Ejemplo práctico
+
+Supongamos que el modelo hizo 100 predicciones:
+
+#+BEGIN_EXAMPLE
+                    Predicción
+                 No Salto  Salto  Total
+Real  No Salto      70      10     80
+      Salto          5      15     20
+      Total          75      25    100
+#+END_EXAMPLE
+
+- TP = 15 (saltó correctamente 15 veces)
+- TN = 70 (no saltó correctamente 70 veces)
+- FP = 10 (saltó innecesariamente 10 veces)
+- FN = 5 (no saltó cuando debía 5 veces → ¡5 colisiones!)
+
+** Accuracy (Precisión General)
+*** Definición
+
+Accuracy mide la proporción de predicciones correctas sobre el total:
+
+\[
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{\text{Predicciones correctas}}{\text{Total de predicciones}}
+\]
+
+*** Cálculo del ejemplo anterior
+
+\[
+\text{Accuracy} = \frac{15 + 70}{100} = \frac{85}{100} = 0.85 = 85\%
+\]
+
+*** Ventajas
+
+- Fácil de entender: "¿Qué porcentaje acertó?"
+- Útil cuando las clases están balanceadas
+- Buena métrica general para comparar modelos
+
+*** Desventajas
+
+- Puede ser engañosa con clases desbalanceadas
+- No distingue entre tipos de errores
+- Un modelo que siempre predice la clase mayoritaria puede tener buen accuracy
+
+*** Ejemplo del problema
+
+Si en el juego el 90% de los casos son "no salto":
+- Un modelo que siempre dice "no salto" tendría 90% accuracy
+- Pero sería inútil porque nunca saltaría
+- Accuracy alto ≠ modelo bueno
+
+*** Cuándo usar Accuracy
+
+- Clases balanceadas (50-50 o similar)
+- Todos los errores tienen el mismo costo
+- Quieres una métrica simple y general
+
+** Precision (Precisión)
+*** Definición
+
+Precision mide: "De todas las veces que predije salto, ¿cuántas eran correctas?"
+
+\[
+\text{Precision} = \frac{TP}{TP + FP} = \frac{\text{Verdaderos positivos}}{\text{Todos los positivos predichos}}
+\]
+
+*** Cálculo del ejemplo
+
+\[
+\text{Precision} = \frac{15}{15 + 10} = \frac{15}{25} = 0.60 = 60\%
+\]
+
+*** Interpretación
+
+- De las 25 veces que el modelo decidió saltar, solo 15 eran correctas
+- 10 veces saltó innecesariamente (FP)
+- "Cuando el modelo dice que hay que saltar, ¿qué tan confiable es?"
+
+*** En el contexto del juego
+
+- Precision alta: Cuando el modelo decide saltar, casi siempre es correcto
+- Precision baja: El modelo salta demasiado, muchas veces innecesariamente
+- Costo: Saltos innecesarios no son críticos, pero desperdician recursos
+
+*** Cuándo es importante
+
+- Los falsos positivos son costosos
+- Quieres minimizar acciones innecesarias
+- Ejemplo: Sistema de spam (no quieres marcar emails legítimos como spam)
+
+** Recall (Sensibilidad o Exhaustividad)
+*** Definición
+
+Recall mide: "De todos los casos donde realmente debía saltar, ¿cuántos detecté?"
+
+\[
+\text{Recall} = \frac{TP}{TP + FN} = \frac{\text{Verdaderos positivos}}{\text{Todos los positivos reales}}
+\]
+
+*** Cálculo del ejemplo
+
+\[
+\text{Recall} = \frac{15}{15 + 5} = \frac{15}{20} = 0.75 = 75\%
+\]
+
+*** Interpretación
+
+- De las 20 veces que realmente debía saltar, el modelo detectó 15
+- 5 veces no saltó cuando debía (FN) → ¡5 colisiones!
+- "¿Qué porcentaje de las situaciones peligrosas detecta el modelo?"
+
+*** En el contexto del juego
+
+- Recall alto: El modelo detecta casi todas las situaciones donde debe saltar
+- Recall bajo: El modelo se pierde muchas situaciones peligrosas → muchas colisiones
+- Costo: Falsos negativos son MUY costosos (colisiones = perder)
+
+*** Cuándo es crítico
+
+- Los falsos negativos son muy costosos
+- Es mejor "sobre-detectar" que "sub-detectar"
+- Ejemplos: Detección de cáncer, detección de fraude, nuestro juego
+
+*** Trade-off Precision vs Recall
+
+Generalmente hay un trade-off:
+- Si aumentas el umbral de decisión → más Precision, menos Recall
+- Si disminuyes el umbral → más Recall, menos Precision
+
+En el juego:
+- Umbral alto (0.7): Solo salta cuando está muy seguro → alta Precision, bajo Recall
+- Umbral bajo (0.3): Salta con más frecuencia → bajo Precision, alto Recall
+
+** F1-Score: El Balance Perfecto
+*** Definición
+
+F1-Score es la media armónica de Precision y Recall:
+
+\[
+F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \times TP}{2 \times TP + FP + FN}
+\]
+
+*** Cálculo del ejemplo
+
+\[
+F1 = 2 \times \frac{0.60 \times 0.75}{0.60 + 0.75} = 2 \times \frac{0.45}{1.35} = 0.667 = 66.7\%
+\]
+
+*** ¿Por qué media armónica y no aritmética?
+
+La media armónica penaliza más cuando una métrica es muy baja:
+- Si Precision = 0.1 y Recall = 0.9 → F1 = 0.18 (bajo)
+- Si Precision = 0.5 y Recall = 0.5 → F1 = 0.5 (mejor balance)
+
+*** Ventajas
+
+- Balancea Precision y Recall
+- Útil cuando necesitas ambas métricas
+- No se ve afectado por clases desbalanceadas tanto como Accuracy
+
+*** Desventajas
+
+- Puede ocultar problemas si una métrica es muy baja
+- No siempre es la métrica más importante
+
+*** Cuándo usar F1-Score
+
+- Necesitas balance entre Precision y Recall
+- Las clases están desbalanceadas
+- Quieres una métrica única que considere ambos aspectos
+
+** Especificidad
+*** Definición
+
+Especificidad mide: "De todos los casos donde NO debía saltar, ¿cuántos detecté correctamente?"
+
+\[
+\text{Especificidad} = \frac{TN}{TN + FP} = \frac{\text{Verdaderos negativos}}{\text{Todos los negativos reales}}
+\]
+
+*** Cálculo del ejemplo
+
+\[
+\text{Especificidad} = \frac{70}{70 + 10} = \frac{70}{80} = 0.875 = 87.5\%
+\]
+
+*** Interpretación
+
+- De las 80 veces que NO debía saltar, el modelo acertó 70
+- 10 veces saltó innecesariamente
+- Es el "Recall de la clase negativa"
+
+*** En el contexto del juego
+
+- Especificidad alta: El modelo rara vez salta innecesariamente
+- Especificidad baja: El modelo salta demasiado cuando no es necesario
+
+** Comparación de Métricas: Tabla Resumen
+*** Valores del ejemplo
+
+| Métrica | Valor | Interpretación |
+|---------+-------+----------------|
+| Accuracy | 85% | 85 de cada 100 predicciones fueron correctas |
+| Precision | 60% | De cada 10 saltos predichos, 6 eran correctos |
+| Recall | 75% | De cada 10 situaciones peligrosas, detectó 7.5 |
+| F1-Score | 66.7% | Balance entre Precision y Recall |
+| Especificidad | 87.5% | De cada 10 casos seguros, detectó 8.75 correctamente |
+
+*** ¿Qué métrica usar?
+
+| Situación | Métrica recomendada |
+|-----------+---------------------|
+| Clases balanceadas, errores igual costo | Accuracy |
+| Falsos positivos muy costosos | Precision |
+| Falsos negativos muy costosos | Recall |
+| Necesitas balance Precision/Recall | F1-Score |
+| Clases muy desbalanceadas | F1-Score o Recall |
+| Quieres ver todo el panorama | Matriz de confusión + todas |
+
+** Casos de Uso en el Juego
+*** Escenario 1: Modelo Conservador
+
+Un modelo que casi nunca salta:
+
+#+BEGIN_EXAMPLE
+                    Predicción
+                 No Salto  Salto
+Real  No Salto      75       5
+      Salto         15       5
+#+END_EXAMPLE
+
+- Accuracy: 80% (80/100)
+- Precision: 50% (5/10) - Cuando salta, acierta la mitad
+- Recall: 25% (5/20) - Solo detecta 1 de cada 4 peligros → ¡MUCHAS COLISIONES!
+- F1: 33.3%
+
+**Veredicto**: Mal modelo para el juego. Aunque tiene buen accuracy, tiene muy bajo Recall → muchas colisiones.
+
+*** Escenario 2: Modelo Agresivo
+
+Un modelo que salta muy frecuentemente:
+
+#+BEGIN_EXAMPLE
+                    Predicción
+                 No Salto  Salto
+Real  No Salto      50      30
+      Salto           2      18
+#+END_EXAMPLE
+
+- Accuracy: 68% (68/100)
+- Precision: 37.5% (18/48) - Muchos saltos innecesarios
+- Recall: 90% (18/20) - Detecta casi todos los peligros
+- F1: 53.3%
+
+**Veredicto**: Mejor que el conservador. Aunque tiene muchos saltos innecesarios, evita casi todas las colisiones.
+
+*** Escenario 3: Modelo Balanceado (Ideal)
+
+Un modelo bien entrenado:
+
+#+BEGIN_EXAMPLE
+                    Predicción
+                 No Salto  Salto
+Real  No Salto      70      10
+      Salto           3      17
+#+END_EXAMPLE
+
+- Accuracy: 87% (87/100)
+- Precision: 63% (17/27)
+- Recall: 85% (17/20) - Detecta la mayoría de peligros
+- F1: 72.3%
+
+**Veredicto**: Buen modelo. Balance entre evitar colisiones y no saltar innecesariamente.
+
+** Implementación en Python
+*** Cálculo manual de métricas
+
+#+BEGIN_SRC python
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+
+# Ejemplo con predicciones y valores reales
+y_real = [0, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+y_pred = [0, 0, 1, 1, 1, 0, 0, 1, 0, 1]
+
+# Matriz de confusión
+cm = confusion_matrix(y_real, y_pred)
+print("Matriz de confusión:")
+print(cm)
+# [[4 1]   # TN=4, FP=1
+#  [1 4]]  # FN=1, TP=4
+
+# Métricas
+accuracy = accuracy_score(y_real, y_pred)
+precision = precision_score(y_real, y_pred)
+recall = recall_score(y_real, y_pred)
+f1 = f1_score(y_real, y_pred)
+
+print(f"Accuracy: {accuracy:.2%}")
+print(f"Precision: {precision:.2%}")
+print(f"Recall: {recall:.2%}")
+print(f"F1-Score: {f1:.2%}")
+#+END_SRC
+
+*** Reporte completo de clasificación
+
+#+BEGIN_SRC python
+from sklearn.metrics import classification_report
+
+y_real = [0, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+y_pred = [0, 0, 1, 1, 1, 0, 0, 1, 0, 1]
+
+report = classification_report(y_real, y_pred, target_names=['No Salto', 'Salto'])
+print(report)
+#+END_SRC
+
+Salida esperada:
+#+BEGIN_EXAMPLE
+              precision    recall  f1-score   support
+
+    No Salto       0.80      0.80      0.80         5
+       Salto       0.80      0.80      0.80         5
+
+    accuracy                           0.80        10
+   macro avg       0.80      0.80      0.80        10
+weighted avg       0.80      0.80      0.80        10
+#+END_EXAMPLE
+
+*** Visualización de la matriz de confusión
+
+#+BEGIN_SRC python
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+
+y_real = [0, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+y_pred = [0, 0, 1, 1, 1, 0, 0, 1, 0, 1]
+
+cm = confusion_matrix(y_real, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['No Salto', 'Salto'],
+            yticklabels=['No Salto', 'Salto'])
+plt.ylabel('Real')
+plt.xlabel('Predicción')
+plt.title('Matriz de Confusión')
+plt.show()
+#+END_SRC
+
+** Mejorando el Juego con Métricas
+*** Añadir métricas al entrenamiento
+
+Podemos modificar =entrenar_modelo()= para mostrar más métricas:
+
+#+BEGIN_SRC python
+from sklearn.metrics import classification_report, confusion_matrix
+
+def entrenar_modelo_mejorado(self) -> Tuple[bool, str]:
+    # ... código de entrenamiento existente ...
+    
+    # Predicciones en el conjunto de prueba
+    y_pred = clf.predict(X_test)
+    
+    # Matriz de confusión
+    cm = confusion_matrix(y_test, y_pred)
+    print("\nMatriz de Confusión:")
+    print(cm)
+    
+    # Reporte completo
+    report = classification_report(y_test, y_pred, 
+                                   target_names=['No Salto', 'Salto'])
+    print("\nReporte de Clasificación:")
+    print(report)
+    
+    # Métricas individuales
+    from sklearn.metrics import precision_score, recall_score, f1_score
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+    
+    return True, (f"MLP entrenado. Accuracy: {acc:.3f}, "
+                  f"Precision: {precision:.3f}, "
+                  f"Recall: {recall:.3f}, "
+                  f"F1: {f1:.3f}")
+#+END_SRC
+
+*** Interpretar resultados en el juego
+
+Si el modelo tiene:
+- Recall bajo (< 0.6): Muchas colisiones → recolecta más datos donde saltas
+- Precision bajo (< 0.5): Muchos saltos innecesarios → recolecta más datos donde NO saltas
+- F1 bajo (< 0.6): El modelo no está aprendiendo bien → más datos variados
+
+** Curvas ROC y AUC
+*** ¿Qué es la curva ROC?
+
+ROC (Receiver Operating Characteristic) muestra el trade-off entre:
+- Tasa de Verdaderos Positivos (Recall/TPR) en el eje Y
+- Tasa de Falsos Positivos (FPR = FP/(FP+TN)) en el eje X
+
+*** ¿Qué es AUC?
+
+AUC (Area Under Curve) es el área bajo la curva ROC:
+- AUC = 1.0: Clasificador perfecto
+- AUC = 0.5: Clasificador aleatorio (no mejor que adivinar)
+- AUC > 0.7: Buen clasificador
+- AUC > 0.9: Excelente clasificador
+
+*** Código para generar curva ROC
+
+#+BEGIN_SRC python
+from sklearn.metrics import roc_curve, roc_auc_score
+import matplotlib.pyplot as plt
+
+# Obtener probabilidades (no solo predicciones)
+y_proba = modelo.predict_proba(X_test)[:, 1]
+
+# Calcular curva ROC
+fpr, tpr, thresholds = roc_curve(y_test, y_proba)
+auc = roc_auc_score(y_test, y_proba)
+
+# Graficar
+plt.figure(figsize=(8, 6))
+plt.plot(fpr, tpr, label=f'ROC curve (AUC = {auc:.2f})')
+plt.plot([0, 1], [0, 1], 'k--', label='Random classifier')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+plt.legend()
+plt.grid(True)
+plt.show()
+#+END_SRC
+
+*** Interpretación
+
+- Curva cerca de la esquina superior izquierda → mejor modelo
+- AUC alto → modelo puede distinguir bien entre clases
+- Útil para comparar diferentes modelos o umbrales
+
+** Métricas para Clases Desbalanceadas
+*** El problema
+
+Cuando una clase es mucho más frecuente que la otra:
+- Accuracy puede ser engañoso
+- Un modelo que siempre predice la clase mayoritaria puede tener buen accuracy
+
+*** Soluciones
+
+1. **F1-Score**: Ya lo vimos, balancea Precision y Recall
+
+2. **Precision-Recall Curve**: Similar a ROC pero mejor para clases desbalanceadas
+
+#+BEGIN_SRC python
+from sklearn.metrics import precision_recall_curve, auc
+
+precision_vals, recall_vals, thresholds = precision_recall_curve(y_test, y_proba)
+pr_auc = auc(recall_vals, precision_vals)
+
+plt.plot(recall_vals, precision_vals)
+plt.xlabel('Recall')
+plt.ylabel('Precision')
+plt.title(f'Precision-Recall Curve (AUC = {pr_auc:.2f})')
+plt.show()
+#+END_SRC
+
+3. **Matthews Correlation Coefficient (MCC)**:
+
+\[
+MCC = \frac{TP \times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}
+\]
+
+- Rango: -1 a +1
+- +1: Predicción perfecta
+- 0: Predicción aleatoria
+- -1: Predicción inversa perfecta
+- Útil para clases desbalanceadas
+
+#+BEGIN_SRC python
+from sklearn.metrics import matthews_corrcoef
+
+mcc = matthews_corrcoef(y_test, y_pred)
+print(f"MCC: {mcc:.3f}")
+#+END_SRC
+
+** Resumen: Guía Rápida
+*** Tabla de métricas clave
+
+| Métrica | Fórmula | Rango | ¿Qué mide? |
+|---------+---------+-------+------------|
+| Accuracy | (TP+TN)/(TP+TN+FP+FN) | 0-1 | Proporción de aciertos totales |
+| Precision | TP/(TP+FP) | 0-1 | Confiabilidad de predicciones positivas |
+| Recall | TP/(TP+FN) | 0-1 | Detección de casos positivos reales |
+| F1-Score | 2×(P×R)/(P+R) | 0-1 | Balance Precision/Recall |
+| Especificidad | TN/(TN+FP) | 0-1 | Detección de casos negativos reales |
+| AUC-ROC | Área bajo curva ROC | 0-1 | Capacidad de distinguir clases |
+| MCC | (TP×TN-FP×FN)/√(...) | -1 a +1 | Correlación general (balanceada) |
+
+*** Decisión rápida: ¿Qué métrica usar?
+
+#+BEGIN_EXAMPLE
+¿Las clases están balanceadas?
+├─ SÍ → Accuracy es útil
+└─ NO → Usa F1-Score o MCC
+
+¿Los falsos negativos son críticos?
+├─ SÍ → Recall es la más importante
+└─ NO → Precision puede ser más importante
+
+¿Necesitas una métrica única?
+├─ SÍ → F1-Score o MCC
+└─ NO → Revisa Precision, Recall y Accuracy juntas
+#+END_EXAMPLE
+
+*** Checklist de evaluación
+
+Antes de aceptar un modelo, verifica:
+
+- [ ] Accuracy > umbral mínimo (ej: 0.7)
+- [ ] Recall > umbral mínimo (ej: 0.7) - especialmente si FN son críticos
+- [ ] Precision > umbral mínimo (ej: 0.6) - si FP son costosos
+- [ ] F1-Score muestra buen balance
+- [ ] Matriz de confusión no muestra patrones extraños
+- [ ] Métricas en test son similares a entrenamiento (no overfitting)
+
+** Ejercicios Prácticos
+*** Ejercicio 1: Calcular métricas manualmente
+
+Dada esta matriz de confusión:
+
+#+BEGIN_EXAMPLE
+                    Predicción
+                 No Salto  Salto
+Real  No Salto      60      20
+      Salto         10      10
+#+END_EXAMPLE
+
+Calcula:
+- TP, TN, FP, FN
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Especificidad
+
+**Solución**:
+- TP = 10, TN = 60, FP = 20, FN = 10
+- Accuracy = 70/100 = 0.70
+- Precision = 10/30 = 0.33
+- Recall = 10/20 = 0.50
+- F1 = 2×(0.33×0.50)/(0.33+0.50) = 0.40
+- Especificidad = 60/80 = 0.75
+
+*** Ejercicio 2: Interpretar resultados
+
+Un modelo tiene:
+- Accuracy: 85%
+- Precision: 40%
+- Recall: 90%
+
+¿Es un buen modelo para el juego? ¿Por qué?
+
+**Solución**: 
+- Recall alto (90%) es bueno → detecta casi todos los peligros
+- Precision bajo (40%) → muchos saltos innecesarios
+- Para el juego: Es aceptable porque evitar colisiones (Recall) es más importante que saltos innecesarios (Precision)
+
+*** Ejercicio 3: Mejorar un modelo
+
+Un modelo tiene Recall = 0.5. ¿Qué puedes hacer para mejorarlo?
+
+**Solución**:
+- Recolectar más datos donde realmente debes saltar
+- Disminuir el umbral de decisión (de 0.5 a 0.3, por ejemplo)
+- Ajustar hiperparámetros del MLP
+- Añadir más características al modelo
+
+** Referencias y Recursos
+*** Documentación oficial
+
+- scikit-learn metrics: https://scikit-learn.org/stable/modules/model_evaluation.html
+- Confusion matrix: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
+
+*** Lecturas recomendadas
+
+- "Hands-On Machine Learning" - Aurélien Géron (Capítulo sobre evaluación)
+- "Pattern Recognition and Machine Learning" - Christopher Bishop
+- "The Elements of Statistical Learning" - Hastie, Tibshirani, Friedman
+
+*** Herramientas útiles
+
+- scikit-learn: Métricas implementadas
+- Yellowbrick: Visualizaciones de métricas
+- Weka: Suite completa de ML con evaluación
+
+** Conclusión
+
+Las métricas de evaluación son esenciales para entender y mejorar modelos de Machine Learning. No hay una métrica "perfecta" - la elección depende de:
+- Tu problema específico
+- El costo de diferentes tipos de errores
+- El balance de clases
+- Tus objetivos
+
+Para el juego de salto:
+- **Recall es crítico** (evitar colisiones)
+- **Precision es importante** (no saltar innecesariamente)
+- **F1-Score** da un buen balance general
+- **Accuracy** puede ser engañoso si las clases están desbalanceadas
+
+Recuerda: Un modelo con 90% accuracy puede ser inútil si tiene 10% Recall (muchas colisiones). Siempre revisa múltiples métricas.
+
+
 * Redes Neuronales LSTM (Long Short-Term Memory)
 
 Las redes neuronales LSTM (*Long Short-Term Memory*) son un tipo especial
@@ -2753,6 +3827,11 @@ Al final de la secuencia (tras los 4 pasos), el último estado oculto
 
 lo que permite interpretar las salidas como probabilidades para cada
 clase (Setosa, Versicolor, Virginica).
+
+
+
+
+
 
 
 * Bibliografía  Deep Learning
