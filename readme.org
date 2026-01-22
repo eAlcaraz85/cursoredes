@@ -3142,6 +3142,2505 @@ Para el juego de salto:
 Recuerda: Un modelo con 90% accuracy puede ser inútil si tiene 10% Recall (muchas colisiones). Siempre revisa múltiples métricas.
 
 
+
+
+
+
+
+
+*  Redes Neuronales Recurrentes (RNN)
+
+** Introducción
+
+*** ¿Qué son las Redes Recurrentes?
+
+Las Redes Neuronales Recurrentes (RNN - Recurrent Neural Networks) son
+un tipo de arquitectura de redes neuronales diseñadas específicamente
+para procesar **secuencias de datos**. A diferencia de las redes
+feedforward tradicionales, las RNN tienen conexiones que forman
+ciclos, permitiéndoles mantener una "memoria" de información procesada
+anteriormente.
+
+*** Características Fundamentales
+
+1. **Procesamiento secuencial**: Procesan datos uno a la vez, manteniendo información del pasado
+2. **Memoria temporal**: Pueden recordar información de pasos anteriores
+3. **Parámetros compartidos**: Los mismos pesos se usan en cada paso temporal
+4. **Longitud variable**: Pueden procesar secuencias de diferentes longitudes
+
+*** Aplicaciones Comunes
+
+- **Procesamiento de lenguaje natural**: Traducción, generación de texto, análisis de sentimientos
+- **Reconocimiento de voz**: Transcripción de audio a texto
+- **Series temporales**: Predicción de valores futuros (precios, temperatura, etc.)
+- **Análisis de video**: Reconocimiento de acciones, seguimiento de objetos
+- **Música**: Generación de melodías, clasificación de géneros
+
+** El Problema que Resuelven las RNN
+
+*** Limitaciones de las Redes Feedforward
+
+Las redes neuronales tradicionales (feedforward) tienen limitaciones importantes:
+
+**Problema 1: Tamaño fijo de entrada**
+- Una red feedforward requiere que todas las entradas tengan el mismo tamaño
+- No puede manejar secuencias de longitud variable directamente
+
+**Problema 2: Sin memoria**
+- Cada predicción es independiente
+- No puede usar información de predicciones anteriores
+- No entiende el contexto temporal
+
+**Ejemplo**: Predecir la siguiente palabra en una oración
+- Feedforward: Solo ve la palabra actual → predicción limitada
+- RNN: Ve todas las palabras anteriores → predicción más inteligente
+
+*** El Concepto de Secuencias
+
+Una secuencia es una serie ordenada de elementos donde:
+- El orden importa
+- Cada elemento puede depender de los anteriores
+- La longitud puede variar
+
+**Ejemplos de secuencias**:
+- Palabras en una oración: ["El", "gato", "está", "durmiendo"]
+- Valores de temperatura: [20, 22, 21, 23, 25, ...]
+- Píxeles en una imagen (si se procesan fila por fila)
+- Notas musicales: [Do, Re, Mi, Fa, Sol, ...]
+
+** Arquitectura Básica de RNN
+*** Estructura Fundamental
+
+Una RNN básica tiene la siguiente estructura:
+
+#+BEGIN_EXAMPLE
+        h[t-1] ──┐
+                 │
+        x[t] ────┼──→ RNN Cell ──→ h[t] ──→ y[t]
+                 │                    │
+                 └────────────────────┘
+                 (bucle de retroalimentación)
+#+END_EXAMPLE
+
+**Componentes**:
+- =x[t]= : Vector de entrada en el tiempo t
+- =h[t]= : Estado oculto (hidden state) en el tiempo t (la "memoria")
+- =y[t]= : Vector de salida en el tiempo t
+- =h[t-1]= : Estado oculto del paso anterior
+
+*** La Ecuación Matemática Fundamental
+
+La operación básica de una RNN se puede expresar como:
+
+\[
+h_t = f(W_{xh} \cdot x_t + W_{hh} \cdot h_{t-1} + b_h)
+\]
+
+\[
+y_t = g(W_{hy} \cdot h_t + b_y)
+\]
+
+Donde:
+- =f= y =g= son funciones de activación (típicamente tanh y sigmoid/softmax)
+- =W_{xh}= : Matriz de pesos de entrada a estado oculto
+- =W_{hh}= : Matriz de pesos de estado oculto a estado oculto (la "memoria")
+- =W_{hy}= : Matriz de pesos de estado oculto a salida
+- =b_h=, =b_y= : Vectores de sesgo (bias)
+
+*** Desglose Detallado de la Ecuación
+
+Vamos a analizar cada componente:
+
+*1. Término de entrada: $$W_{xh} \cdot x_t$$*
+- Transforma la entrada actual a un espacio de dimensión oculta
+- Captura información del presente
+
+**2. Término recurrente: $$W_{hh} \cdot h_{t-1}$$**
+- Transforma la memoria anterior
+- Captura información del pasado
+- **Esta es la clave de la "memoria"**
+
+**3. Suma y activación: =f(...)=**
+- Combina información presente y pasada
+- La función de activación introduce no-linealidad
+- Típicamente se usa tanh para mantener valores acotados
+
+*** Ejemplo Numérico Simple
+
+Vamos a calcular manualmente un paso de una RNN.
+
+**Configuración**:
+- Dimensión de entrada: 2
+- Dimensión oculta: 3
+- Dimensión de salida: 1
+
+**Paso 1: Inicialización (t=0)**
+\[
+h_0 = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\]
+
+**Paso 2: Primer paso temporal (t=1)**
+
+**Entrada**: $$x_1 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$$
+
+**Pesos** (ejemplo):
+\[
+W_{xh} = \begin{bmatrix}
+0.1 & 0.3 \\
+0.2 & 0.4 \\
+0.3 & 0.5
+\end{bmatrix}, \quad
+W_{hh} = \begin{bmatrix}
+0.6 & 0.1 & 0.2 \\
+0.1 & 0.7 & 0.3 \\
+0.2 & 0.3 & 0.8
+\end{bmatrix}, \quad
+b_h = \begin{bmatrix}
+0.1 \\
+0.2 \\
+0.3
+\end{bmatrix}
+\]
+
+**Cálculo del estado oculto**:
+
+1. $$W_{xh} \cdot x_1$$
+    \begin{align*}
+    \begin{bmatrix}
+    0.1 & 0.3 \\
+    0.2 & 0.4 \\
+    0.3 & 0.5
+    \end{bmatrix}
+    \quad
+    \begin{bmatrix}
+    1 \\
+    2
+    \end{bmatrix}
+     \quad  =  \quad
+    \begin{bmatrix}
+    0.1(1) + 0.3(2) \\
+    0.2(1) + 0.4(2) \\
+    0.3(1) + 0.5(2)
+    \end{bmatrix}
+    \quad  =  \quad
+     \begin{bmatrix}
+    0.7 \\
+    1.0 \\
+    1.3
+    \end{bmatrix}
+    \end{align*}
+   
+2. $$W_{hh} \cdot h_0:$$
+   \begin{align*}
+   \begin{bmatrix}
+   0.6 & 0.1 & 0.2 \\
+   0.1 & 0.7 & 0.3 \\
+   0.2 & 0.3 & 0.8
+   \end{bmatrix}
+   \quad
+   \begin{bmatrix}
+   0 \\
+   0 \\
+   0
+   \end{bmatrix}
+   \quad=\quad
+   \begin{bmatrix}
+   0 \\
+   0 \\
+   0
+   \end{bmatrix}
+   \end{align*}
+
+
+3. Suma con bias:
+   \begin{align*}
+   \begin{bmatrix} 0.7 \\ 1.0 \\ 1.3 \end{bmatrix} 
+   &\quad+\quad 
+   \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} 
+   \quad+\quad 
+   \begin{bmatrix} 0.1 \\ 0.2 \\ 0.3 \end{bmatrix} 
+   &\quad=\quad 
+   \begin{bmatrix} 0.8 \\ 1.2 \\ 1.6 \end{bmatrix}
+   \end{align*}
+
+4. Aplicar tanh:
+   \[
+    h_1 = \tanh\left(\begin{bmatrix} 0.8 \\ 1.2 \\ 1.6 \end{bmatrix}\right) \approx \begin{bmatrix} 0.664 \\ 0.834 \\ 0.922 \end{bmatrix}
+   \]
+
+**Cálculo de la salida**:
+\begin{align*}
+W_{hy} =
+\quad
+\begin{bmatrix}
+0.5 & 0.3 & 0.2
+\end{bmatrix},
+\quad
+b_y = 0.1
+\end{align*}
+
+\begin{align*}
+y_1 = W_{hy} \cdot h_1 + b_y
+=
+\quad
+\begin{bmatrix} 0.5 & 0.3 & 0.2
+\end{bmatrix}
+\begin{bmatrix}
+0.664 \\
+0.834 \\
+0.922
+\end{bmatrix}
++
+0.1
+\end{align*}
+
+\[
+= 0.5(0.664) + 0.3(0.834) + 0.2(0.922) + 0.1\\
+= 0.332 + 0.250 + 0.184 + 0.1\\
+= 0.866\\
+\]
+
+**Paso 3: Segundo paso temporal (t=2)**
+
+**Entrada**: $$x_2 = \begin{bmatrix} 3 \\ 4 \end{bmatrix}$$
+
+**Cálculo**:
+
+1. $$W_{xh} \cdot x_2:$$
+   \begin{align*}
+   \begin{bmatrix}
+   0.1 & 0.3 \\
+   0.2 & 0.4 \\
+   0.3 & 0.5
+   \end{bmatrix}
+   \quad
+   \begin{bmatrix}
+   3 \\
+   4
+   \end{bmatrix}
+   \quad
+   =
+   \quad
+   \begin{bmatrix}
+   1.5 \\
+   2.2 \\
+   2.9
+   \end{bmatrix}
+   \end{align*}
+
+2. $$W_{hh} \cdot h_1$$ (¡Ahora usamos la memoria!):
+   \begin{align*}
+   \begin{bmatrix}
+   0.6 & 0.1 & 0.2 \\
+   0.1 & 0.7 & 0.3 \\
+   0.2 & 0.3 & 0.8
+   \end{bmatrix}
+   \quad
+   \begin{bmatrix}
+   0.664 \\
+   0.834 \\
+   0.922
+   \end{bmatrix}
+   \quad
+   =
+   \quad
+   \begin{bmatrix}
+   0.6(0.664) + 0.1(0.834) + 0.2(0.922) \\
+   0.1(0.664) + 0.7(0.834) + 0.3(0.922) \\
+   0.2(0.664) + 0.3(0.834) + 0.8(0.922)
+   \end{bmatrix}
+   \quad
+   =
+   \quad
+   \begin{bmatrix}
+   0.398 + 0.083 + 0.184 \\
+   0.066 + 0.584 + 0.277 \\
+   0.133 + 0.250 + 0.738
+   \end{bmatrix}
+   \quad
+   =
+   \quad
+   \begin{bmatrix}
+   0.665 \\
+   0.927 \\
+   1.121
+   \end{bmatrix}
+   \end{align*}
+
+3. Suma:
+
+   \begin{align*}
+   \begin{bmatrix}
+   1.5 \\
+   2.2 \\
+   2.9
+   \end{bmatrix}
+   \quad
+   +
+   \quad  
+   \begin{bmatrix}
+   0.665 \\
+   0.927 \\
+   1.121
+   \end{bmatrix}
+   \quad
+   +
+   \quad  
+   \begin{bmatrix}
+   0.1 \\
+   0.2 \\
+   0.3
+   \end{bmatrix}
+   \quad
+   =
+   \quad
+   \begin{bmatrix}
+   2.265 \\
+   3.327 \\
+   4.321
+   \end{bmatrix}
+   \end{align*}
+
+4. Aplicar tanh:
+   \begin{align*}
+   h_2
+   \quad=
+   \tanh\left(
+   \quad
+   \begin{bmatrix}
+   2.265 \\
+   3.327 \\
+   4.321
+   \end{bmatrix}
+   \quad
+   \right)
+   \quad
+   \approx
+   \quad
+   \begin{bmatrix}
+   0.978 \\
+   0.997 \\
+   0.999
+   \end{bmatrix}
+   \end{align*}
+
+**Observación clave**: El estado =h_2= es diferente de =h_1= porque:
+1. La entrada cambió (=x_2 ≠ x_1=)
+2. La memoria anterior (=h_1=) influyó en el cálculo
+3. La combinación de ambos crea un nuevo estado que refleja tanto el presente como el pasado
+
+** Propagación hacia Atrás en el Tiempo (BPTT)
+*** ¿Qué es BPTT?
+
+Backpropagation Through Time (BPTT) es el algoritmo de entrenamiento
+para RNN. Es una extensión del backpropagation estándar que propaga el
+error no solo a través de las capas, sino también **a través del
+tiempo**.
+
+*** Analogía
+
+Imagina que tienes una secuencia de 5 pasos:
+- En backpropagation normal: El error se propaga capa por capa
+- En BPTT: El error se propaga capa por capa Y paso temporal por paso temporal
+
+*** Cálculo de Gradientes
+
+Para entrenar una RNN, necesitamos calcular los gradientes de la función de pérdida respecto a todos los parámetros.
+
+**Pérdida total**:
+\[
+L = \sum_{t=1}^{T} L_t(y_t, \hat{y}_t)
+\]
+
+Donde =L_t= es la pérdida en el tiempo t y =T= es la longitud de la
+secuencia.
+
+**Gradiente respecto a =W_{hh}=**:
+
+El gradiente es más complejo porque =h_t= depende de =h_{t-1}=, que
+depende de =h_{t-2}=, etc.
+
+\[
+\frac{\partial L}{\partial W_{hh}} = \sum_{t=1}^{T} \sum_{k=1}^{t} \frac{\partial L_t}{\partial y_t} \frac{\partial y_t}{\partial h_t} \frac{\partial h_t}{\partial h_k} \frac{\partial h_k}{\partial W_{hh}}
+\]
+
+Donde =∂h_t/∂h_k= requiere calcular la cadena completa:
+
+\[
+\frac{\partial h_t}{\partial h_k} = \prod_{j=k+1}^{t} \frac{\partial h_j}{\partial h_{j-1}}
+\]
+
+*** El Problema del Gradiente que Desaparece
+
+**¿Por qué ocurre?**
+
+La derivada =∂h_j/∂h_{j-1}= típicamente tiene valores menores que 1. Cuando multiplicamos muchas de estas derivadas, el resultado se acerca a cero.
+
+**Ejemplo numérico**:
+
+Supongamos que =∂h_j/∂h_{j-1} = 0.5= (valor típico).
+
+Para una secuencia de longitud 10:
+\[
+\frac{\partial h_{10}}{\partial h_1} = 0.5^9 \approx 0.002
+\]
+
+Para una secuencia de longitud 50:
+\[
+\frac{\partial h_{50}}{\partial h_1} = 0.5^{49} \approx 1.8 \times 10^{-15}
+\]
+
+¡El gradiente es prácticamente cero! El modelo no puede aprender dependencias largas.
+
+*** El Problema del Gradiente que Explota
+
+A veces ocurre lo contrario: los valores son mayores que 1 y al multiplicarlos explotan.
+
+**Ejemplo**:
+Si =∂h_j/∂h_{j-1} = 1.5=:
+\[
+\frac{\partial h_{50}}{\partial h_1} = 1.5^{49} \approx 6.3 \times 10^8
+\]
+
+El gradiente es enorme, causando actualizaciones de pesos muy grandes y entrenamiento inestable.
+
+*** Soluciones
+
+1. **Gradient Clipping**: Limitar el valor máximo del gradiente
+2. **LSTM/GRU**: Arquitecturas diseñadas para solucionar estos problemas
+3. **Skip Connections**: Conexiones que saltan pasos temporales
+
+** Tipos de Redes Recurrentes
+*** RNN Vanilla (SimpleRNN)
+
+La RNN más básica, con la estructura que hemos estado describiendo.
+
+**Ecuación**:
+\[
+h_t = \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)
+\]
+
+**Ventajas**:
+- Simple de entender e implementar
+- Computacionalmente eficiente
+- Buena para secuencias cortas
+
+**Desventajas**:
+- Problema del gradiente que desaparece
+- Memoria limitada
+- Dificultad para capturar dependencias largas
+
+**Uso típico**: Secuencias cortas (5-10 pasos), problemas simples.
+
+*** LSTM (Long Short-Term Memory)
+
+LSTM fue diseñada específicamente para solucionar el problema del gradiente que desaparece.
+
+**Estructura clave**: La LSTM tiene "puertas" (gates) que controlan el flujo de información:
+
+1. **Forget Gate** (Puerta de olvido): Decide qué información olvidar del estado anterior
+2. **Input Gate** (Puerta de entrada): Decide qué nueva información guardar
+3. **Output Gate** (Puerta de salida): Decide qué información usar para la salida
+
+**Ecuaciones**:
+
+**Forget Gate**:
+\[
+f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+\]
+
+**Input Gate**:
+\[
+i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+\]
+
+**Candidato a memoria**:
+\[
+\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+\]
+
+**Estado de celda** (la memoria a largo plazo):
+\[
+C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+\]
+
+**Output Gate**:
+\[
+o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+\]
+
+**Estado oculto**:
+\[
+h_t = o_t * \tanh(C_t)
+\]
+
+Donde =*= denota multiplicación elemento por elemento (Hadamard product).
+
+**Interpretación**:
+- =C_t= es la "memoria a largo plazo" que puede persistir por muchos pasos
+- Las puertas controlan qué se recuerda y qué se olvida
+- Esto permite que la información fluya sin degradarse
+
+**Ventajas**:
+- Puede recordar información por mucho tiempo
+- Soluciona el problema del gradiente que desaparece
+- Muy efectiva para secuencias largas
+
+**Desventajas**:
+- Más compleja computacionalmente
+- Más parámetros que entrenar
+- Más lenta que RNN vanilla
+
+**Uso típico**: Secuencias largas (20+ pasos), problemas complejos que requieren memoria a largo plazo.
+
+*** GRU (Gated Recurrent Unit)
+
+GRU es una versión simplificada de LSTM que combina algunas operaciones.
+
+**Estructura**: Solo 2 puertas en lugar de 3:
+
+1. **Reset Gate**: Decide qué información del pasado ignorar
+2. **Update Gate**: Decide qué información actualizar
+
+**Ecuaciones**:
+
+**Reset Gate**:
+\[
+r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
+\]
+
+**Update Gate**:
+\[
+z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
+\]
+
+**Candidato a estado oculto**:
+\[
+\tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
+\]
+
+**Estado oculto**:
+\[
+h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t
+\]
+
+**Interpretación**:
+- =z_t= controla cuánta información nueva vs. antigua usar
+- =r_t= controla cuánta información del pasado considerar
+- Más simple que LSTM pero a menudo igual de efectiva
+
+**Ventajas**:
+- Más simple que LSTM
+- Menos parámetros
+- A menudo funciona tan bien como LSTM
+- Más rápida de entrenar
+
+**Desventajas**:
+- Menos flexible que LSTM para casos muy complejos
+- Puede tener problemas con secuencias muy largas
+
+**Uso típico**: Balance entre simplicidad y poder. Recomendada para la mayoría de casos.
+
+** Implementación Práctica
+*** Implementación desde Cero (NumPy)
+
+#+BEGIN_SRC python
+import numpy as np
+
+class SimpleRNN:
+    def __init__(self, input_size, hidden_size, output_size):
+        """
+        Inicializa una RNN simple.
+        
+        Args:
+            input_size: Dimensión de la entrada
+            hidden_size: Dimensión del estado oculto
+            output_size: Dimensión de la salida
+        """
+        # Inicializar pesos con valores pequeños aleatorios
+        self.W_xh = np.random.randn(hidden_size, input_size) * 0.01
+        self.W_hh = np.random.randn(hidden_size, hidden_size) * 0.01
+        self.W_hy = np.random.randn(output_size, hidden_size) * 0.01
+        
+        # Inicializar sesgos
+        self.b_h = np.zeros((hidden_size, 1))
+        self.b_y = np.zeros((output_size, 1))
+        
+        self.hidden_size = hidden_size
+    
+    def forward(self, x_sequence):
+        """
+        Forward pass: procesa una secuencia completa.
+        
+        Args:
+            x_sequence: Lista de vectores de entrada [x_1, x_2, ..., x_T]
+        
+        Returns:
+            h_states: Lista de estados ocultos
+            y_outputs: Lista de salidas
+        """
+        h_states = []
+        y_outputs = []
+        h_prev = np.zeros((self.hidden_size, 1))  # Inicializar h_0
+        
+        for x_t in x_sequence:
+            # Convertir entrada a columna si es necesario
+            if x_t.ndim == 1:
+                x_t = x_t.reshape(-1, 1)
+            
+            # Calcular estado oculto
+            h_t = np.tanh(
+                self.W_xh @ x_t +      # Entrada actual
+                self.W_hh @ h_prev +  # Memoria anterior
+                self.b_h               # Sesgo
+            )
+            
+            # Calcular salida
+            y_t = self.W_hy @ h_t + self.b_y
+            
+            h_states.append(h_t)
+            y_outputs.append(y_t)
+            h_prev = h_t  # Actualizar para el siguiente paso
+        
+        return h_states, y_outputs
+
+# Ejemplo de uso
+rnn = SimpleRNN(input_size=2, hidden_size=3, output_size=1)
+
+# Secuencia de ejemplo
+x_seq = [
+    np.array([1, 2]),
+    np.array([3, 4]),
+    np.array([5, 6])
+]
+
+h_states, y_outputs = rnn.forward(x_seq)
+
+print("Estados ocultos:")
+for i, h in enumerate(h_states):
+    print(f"h_{i+1} = {h.flatten()}")
+
+print("\nSalidas:")
+for i, y in enumerate(y_outputs):
+    print(f"y_{i+1} = {y.flatten()}")
+#+END_SRC
+
+*** Implementación con Keras/TensorFlow
+
+#+BEGIN_SRC python
+from tensorflow import keras
+from tensorflow.keras import layers
+import numpy as np
+
+# Crear datos de ejemplo
+# Secuencias de longitud 10, cada elemento tiene 5 características
+X_train = np.random.randn(100, 10, 5)  # (muestras, tiempo, características)
+y_train = np.random.randint(0, 2, (100, 1))  # Clasificación binaria
+
+# Crear modelo RNN
+modelo = keras.Sequential([
+    layers.Input(shape=(10, 5)),  # (tiempo, características)
+    layers.SimpleRNN(32, return_sequences=False),  # 32 neuronas ocultas
+    layers.Dense(16, activation='relu'),
+    layers.Dense(1, activation='sigmoid')  # Salida binaria
+])
+
+# Compilar modelo
+modelo.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)
+
+# Entrenar
+modelo.fit(X_train, y_train, epochs=10, batch_size=32, verbose=1)
+
+# Predecir
+predicciones = modelo.predict(X_train[:5])
+print("Predicciones:", predicciones)
+#+END_SRC
+
+*** Implementación con LSTM
+
+#+BEGIN_SRC python
+from tensorflow import keras
+from tensorflow.keras import layers
+
+# Modelo LSTM
+modelo_lstm = keras.Sequential([
+    layers.Input(shape=(10, 5)),
+    layers.LSTM(64, return_sequences=False),  # 64 neuronas LSTM
+    layers.Dense(32, activation='relu'),
+    layers.Dropout(0.2),  # Regularización
+    layers.Dense(1, activation='sigmoid')
+])
+
+modelo_lstm.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)
+#+END_SRC
+
+*** Implementación con GRU
+
+#+BEGIN_SRC python
+# Modelo GRU
+modelo_gru = keras.Sequential([
+    layers.Input(shape=(10, 5)),
+    layers.GRU(64, return_sequences=False),  # 64 neuronas GRU
+    layers.Dense(32, activation='relu'),
+    layers.Dropout(0.2),
+    layers.Dense(1, activation='sigmoid')
+])
+
+modelo_gru.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)
+#+END_SRC
+
+** Ejemplos Prácticos
+*** Ejemplo 1: Predicción de Series Temporales
+
+Predecir el siguiente valor en una serie temporal.
+
+#+BEGIN_SRC python
+import numpy as np
+from tensorflow import keras
+from tensorflow.keras import layers
+
+# Generar datos sintéticos: función seno con ruido
+t = np.linspace(0, 4*np.pi, 1000)
+serie = np.sin(t) + 0.1 * np.random.randn(1000)
+
+# Crear secuencias: usar 20 valores para predecir el siguiente
+def crear_secuencias(datos, longitud_secuencia=20):
+    X, y = [], []
+    for i in range(len(datos) - longitud_secuencia):
+        X.append(datos[i:i+longitud_secuencia])
+        y.append(datos[i+longitud_secuencia])
+    return np.array(X), np.array(y)
+
+X, y = crear_secuencias(serie, longitud_secuencia=20)
+X = X.reshape(X.shape[0], X.shape[1], 1)  # Añadir dimensión de características
+
+# Dividir en train/test
+split = int(0.8 * len(X))
+X_train, X_test = X[:split], X[split:]
+y_train, y_test = y[:split], y[split:]
+
+# Crear modelo
+modelo = keras.Sequential([
+    layers.Input(shape=(20, 1)),
+    layers.LSTM(50, return_sequences=False),
+    layers.Dense(1)
+])
+
+modelo.compile(optimizer='adam', loss='mse', metrics=['mae'])
+
+# Entrenar
+modelo.fit(X_train, y_train, epochs=50, batch_size=32, 
+           validation_data=(X_test, y_test), verbose=1)
+
+# Predecir
+predicciones = modelo.predict(X_test)
+print(f"Error promedio: {np.mean(np.abs(predicciones.flatten() - y_test)):.4f}")
+#+END_SRC
+
+*** Ejemplo 2: Clasificación de Texto
+
+Clasificar oraciones como positivas o negativas.
+
+#+BEGIN_SRC python
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import numpy as np
+
+# Datos de ejemplo
+textos = [
+    "Me encanta este producto",
+    "No me gusta para nada",
+    "Excelente calidad",
+    "Muy malo, no lo recomiendo",
+    # ... más textos
+]
+
+etiquetas = [1, 0, 1, 0, ...]  # 1=positivo, 0=negativo
+
+# Tokenizar y convertir a secuencias
+tokenizer = Tokenizer(num_words=1000)
+tokenizer.fit_on_texts(textos)
+secuencias = tokenizer.texts_to_sequences(textos)
+
+# Padding para que todas tengan la misma longitud
+X = pad_sequences(secuencias, maxlen=50)
+y = np.array(etiquetas)
+
+# Crear modelo
+modelo = keras.Sequential([
+    layers.Input(shape=(50,)),
+    layers.Embedding(1000, 128),  # Embedding de palabras
+    layers.LSTM(64, return_sequences=False),
+    layers.Dense(32, activation='relu'),
+    layers.Dense(1, activation='sigmoid')
+])
+
+modelo.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Entrenar
+modelo.fit(X, y, epochs=10, batch_size=32, validation_split=0.2)
+#+END_SRC
+
+*** Ejemplo 3: Generación de Secuencias
+
+Generar texto carácter por carácter.
+
+#+BEGIN_SRC python
+from tensorflow import keras
+from tensorflow.keras import layers
+import numpy as np
+
+# Texto de entrenamiento
+texto = "El gato está durmiendo en el sofá. " * 100
+
+# Crear mapeo carácter → índice
+caracteres = sorted(list(set(texto)))
+char_to_idx = {char: idx for idx, char in enumerate(caracteres)}
+idx_to_char = {idx: char for char, idx in char_to_idx.items()}
+
+# Crear secuencias: usar 40 caracteres para predecir el siguiente
+longitud_secuencia = 40
+X, y = [], []
+
+for i in range(len(texto) - longitud_secuencia):
+    secuencia = texto[i:i+longitud_secuencia]
+    siguiente = texto[i+longitud_secuencia]
+    X.append([char_to_idx[char] for char in secuencia])
+    y.append(char_to_idx[siguiente])
+
+X = np.array(X)
+y = keras.utils.to_categorical(y, num_classes=len(caracteres))
+
+# Crear modelo
+modelo = keras.Sequential([
+    layers.Input(shape=(longitud_secuencia,)),
+    layers.Embedding(len(caracteres), 50),
+    layers.LSTM(128, return_sequences=True),
+    layers.LSTM(128, return_sequences=False),
+    layers.Dense(128, activation='relu'),
+    layers.Dense(len(caracteres), activation='softmax')
+])
+
+modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Entrenar
+modelo.fit(X, y, epochs=50, batch_size=128)
+
+# Generar texto
+def generar_texto(semilla, longitud=100):
+    texto_generado = semilla
+    for _ in range(longitud):
+        x = np.array([[char_to_idx[char] for char in texto_generado[-longitud_secuencia:]]])
+        pred = modelo.predict(x, verbose=0)
+        siguiente_idx = np.argmax(pred[0])
+        siguiente_char = idx_to_char[siguiente_idx]
+        texto_generado += siguiente_char
+    return texto_generado
+
+print(generar_texto("El gato está ", 50))
+#+END_SRC
+
+** Variantes y Extensiones
+*** RNN Bidireccional
+
+Una RNN bidireccional procesa la secuencia en ambas direcciones (hacia adelante y hacia atrás).
+
+#+BEGIN_SRC python
+from tensorflow.keras import layers
+
+modelo = keras.Sequential([
+    layers.Input(shape=(10, 5)),
+    layers.Bidirectional(layers.LSTM(32)),  # Procesa en ambas direcciones
+    layers.Dense(1, activation='sigmoid')
+])
+#+END_SRC
+
+**Ventaja**: Puede usar información tanto del pasado como del "futuro" (en el contexto de la secuencia completa).
+
+**Uso**: Cuando tienes acceso a toda la secuencia (no predicción en tiempo real).
+
+*** RNN Apiladas (Stacked)
+
+Múltiples capas RNN apiladas para capturar patrones más complejos.
+
+#+BEGIN_SRC python
+modelo = keras.Sequential([
+    layers.Input(shape=(10, 5)),
+    layers.LSTM(64, return_sequences=True),  # return_sequences=True para apilar
+    layers.LSTM(32, return_sequences=True),
+    layers.LSTM(16, return_sequences=False),
+    layers.Dense(1, activation='sigmoid')
+])
+#+END_SRC
+
+**Ventaja**: Cada capa puede aprender diferentes niveles de abstracción.
+
+**Desventaja**: Más parámetros, más lento de entrenar.
+
+*** Attention Mechanism
+
+Los mecanismos de atención permiten que el modelo "preste atención" a partes específicas de la secuencia.
+
+Más avanzado, pero muy poderoso. Se usa en arquitecturas como Transformers.
+
+** Regularización y Mejoras
+*** Dropout
+
+Evita sobreajuste desactivando aleatoriamente algunas neuronas.
+
+#+BEGIN_SRC python
+layers.LSTM(64, dropout=0.2, recurrent_dropout=0.2)
+#+END_SRC
+
+- =dropout=: Dropout en las entradas
+- =recurrent_dropout=: Dropout en las conexiones recurrentes
+
+*** Early Stopping
+
+Detener el entrenamiento cuando el error de validación deja de mejorar.
+
+#+BEGIN_SRC python
+from tensorflow.keras.callbacks import EarlyStopping
+
+callbacks = [
+    EarlyStopping(
+        monitor='val_loss',
+        patience=10,  # Esperar 10 épocas sin mejora
+        restore_best_weights=True
+    )
+]
+
+modelo.fit(X_train, y_train, validation_data=(X_val, y_val), 
+           callbacks=callbacks)
+#+END_SRC
+
+*** Gradient Clipping
+
+Limitar el valor máximo del gradiente para evitar explosión.
+
+#+BEGIN_SRC python
+from tensorflow.keras.optimizers import Adam
+
+optimizer = Adam(clipnorm=1.0)  # Limitar norma del gradiente a 1.0
+modelo.compile(optimizer=optimizer, loss='binary_crossentropy')
+#+END_SRC
+
+** Conceptos Clave
+
+1. **RNN procesan secuencias** manteniendo memoria del pasado
+2. **BPTT** propaga errores hacia atrás en el tiempo
+3. **LSTM y GRU** solucionan problemas de RNN vanilla
+4. **Parámetros compartidos** hacen que RNN sean eficientes
+
+*** Cuándo Usar RNN
+
+-  Datos secuenciales o temporales
+-  El orden importa
+-  El contexto temporal es relevante
+-  Longitud variable de secuencias
+
+*** Cuándo NO Usar RNN
+
+-  Datos independientes (sin secuencia)
+-  El orden no importa
+-  Problemas que se resuelven bien con feedforward
+-  Secuencias muy largas (considerar Transformers)
+
+*** Próximos Pasos
+
+1. Experimentar con diferentes arquitecturas (LSTM, GRU)
+2. Aprender sobre Transformers (sucesor de RNN)
+3. Explorar aplicaciones específicas (NLP, series temporales)
+4. Estudiar técnicas avanzadas (attention, encoder-decoder)
+
+
+
+
+* Redes Recurrentes (RNN) con Aplicación al Juego
+
+** Introducción
+
+*** ¿Qué son las Redes Recurrentes?
+
+Las Redes Neuronales Recurrentes (RNN - Recurrent Neural Networks) son
+un tipo especial de red neuronal diseñadas para trabajar con
+**secuencias de datos**. A diferencia de las redes feedforward (como el
+MLP), las RNN tienen "memoria" que les permite recordar información de
+pasos anteriores.
+
+*** ¿Por qué RNN para el juego?
+
+En el juego actual, el MLP solo considera:
+- Velocidad de la bala (en este momento)
+- Distancia (en este momento)
+
+Pero una RNN podría considerar:
+- La **historia** de velocidades y distancias anteriores
+- El **patrón temporal** de cómo se mueve la bala
+- La **secuencia** de decisiones anteriores
+
+Esto podría hacer que el modelo entienda mejor el contexto y tome decisiones más inteligentes.
+
+*** Objetivo de estas notas
+
+Aprender:
+1. Conceptos fundamentales de RNN
+2. Diferentes tipos de RNN (vanilla, LSTM, GRU)
+3. Cómo adaptar el juego para usar RNN
+4. Implementación práctica
+5. Comparación RNN vs MLP
+
+** Conceptos Fundamentales
+*** El Problema de las Secuencias
+
+**Ejemplo del juego**:
+- Frame 1: distancia=500, velocidad=-10 → ¿saltar?
+- Frame 2: distancia=450, velocidad=-10 → ¿saltar?
+- Frame 3: distancia=400, velocidad=-10 → ¿saltar?
+
+Un MLP ve cada frame de forma independiente. Una RNN ve la **secuencia completa** y puede aprender que:
+- "Si la distancia está disminuyendo constantemente y la velocidad es negativa, probablemente deba saltar pronto"
+
+*** Arquitectura Básica de RNN
+
+Una RNN tiene una estructura que permite que la salida de un paso anterior se use como entrada del siguiente:
+
+#+BEGIN_EXAMPLE
+        h[t-1] ──┐
+                 │
+        x[t] ────┼──→ RNN Cell ──→ h[t] ──→ y[t]
+                 │                    │
+                 └────────────────────┘
+                 (feedback loop)
+#+END_EXAMPLE
+
+Donde:
+- =x[t]= : Entrada en el tiempo t (ej: distancia, velocidad en frame t)
+- =h[t]= : Estado oculto (memoria) en el tiempo t
+- =y[t]= : Salida en el tiempo t (ej: decisión de salto)
+- =h[t-1]= : Estado oculto del paso anterior (memoria)
+
+*** Ecuación Matemática Básica
+
+Para una RNN simple (vanilla RNN):
+
+\[
+h_t = \tanh(W_{xh} \cdot x_t + W_{hh} \cdot h_{t-1} + b_h)
+\]
+
+\[
+y_t = W_{hy} \cdot h_t + b_y
+\]
+
+Donde:
+- =W_{xh}= : Pesos de entrada a oculto
+- =W_{hh}= : Pesos de oculto a oculto (la "memoria")
+- =W_{hy}= : Pesos de oculto a salida
+- =b_h, b_y= : Sesgos (biases)
+
+*** Ventajas de RNN
+
+1. **Memoria temporal**: Recuerda información de pasos anteriores
+2. **Secuencias de longitud variable**: Puede procesar secuencias de diferentes tamaños
+3. **Contexto**: Entiende el contexto de la secuencia completa
+
+*** Desventajas de RNN Vanilla
+
+1. **Problema del gradiente que desaparece**: En secuencias largas, el gradiente se vuelve muy pequeño
+2. **Memoria limitada**: La memoria se desvanece rápidamente
+3. **Dificultad para capturar dependencias largas**: No puede recordar información de muchos pasos atrás
+
+** Matemáticas Detalladas de las Redes Recurrentes
+*** Desglose Paso a Paso de las Ecuaciones
+
+Vamos a descomponer las ecuaciones matemáticas de una RNN paso a paso para entender exactamente qué está pasando.
+
+*** Ecuación del Estado Oculto (Hidden State)
+
+La ecuación fundamental de una RNN es:
+
+\[
+h_t = \tanh(W_{xh} \cdot x_t + W_{hh} \cdot h_{t-1} + b_h)
+\]
+
+**Desglose de cada componente**:
+
+1. **=W_{xh} \cdot x_t=**: Transformación lineal de la entrada actual
+   - =W_{xh}= es una matriz de pesos de tamaño (dimensión_oculta × dimensión_entrada)
+   - =x_t= es el vector de entrada en el tiempo t
+   - Resultado: Vector de tamaño (dimensión_oculta,)
+
+2. **=W_{hh} \cdot h_{t-1}=**: Transformación de la memoria anterior
+   - =W_{hh}= es una matriz de pesos de tamaño (dimensión_oculta × dimensión_oculta)
+   - =h_{t-1}= es el estado oculto del paso anterior
+   - Resultado: Vector de tamaño (dimensión_oculta,)
+   - **Esta es la clave de la "memoria"**: La información del pasado se combina con el presente
+
+3. **=b_h=**: Sesgo (bias) del estado oculto
+   - Vector de tamaño (dimensión_oculta,)
+   - Permite ajustar el punto de activación
+
+4. **Suma**: Se suman los tres componentes
+   - =W_{xh} \cdot x_t + W_{hh} \cdot h_{t-1} + b_h=
+   - Resultado: Vector de tamaño (dimensión_oculta,)
+
+5. **=tanh()=**: Función de activación
+   - Comprime el resultado al rango (-1, 1)
+   - Introduce no-linealidad
+   - Ayuda a estabilizar los valores
+
+*** Ecuación de la Salida
+
+\[
+y_t = W_{hy} \cdot h_t + b_y
+\]
+
+Esta es más simple:
+- =W_{hy}=: Matriz de pesos (dimensión_salida × dimensión_oculta)
+- =h_t=: Estado oculto calculado anteriormente
+- =b_y=: Sesgo de la salida
+- Resultado: =y_t=, la predicción en el tiempo t
+
+*** Ejemplo Numérico Concreto
+
+Vamos a ver un ejemplo paso a paso con números reales.
+
+**Configuración**:
+- Dimensión de entrada: 2 (velocidad, distancia)
+- Dimensión oculta: 3 (3 neuronas en la capa oculta)
+- Dimensión de salida: 1 (probabilidad de salto)
+
+**Paso 1: Inicialización (t=0)**
+
+Al inicio, no hay memoria previa, así que =h_0 = 0= (vector de ceros).
+
+**Paso 2: Primer Frame (t=1)**
+
+**Entrada**: =x_1 = \begin{bmatrix} -10 \\ 500 \end{bmatrix}= (velocidad=-10, distancia=500)
+
+**Pesos** (ejemplo):
+\[
+W_{xh} = \begin{bmatrix}
+0.1 & 0.2 \\
+-0.3 & 0.4 \\
+0.2 & -0.1
+\end{bmatrix}, \quad
+W_{hh} = \begin{bmatrix}
+0.5 & 0.1 & 0.2 \\
+0.1 & 0.6 & 0.3 \\
+0.2 & 0.3 & 0.7
+\end{bmatrix}, \quad
+b_h = \begin{bmatrix}
+0.1 \\
+-0.2 \\
+0.3
+\end{bmatrix}
+\]
+
+**Cálculo**:
+
+1. =W_{xh} \cdot x_1=:
+\[
+\begin{bmatrix}
+0.1 & 0.2 \\
+-0.3 & 0.4 \\
+0.2 & -0.1
+\end{bmatrix}
+\begin{bmatrix}
+-10 \\
+500
+\end{bmatrix}
+=
+\begin{bmatrix}
+0.1(-10) + 0.2(500) \\
+-0.3(-10) + 0.4(500) \\
+0.2(-10) + -0.1(500)
+\end{bmatrix}
+=
+\begin{bmatrix}
+-1 + 100 \\
+3 + 200 \\
+-2 - 50
+\end{bmatrix}
+=
+\begin{bmatrix}
+99 \\
+203 \\
+-52
+\end{bmatrix}
+\]
+
+2. =W_{hh} \cdot h_0=:
+\[
+\begin{bmatrix}
+0.5 & 0.1 & 0.2 \\
+0.1 & 0.6 & 0.3 \\
+0.2 & 0.3 & 0.7
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix}
+\]
+
+3. Suma con bias:
+\[
+\begin{bmatrix}
+99 \\
+203 \\
+-52
+\end{bmatrix}
++
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+0.1 \\
+-0.2 \\
+0.3
+\end{bmatrix}
+=
+\begin{bmatrix}
+99.1 \\
+202.8 \\
+-51.7
+\end{bmatrix}
+\]
+
+4. Aplicar tanh:
+\[
+h_1 = \tanh\left(\begin{bmatrix}
+99.1 \\
+202.8 \\
+-51.7
+\end{bmatrix}\right)
+\approx
+\begin{bmatrix}
+1.0 \\
+1.0 \\
+-1.0
+\end{bmatrix}
+\]
+
+(Nota: tanh de valores grandes se acerca a ±1)
+
+**Paso 3: Segundo Frame (t=2)**
+
+**Entrada**: =x_2 = \begin{bmatrix} -10 \\ 450 \end{bmatrix}= (distancia disminuyó)
+
+**Cálculo**:
+
+1. =W_{xh} \cdot x_2=:
+\[
+\begin{bmatrix}
+0.1 & 0.2 \\
+-0.3 & 0.4 \\
+0.2 & -0.1
+\end{bmatrix}
+\begin{bmatrix}
+-10 \\
+450
+\end{bmatrix}
+=
+\begin{bmatrix}
+89 \\
+177 \\
+-47
+\end{bmatrix}
+\]
+
+2. =W_{hh} \cdot h_1= (¡Ahora usamos la memoria!):
+\[
+\begin{bmatrix}
+0.5 & 0.1 & 0.2 \\
+0.1 & 0.6 & 0.3 \\
+0.2 & 0.3 & 0.7
+\end{bmatrix}
+\begin{bmatrix}
+1.0 \\
+1.0 \\
+-1.0
+\end{bmatrix}
+=
+\begin{bmatrix}
+0.5 + 0.1 - 0.2 \\
+0.1 + 0.6 - 0.3 \\
+0.2 + 0.3 - 0.7
+\end{bmatrix}
+=
+\begin{bmatrix}
+0.4 \\
+0.4 \\
+-0.2
+\end{bmatrix}
+\]
+
+3. Suma:
+\[
+\begin{bmatrix}
+89 \\
+177 \\
+-47
+\end{bmatrix}
++
+\begin{bmatrix}
+0.4 \\
+0.4 \\
+-0.2
+\end{bmatrix}
++
+\begin{bmatrix}
+0.1 \\
+-0.2 \\
+0.3
+\end{bmatrix}
+=
+\begin{bmatrix}
+89.5 \\
+177.2 \\
+-46.9
+\end{bmatrix}
+\]
+
+4. Aplicar tanh:
+\[
+h_2 = \tanh\left(\begin{bmatrix}
+89.5 \\
+177.2 \\
+-46.9
+\end{bmatrix}\right)
+\approx
+\begin{bmatrix}
+1.0 \\
+1.0 \\
+-1.0
+\end{bmatrix}
+\]
+
+**Observación clave**: Aunque la entrada cambió ligeramente (distancia 500→450), el estado oculto =h_2= es similar a =h_1= porque la **memoria** (=h_1=) se combina con la nueva entrada.
+
+*** Cálculo de la Salida
+
+Continuando con el ejemplo, calculemos =y_2=:
+
+**Pesos de salida**:
+\[
+W_{hy} = \begin{bmatrix} 0.3 & -0.5 & 0.8 \end{bmatrix}, \quad
+b_y = 0.2
+\]
+
+**Cálculo**:
+\[
+y_2 = W_{hy} \cdot h_2 + b_y
+= \begin{bmatrix} 0.3 & -0.5 & 0.8 \end{bmatrix}
+\begin{bmatrix}
+1.0 \\
+1.0 \\
+-1.0
+\end{bmatrix}
++ 0.2
+\]
+
+\[
+= 0.3(1.0) + (-0.5)(1.0) + 0.8(-1.0) + 0.2
+= 0.3 - 0.5 - 0.8 + 0.2
+= -0.8
+\]
+
+Si aplicamos sigmoid para obtener probabilidad:
+\[
+P(\text{salto}) = \sigma(y_2) = \sigma(-0.8) = \frac{1}{1 + e^{0.8}} \approx 0.31
+\]
+
+Probabilidad de salto ≈ 31% (baja, lo cual tiene sentido si la distancia aún es grande).
+
+*** Propagación hacia Atrás en el Tiempo (BPTT)
+
+El entrenamiento de una RNN usa Backpropagation Through Time (BPTT), que es una extensión del backpropagation estándar.
+
+*** Idea General
+
+En una red feedforward, el error se propaga hacia atrás capa por capa. En una RNN, el error se propaga hacia atrás **en el tiempo** también.
+
+*** Derivadas Necesarias
+
+Para entrenar, necesitamos calcular:
+
+1. **=∂L/∂W_{hy}=**: Gradiente respecto a los pesos de salida
+2. **=∂L/∂W_{xh}=**: Gradiente respecto a los pesos de entrada
+3. **=∂L/∂W_{hh}=**: Gradiente respecto a los pesos recurrentes
+4. **=∂L/∂b_h=** y **=∂L/∂b_y=**: Gradientes de los sesgos
+
+*** Cálculo del Gradiente en el Tiempo T
+
+Supongamos que tenemos una secuencia de longitud T y queremos calcular el gradiente en el tiempo final =T=.
+
+**Pérdida total**:
+\[
+L = \sum_{t=1}^{T} L_t(y_t, \hat{y}_t)
+\]
+
+Donde =L_t= es la pérdida en el tiempo t (ej: binary cross-entropy).
+
+**Gradiente respecto a =W_{hh}=**:
+
+\[
+\frac{\partial L}{\partial W_{hh}} = \sum_{t=1}^{T} \frac{\partial L_t}{\partial W_{hh}}
+\]
+
+Para calcular =∂L_t/∂W_{hh}=, necesitamos la regla de la cadena:
+
+\[
+\frac{\partial L_t}{\partial W_{hh}} = \frac{\partial L_t}{\partial y_t} \cdot \frac{\partial y_t}{\partial h_t} \cdot \frac{\partial h_t}{\partial W_{hh}}
+\]
+
+El problema es que =h_t= depende de =h_{t-1}=, que depende de =h_{t-2}=, etc.:
+
+\[
+\frac{\partial h_t}{\partial W_{hh}} = \frac{\partial h_t}{\partial W_{hh}} + \frac{\partial h_t}{\partial h_{t-1}} \cdot \frac{\partial h_{t-1}}{\partial W_{hh}} + \frac{\partial h_t}{\partial h_{t-1}} \cdot \frac{\partial h_{t-1}}{\partial h_{t-2}} \cdot \frac{\partial h_{t-2}}{\partial W_{hh}} + \cdots
+\]
+
+Esto crea una cadena de multiplicaciones que puede hacer que el gradiente:
+- **Desaparezca** (vanishing gradient): Si los valores son < 1, multiplicarlos muchas veces → 0
+- **Explote** (exploding gradient): Si los valores son > 1, multiplicarlos muchas veces → ∞
+
+*** Ejemplo del Problema del Gradiente que Desaparece
+
+Supongamos que =∂h_t/∂h_{t-1} = 0.5= (valor típico).
+
+Para una secuencia de longitud 10:
+\[
+\frac{\partial h_{10}}{\partial h_1} = 0.5^9 \approx 0.002
+\]
+
+Para una secuencia de longitud 50:
+\[
+\frac{\partial h_{50}}{\partial h_1} = 0.5^{49} \approx 1.8 \times 10^{-15}
+\]
+
+¡El gradiente es prácticamente cero! El modelo no puede aprender dependencias largas.
+
+*** Visualización del Flujo de Información
+
+#+BEGIN_EXAMPLE
+Tiempo:     t=1        t=2        t=3        t=4
+          ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+Entrada:  │ x₁  │    │ x₂  │    │ x₃  │    │ x₄  │
+          └──┬──┘    └──┬──┘    └──┬──┘    └──┬──┘
+             │          │          │          │
+          ┌──▼──┐    ┌──▼──┐    ┌──▼──┐    ┌──▼──┐
+Memoria:  │ h₀  │───▶│ h₁  │───▶│ h₂  │───▶│ h₃  │───▶...
+          └──┬──┘    └──┬──┘    └──┬──┘    └──┬──┘
+             │          │          │          │
+          ┌──▼──┐    ┌──▼──┐    ┌──▼──┐    ┌──▼──┐
+Salida:   │ y₁  │    │ y₂  │    │ y₃  │    │ y₄  │
+          └─────┘    └─────┘    └─────┘    └─────┘
+
+Flujo de información:
+- Hacia adelante: x_t → h_t → y_t (con h_{t-1} → h_t)
+- Hacia atrás: ∂L/∂y_t → ∂L/∂h_t → ∂L/∂h_{t-1} → ... → ∂L/∂h_1
+#+END_EXAMPLE
+
+*** Descomposición de la Ecuación RNN
+
+Vamos a ver qué representa cada término matemáticamente:
+
+\[
+h_t = \tanh(W_{xh} \cdot x_t + W_{hh} \cdot h_{t-1} + b_h)
+\]
+
+**Término 1: =W_{xh} \cdot x_t=**
+- **Significado**: "¿Qué información nueva aporta la entrada actual?"
+- **En el juego**: "¿Qué me dice este frame sobre la situación actual?"
+- **Ejemplo**: Si distancia=300 y velocidad=-10, esto sugiere peligro
+
+**Término 2: =W_{hh} \cdot h_{t-1}=**
+- **Significado**: "¿Qué información del pasado es relevante ahora?"
+- **En el juego**: "¿Qué aprendí de los frames anteriores?"
+- **Ejemplo**: Si en los últimos frames la distancia ha estado disminuyendo, esto es una tendencia importante
+
+**Suma de ambos términos**:
+- **Significado**: Combinar información nueva con memoria del pasado
+- **En el juego**: "Considerando tanto la situación actual como la tendencia, ¿qué debo hacer?"
+
+*** Función de Activación tanh
+
+¿Por qué tanh y no otra función?
+
+**Propiedades de tanh**:
+- Rango: (-1, 1)
+- Derivada: =tanh'(x) = 1 - tanh²(x)=
+- Derivada máxima: 1 (en x=0)
+- Derivada mínima: 0 (cuando |x| es grande)
+
+**Ventajas**:
+- Mantiene los valores acotados (evita explosión)
+- Es diferenciable en todas partes
+- Tiene gradiente razonable en el rango útil
+
+**Desventajas**:
+- Para valores grandes, la derivada es muy pequeña → contribuye al problema del gradiente que desaparece
+
+*** Ejemplo Completo: Secuencia de 3 Frames
+
+Vamos a calcular manualmente una secuencia completa para el juego.
+
+**Configuración simplificada**:
+- Dimensión oculta: 2 (para simplificar)
+- Pesos inicializados aleatoriamente
+
+**Frame 1** (t=1):
+- Entrada: =x_1 = [-10, 500]= (velocidad, distancia)
+- Memoria previa: =h_0 = [0, 0]=
+
+\[
+h_1 = \tanh\left(W_{xh} \begin{bmatrix} -10 \\ 500 \end{bmatrix} + W_{hh} \begin{bmatrix} 0 \\ 0 \end{bmatrix} + b_h\right)
+\]
+
+Supongamos que =h_1 = [0.3, -0.7]=
+
+**Frame 2** (t=2):
+- Entrada: =x_2 = [-10, 450]= (distancia disminuyó)
+- Memoria previa: =h_1 = [0.3, -0.7]=
+
+\[
+h_2 = \tanh\left(W_{xh} \begin{bmatrix} -10 \\ 450 \end{bmatrix} + W_{hh} \begin{bmatrix} 0.3 \\ -0.7 \end{bmatrix} + b_h\right)
+\]
+
+La memoria =h_1= ahora influye en =h_2=. Si =W_{hh}= tiene valores positivos en la diagonal, =h_2= recordará parte de =h_1=.
+
+Supongamos que =h_2 = [0.5, -0.6]=
+
+**Frame 3** (t=3):
+- Entrada: =x_3 = [-10, 400]= (distancia sigue disminuyendo)
+- Memoria previa: =h_2 = [0.5, -0.6]=
+
+\[
+h_3 = \tanh\left(W_{xh} \begin{bmatrix} -10 \\ 400 \end{bmatrix} + W_{hh} \begin{bmatrix} 0.5 \\ -0.6 \end{bmatrix} + b_h\right)
+\]
+
+Ahora =h_3= tiene información de =h_2= (que a su vez tenía información de =h_1=). La RNN puede "ver" la tendencia: distancia está disminuyendo constantemente.
+
+Supongamos que =h_3 = [0.8, -0.4]=
+
+**Salida final**:
+\[
+y_3 = W_{hy} \cdot h_3 + b_y
+\]
+
+Si =y_3 = 0.7=, entonces =P(salto) = σ(0.7) ≈ 0.67= (67% de probabilidad de saltar).
+
+**Interpretación**: La RNN vio la secuencia [500, 450, 400] y aprendió que la distancia está disminuyendo rápidamente, por lo que aumenta la probabilidad de salto.
+
+*** Representación Matricial Completa
+
+Para una secuencia completa, podemos escribir todo en forma matricial:
+
+**Entradas**: =X = [x_1, x_2, ..., x_T]= (matriz T × dimensión_entrada)
+
+**Estados ocultos**: =H = [h_1, h_2, ..., h_T]= (matriz T × dimensión_oculta)
+
+**Ecuación vectorizada** (para todos los tiempos a la vez):
+\[
+H = \tanh(X \cdot W_{xh}^T + H_{shifted} \cdot W_{hh}^T + \mathbf{1} \cdot b_h^T)
+\]
+
+Donde =H_{shifted}= es H desplazado un paso (h_0, h_1, ..., h_{T-1}).
+
+*** Cálculo de la Pérdida y Optimización
+
+**Pérdida total**:
+\[
+L = -\frac{1}{T}\sum_{t=1}^{T} \left[ y_t^* \log(\sigma(y_t)) + (1-y_t^*) \log(1-\sigma(y_t)) \right]
+\]
+
+Donde =y_t^*= es el valor real (0 o 1) y =y_t= es la predicción.
+
+**Gradiente respecto a =W_{hy}=**:
+\[
+\frac{\partial L}{\partial W_{hy}} = \frac{1}{T}\sum_{t=1}^{T} (\sigma(y_t) - y_t^*) \cdot h_t
+\]
+
+**Gradiente respecto a =W_{xh}=** (más complejo debido a la recurrencia):
+\[
+\frac{\partial L}{\partial W_{xh}} = \sum_{t=1}^{T} \frac{\partial L_t}{\partial W_{xh}}
+\]
+
+Donde cada término requiere calcular la cadena completa desde t hasta 1.
+
+*** Implementación Numérica
+
+Aquí está cómo se calcula realmente en código:
+
+#+BEGIN_SRC python
+import numpy as np
+
+def rnn_forward(x_sequence, W_xh, W_hh, W_hy, b_h, b_y):
+    """
+    Forward pass de una RNN.
+    
+    Args:
+        x_sequence: Lista de entradas [x_1, x_2, ..., x_T]
+        W_xh: Pesos entrada→oculto
+        W_hh: Pesos oculto→oculto
+        W_hy: Pesos oculto→salida
+        b_h: Sesgo oculto
+        b_y: Sesgo salida
+    
+    Returns:
+        h_states: Lista de estados ocultos
+        y_outputs: Lista de salidas
+    """
+    h_states = []
+    y_outputs = []
+    h_prev = np.zeros(W_hh.shape[0])  # Inicializar h_0 = 0
+    
+    for x_t in x_sequence:
+        # Calcular estado oculto
+        h_t = np.tanh(
+            np.dot(W_xh, x_t) +      # Entrada actual
+            np.dot(W_hh, h_prev) +   # Memoria anterior
+            b_h                      # Sesgo
+        )
+        
+        # Calcular salida
+        y_t = np.dot(W_hy, h_t) + b_y
+        
+        h_states.append(h_t)
+        y_outputs.append(y_t)
+        h_prev = h_t  # Actualizar para el siguiente paso
+    
+    return h_states, y_outputs
+
+# Ejemplo de uso
+x_seq = [
+    np.array([-10, 500]),
+    np.array([-10, 450]),
+    np.array([-10, 400])
+]
+
+# Pesos (ejemplo, normalmente se inicializan aleatoriamente)
+W_xh = np.random.randn(3, 2) * 0.1
+W_hh = np.random.randn(3, 3) * 0.1
+W_hy = np.random.randn(1, 3) * 0.1
+b_h = np.zeros(3)
+b_y = np.array([0.0])
+
+h_states, y_outputs = rnn_forward(x_seq, W_xh, W_hh, W_hy, b_h, b_y)
+
+print("Estados ocultos:")
+for i, h in enumerate(h_states):
+    print(f"h_{i+1} = {h}")
+
+print("\nSalidas:")
+for i, y in enumerate(y_outputs):
+    prob = 1 / (1 + np.exp(-y))  # sigmoid
+    print(f"y_{i+1} = {y[0]:.3f}, P(salto) = {prob[0]:.3f}")
+#+END_SRC
+
+*** Resumen Matemático
+
+**Ecuaciones clave**:
+
+1. **Estado oculto**: =h_t = tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)=
+2. **Salida**: =y_t = W_{hy}h_t + b_y=
+3. **Probabilidad**: =P_t = σ(y_t)=
+
+**Propiedades importantes**:
+
+- **Memoria**: =h_t= contiene información de todos los pasos anteriores (a través de =h_{t-1}=)
+- **No-linealidad**: tanh permite aprender patrones complejos
+- **Gradientes**: Se propagan hacia atrás en el tiempo (BPTT)
+- **Problema**: Gradientes pueden desaparecer o explotar en secuencias largas
+
+**Interpretación para el juego**:
+- La RNN "recuerda" cómo ha cambiado la distancia y velocidad en los frames anteriores
+- Combina esta memoria con la información actual
+- Toma una decisión basada en el contexto completo, no solo el frame actual
+
+** Tipos de Redes Recurrentes
+*** RNN Vanilla (Simple)
+
+La RNN más básica, con la estructura que vimos antes.
+
+**Ventajas**:
+- Simple de entender
+- Rápida de entrenar
+- Buena para secuencias cortas
+
+**Desventajas**:
+- Problema del gradiente que desaparece
+- Memoria limitada
+
+**Uso en el juego**: Podría funcionar para secuencias de 5-10 frames.
+
+*** LSTM (Long Short-Term Memory)
+
+LSTM fue diseñada para solucionar el problema del gradiente que desaparece.
+
+**Estructura clave**: La LSTM tiene "puertas" (gates) que controlan el flujo de información:
+
+1. **Forget Gate** (Puerta de olvido): Decide qué información olvidar
+2. **Input Gate** (Puerta de entrada): Decide qué nueva información guardar
+3. **Output Gate** (Puerta de salida): Decide qué información usar para la salida
+
+#+BEGIN_EXAMPLE
+        ┌─────────────────┐
+        │  Forget Gate    │ ──→ ¿Qué olvidar?
+        ├─────────────────┤
+        │  Input Gate     │ ──→ ¿Qué recordar?
+        ├─────────────────┤
+        │  Output Gate    │ ──→ ¿Qué usar?
+        └─────────────────┘
+#+END_EXAMPLE
+
+**Ecuaciones principales**:
+
+\[
+f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \quad \text{(Forget Gate)}
+\]
+
+\[
+i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \quad \text{(Input Gate)}
+\]
+
+\[
+\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \quad \text{(Candidato a memoria)}
+\]
+
+\[
+C_t = f_t * C_{t-1} + i_t * \tilde{C}_t \quad \text{(Estado de celda)}
+\]
+
+\[
+o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \quad \text{(Output Gate)}
+\]
+
+\[
+h_t = o_t * \tanh(C_t) \quad \text{(Estado oculto)}
+\]
+
+**Ventajas**:
+- Puede recordar información por mucho tiempo
+- Soluciona el problema del gradiente que desaparece
+- Muy efectiva para secuencias largas
+
+**Desventajas**:
+- Más compleja computacionalmente
+- Más parámetros que entrenar
+
+**Uso en el juego**: Ideal para secuencias largas (20+ frames) donde necesitas recordar el patrón completo.
+
+*** GRU (Gated Recurrent Unit)
+
+GRU es una versión simplificada de LSTM con solo 2 puertas en lugar de 3.
+
+**Estructura**:
+1. **Reset Gate**: Decide qué información del pasado ignorar
+2. **Update Gate**: Decide qué información actualizar
+
+**Ecuaciones**:
+
+\[
+r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r) \quad \text{(Reset Gate)}
+\]
+
+\[
+z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z) \quad \text{(Update Gate)}
+\]
+
+\[
+\tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b) \quad \text{(Candidato)}
+\]
+
+\[
+h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t \quad \text{(Estado oculto)}
+\]
+
+**Ventajas**:
+- Más simple que LSTM
+- Menos parámetros
+- A menudo funciona tan bien como LSTM
+- Más rápida de entrenar
+
+**Desventajas**:
+- Menos flexible que LSTM para casos muy complejos
+
+**Uso en el juego**: Excelente balance entre simplicidad y poder. Recomendado para la mayoría de casos.
+
+** Adaptando el Juego para RNN
+*** Cambios Necesarios en los Datos
+
+**Formato actual (MLP)**:
+Cada muestra es independiente:
+- Muestra 1: [velocidad, distancia] → salto
+- Muestra 2: [velocidad, distancia] → salto
+- Muestra 3: [velocidad, distancia] → salto
+
+**Formato para RNN (Secuencias)**:
+Necesitamos secuencias de frames:
+- Secuencia 1: [[v1,d1], [v2,d2], [v3,d3], ...] → [s1, s2, s3, ...]
+- Secuencia 2: [[v1,d1], [v2,d2], [v3,d3], ...] → [s1, s2, s3, ...]
+
+*** Estructura de Datos para RNN
+
+#+BEGIN_SRC python
+# Para MLP (actual)
+sample = {
+    'velocidad_bala': -10.0,
+    'distancia': 250.0,
+    'salto': 1
+}
+
+# Para RNN (nuevo)
+sequence = {
+    'frames': [
+        {'velocidad': -10.0, 'distancia': 500.0},
+        {'velocidad': -10.0, 'distancia': 450.0},
+        {'velocidad': -10.0, 'distancia': 400.0},
+        {'velocidad': -10.0, 'distancia': 350.0},
+        {'velocidad': -10.0, 'distancia': 300.0},
+    ],
+    'decisiones': [0, 0, 0, 1, 1]  # ¿Saltó en cada frame?
+}
+#+END_SRC
+
+*** Longitud de Secuencia
+
+**Opciones**:
+- **Secuencias cortas (5-10 frames)**: RNN vanilla o GRU, más rápido
+- **Secuencias medianas (10-20 frames)**: GRU o LSTM
+- **Secuencias largas (20+ frames)**: LSTM
+
+**Para el juego**: Recomendamos 10-15 frames, suficiente para capturar el patrón de una bala acercándose.
+
+*** Ventana Deslizante (Sliding Window)
+
+Para crear secuencias a partir de datos continuos:
+
+#+BEGIN_SRC python
+def crear_secuencias(datos, longitud_secuencia=10):
+    """
+    Convierte datos continuos en secuencias de longitud fija.
+    
+    Ejemplo:
+    datos = [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, ...]
+    
+    Con longitud_secuencia=5:
+    secuencia1 = [d1, d2, d3, d4, d5] → decisión en d5
+    secuencia2 = [d2, d3, d4, d5, d6] → decisión en d6
+    secuencia3 = [d3, d4, d5, d6, d7] → decisión en d7
+    """
+    secuencias = []
+    decisiones = []
+    
+    for i in range(len(datos) - longitud_secuencia + 1):
+        secuencia = datos[i:i+longitud_secuencia]
+        # La decisión es la del último frame de la secuencia
+        decision = secuencia[-1]['salto']
+        secuencias.append([(s['velocidad'], s['distancia']) for s in secuencia])
+        decisiones.append(decision)
+    
+    return secuencias, decisiones
+#+END_SRC
+
+** Implementación Práctica
+*** Instalación de Dependencias
+
+Para usar RNN en Python necesitamos:
+
+#+BEGIN_SRC bash
+pip install tensorflow keras numpy
+#+END_SRC
+
+O si prefieres PyTorch:
+
+#+BEGIN_SRC bash
+pip install torch numpy
+#+END_SRC
+
+En este tutorial usaremos **Keras/TensorFlow** por su simplicidad.
+
+*** Modificando el Juego: Recolectar Secuencias
+
+#+BEGIN_SRC python
+class JuegoRNN:
+    def __init__(self):
+        # ... código existente ...
+        self.longitud_secuencia = 10  # Frames en cada secuencia
+        self.buffer_secuencia = []  # Buffer para construir secuencias
+        
+    def registrar_frame_secuencia(self):
+        """Registra un frame para construir secuencias."""
+        if not self.bala_disparada:
+            return
+        
+        distancia = abs(self.jugador.x - self.bala.x)
+        frame = {
+            'velocidad_bala': float(self.velocidad_bala),
+            'distancia': float(distancia),
+            'salto': 0 if self.en_suelo else 1
+        }
+        
+        self.buffer_secuencia.append(frame)
+        
+        # Si el buffer está lleno, guardamos una secuencia
+        if len(self.buffer_secuencia) >= self.longitud_secuencia:
+            # Guardar secuencia completa
+            self.secuencias_modelo.append({
+                'frames': self.buffer_secuencia.copy(),
+                'decision_final': self.buffer_secuencia[-1]['salto']
+            })
+            # Deslizar ventana: quitar el primer elemento
+            self.buffer_secuencia.pop(0)
+#+END_SRC
+
+*** Preparación de Datos para RNN
+
+#+BEGIN_SRC python
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+def preparar_datos_rnn(secuencias):
+    """
+    Prepara datos para entrenar una RNN.
+    
+    Args:
+        secuencias: Lista de secuencias, cada una con 'frames' y 'decision_final'
+    
+    Returns:
+        X: Array 3D (num_secuencias, longitud_secuencia, num_caracteristicas)
+        y: Array 1D (num_secuencias,)
+        scaler: Scaler para normalizar
+    """
+    # Extraer características y decisiones
+    X_list = []
+    y_list = []
+    
+    for seq in secuencias:
+        # Extraer características de cada frame
+        features = [[f['velocidad_bala'], f['distancia']] for f in seq['frames']]
+        X_list.append(features)
+        y_list.append(seq['decision_final'])
+    
+    # Convertir a numpy arrays
+    X = np.array(X_list)  # Shape: (num_secuencias, longitud_secuencia, 2)
+    y = np.array(y_list)  # Shape: (num_secuencias,)
+    
+    # Normalizar características
+    # Reshape para normalizar: (num_secuencias * longitud_secuencia, 2)
+    X_reshaped = X.reshape(-1, 2)
+    scaler = StandardScaler()
+    X_normalized = scaler.fit_transform(X_reshaped)
+    # Volver a la forma original
+    X_normalized = X_normalized.reshape(X.shape)
+    
+    return X_normalized, y, scaler
+#+END_SRC
+
+*** Creando una RNN con Keras
+
+#+BEGIN_SRC python
+from tensorflow import keras
+from tensorflow.keras import layers
+
+def crear_modelo_rnn(longitud_secuencia=10, num_caracteristicas=2, tipo='GRU'):
+    """
+    Crea un modelo RNN para el juego.
+    
+    Args:
+        longitud_secuencia: Número de frames en cada secuencia
+        num_caracteristicas: Número de características por frame (2: velocidad, distancia)
+        tipo: 'RNN', 'LSTM', o 'GRU'
+    """
+    modelo = keras.Sequential()
+    
+    # Capa de entrada
+    modelo.add(layers.Input(shape=(longitud_secuencia, num_caracteristicas)))
+    
+    # Capa recurrente
+    if tipo == 'LSTM':
+        modelo.add(layers.LSTM(32, return_sequences=False))
+    elif tipo == 'GRU':
+        modelo.add(layers.GRU(32, return_sequences=False))
+    else:  # RNN vanilla
+        modelo.add(layers.SimpleRNN(32, return_sequences=False))
+    
+    # Capa densa para la salida
+    modelo.add(layers.Dense(16, activation='relu'))
+    modelo.add(layers.Dropout(0.2))  # Regularización
+    modelo.add(layers.Dense(1, activation='sigmoid'))  # Salida binaria
+    
+    modelo.compile(
+        optimizer='adam',
+        loss='binary_crossentropy',
+        metrics=['accuracy', 'precision', 'recall']
+    )
+    
+    return modelo
+#+END_SRC
+
+*** Entrenamiento de la RNN
+
+#+BEGIN_SRC python
+def entrenar_rnn(modelo, X_train, y_train, X_test, y_test, epochs=50):
+    """
+    Entrena el modelo RNN.
+    """
+    # Callbacks para mejorar el entrenamiento
+    callbacks = [
+        keras.callbacks.EarlyStopping(
+            monitor='val_loss',
+            patience=10,
+            restore_best_weights=True
+        ),
+        keras.callbacks.ReduceLROnPlateau(
+            monitor='val_loss',
+            factor=0.5,
+            patience=5
+        )
+    ]
+    
+    # Entrenar
+    historia = modelo.fit(
+        X_train, y_train,
+        validation_data=(X_test, y_test),
+        epochs=epochs,
+        batch_size=32,
+        callbacks=callbacks,
+        verbose=1
+    )
+    
+    return historia, modelo
+#+END_SRC
+
+*** Predicción con RNN
+
+#+BEGIN_SRC python
+def predecir_rnn(modelo, secuencia_actual, scaler):
+    """
+    Predice si debe saltar basándose en la secuencia actual.
+    
+    Args:
+        modelo: Modelo RNN entrenado
+        secuencia_actual: Lista de frames recientes (longitud_secuencia frames)
+        scaler: Scaler usado para normalizar
+    
+    Returns:
+        probabilidad: Probabilidad de que deba saltar (0-1)
+    """
+    # Preparar secuencia
+    features = [[f['velocidad_bala'], f['distancia']] for f in secuencia_actual]
+    X = np.array([features])  # Shape: (1, longitud_secuencia, 2)
+    
+    # Normalizar
+    X_reshaped = X.reshape(-1, 2)
+    X_normalized = scaler.transform(X_reshaped)
+    X_normalized = X_normalized.reshape(X.shape)
+    
+    # Predecir
+    probabilidad = modelo.predict(X_normalized, verbose=0)[0][0]
+    
+    return probabilidad
+#+END_SRC
+
+** Comparación: MLP vs RNN
+*** Tabla Comparativa
+
+| Aspecto | MLP | RNN |
+|---------+-----+-----|
+| **Entrada** | Frame individual | Secuencia de frames |
+| **Memoria** | No tiene | Tiene memoria temporal |
+| **Contexto** | Solo el momento actual | Historia completa |
+| **Complejidad** | Simple | Más compleja |
+| **Tiempo entrenamiento** | Rápido | Más lento |
+| **Datos necesarios** | Menos | Más (secuencias) |
+| **Mejor para** | Decisiones instantáneas | Patrones temporales |
+
+*** Ejemplo Práctico: Misma Situación
+
+**Situación**: Bala acercándose con velocidad constante.
+
+**MLP**:
+- Frame 1: distancia=500 → No salto (correcto)
+- Frame 2: distancia=450 → No salto (correcto)
+- Frame 3: distancia=400 → No salto (correcto)
+- Frame 4: distancia=350 → ¿Salto? (depende del umbral)
+
+**RNN**:
+- Ve la secuencia completa: [500, 450, 400, 350, 300, ...]
+- Aprende el patrón: "distancia disminuyendo constantemente"
+- Puede predecir mejor: "En los próximos frames probablemente deba saltar"
+- Toma decisiones más informadas basadas en la tendencia
+
+*** Cuándo Usar Cada Una
+
+**Usa MLP cuando**:
+- Las decisiones son independientes del contexto temporal
+- Tienes pocos datos
+- Necesitas un modelo simple y rápido
+- Cada frame contiene toda la información necesaria
+
+**Usa RNN cuando**:
+- El contexto temporal es importante
+- Los patrones se desarrollan en el tiempo
+- Tienes suficientes datos para crear secuencias
+- Quieres capturar tendencias y patrones
+
+**Para el juego**: RNN podría ser mejor porque:
+- El movimiento de la bala es una secuencia temporal
+- La decisión de saltar depende de cómo se ha movido la bala
+- Podemos predecir mejor cuándo saltar viendo la tendencia
+
+** Implementación Completa: Juego con RNN
+*** Estructura del Código
+
+#+BEGIN_SRC python
+import os
+import random
+import numpy as np
+from dataclasses import dataclass
+from typing import List, Optional, Tuple
+from collections import deque
+
+import pygame
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from tensorflow import keras
+from tensorflow.keras import layers
+
+@dataclass
+class FrameSecuencia:
+    velocidad_bala: float
+    distancia: float
+    salto: int
+
+class JuegoRNN:
+    def __init__(self):
+        pygame.init()
+        # ... inicialización de pygame ...
+        
+        # Parámetros RNN
+        self.longitud_secuencia = 10
+        self.buffer_secuencia = deque(maxlen=self.longitud_secuencia)
+        self.secuencias_modelo: List[dict] = []
+        
+        # Modelo
+        self.modelo_rnn = None
+        self.scaler_rnn = None
+        self.modelo_entrenado = False
+        
+    def registrar_frame_secuencia(self):
+        """Registra un frame para construir secuencias."""
+        if not self.bala_disparada:
+            return
+        
+        distancia = abs(self.jugador.x - self.bala.x)
+        frame = FrameSecuencia(
+            velocidad_bala=float(self.velocidad_bala),
+            distancia=float(distancia),
+            salto=0 if self.en_suelo else 1
+        )
+        
+        self.buffer_secuencia.append(frame)
+        
+        # Cuando el buffer está lleno, guardamos secuencia
+        if len(self.buffer_secuencia) == self.longitud_secuencia:
+            self.secuencias_modelo.append({
+                'frames': list(self.buffer_secuencia),
+                'decision': self.buffer_secuencia[-1].salto
+            })
+    
+    def preparar_datos_rnn(self):
+        """Prepara datos para entrenar RNN."""
+        if len(self.secuencias_modelo) < 50:
+            return None, None, None
+        
+        X_list = []
+        y_list = []
+        
+        for seq in self.secuencias_modelo:
+            features = [[f.velocidad_bala, f.distancia] for f in seq['frames']]
+            X_list.append(features)
+            y_list.append(seq['decision'])
+        
+        X = np.array(X_list)
+        y = np.array(y_list)
+        
+        # Normalizar
+        X_reshaped = X.reshape(-1, 2)
+        scaler = StandardScaler()
+        X_normalized = scaler.fit_transform(X_reshaped)
+        X_normalized = X_normalized.reshape(X.shape)
+        
+        return X_normalized, y, scaler
+    
+    def crear_modelo_rnn(self, tipo='GRU'):
+        """Crea modelo RNN."""
+        modelo = keras.Sequential([
+            layers.Input(shape=(self.longitud_secuencia, 2)),
+            layers.GRU(32, return_sequences=False) if tipo == 'GRU' else
+            layers.LSTM(32, return_sequences=False) if tipo == 'LSTM' else
+            layers.SimpleRNN(32, return_sequences=False),
+            layers.Dense(16, activation='relu'),
+            layers.Dropout(0.2),
+            layers.Dense(1, activation='sigmoid')
+        ])
+        
+        modelo.compile(
+            optimizer='adam',
+            loss='binary_crossentropy',
+            metrics=['accuracy']
+        )
+        
+        return modelo
+    
+    def entrenar_rnn(self, tipo='GRU'):
+        """Entrena el modelo RNN."""
+        X, y, scaler = self.preparar_datos_rnn()
+        if X is None:
+            return False, "Necesitas más secuencias (>= 50)."
+        
+        # Dividir datos
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42
+        )
+        
+        # Crear y entrenar modelo
+        modelo = self.crear_modelo_rnn(tipo)
+        
+        historia = modelo.fit(
+            X_train, y_train,
+            validation_data=(X_test, y_test),
+            epochs=50,
+            batch_size=32,
+            verbose=0
+        )
+        
+        # Evaluar
+        acc = modelo.evaluate(X_test, y_test, verbose=0)[1]
+        
+        self.modelo_rnn = modelo
+        self.scaler_rnn = scaler
+        self.modelo_entrenado = True
+        
+        return True, f"RNN ({tipo}) entrenada. Accuracy test ≈ {acc:.3f}"
+    
+    def decision_auto_rnn(self) -> bool:
+        """Decide si saltar usando RNN."""
+        if not self.modelo_entrenado or len(self.buffer_secuencia) < self.longitud_secuencia:
+            return False
+        
+        if not self.bala_disparada or not self.en_suelo:
+            return False
+        
+        # Preparar secuencia actual
+        features = [[f.velocidad_bala, f.distancia] for f in self.buffer_secuencia]
+        X = np.array([features])
+        
+        # Normalizar
+        X_reshaped = X.reshape(-1, 2)
+        X_normalized = self.scaler_rnn.transform(X_reshaped)
+        X_normalized = X_normalized.reshape(X.shape)
+        
+        # Predecir
+        proba = self.modelo_rnn.predict(X_normalized, verbose=0)[0][0]
+        self.ultima_proba_salto = proba
+        
+        return proba >= 0.5
+#+END_SRC
+
+** Visualización de Secuencias
+*** Graficar Secuencias Temporales
+
+#+BEGIN_SRC python
+import matplotlib.pyplot as plt
+
+def graficar_secuencia(secuencia, titulo="Secuencia de Juego"):
+    """
+    Grafica una secuencia mostrando cómo cambian distancia y velocidad en el tiempo.
+    """
+    frames = secuencia['frames']
+    tiempos = list(range(len(frames)))
+    
+    distancias = [f.distancia for f in frames]
+    velocidades = [abs(f.velocidad_bala) for f in frames]
+    decisiones = [f.salto for f in frames]
+    
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6))
+    
+    # Gráfica de distancia
+    ax1.plot(tiempos, distancias, 'b-o', label='Distancia')
+    ax1.set_ylabel('Distancia')
+    ax1.set_title(f'{titulo} - Distancia vs Tiempo')
+    ax1.grid(True)
+    ax1.legend()
+    
+    # Gráfica de velocidad y decisiones
+    ax2.plot(tiempos, velocidades, 'r-s', label='Velocidad (abs)')
+    # Marcar frames donde se saltó
+    saltos = [i for i, d in enumerate(decisiones) if d == 1]
+    if saltos:
+        ax2.scatter(saltos, [velocidades[i] for i in saltos], 
+                   c='green', s=100, marker='*', label='Salto', zorder=5)
+    ax2.set_xlabel('Frame')
+    ax2.set_ylabel('Velocidad')
+    ax2.set_title('Velocidad y Decisiones')
+    ax2.grid(True)
+    ax2.legend()
+    
+    plt.tight_layout()
+    plt.show()
+#+END_SRC
+
+** Actividades Prácticas
+*** Actividad 1: Comparar MLP vs RNN
+
+1. Entrena un modelo MLP con el juego
+2. Entrena un modelo RNN (GRU) con el mismo juego
+3. Compara:
+   - Accuracy en test
+   - Precision y Recall
+   - Comportamiento en modo auto
+   - ¿Cuál juega mejor?
+
+*** Actividad 2: Experimentar con Longitud de Secuencia
+
+1. Entrena RNN con secuencias de 5 frames
+2. Entrena RNN con secuencias de 10 frames
+3. Entrena RNN con secuencias de 20 frames
+4. Compara resultados:
+   - ¿Cuál tiene mejor accuracy?
+   - ¿Cuál se entrena más rápido?
+   - ¿Cuál juega mejor en modo auto?
+
+*** Actividad 3: Comparar Tipos de RNN
+
+1. Entrena una RNN vanilla (SimpleRNN)
+2. Entrena una GRU
+3. Entrena una LSTM
+4. Compara:
+   - Tiempo de entrenamiento
+   - Accuracy
+   - Comportamiento en el juego
+
+*** Actividad 4: Análisis de Secuencias
+
+1. Exporta secuencias a CSV
+2. Visualiza varias secuencias con gráficas
+3. Identifica patrones:
+   - ¿Qué patrones llevan a saltar?
+   - ¿Qué patrones llevan a no saltar?
+   - ¿Hay tendencias claras?
+
+** Conceptos Avanzados
+*** Bidireccionalidad (Bidirectional RNN)
+
+Una RNN bidireccional procesa la secuencia en ambas direcciones:
+
+#+BEGIN_SRC python
+from tensorflow.keras import layers
+
+modelo = keras.Sequential([
+    layers.Input(shape=(longitud_secuencia, 2)),
+    layers.Bidirectional(layers.GRU(32)),
+    layers.Dense(1, activation='sigmoid')
+])
+#+END_SRC
+
+**Ventaja**: Puede usar información tanto del pasado como del "futuro" (en el contexto de la secuencia).
+
+**Para el juego**: Probablemente no necesario, ya que solo tenemos información del pasado.
+
+*** Stacked RNN (RNN Apiladas)
+
+Múltiples capas RNN apiladas para capturar patrones más complejos:
+
+#+BEGIN_SRC python
+modelo = keras.Sequential([
+    layers.Input(shape=(longitud_secuencia, 2)),
+    layers.GRU(32, return_sequences=True),  # return_sequences=True para apilar
+    layers.GRU(16, return_sequences=False),
+    layers.Dense(1, activation='sigmoid')
+])
+#+END_SRC
+
+*** Attention Mechanism
+
+Los mecanismos de atención permiten que el modelo "preste atención" a partes específicas de la secuencia. Más avanzado, pero muy poderoso.
+
+*** Regularización para RNN
+
+- **Dropout**: Ya lo usamos en el ejemplo
+- **Recurrent Dropout**: Dropout específico para conexiones recurrentes
+- **L2 Regularization**: Penalizar pesos grandes
+
+#+BEGIN_SRC python
+layers.GRU(32, 
+           dropout=0.2,           # Dropout en inputs
+           recurrent_dropout=0.2, # Dropout en conexiones recurrentes
+           kernel_regularizer=keras.regularizers.l2(0.01))
+#+END_SRC
+
+** Troubleshooting Común
+*** Problema: "No hay suficientes datos"
+
+**Solución**:
+- Reduce la longitud de secuencia
+- Recolecta más datos jugando más tiempo
+- Usa ventana deslizante con solapamiento
+
+*** Problema: "El modelo no aprende (loss no baja)"
+
+**Soluciones**:
+- Verifica que los datos estén normalizados
+- Reduce el learning rate
+- Aumenta el número de neuronas
+- Prueba diferentes optimizadores
+
+*** Problema: "Overfitting (accuracy train >> accuracy test)"
+
+**Soluciones**:
+- Aumenta dropout
+- Reduce el número de neuronas
+- Añade más datos
+- Usa early stopping (ya incluido en el código)
+
+*** Problema: "Entrenamiento muy lento"
+
+**Soluciones**:
+- Reduce la longitud de secuencia
+- Reduce el número de neuronas
+- Usa GRU en lugar de LSTM
+- Reduce batch size (pero puede afectar estabilidad)
+
+
+
+
 * Redes Neuronales LSTM (Long Short-Term Memory)
 
 Las redes neuronales LSTM (*Long Short-Term Memory*) son un tipo especial
